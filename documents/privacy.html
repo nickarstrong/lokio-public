@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>LOKIO. Privacy Policy.</title>
+<meta name="description" content="What LOKIO collects, why, how long, and your rights under GDPR and CCPA. Beta policy."/>
+<meta property="og:title" content="LOKIO Privacy Policy"/>
+<meta property="og:url" content="https://lokio.org/documents/privacy"/>
+<meta name="robots" content="index,follow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --magenta:#FF00FF;--male:#007FFF;--gold:#FBEC5D;
+  --blue:#0A84FF;--green:#30D158;--red:#FF375F;
+  --magenta-d:rgba(255,0,255,0.15);--male-d:rgba(0,127,255,0.15);
+  --gold-d:rgba(251,236,93,0.15);--blue-d:rgba(10,132,255,0.15);
+  --surface:rgba(22,22,34,0.72);--surface-hi:rgba(16,16,26,0.95);
+  --mock-bg:rgba(10,10,18,0.92);
+  --border:rgba(255,255,255,0.10);--border-hi:rgba(255,255,255,0.18);
+  --w14:rgba(255,255,255,0.14);--w10:rgba(255,255,255,0.10);
+  --w08:rgba(255,255,255,0.08);--w06:rgba(255,255,255,0.06);
+  --whi:rgba(255,255,255,0.96);--wmid:rgba(255,255,255,0.62);--wlo:rgba(255,255,255,0.40);
+  --r-sm:12px;--r-md:16px;--r-lg:20px;--r-xl:24px;--r-2xl:28px;--r-pill:999px;
+  --font:'Geist',-apple-system,system-ui,sans-serif;
+  --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+  --pad:24px;
+}
+@media (min-width:768px){:root{--pad:48px;}}
+@media (min-width:1280px){:root{--pad:80px;}}
+
+html{scroll-behavior:smooth;scroll-padding-top:80px;}
+html,body{
+  background:#0a0a0a;color:var(--whi);font-family:var(--font);
+  font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+body{position:relative;min-height:100dvh;isolation:isolate;}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 70% 55% at 10% 5%,  rgba(155,0,195,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 92% 12%, rgba(10,132,255,0.14) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 96%, rgba(251,236,93,0.06) 0%, transparent 55%),
+    #0a0a0a;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 90% 85% at center,black 10%,transparent 78%);
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+
+/* HEADER */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px var(--pad);background:rgba(10,10,10,0.72);backdrop-filter:saturate(160%) blur(18px);-webkit-backdrop-filter:saturate(160%) blur(18px);border-bottom:1px solid var(--border);}
+.hdr-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.02em;font-size:18px;}
+.hdr-mark{width:28px;height:28px;border-radius:8px;background:var(--gold);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:16px;letter-spacing:-0.04em;}
+.hdr-doc-title{display:none;font-family:var(--mono);font-size:12px;color:var(--wmid);letter-spacing:0.16em;text-transform:uppercase;}
+@media (min-width:768px){.hdr-doc-title{display:inline-block;}}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.hdr-back{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--wmid);border-radius:var(--r-pill);transition:color .2s var(--ease),background .2s var(--ease);}
+.hdr-back:hover{color:var(--whi);background:var(--w06);}
+.hdr-cta{display:none;padding:8px 18px;border-radius:var(--r-pill);background:var(--blue);color:#fff;font-weight:600;font-size:14px;transition:transform .2s var(--ease),background .2s var(--ease);}
+.hdr-cta:hover{background:#1A8FFF;}
+@media (min-width:768px){.hdr-cta{display:inline-flex;}}
+
+/* PAGE */
+.page{display:grid;grid-template-columns:1fr;max-width:1400px;margin:0 auto;padding:96px var(--pad) 96px;gap:48px;}
+@media (min-width:1024px){.page{grid-template-columns:240px minmax(0,1fr);padding:120px var(--pad) 96px;gap:64px;}}
+@media (min-width:1280px){.page{grid-template-columns:260px minmax(0,1fr);gap:96px;}}
+
+.toc{display:none;position:sticky;top:96px;align-self:start;max-height:calc(100dvh - 120px);overflow-y:auto;padding-right:8px;}
+@media (min-width:1024px){.toc{display:block;}}
+.toc::-webkit-scrollbar{width:4px;}
+.toc::-webkit-scrollbar-thumb{background:var(--w10);border-radius:2px;}
+.toc-tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--wlo);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px;}
+.toc-list a{display:block;padding:8px 12px;font-size:13px;line-height:1.4;color:var(--wmid);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:color .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);}
+.toc-list a:hover{color:var(--whi);background:var(--w06);}
+.toc-list a.active{color:var(--whi);background:var(--w08);border-left-color:var(--blue);}
+
+.col{max-width:760px;}
+
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--blue);margin-bottom:24px;padding:6px 12px;border:1px solid var(--blue-d);background:var(--blue-d);border-radius:var(--r-pill);}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue);box-shadow:0 0 12px var(--blue);}
+
+h1{font-weight:800;letter-spacing:-0.03em;line-height:1.05;font-size:48px;margin-bottom:20px;}
+@media (min-width:768px){h1{font-size:64px;}}
+@media (min-width:1280px){h1{font-size:72px;}}
+
+.lede{font-size:19px;line-height:1.55;color:var(--whi);max-width:64ch;margin-bottom:24px;font-weight:400;}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.meta-row span{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--r-pill);color:var(--wmid);}
+.meta-row span.beta{border-color:rgba(251,236,93,0.32);color:var(--gold);background:rgba(251,236,93,0.06);}
+
+/* BETA NOTICE */
+.beta-notice{
+  margin-bottom:48px;
+  padding:24px 28px;
+  background:linear-gradient(135deg, rgba(251,236,93,0.08), rgba(251,236,93,0.02));
+  border:1px solid rgba(251,236,93,0.32);
+  border-radius:var(--r-xl);
+}
+.beta-notice .tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);
+  margin-bottom:10px;
+}
+.beta-notice .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);}
+.beta-notice p{margin:0;font-size:15px;line-height:1.6;color:var(--whi);}
+.beta-notice p + p{margin-top:8px;color:var(--wmid);font-size:14px;}
+
+/* SECTIONS */
+section{scroll-margin-top:96px;margin-top:64px;}
+section:first-of-type{margin-top:0;}
+
+.section-num{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--wlo);margin-bottom:12px;display:block;}
+
+h2{font-weight:800;letter-spacing:-0.025em;line-height:1.15;font-size:28px;margin-bottom:16px;}
+@media (min-width:768px){h2{font-size:34px;}}
+h3{font-weight:700;letter-spacing:-0.015em;line-height:1.3;font-size:18px;margin-top:28px;margin-bottom:10px;color:var(--whi);}
+h4{font-weight:600;font-size:15px;line-height:1.3;margin-top:20px;margin-bottom:6px;color:var(--whi);}
+
+p{margin-bottom:14px;color:var(--whi);font-size:15px;line-height:1.7;}
+p strong, li strong{color:#fff;font-weight:600;}
+.muted{color:var(--wmid);}
+
+ul,ol{margin:0 0 14px 0;padding-left:20px;}
+li{margin-bottom:6px;color:var(--whi);line-height:1.6;font-size:15px;}
+ul li::marker{color:var(--wlo);}
+
+code{font-family:var(--mono);font-size:0.92em;padding:2px 7px;background:var(--w08);border:1px solid var(--border);border-radius:6px;color:#FFC857;}
+a.inline{color:var(--blue);border-bottom:1px solid var(--blue-d);transition:border-color .2s var(--ease);}
+a.inline:hover{border-bottom-color:var(--blue);}
+hr{border:none;border-top:1px solid var(--border);margin:32px 0;}
+
+/* TABLES */
+.tbl{margin:20px 0;overflow-x:auto;border:1px solid var(--border);border-radius:var(--r-lg);background:var(--surface);}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;}
+.tbl thead{background:var(--w06);}
+.tbl th, .tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
+.tbl th{font-weight:600;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--wmid);}
+.tbl td{color:var(--whi);line-height:1.5;}
+.tbl td strong{color:#fff;}
+.tbl tbody tr:last-child td{border-bottom:none;}
+
+/* CALLOUTS */
+.callout{background:linear-gradient(135deg, rgba(10,132,255,0.06), rgba(10,132,255,0.02));border:1px solid rgba(10,132,255,0.20);border-radius:var(--r-lg);padding:18px 22px;margin:20px 0;}
+.callout p{margin:0;font-size:15px;line-height:1.55;color:var(--whi);}
+.callout p strong{color:#fff;}
+.callout p + p{margin-top:6px;}
+.callout.warn{background:linear-gradient(135deg, rgba(255,55,95,0.06), rgba(255,55,95,0.02));border-color:rgba(255,55,95,0.24);}
+.callout.gold{background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.02));border-color:rgba(251,236,93,0.24);}
+
+/* CONTACT */
+.contact-block{margin:32px 0 0;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);}
+.contact-block .em{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--blue);display:inline-block;}
+.contact-block .em:hover{color:#3FA0FF;}
+.contact-block p{margin-top:8px;color:var(--wmid);font-size:14px;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-top:64px;}
+.foot-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px;}
+@media (min-width:640px){.foot-inner{grid-template-columns:1fr 1fr;gap:32px 48px;}}
+@media (min-width:1024px){.foot-inner{grid-template-columns:1.4fr 1fr 1fr;gap:64px;}}
+.foot-col h4{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--wlo);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-top:0;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;margin:0;}
+.foot-col li{margin:0;}
+.foot-col a{font-size:14px;color:var(--wmid);transition:color .2s var(--ease);line-height:1.4;display:inline-block;padding:2px 0;}
+.foot-col a:hover{color:var(--whi);}
+.foot-contact{font-family:var(--mono);font-size:13px;color:var(--wmid);display:flex;flex-direction:column;gap:4px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.foot-contact a{padding:0;}
+.foot-contact a:hover{color:var(--whi);}
+.foot-mark{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--wlo);letter-spacing:0.08em;}
+
+/* PRINT */
+@media print{
+  .hdr,.toc,footer{display:none;}
+  body::before,body::after{display:none;}
+  body{background:#fff;color:#000;}
+  .page{display:block;padding:0;}
+  h1,h2,h3,h4{color:#000;}
+  p,li,td{color:#222;}
+  .callout,.beta-notice,.contact-block,.tbl{break-inside:avoid;background:#f5f5f5;border-color:#ccc;}
+  section{break-inside:avoid-page;}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a href="/" class="hdr-logo" aria-label="LOKIO home">
+    <span class="hdr-mark">L</span>
+    <span>LOKIO</span>
+    <span class="hdr-doc-title">/ Privacy</span>
+  </a>
+  <div class="hdr-right">
+    <a class="hdr-back" href="/">
+      <span aria-hidden="true">←</span>
+      <span>Home</span>
+    </a>
+    <a class="hdr-cta" href="https://app.lokio.org" target="_blank" rel="noopener">Open the map</a>
+  </div>
+</header>
+
+<div class="page">
+  <aside class="toc" aria-label="Contents">
+    <div class="toc-tag">Privacy Policy</div>
+    <ul class="toc-list">
+      <li><a href="#summary">At a glance</a></li>
+      <li><a href="#who">Who we are</a></li>
+      <li><a href="#what">Data we collect</a></li>
+      <li><a href="#why">Why we collect it</a></li>
+      <li><a href="#legal-basis">Legal basis (GDPR)</a></li>
+      <li><a href="#retention">Retention</a></li>
+      <li><a href="#sharing">Who sees your data</a></li>
+      <li><a href="#third-parties">Third-party processors</a></li>
+      <li><a href="#international">International transfers</a></li>
+      <li><a href="#rights-eu">Your rights · EU/UK (GDPR)</a></li>
+      <li><a href="#rights-us">Your rights · California (CCPA)</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#breach">Breach notification</a></li>
+      <li><a href="#children">Age (18+)</a></li>
+      <li><a href="#cookies">Cookies and tracking</a></li>
+      <li><a href="#dnt">Do Not Track</a></li>
+      <li><a href="#changes">Changes to this policy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </aside>
+
+  <main class="col">
+
+    <span class="eyebrow">Privacy Policy</span>
+    <h1>Privacy Policy.</h1>
+    <p class="lede">What LOKIO collects, why, for how long, who sees it, and the rights you have over it. GDPR-aligned. CCPA-aligned.</p>
+    <div class="meta-row">
+      <span>Effective: 8 May 2026</span>
+      <span>Last updated: 8 May 2026</span>
+      <span class="beta">Beta · v1</span>
+    </div>
+
+    <div class="beta-notice">
+      <span class="tag">Beta-stage policy</span>
+      <p>LOKIO is in pre-revenue beta. The operating legal entity is scheduled to incorporate at first paid transaction (Q4 2026). Until then, the controller of your data is the natural person operating the LOKIO project under the contact at the bottom of this page.</p>
+      <p>This policy will be re-issued under the operating company's name at incorporation. The privacy substance (what we collect, why, retention, your rights) does not change.</p>
+    </div>
+
+    <!-- ─── AT A GLANCE ─── -->
+    <section id="summary">
+      <span class="section-num">01 · At a glance</span>
+      <h2>The short version.</h2>
+      <ul>
+        <li>You sign in with Google or a passkey. We do not see your password.</li>
+        <li>You drop a thought on a map. The thought is visible to people physically nearby for up to 24 hours, then it decays automatically.</li>
+        <li>We do not sell your data. We do not run third-party advertising on LOKIO.</li>
+        <li>You can read everything we hold about you, export it, and delete your account at any time.</li>
+        <li>LOKIO is for adults aged 18 and over. We do not knowingly accept anyone younger.</li>
+        <li>We use platform-native sign-in and payments. We do not store passwords or card numbers.</li>
+      </ul>
+      <p class="muted">The full policy below explains the legal basis, retention, third-party processors, and your specific rights under GDPR and CCPA.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── WHO WE ARE ─── -->
+    <section id="who">
+      <span class="section-num">02 · Who we are</span>
+      <h2>Data controller.</h2>
+      <p>The "data controller" is the natural or legal person responsible for deciding why and how your data is processed. For LOKIO during the beta period, that controller is the natural person operating the LOKIO project, reachable at:</p>
+      <p><strong>Email:</strong> <a class="inline" href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a><br/><strong>Postal correspondence:</strong> available on written request to the email above.</p>
+      <p>At incorporation (Q4 2026), the operating company will assume controller status and this section will be updated with the company's registered name, registration number, and registered address.</p>
+      <p>For the purposes of GDPR, the contact above also acts as the point of contact for data subject requests until a Data Protection Officer is formally designated.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── WHAT WE COLLECT ─── -->
+    <section id="what">
+      <span class="section-num">03 · Data we collect</span>
+      <h2>What LOKIO holds about you.</h2>
+
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Category</th><th>Examples</th><th>Source</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Account identifier</strong></td><td>Google OAuth subject ID, WebAuthn passkey credential ID, optional Telegram phone number</td><td>You, via sign-in</td></tr>
+            <tr><td><strong>Profile content</strong></td><td>Display name, avatar, bio, links you choose to publish, interests</td><td>You, when you fill it in</td></tr>
+            <tr><td><strong>Location data</strong></td><td>Approximate device location at the moment you publish a topic. Used to verify Proof of Presence and to show your pin on the map.</td><td>Device geolocation API, with your consent</td></tr>
+            <tr><td><strong>Topics and messages</strong></td><td>Text you type into a topic or topic chat</td><td>You</td></tr>
+            <tr><td><strong>Presence</strong></td><td>The fact that you are currently on the map and your approximate viewport. Held only in volatile memory.</td><td>Your active session</td></tr>
+            <tr><td><strong>Reports</strong></td><td>Reports you file against other users or content; reports filed against you</td><td>You and other users</td></tr>
+            <tr><td><strong>Technical metadata</strong></td><td>Device type, browser, IP address (for fraud prevention and rate limiting), short-lived session tokens</td><td>Standard web traffic</td></tr>
+            <tr><td><strong>Payment instruments</strong></td><td>None. When billing activates, payment is processed by Apple Pay or Google Pay. LOKIO does not see, receive, or store card numbers.</td><td>Platform processor</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What we explicitly do not collect</h3>
+      <ul>
+        <li>Passwords. We do not have a password system.</li>
+        <li>Card numbers, CVV, or banking credentials. Payment is platform-native.</li>
+        <li>Government identity documents. We do not run identity verification.</li>
+        <li>Continuous background location. Location is captured only at the moment you publish a topic, and only with your consent at that moment.</li>
+        <li>Microphone or camera contents.</li>
+        <li>Contacts list, photo library, or other on-device data.</li>
+      </ul>
+    </section>
+
+    <hr/>
+
+    <!-- ─── WHY ─── -->
+    <section id="why">
+      <span class="section-num">04 · Why we collect it</span>
+      <h2>Purposes of processing.</h2>
+      <p>Each category of data is collected for one or more of the following purposes:</p>
+      <ul>
+        <li><strong>To operate the service.</strong> An account identifier is needed to authenticate you. Topics and messages are the product. Profile content is what other users see.</li>
+        <li><strong>To verify Proof of Presence.</strong> Location at the moment of publishing prevents users from publishing pins in places they are not in. This is a structural anti-spam measure and a core safety property of the product.</li>
+        <li><strong>To deliver real-time presence.</strong> Your viewport, while you are on the map, is used to deliver nearby-user events to your device.</li>
+        <li><strong>To enforce safety rules.</strong> Reports help us identify abuse. Technical metadata helps us identify automated abuse.</li>
+        <li><strong>To bill you, when billing activates.</strong> Records of which paid upsells you purchased, for the purpose of providing them and complying with tax law.</li>
+        <li><strong>To comply with legal obligations.</strong> Where law requires us to retain or disclose data.</li>
+      </ul>
+    </section>
+
+    <hr/>
+
+    <!-- ─── LEGAL BASIS ─── -->
+    <section id="legal-basis">
+      <span class="section-num">05 · Legal basis (GDPR)</span>
+      <h2>Why we are allowed to process your data.</h2>
+      <p>If you are in the European Economic Area, the United Kingdom, or another GDPR-aligned jurisdiction, the legal basis on which we rely for each purpose is one of the following:</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Purpose</th><th>Legal basis (GDPR Art. 6)</th></tr></thead>
+          <tbody>
+            <tr><td>Operating your account</td><td>Contract performance (Art. 6(1)(b))</td></tr>
+            <tr><td>Showing your topic on the map</td><td>Contract performance (Art. 6(1)(b))</td></tr>
+            <tr><td>Capturing location for Proof of Presence</td><td>Explicit consent (Art. 6(1)(a)) at the moment of publishing</td></tr>
+            <tr><td>Anti-abuse and security</td><td>Legitimate interest (Art. 6(1)(f)) in operating a safe service</td></tr>
+            <tr><td>Reports and moderation</td><td>Legitimate interest (Art. 6(1)(f)) and, where applicable, legal obligation (Art. 6(1)(c))</td></tr>
+            <tr><td>Tax records on paid transactions</td><td>Legal obligation (Art. 6(1)(c))</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>You can withdraw consent for the geolocation prompt at any time at the operating-system level. Withdrawal does not affect the lawfulness of processing carried out before withdrawal. Withdrawing geolocation prevents future publishing but does not affect topics already on the map.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── RETENTION ─── -->
+    <section id="retention">
+      <span class="section-num">06 · Retention</span>
+      <h2>How long we keep things.</h2>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Data</th><th>Retention</th></tr></thead>
+          <tbody>
+            <tr><td>Topics and topic chat content</td><td>Default 24 hours of visibility plus a short audit window for moderation, then automatic removal. Author can delete earlier.</td></tr>
+            <tr><td>Account and profile</td><td>Until you delete your account.</td></tr>
+            <tr><td>Reports filed</td><td>Up to 24 months from filing, then anonymised or deleted.</td></tr>
+            <tr><td>Presence</td><td>Volatile only. Held in memory while your session is active. Not written to disk.</td></tr>
+            <tr><td>Payment records</td><td>Period required by tax law in the operating company's jurisdiction (typically 5–10 years), even if the account is deleted.</td></tr>
+            <tr><td>Technical logs</td><td>Up to 90 days for security incident review, then rotated.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>Topic decay is a structural privacy feature.</strong> By design, LOKIO does not accumulate a permanent searchable record of what its users said. After the topic's lifetime ends and the audit window closes, the message content is deleted from the primary database. Backups are rotated on a schedule consistent with disaster-recovery best practice and are not used for retrieval of deleted content except in cases of confirmed data loss.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── SHARING ─── -->
+    <section id="sharing">
+      <span class="section-num">07 · Who sees your data</span>
+      <h2>Inside the product.</h2>
+      <p>By default, LOKIO is pseudonymous. Other users see:</p>
+      <ul>
+        <li>Your display name (if you have set one) or a hash-style identifier (e.g. <code>@user_a1b2c</code>) if you have not.</li>
+        <li>Your avatar, bio, links, and interests, when they look at your public profile.</li>
+        <li>Topics you have published, while those topics are within their lifetime.</li>
+        <li>The approximate location of any pin you publish, since the pin is on a map.</li>
+        <li>Your replies in topic chats you participate in.</li>
+        <li>Your name as a reporter, if you file a report against them. <strong>Reports are public to the reported party</strong> as part of the safety architecture.</li>
+      </ul>
+
+      <h3>Outside the product</h3>
+      <p>We do not sell, rent, or trade your data. We do not run third-party advertising. We do not share your data with anyone except:</p>
+      <ul>
+        <li>Service providers who process data on our behalf under written contracts (see Third-party processors below).</li>
+        <li>Law enforcement or regulators where we are legally compelled. We will notify you of such a request unless we are legally prohibited from doing so.</li>
+        <li>A successor entity in the event of a merger, acquisition, or sale of assets, subject to the same privacy commitments.</li>
+      </ul>
+    </section>
+
+    <hr/>
+
+    <!-- ─── THIRD PARTY ─── -->
+    <section id="third-parties">
+      <span class="section-num">08 · Third-party processors</span>
+      <h2>Companies that help run LOKIO.</h2>
+      <p>The following processors handle parts of the service. Each operates under a written data processing agreement and is bound to confidentiality.</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Processor</th><th>Role</th><th>Data accessed</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Google LLC</strong></td><td>OAuth identity provider (sign-in)</td><td>Your Google account email address and OAuth subject ID</td></tr>
+            <tr><td><strong>Cloudflare, Inc.</strong></td><td>CDN, DDoS protection, edge delivery of static assets</td><td>IP address, request metadata. No application data.</td></tr>
+            <tr><td><strong>Railway Corp.</strong></td><td>Application hosting, database, Redis</td><td>All application data, encrypted at rest</td></tr>
+            <tr><td><strong>OpenStreetMap / MapLibre</strong></td><td>Map tiles</td><td>Tile request coordinates only. No account data.</td></tr>
+            <tr><td><strong>Apple Inc. / Google LLC (Pay)</strong></td><td>Payment processing, when billing activates</td><td>Card data is held by them, not by LOKIO. We receive a transaction confirmation only.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">If a processor changes, this list is updated and the change is announced in the changelog (Changes section).</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── INTERNATIONAL TRANSFERS ─── -->
+    <section id="international">
+      <span class="section-num">09 · International transfers</span>
+      <h2>Where your data is stored.</h2>
+      <p>Application data is stored in databases hosted by Railway, with a default region in the United States (US-West). If you are accessing LOKIO from the European Economic Area, the United Kingdom, or another jurisdiction with cross-border transfer rules, your data is transferred to the United States.</p>
+      <p>For such transfers we rely on the European Commission's <strong>Standard Contractual Clauses</strong> (SCCs) as the lawful transfer mechanism, supplemented where required by appropriate technical and organisational measures including encryption in transit (TLS) and at rest.</p>
+      <p>EU enterprise customers and regulators may request EU data residency and a Data Processing Addendum by writing to <a class="inline" href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a>. We will engage with such requests in good faith ahead of any onboarding.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── GDPR RIGHTS ─── -->
+    <section id="rights-eu">
+      <span class="section-num">10 · Your rights · EU/UK</span>
+      <h2>GDPR rights.</h2>
+      <p>If GDPR applies to you, you have the following rights, exercisable free of charge except where requests are manifestly unfounded or excessive:</p>
+      <ul>
+        <li><strong>Right to access.</strong> Confirm whether we hold your data and obtain a copy. Most of it is visible inside the product. A formal export endpoint is scheduled for Q4 2026.</li>
+        <li><strong>Right to rectification.</strong> Correct inaccurate data. Profile fields are user-editable.</li>
+        <li><strong>Right to erasure ("right to be forgotten").</strong> Delete your account in settings. Cascades to your topics, messages, and presence. Not undoable.</li>
+        <li><strong>Right to restrict processing.</strong> Ask us to limit processing while a dispute is resolved.</li>
+        <li><strong>Right to data portability.</strong> Receive your personal data in a structured, commonly used, machine-readable format. Available on request via email until the in-product export endpoint ships.</li>
+        <li><strong>Right to object.</strong> Object to processing based on legitimate interest, including safety processing, on grounds related to your particular situation.</li>
+        <li><strong>Right not to be subject to automated decision-making.</strong> LOKIO does not use automated decision-making with legal or similarly significant effect.</li>
+        <li><strong>Right to withdraw consent.</strong> Where processing is based on consent (e.g. geolocation prompt), you may withdraw at any time at the operating-system level.</li>
+        <li><strong>Right to lodge a complaint.</strong> You may complain to your local data protection supervisory authority. We would prefer that you contact us first so we can resolve the issue.</li>
+      </ul>
+      <p>To exercise any right, write to <a class="inline" href="mailto:hello&#64;lokio.org?subject=GDPR%20request">hello&#64;lokio.org</a>. We will respond within 30 days, extendable by a further 60 days for complex requests with notice to you. We may ask you to verify control of your account before we act on a request, to prevent impersonation.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── CCPA ─── -->
+    <section id="rights-us">
+      <span class="section-num">11 · Your rights · California</span>
+      <h2>CCPA / CPRA rights.</h2>
+      <p>If you are a California resident, you have the following rights under the California Consumer Privacy Act and California Privacy Rights Act:</p>
+      <ul>
+        <li><strong>Right to know.</strong> What personal information we collect, where it comes from, why, and to whom we disclose it. This policy answers all four.</li>
+        <li><strong>Right to delete.</strong> Delete your account and associated personal information.</li>
+        <li><strong>Right to correct.</strong> Correct inaccurate personal information.</li>
+        <li><strong>Right to opt out of sale or sharing.</strong> <strong>We do not sell or share your personal information.</strong> No opt-out is required because no sale occurs.</li>
+        <li><strong>Right to limit use of sensitive information.</strong> The only sensitive category we may handle is precise geolocation, captured only at the moment of publishing with your consent. We do not use it to infer characteristics about you.</li>
+        <li><strong>Right to non-discrimination.</strong> We will not deny service, charge a different price, or provide a lower quality of service because you exercised any of these rights.</li>
+      </ul>
+      <p>To exercise any right, write to <a class="inline" href="mailto:hello&#64;lokio.org?subject=CCPA%20request">hello&#64;lokio.org</a>. You may designate an authorised agent. We may verify your identity before acting.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── SECURITY ─── -->
+    <section id="security">
+      <span class="section-num">12 · Security</span>
+      <h2>How we protect your data.</h2>
+      <ul>
+        <li>All traffic is served over HTTPS (TLS 1.2 or higher). Insecure HTTP requests are redirected.</li>
+        <li>WebSocket presence is served over WSS.</li>
+        <li>Authentication uses Google OAuth (authorisation-code flow) and WebAuthn passkeys. <strong>We do not have a password database to breach.</strong></li>
+        <li>Application data is encrypted at rest by the database provider.</li>
+        <li>Server-side input filters block URLs, phone numbers, and card numbers from being posted in topic content (the contentGuard, described in our whitepaper).</li>
+        <li>Card data is never seen or stored by LOKIO. Payment is platform-native (Apple Pay / Google Pay).</li>
+      </ul>
+      <p>No system can guarantee absolute security. The protections above are industry-standard for products of this scale, applied deliberately to minimise the surface area of any incident.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── BREACH ─── -->
+    <section id="breach">
+      <span class="section-num">13 · Breach notification</span>
+      <h2>If something goes wrong.</h2>
+      <p>If we become aware of a personal data breach that is likely to result in a risk to your rights and freedoms, we will:</p>
+      <ul>
+        <li>Notify the relevant supervisory authority within 72 hours of becoming aware, where GDPR applies.</li>
+        <li>Notify affected users without undue delay, by email and an in-product notice, with a description of the nature of the breach, the data categories affected, the likely consequences, and the measures we are taking.</li>
+        <li>Maintain a public incident log for material incidents.</li>
+      </ul>
+    </section>
+
+    <hr/>
+
+    <!-- ─── CHILDREN ─── -->
+    <section id="children">
+      <span class="section-num">14 · Age</span>
+      <h2>LOKIO is for adults.</h2>
+      <div class="callout warn">
+        <p><strong>LOKIO is not for anyone under 18 years of age.</strong> The product enables real-world meetings between strangers. We do not believe this is appropriate for minors.</p>
+      </div>
+      <p>You confirm at sign-up that you are 18 or older. If we become aware that an account is held by a person under 18, we will close the account and delete the data without further notice. Parents or guardians who believe their child has created an account may write to <a class="inline" href="mailto:hello&#64;lokio.org?subject=Underage%20account">hello&#64;lokio.org</a> and we will act promptly.</p>
+      <p>Where stricter local thresholds apply (such as the United Kingdom's Age Appropriate Design Code or jurisdictions defining minority above 18), the higher threshold prevails.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── COOKIES ─── -->
+    <section id="cookies">
+      <span class="section-num">15 · Cookies and similar technologies</span>
+      <h2>What we set on your device.</h2>
+      <ul>
+        <li><strong>Session cookies.</strong> Required to keep you signed in. Without them you would have to authenticate on every page load.</li>
+        <li><strong>Local storage.</strong> Used for client-side preferences (e.g. language, last seen viewport). You can clear it from your browser settings; the service will continue to work but will reset some preferences.</li>
+        <li><strong>No third-party advertising cookies. No cross-site tracking. No fingerprinting.</strong></li>
+      </ul>
+      <p>Because LOKIO does not run advertising and does not use third-party analytics that build cross-site profiles, no separate cookie consent banner is presented for non-essential tracking. The cookies set are strictly necessary to operate the service.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── DNT ─── -->
+    <section id="dnt">
+      <span class="section-num">16 · Do Not Track</span>
+      <h2>Browser signals.</h2>
+      <p>LOKIO does not track you across other websites or services. We do not need to interpret a Do Not Track or Global Privacy Control signal to provide a tracking-free experience: tracking is not part of the product. Where applicable law requires us to honour a specific signal (e.g. California's GPC for opt-out of sale), we honour it; since we do not sell or share, no further action is taken.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── CHANGES ─── -->
+    <section id="changes">
+      <span class="section-num">17 · Changes</span>
+      <h2>How we update this policy.</h2>
+      <p>We may update this policy to reflect changes in the product, the law, or the operating entity. Material changes will be:</p>
+      <ul>
+        <li>Posted to this page with an updated "Last updated" date.</li>
+        <li>Announced inside the product to all signed-in users at least 14 days before they take effect, unless a faster change is required by law or to protect users.</li>
+        <li>Logged in a publicly accessible changelog.</li>
+      </ul>
+      <p>Continued use of the service after the effective date of an updated policy means acceptance of it. If you do not agree with the changes, you may delete your account.</p>
+    </section>
+
+    <hr/>
+
+    <!-- ─── CONTACT ─── -->
+    <section id="contact">
+      <span class="section-num">18 · Contact</span>
+      <h2>How to reach us.</h2>
+      <p>For any privacy question, request, or complaint:</p>
+      <div class="contact-block">
+        <a class="em" href="mailto:hello&#64;lokio.org?subject=Privacy%20inquiry">hello&#64;lokio.org</a>
+        <p>We aim to respond within 5 business days for general inquiries and within 30 days for formal data subject requests.</p>
+      </div>
+      <p class="muted">If you are not satisfied with our response, you may lodge a complaint with your local data protection authority. In the EU, a list is maintained at <code>edpb.europa.eu</code>. In the UK, the Information Commissioner's Office at <code>ico.org.uk</code>.</p>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-col">
+      <div class="foot-contact">
+        <a href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a>
+        <a href="https://app.lokio.org" target="_blank" rel="noopener">app.lokio.org</a>
+      </div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Business%20inquiry">For business</a></li>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Press%20inquiry">Press</a></li>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Investor%20inquiry">Investors</a></li>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Partnership%20inquiry">Partnerships</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Documents</h4>
+      <ul>
+        <li><a href="/documents/whitepaper">Whitepaper</a></li>
+        <li><a href="/documents/pitch">Pitch deck</a></li>
+        <li><a href="/documents/presentation">Presentation</a></li>
+        <li><a href="/documents/business">Business case</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="/documents/privacy">Privacy</a></li>
+        <li><a href="/documents/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-mark">© 2025 – 2026 LOKIO® GLOBAL LLC</div>
+</footer>
+
+<script>
+(function(){
+  var links=Array.prototype.slice.call(document.querySelectorAll('.toc-list a'));
+  var targets=links.map(function(a){
+    var id=a.getAttribute('href').replace('#','');
+    return document.getElementById(id);
+  }).filter(Boolean);
+  function spy(){
+    var top=window.scrollY+120;
+    var current=null;
+    targets.forEach(function(el){if(el.offsetTop<=top) current=el;});
+    links.forEach(function(a){a.classList.remove('active');});
+    if(current){
+      var match=links.find(function(a){return a.getAttribute('href')==='#'+current.id;});
+      if(match) match.classList.add('active');
+    }
+  }
+  document.addEventListener('scroll',spy,{passive:true});
+  spy();
+})();
+</script>
+
+</body>
+</html>

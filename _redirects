@@ -1,0 +1,49 @@
+# LOKIO. Cloudflare Pages routing.
+# Clean URLs: /documents/whitepaper → whitepaper.html
+# Cloudflare Pages serves files matching the path automatically,
+# but explicit rewrites keep the URL bar clean (no .html suffix shown).
+
+# ── Document routes ────────────────────────
+/documents/whitepaper        /documents/whitepaper.html      200
+/documents/pitch             /documents/pitch.html           200
+/documents/presentation      /documents/presentation.html    200
+/documents/business          /documents/business.html        200
+/documents/privacy           /documents/privacy.html         200
+/documents/terms             /documents/terms.html           200
+
+# ── Documents index (no hub page exists, redirect to whitepaper) ──
+/documents                   /documents/whitepaper           302
+/documents/                  /documents/whitepaper           302
+
+# ── Trailing slash hygiene ─────────────────
+/documents/whitepaper/       /documents/whitepaper           301
+/documents/pitch/            /documents/pitch                301
+/documents/presentation/     /documents/presentation         301
+/documents/business/         /documents/business             301
+/documents/privacy/          /documents/privacy              301
+/documents/terms/            /documents/terms                301
+
+# ── Legacy .uz domain handling (if cross-domain redirect needed) ──
+# When lokio.uz is decommissioned, set up domain-level 301 in Cloudflare DNS
+# from lokio.uz → lokio.org. This _redirects file lives on lokio.org only.
+
+# ── Common typos / alternates ──────────────
+/whitepaper                  /documents/whitepaper           301
+/pitch                       /documents/pitch                301
+/presentation                /documents/presentation         301
+/business                    /documents/business             301
+/privacy                     /documents/privacy              301
+/terms                       /documents/terms                301
+/legal                       /documents/privacy              302
+/docs                        /documents/whitepaper           302
+
+# ── App shortcuts ──────────────────────────
+/app                         https://app.lokio.org           302
+/map                         https://app.lokio.org           302
+
+# ── Email shortcut (mailto) ────────────────
+# Browsers handle mailto: directly; no rewrite needed.
+
+# ── 404 handler ────────────────────────────
+# Cloudflare Pages serves /404.html automatically if present.
+# We rely on its default behaviour for now.

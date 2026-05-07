@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# No crawl budget waste on hash routes
+Disallow: /*?*
+
+Sitemap: https://lokio.org/sitemap.xml

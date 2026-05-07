@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>LOKIO. A map of your city where people drop thoughts.</title>
+<meta name="description" content="Drop a joke, a thought, anything. On the map. People nearby see them. Conversations start. Meetings happen."/>
+<meta property="og:title" content="LOKIO"/>
+<meta property="og:description" content="A map of your city where people drop thoughts. People nearby see them."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://lokio.org/"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+:root{
+  /* Brand markers (immutable per protocol) */
+  --magenta:#FF00FF;
+  --male:#007FFF;
+  --gold:#FBEC5D;
+
+  /* Action / accent (matches app.lokio.org design system) */
+  --blue:#0A84FF;
+  --green:#30D158;
+  --purple:#BF5AF2;
+
+  /* Tinted backgrounds (decorative only) */
+  --magenta-d:rgba(255,0,255,0.15);
+  --male-d:rgba(0,127,255,0.15);
+  --gold-d:rgba(251,236,93,0.15);
+  --blue-d:rgba(10,132,255,0.15);
+
+  /* Surfaces and borders (no rgba 0.02-0.04 - browns ghost) */
+  --surface:rgba(22,22,34,0.72);
+  --surface-hi:rgba(16,16,26,0.95);
+  --mock-bg:rgba(10,10,18,0.92);
+  --border:rgba(255,255,255,0.10);
+  --border-hi:rgba(255,255,255,0.18);
+  --w14:rgba(255,255,255,0.14);
+  --w10:rgba(255,255,255,0.10);
+  --w08:rgba(255,255,255,0.08);
+  --w06:rgba(255,255,255,0.06);
+
+  /* Text (no rgba 0.02-0.04) */
+  --whi:rgba(255,255,255,0.96);
+  --wmid:rgba(255,255,255,0.62);
+  --wlo:rgba(255,255,255,0.40);
+
+  /* Radii */
+  --r-sm:12px;
+  --r-md:16px;
+  --r-lg:20px;
+  --r-xl:24px;
+  --r-2xl:28px;
+  --r-pill:999px;
+
+  /* Type */
+  --font:'Geist',-apple-system,system-ui,sans-serif;
+  --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+
+  /* Container */
+  --pad:24px;
+}
+
+@media (min-width:768px){:root{--pad:48px;}}
+@media (min-width:1280px){:root{--pad:80px;}}
+
+html,body{
+  background:#0a0a0a;
+  color:var(--whi);
+  font-family:var(--font);
+  font-size:16px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+
+body{
+  position:relative;
+  min-height:100dvh;
+  isolation:isolate;
+}
+
+/* Shared radial bg, always behind everything */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background:
+    radial-gradient(ellipse 70% 55% at 10% 5%,  rgba(155,0,195,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 92% 12%, rgba(10,132,255,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 96%, rgba(251,236,93,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 85% 60% at 85% 100%,rgba(48,209,88,0.12) 0%, transparent 60%),
+    #0a0a0a;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size:72px 72px;
+  mask-image:radial-gradient(ellipse 90% 85% at center, black 10%, transparent 78%);
+}
+
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+
+/* ─────────────────────────────────────
+   HEADER
+   ───────────────────────────────────── */
+.hdr{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px var(--pad);
+  background:rgba(10,10,10,0.72);
+  backdrop-filter:saturate(160%) blur(18px);
+  -webkit-backdrop-filter:saturate(160%) blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.hdr-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  letter-spacing:-0.02em;
+  font-size:18px;
+}
+
+.hdr-mark{
+  width:28px;height:28px;
+  border-radius:8px;
+  background:var(--gold);
+  color:#0a0a0a;
+  display:grid;place-items:center;
+  font-weight:900;font-size:16px;
+  letter-spacing:-0.04em;
+}
+
+.hdr-right{display:flex;align-items:center;gap:8px;}
+
+.hdr-nav{
+  display:none;
+  align-items:center;
+  gap:4px;
+  margin-right:4px;
+}
+
+.hdr-nav a{
+  padding:8px 14px;
+  font-size:14px;
+  font-weight:500;
+  color:var(--wmid);
+  border-radius:var(--r-pill);
+  transition:color .2s var(--ease), background .2s var(--ease);
+}
+
+.hdr-nav a:hover{color:var(--whi);background:var(--w06);}
+
+@media (min-width:768px){.hdr-nav{display:flex;}}
+
+.hdr-cta{
+  display:none;
+  padding:8px 18px;
+  border-radius:var(--r-pill);
+  background:var(--blue);
+  color:#fff;
+  font-weight:600;
+  font-size:14px;
+  transition:transform .2s var(--ease), background .2s var(--ease);
+}
+
+.hdr-cta:hover{background:#1A8FFF;}
+.hdr-cta:active{transform:scale(0.97);}
+
+@media (min-width:768px){.hdr-cta{display:inline-flex;}}
+
+/* ─────────────────────────────────────
+   SECTION FRAME
+   ───────────────────────────────────── */
+section{
+  position:relative;
+  padding:96px var(--pad) 64px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+@media (min-width:768px){
+  section{padding:128px var(--pad) 96px;}
+}
+
+.eyebrow{
+  display:inline-block;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--wmid);
+  margin-bottom:20px;
+  padding:6px 12px;
+  border:1px solid var(--border);
+  border-radius:var(--r-pill);
+}
+
+h1,h2,h3{
+  font-weight:800;
+  letter-spacing:-0.03em;
+  line-height:1.05;
+}
+
+h1{font-size:44px;}
+h2{font-size:36px;}
+h3{font-size:24px;letter-spacing:-0.02em;line-height:1.2;}
+
+@media (min-width:768px){
+  h1{font-size:72px;}
+  h2{font-size:54px;}
+  h3{font-size:28px;}
+}
+
+@media (min-width:1280px){
+  h1{font-size:88px;}
+  h2{font-size:64px;}
+}
+
+p{color:var(--whi);}
+.muted{color:var(--wmid);}
+.dim{color:var(--wlo);}
+
+/* ─────────────────────────────────────
+   HERO
+   ───────────────────────────────────── */
+.hero{
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding-top:calc(env(safe-area-inset-top, 0px) + 152px);
+  padding-bottom:80px;
+}
+
+@media (min-width:768px){
+  .hero{padding-top:calc(env(safe-area-inset-top, 0px) + 184px);}
+}
+
+.hero h1{
+  max-width:18ch;
+  margin-bottom:24px;
+}
+
+.hero .strap{
+  font-size:18px;
+  color:var(--wmid);
+  max-width:36ch;
+  margin-bottom:48px;
+}
+
+@media (min-width:768px){.hero .strap{font-size:22px;}}
+
+.hero-product{
+  font-size:17px;
+  line-height:1.55;
+  color:var(--whi);
+  max-width:48ch;
+  margin-bottom:16px;
+}
+
+.hero-sub{
+  font-size:15px;
+  line-height:1.6;
+  color:var(--wmid);
+  max-width:48ch;
+  margin-bottom:40px;
+}
+
+@media (min-width:768px){
+  .hero-product{font-size:20px;margin-bottom:20px;}
+  .hero-sub{font-size:17px;margin-bottom:56px;}
+}
+
+.cta{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:18px 32px;
+  background:var(--blue);
+  color:#fff;
+  font-weight:600;
+  font-size:17px;
+  border-radius:var(--r-pill);
+  box-shadow:0 12px 40px rgba(10,132,255,0.32);
+  transition:transform .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+}
+
+.cta:hover{
+  background:#1A8FFF;
+  box-shadow:0 16px 48px rgba(10,132,255,0.42);
+}
+
+.cta:active{transform:scale(0.98);}
+
+.cta .arrow{
+  display:inline-block;
+  transition:transform .2s var(--ease);
+}
+
+.cta:hover .arrow{transform:translateX(4px);}
+
+.cta-sub{
+  display:block;
+  margin-top:14px;
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--wlo);
+  letter-spacing:0.02em;
+}
+
+/* Decorative pins backdrop in hero */
+.pins{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  overflow:hidden;
+}
+
+.pin{
+  position:absolute;
+  width:48px;height:48px;
+  display:grid;place-items:center;
+}
+
+.pin-c{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:currentColor;
+  box-shadow:0 0 16px currentColor;
+}
+
+.pin-r{
+  position:absolute;
+  border:1.5px solid currentColor;
+  border-radius:50%;
+  opacity:0.5;
+  animation:pulse 3s var(--ease) infinite;
+}
+
+@keyframes pulse{
+  0%   {transform:scale(0.6);opacity:0.7;}
+  100% {transform:scale(1.4);opacity:0;}
+}
+
+/* ─────────────────────────────────────
+   MOCK POST CARD (matches app.lokio.org)
+   ───────────────────────────────────── */
+.mock{
+  background:var(--mock-bg);
+  border:1px solid var(--border-hi);
+  border-radius:var(--r-lg);
+  padding:18px 20px;
+  font-family:var(--mono);
+  font-size:14px;
+  line-height:1.6;
+  max-width:520px;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,0,0,0.32);
+}
+
+.mock-head{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  color:rgba(255,255,255,0.78);
+  font-size:12px;
+  margin-bottom:10px;
+}
+
+.mock-user{color:rgba(255,255,255,0.92);font-weight:500;}
+.mock-meta{color:rgba(255,255,255,0.62);}
+.mock-dot{color:rgba(255,255,255,0.40);}
+
+.mock-body{
+  color:var(--whi);
+  font-size:15px;
+  line-height:1.5;
+  margin-bottom:12px;
+  font-family:var(--font);
+}
+
+.mock-foot{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  color:rgba(255,255,255,0.78);
+  font-size:12px;
+  padding-top:10px;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.mock-arrow{color:rgba(255,255,255,0.50);}
+.mock-echo{color:#3FA0FF;font-weight:600;}
+.mock-joined{color:#4FD971;font-weight:600;}
+
+.mock-tx{
+  display:block;
+  margin-top:10px;
+  padding-left:12px;
+  border-left:2px solid var(--w14);
+  color:rgba(255,255,255,0.66);
+  font-style:italic;
+  font-family:var(--font);
+  font-size:14px;
+  line-height:1.5;
+  max-width:520px;
+}
+
+/* Marker tinted variants for mock posts */
+.mock.f{border-color:rgba(255,0,255,0.32);box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,0,255,0.14);}
+.mock.m{border-color:rgba(0,127,255,0.32);box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,127,255,0.14);}
+.mock.b{border-color:rgba(251,236,93,0.32);box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(251,236,93,0.14);}
+
+.mock.f .mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--magenta);box-shadow:0 0 8px var(--magenta);margin-right:6px;vertical-align:middle;}
+.mock.m .mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--male);box-shadow:0 0 8px var(--male);margin-right:6px;vertical-align:middle;}
+.mock.b .mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);margin-right:6px;vertical-align:middle;}
+
+/* ─────────────────────────────────────
+   STEPS (Section 3)
+   ───────────────────────────────────── */
+.steps{
+  display:grid;
+  gap:16px;
+  grid-template-columns:1fr;
+  margin-top:40px;
+  margin-bottom:24px;
+}
+
+@media (min-width:768px){
+  .steps{grid-template-columns:repeat(3,1fr);gap:20px;}
+}
+
+.step{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  padding:32px 28px;
+  position:relative;
+  transition:border-color .3s var(--ease), transform .3s var(--ease);
+}
+
+.step:hover{border-color:var(--border-hi);}
+
+.step-num{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--wlo);
+  letter-spacing:0.16em;
+  margin-bottom:24px;
+}
+
+.step-icon{
+  width:64px;height:64px;
+  border-radius:var(--r-lg);
+  display:grid;place-items:center;
+  margin-bottom:24px;
+  border:1.5px solid currentColor;
+  background:transparent;
+}
+
+.step-icon svg{width:28px;height:28px;}
+
+.step:nth-child(1) .step-icon{color:var(--magenta);background:var(--magenta-d);}
+.step:nth-child(2) .step-icon{color:var(--blue);background:var(--blue-d);}
+.step:nth-child(3) .step-icon{color:var(--green);background:rgba(48,209,88,0.10);}
+
+.step h3{margin-bottom:12px;color:var(--whi);}
+.step p{color:var(--wmid);font-size:15px;line-height:1.55;}
+
+.steps-sub{
+  margin-top:32px;
+  color:var(--wmid);
+  font-size:17px;
+  line-height:1.55;
+  max-width:48ch;
+}
+
+/* ─────────────────────────────────────
+   SCENES (Section 4)
+   ───────────────────────────────────── */
+.scenes{
+  display:grid;
+  gap:32px;
+  grid-template-columns:1fr;
+  margin-top:48px;
+}
+
+@media (min-width:1024px){.scenes{grid-template-columns:1fr 1fr;gap:40px;}}
+
+.scene{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-2xl);
+  padding:36px 32px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+@media (min-width:768px){.scene{padding:48px 40px;}}
+
+.scene-tag{
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--wmid);
+}
+
+.scene h3{color:var(--whi);}
+
+.scene p{
+  color:var(--whi);
+  font-size:16px;
+  line-height:1.6;
+}
+
+.scene .muted{color:var(--wmid);}
+
+.scene-close{
+  margin-top:24px;
+  color:var(--wmid);
+  font-size:16px;
+  line-height:1.6;
+  max-width:60ch;
+}
+
+/* ─────────────────────────────────────
+   LANGUAGE BARRIER (Section 5)
+   ───────────────────────────────────── */
+.lang-stack{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  margin-top:40px;
+  margin-bottom:32px;
+  max-width:560px;
+}
+
+.lang-stack .mock:nth-child(1){align-self:flex-start;}
+.lang-stack .lang-block{align-self:flex-end;max-width:540px;}
+.lang-stack .lang-block .mock-tx{margin-left:0;}
+.lang-stack .mock:nth-child(3){align-self:flex-start;}
+
+@media (min-width:1024px){
+  .lang-stack{max-width:none;}
+  .lang-stack .mock,.lang-stack .lang-block{max-width:540px;}
+}
+
+.lang-close{
+  margin-top:32px;
+  color:var(--wmid);
+  font-size:17px;
+  line-height:1.6;
+  max-width:60ch;
+}
+
+/* ─────────────────────────────────────
+   COMPARISON TABLE (Section 6)
+   ───────────────────────────────────── */
+.compare{
+  margin-top:40px;
+  margin-bottom:32px;
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  overflow:hidden;
+  background:var(--surface);
+  max-width:680px;
+}
+
+.compare-row{
+  display:grid;
+  grid-template-columns:1fr 1.5fr;
+  border-bottom:1px solid var(--border);
+  font-size:16px;
+}
+
+.compare-row:last-child{border-bottom:none;}
+.compare-row.head{font-size:12px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);background:var(--w06);}
+.compare-row.head>div{padding:14px 24px;}
+
+.compare-row>div{
+  padding:18px 24px;
+}
+
+.compare-row>div:first-child{
+  color:var(--whi);
+  border-right:1px solid var(--border);
+  font-weight:500;
+}
+
+.compare-row>div:last-child{
+  color:var(--wmid);
+}
+
+.compare-row.lokio{
+  background:linear-gradient(90deg, rgba(10,132,255,0.10), rgba(10,132,255,0.02));
+  border-top:1px solid var(--border-hi);
+}
+
+.compare-row.lokio>div:first-child{
+  color:#fff;
+  font-weight:800;
+  font-size:18px;
+  letter-spacing:-0.01em;
+}
+
+.compare-row.lokio>div:last-child{
+  color:#fff;
+  font-weight:800;
+  font-size:18px;
+}
+
+.compare-sub{
+  color:var(--wmid);
+  font-size:16px;
+  line-height:1.6;
+  max-width:60ch;
+}
+
+/* ─────────────────────────────────────
+   BUSINESS HOOK (Section 6.5)
+   ───────────────────────────────────── */
+.biz{
+  background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.02));
+  border:1px solid rgba(251,236,93,0.20);
+  border-radius:var(--r-2xl);
+  padding:48px 32px;
+  margin-top:24px;
+}
+
+@media (min-width:768px){.biz{padding:64px 56px;}}
+
+.biz-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 14px;
+  background:rgba(251,236,93,0.12);
+  border:1px solid rgba(251,236,93,0.32);
+  border-radius:var(--r-pill);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:24px;
+}
+
+.biz-badge::before{
+  content:"";
+  width:8px;height:8px;
+  background:var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--gold);
+}
+
+.biz h2{
+  margin-bottom:24px;
+}
+
+.biz h2 .num{color:var(--gold);}
+.biz h2 .strike{color:var(--wlo);text-decoration:line-through;text-decoration-thickness:2px;}
+
+.biz-body{
+  color:var(--whi);
+  font-size:17px;
+  line-height:1.6;
+  max-width:60ch;
+  margin-bottom:24px;
+}
+
+.biz-body + .biz-body{margin-top:0;}
+
+.biz-sub{
+  font-size:18px;
+  font-weight:600;
+  color:#fff;
+  margin-top:24px;
+  margin-bottom:32px;
+  max-width:48ch;
+}
+
+.biz-cta{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 24px;
+  background:transparent;
+  border:1.5px solid var(--gold);
+  color:var(--gold);
+  font-weight:600;
+  font-size:15px;
+  border-radius:var(--r-pill);
+  transition:background .2s var(--ease);
+}
+
+.biz-cta:hover{background:rgba(251,236,93,0.10);}
+
+/* ─────────────────────────────────────
+   LIVE NOW (Section 7)
+   ───────────────────────────────────── */
+.live{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-2xl);
+  padding:48px 32px;
+  margin-top:32px;
+}
+
+@media (min-width:768px){.live{padding:64px 56px;}}
+
+.live h2{margin-bottom:32px;}
+
+.checklist{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-bottom:36px;
+}
+
+.checklist li{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  font-size:16px;
+  color:var(--whi);
+  line-height:1.5;
+}
+
+.checklist li::before{
+  content:"";
+  flex-shrink:0;
+  width:22px;height:22px;
+  margin-top:1px;
+  border-radius:50%;
+  background:var(--green);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a0a0a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3.5 8.5 6.5 11.5 12.5 5'/></svg>");
+  background-size:14px 14px;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+.live-sub{
+  color:var(--wmid);
+  font-size:17px;
+  line-height:1.6;
+  margin-bottom:32px;
+  max-width:48ch;
+}
+
+/* ─────────────────────────────────────
+   FOOTER
+   ───────────────────────────────────── */
+footer{
+  border-top:1px solid var(--border);
+  padding:48px var(--pad) 32px;
+  margin-top:48px;
+}
+
+.foot-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:32px;
+}
+
+@media (min-width:640px){
+  .foot-inner{grid-template-columns:1fr 1fr;gap:32px 48px;}
+}
+
+@media (min-width:1024px){
+  .foot-inner{grid-template-columns:1.4fr 1fr 1fr;gap:64px;}
+}
+
+.foot-col h4{
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--wlo);
+  margin-bottom:14px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.foot-col ul{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.foot-col a{
+  font-size:14px;
+  color:var(--wmid);
+  transition:color .2s var(--ease);
+  line-height:1.4;
+  display:inline-block;
+  padding:2px 0;
+}
+
+.foot-col a:hover{color:var(--whi);}
+
+.foot-contact{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--wmid);
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  margin-bottom:20px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--border);
+}
+
+.foot-contact a{padding:0;}
+.foot-contact a:hover{color:var(--whi);}
+
+.foot-mark{
+  max-width:1200px;
+  margin:40px auto 0;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--wlo);
+  letter-spacing:0.08em;
+}
+
+/* ─────────────────────────────────────
+   LANG SWAP
+   ───────────────────────────────────── */
+[data-lang="en"] [lang="ru"]{display:none;}
+[data-lang="ru"] [lang="en"]{display:none;}
+
+/* ─────────────────────────────────────
+   ENTRY ANIMATIONS
+   ───────────────────────────────────── */
+@media (prefers-reduced-motion:no-preference){
+  .reveal{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .6s var(--ease), transform .6s var(--ease);
+  }
+  .reveal.in{opacity:1;transform:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     HEADER
+     ══════════════════════════════════ -->
+<header class="hdr">
+  <a href="/" class="hdr-logo" aria-label="LOKIO home">
+    <span class="hdr-mark">L</span>
+    <span>LOKIO</span>
+  </a>
+  <div class="hdr-right">
+    <nav class="hdr-nav" aria-label="Primary">
+      <a href="mailto:hello&#64;lokio.org">
+        <span lang="en">Contact</span>
+        <span lang="ru">Контакт</span>
+      </a>
+    </nav>
+    <a class="hdr-cta" href="https://app.lokio.org" target="_blank" rel="noopener">
+      <span lang="en">Open the map</span>
+      <span lang="ru">Открой карту</span>
+    </a>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════
+     HERO  (Section 1)
+     ══════════════════════════════════ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="pins" id="pins" aria-hidden="true"></div>
+
+  <h1 id="hero-title">
+    <span lang="en">Drop a joke, a thought, anything. On the map.</span>
+    <span lang="ru">Кинь шутку, мысль, что угодно. На карте.</span>
+  </h1>
+
+  <p class="strap">
+    <span lang="en">This is happening around you right now. You just don't see it.</span>
+    <span lang="ru">Это происходит вокруг тебя прямо сейчас. Ты просто этого не видишь.</span>
+  </p>
+
+  <p class="hero-product">
+    <span lang="en">A map of your city where people drop thoughts. People nearby see them. Conversations start. Meetings happen.</span>
+    <span lang="ru">Карта твоего города, на которую люди кидают мысли. Люди рядом их видят. Начинаются разговоры. Происходят встречи.</span>
+  </p>
+
+  <p class="hero-sub">
+    <span lang="en">A neighbourhood meme. A coffee company. A free first coffee from the café across the street.</span>
+    <span lang="ru">Шутка района. Компания на кофе. Бесплатный первый кофе от кафе через дорогу.</span>
+  </p>
+
+  <div>
+    <a class="cta" href="https://app.lokio.org" target="_blank" rel="noopener">
+      <span lang="en">Open the map</span>
+      <span lang="ru">Открой карту</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+    <span class="cta-sub">app.lokio.org</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 2 · NOT A FEED
+     ══════════════════════════════════ -->
+<section class="reveal" aria-labelledby="s2-title">
+  <span class="eyebrow">
+    <span lang="en">02 · Not a feed</span>
+    <span lang="ru">02 · Не лента</span>
+  </span>
+
+  <h2 id="s2-title">
+    <span lang="en">Algorithms show you someone else's life. LOKIO shows you where to start your own.</span>
+    <span lang="ru">Алгоритмы показывают чужую жизнь. LOKIO показывает где начать свою.</span>
+  </h2>
+
+  <p class="hero-sub" style="margin-top:32px;max-width:60ch;">
+    <span lang="en">A thought tied to a place. Visible to people physically nearby. Five seconds from opening to publishing. No followers, no content plan, no swipe.</span>
+    <span lang="ru">Мысль привязанная к месту. Видна людям рядом. Пять секунд от открытия до публикации. Без подписчиков, без контент-плана, без свайпов.</span>
+  </p>
+
+  <div class="mock m" style="margin-top:24px;">
+    <div class="mock-head">
+      <span class="mock-user">@user_a1b2c</span>
+      <span class="mock-dot">·</span>
+      <span class="mock-meta">
+        <span lang="en">80m · 23h remaining</span>
+        <span lang="ru">80м · 23ч осталось</span>
+      </span>
+    </div>
+    <div class="mock-body">
+      <span lang="en">"Coffee near the airport, anyone want company in 30 min?"</span>
+      <span lang="ru">"Кофе у аэропорта, кто составит компанию через полчаса?"</span>
+    </div>
+    <div class="mock-foot">
+      <span class="mock-arrow">↳</span>
+      <span class="mock-echo">3 echo</span>
+      <span class="mock-dot">·</span>
+      <span class="mock-joined">
+        <span lang="en">1 joined</span>
+        <span lang="ru">1 присоединился</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 3 · HOW IT WORKS
+     ══════════════════════════════════ -->
+<section class="reveal" aria-labelledby="s3-title">
+  <span class="eyebrow">
+    <span lang="en">03 · How it works</span>
+    <span lang="ru">03 · Как это работает</span>
+  </span>
+
+  <h2 id="s3-title">
+    <span lang="en">Signal → Radar → Meeting.</span>
+    <span lang="ru">Сигнал → Радар → Встреча.</span>
+  </h2>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2v6"/><circle cx="12" cy="14" r="6"/><circle cx="12" cy="14" r="2" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>
+        <span lang="en">Signal</span>
+        <span lang="ru">Сигнал</span>
+      </h3>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3>
+        <span lang="en">Radar</span>
+        <span lang="ru">Радар</span>
+      </h3>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 11a5 5 0 0 0-10 0v6h10z"/><path d="M9 17v2a3 3 0 0 0 6 0v-2"/><path d="M5 11h14"/>
+        </svg>
+      </div>
+      <h3>
+        <span lang="en">Meeting</span>
+        <span lang="ru">Встреча</span>
+      </h3>
+    </div>
+  </div>
+
+  <p class="steps-sub">
+    <span lang="en">You drop a thought. The map shows it to people nearby. Someone replies. You meet.</span>
+    <span lang="ru">Ты кинул мысль. Карта показала её людям рядом. Кто-то ответил. Вы встретились.</span>
+  </p>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 4 · TWO SCENES
+     ══════════════════════════════════ -->
+<section class="reveal" aria-labelledby="s4-title">
+  <span class="eyebrow">
+    <span lang="en">04 · Two scenes</span>
+    <span lang="ru">04 · Две сцены</span>
+  </span>
+
+  <h2 id="s4-title">
+    <span lang="en">What it actually does.</span>
+    <span lang="ru">Что это на самом деле делает.</span>
+  </h2>
+
+  <div class="scenes">
+    <!-- Scene 1 -->
+    <div class="scene">
+      <span class="scene-tag">
+        <span lang="en">Scene 1 · A traveller in Istanbul</span>
+        <span lang="ru">Сцена 1 · Путешественник в Стамбуле</span>
+      </span>
+
+      <p>
+        <span lang="en">19:00. Third night dining alone in the hotel. Speaks no Turkish.</span>
+        <span lang="ru">19:00. Третий вечер ужинает в отеле один. Не знает турецкого.</span>
+      </p>
+
+      <p class="muted">
+        <span lang="en">Opens LOKIO. The map shows pins around the hotel.</span>
+        <span lang="ru">Открывает LOKIO. На карте появляются пины вокруг отеля.</span>
+      </p>
+
+      <div class="mock f">
+        <div class="mock-head">
+          <span class="mock-user">@user_b7c2e</span>
+          <span class="mock-dot">·</span>
+          <span class="mock-meta">
+            <span lang="en">200m · 2h remaining</span>
+            <span lang="ru">200м · 2ч осталось</span>
+          </span>
+        </div>
+        <div class="mock-body">
+          <span lang="en">"Steak at Mikla, table for two at 20:30. One spot open."</span>
+          <span lang="ru">"Стейк в Mikla, столик на двоих в 20:30. Одно место свободно."</span>
+        </div>
+        <div class="mock-foot">
+          <span class="mock-arrow">↳</span>
+          <span class="mock-echo">4 echo</span>
+          <span class="mock-dot">·</span>
+          <span class="mock-joined">
+            <span lang="en">1 joined</span>
+            <span lang="ru">1 присоединился</span>
+          </span>
+        </div>
+      </div>
+
+      <p class="muted">
+        <span lang="en">Taps join. At 20:30 the traveller is not alone.</span>
+        <span lang="ru">Жмёт «присоединиться». В 20:30 он уже не один.</span>
+      </p>
+    </div>
+
+    <!-- Scene 2 -->
+    <div class="scene">
+      <span class="scene-tag">
+        <span lang="en">Scene 2 · Your district, every day</span>
+        <span lang="ru">Сцена 2 · Твой район, каждый день</span>
+      </span>
+
+      <p>
+        <span lang="en">You walk past a bench. Someone has dropped this on the map:</span>
+        <span lang="ru">Ты идёшь мимо лавочки. Кто-то кинул на карту:</span>
+      </p>
+
+      <div class="mock m">
+        <div class="mock-head">
+          <span class="mock-user">@user_h4x</span>
+          <span class="mock-dot">·</span>
+          <span class="mock-meta">
+            <span lang="en">0m · 12h remaining</span>
+            <span lang="ru">0м · 12ч осталось</span>
+          </span>
+        </div>
+        <div class="mock-body">
+          <span lang="en">"Stepped out 'for some air' 40 minutes ago. Send help."</span>
+          <span lang="ru">"Вышел «подышать» уже 40 минут назад. Спасите"</span>
+        </div>
+        <div class="mock-foot">
+          <span class="mock-arrow">↳</span>
+          <span class="mock-echo">31 echo</span>
+          <span class="mock-dot">·</span>
+          <span class="mock-joined">
+            <span lang="en">4 offered to come</span>
+            <span lang="ru">4 предложили прийти</span>
+          </span>
+        </div>
+      </div>
+
+      <p class="muted">
+        <span lang="en">You smile. Thirty-one people already recognised themselves. Four offered to come find this person. You add yours.</span>
+        <span lang="ru">Ты улыбаешься. Тридцать один человек уже узнал себя. Четверо предложили найти этого человека. Ты добавляешь свою.</span>
+      </p>
+    </div>
+  </div>
+
+  <p class="scene-close">
+    <span lang="en">This is the daily reason. Coffee posts and meet-ups happen when a need arrives. Self-deprecating thoughts from a bench happen every day. The user who came for company comes back for the recognition.</span>
+    <span lang="ru">Это ежедневная причина заходить. Посты про кофе и встречи происходят когда есть нужда. Самоирония с лавочки. Каждый день. Тот кто пришёл за компанией возвращается за узнаванием.</span>
+  </p>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 5 · ANY LANGUAGE
+     ══════════════════════════════════ -->
+<section class="reveal" aria-labelledby="s5-title">
+  <span class="eyebrow">
+    <span lang="en">05 · Any language</span>
+    <span lang="ru">05 · Любой язык</span>
+  </span>
+
+  <h2 id="s5-title">
+    <span lang="en">Any language. In any city.</span>
+    <span lang="ru">Любой язык. В любом городе.</span>
+  </h2>
+
+  <p class="hero-sub" style="margin-top:32px;max-width:60ch;">
+    <span lang="en">There is someone in every city in the world who speaks your language. And someone learning yours. Open the map. They are visible.</span>
+    <span lang="ru">В каждом городе мира есть кто-то говорящий на твоём языке. И кто-то изучающий его. Открой карту. Они видны.</span>
+  </p>
+
+  <div class="lang-stack">
+    <!-- Tourist -->
+    <div class="mock f">
+      <div class="mock-head">
+        <span class="mock-user">@user_x4t</span>
+        <span class="mock-dot">·</span>
+        <span class="mock-meta">
+          <span lang="en">200m · 5h remaining</span>
+          <span lang="ru">200м · 5ч осталось</span>
+        </span>
+      </div>
+      <div class="mock-body" style="font-family:var(--font);">"Anyone in Shibuya speaks English? Lost in a menu, need someone to translate or just sit with me through dinner."</div>
+      <div class="mock-foot">
+        <span class="mock-arrow">↳</span>
+        <span class="mock-echo">14 echo</span>
+        <span class="mock-dot">·</span>
+        <span class="mock-joined">
+          <span lang="en">3 joined</span>
+          <span lang="ru">3 присоединились</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Relocator -->
+    <div class="lang-block">
+      <div class="mock m">
+        <div class="mock-head">
+          <span class="mock-user">@user_q9m</span>
+          <span class="mock-dot">·</span>
+          <span class="mock-meta">
+            <span lang="en">500m · 8h remaining</span>
+            <span lang="ru">500м · 8ч осталось</span>
+          </span>
+        </div>
+        <div class="mock-body" style="font-family:var(--font);">"¿Alguien más llegó a Berlín este otoño? Hablemos en español, extraño la conversación."</div>
+        <div class="mock-foot">
+          <span class="mock-arrow">↳</span>
+          <span class="mock-echo">22 echo</span>
+          <span class="mock-dot">·</span>
+          <span class="mock-joined">
+            <span lang="en">9 joined</span>
+            <span lang="ru">9 присоединились</span>
+          </span>
+        </div>
+      </div>
+      <div class="mock-tx">
+        <span lang="en">"Anyone else moved to Berlin this autumn? Let's speak Spanish, I miss the conversation."</span>
+        <span lang="ru">"Кто-то ещё перебрался в Берлин этой осенью? Поговорим на испанском, скучаю по разговорам."</span>
+      </div>
+    </div>
+
+    <!-- Learner -->
+    <div class="mock f">
+      <div class="mock-head">
+        <span class="mock-user">@user_b3n</span>
+        <span class="mock-dot">·</span>
+        <span class="mock-meta">
+          <span lang="en">150m · 4h remaining</span>
+          <span lang="ru">150м · 4ч осталось</span>
+        </span>
+      </div>
+      <div class="mock-body" style="font-family:var(--font);">"Practising my Italian. Café in Trastevere right now. Native speakers welcome to correct my mistakes."</div>
+      <div class="mock-foot">
+        <span class="mock-arrow">↳</span>
+        <span class="mock-echo">11 echo</span>
+        <span class="mock-dot">·</span>
+        <span class="mock-joined">
+          <span lang="en">4 joined</span>
+          <span lang="ru">4 присоединились</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <p class="lang-close">
+    <span lang="en">Tandem demands registration, profile forms, learning goals. Telegram chats with 10,000 members are chaos. LOKIO: one thought on the map in your language. Someone nearby answers. That is how you find your people, and how you learn theirs.</span>
+    <span lang="ru">Tandem требует регистрации, формы, целей обучения. Telegram-чаты на 10,000 человек, это хаос. LOKIO: одна мысль на карте на твоём языке. Кто-то рядом отвечает. Так находят своих и так учат чужой.</span>
+  </p>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 6 · LOKIO REQUIRES NOTHING
+     ══════════════════════════════════ -->
+<section class="reveal" aria-labelledby="s6-title">
+  <span class="eyebrow">
+    <span lang="en">06 · Requires nothing</span>
+    <span lang="ru">06 · Ничего не требует</span>
+  </span>
+
+  <h2 id="s6-title">
+    <span lang="en">Every other product asks something of you before letting you in.</span>
+    <span lang="ru">Каждый другой продукт что-то требует от тебя прежде чем впустить.</span>
+  </h2>
+
+  <div class="compare">
+    <div class="compare-row head">
+      <div>
+        <span lang="en">Product</span>
+        <span lang="ru">Продукт</span>
+      </div>
+      <div>
+        <span lang="en">What it requires</span>
+        <span lang="ru">Что требует</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div>Tinder</div>
+      <div>
+        <span lang="en">A declaration of intent</span>
+        <span lang="ru">Заявить о намерении</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div>Meetup</div>
+      <div>
+        <span lang="en">Responsibility for an event</span>
+        <span lang="ru">Взять ответственность за мероприятие</span>
+      </div>
+    </div>
+    <div class="compare-row">
+      <div>Instagram</div>
+      <div>
+        <span lang="en">Followers and a content plan</span>
+        <span lang="ru">Подписчиков и контент-план</span>
+      </div>
+    </div>
+    <div class="compare-row lokio">
+      <div>LOKIO</div>
+      <div>
+        <span lang="en">Nothing</span>
+        <span lang="ru">Ничего</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="compare-sub">
+    <span lang="en">You wrote what you were thinking. You did not ask to be noticed, so being unnoticed costs nothing. You asked for nothing, so the reply or its absence carries no rejection. But the reply comes. People nearby see it. Someone is thinking the same thing.</span>
+    <span lang="ru">Ты написал что думаешь. Ты не просил чтобы тебя заметили, поэтому остаться незамеченным ничего не стоит. Ты ничего не просил, поэтому ответ или его отсутствие не несут отказа. Но ответ приходит. Люди рядом видят. Кто-то думает то же самое.</span>
+  </p>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 6.5 · BUSINESS HOOK
+     ══════════════════════════════════ -->
+<section class="reveal" aria-labelledby="s65-title">
+  <div class="biz">
+    <span class="biz-badge">
+      <span lang="en">For local businesses</span>
+      <span lang="ru">Локальному бизнесу</span>
+    </span>
+
+    <h2 id="s65-title">
+      <span lang="en"><span class="strike">$3,500 a month.</span> Now <span class="num">$4.99</span>.</span>
+      <span lang="ru"><span class="strike">$3,500 в месяц.</span> Теперь <span class="num">$4.99</span>.</span>
+    </h2>
+
+    <p class="biz-body">
+      <span lang="en">A café publishes a banner pin on the map. Visible to every user who opens the map in the district right now. The free-coffee filter surfaces it on top of regular pins to people actively looking for offers. ROI measurable on the same day.</span>
+      <span lang="ru">Кафе публикует баннер на карте. Виден каждому юзеру который открыл карту в районе прямо сейчас. Фильтр «бесплатный кофе» поднимает баннер над обычными пинами для тех кто ищет предложения. ROI считается в тот же день.</span>
+    </p>
+
+    <p class="biz-body">
+      <span lang="en">A solo trainer fills a class with one map post. A neighbourhood market lets the street know they have fresh fish today, no marketer required. A street vendor announces today's location to passers-by within walking distance.</span>
+      <span lang="ru">Тренер-одиночка собирает группу одним постом. Районный рынок сообщает улице что сегодня свежая рыба, без маркетолога. Уличный торговец объявляет прохожим в шаговой доступности своё сегодняшнее место.</span>
+    </p>
+
+    <p class="biz-sub">
+      <span lang="en">Not advertising people hate. Invitations they wait for.</span>
+      <span lang="ru">Не реклама которую ненавидят. Приглашение которого ждут.</span>
+    </p>
+
+    <a class="biz-cta" href="mailto:hello&#64;lokio.org?subject=Business%20inquiry&amp;body=Hi%20LOKIO%20team%2C%0A%0AI%20run%20a%20local%20business%20and%20I%27d%20like%20to%20learn%20more%20about%20putting%20a%20banner%20pin%20on%20the%20map.%0A%0AMy%20business%3A%20%0ACity%2Fdistrict%3A%20%0AWhat%20I%20want%20to%20advertise%3A%20%0A%0AThanks." data-target="/documents/business">
+      <span lang="en">See full business case</span>
+      <span lang="ru">Полный бизнес-кейс</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     SECTION 7 · LIVE NOW
+     ══════════════════════════════════ -->
+<section class="reveal" aria-labelledby="s7-title">
+  <span class="eyebrow">
+    <span lang="en">07 · Live now</span>
+    <span lang="ru">07 · Уже работает</span>
+  </span>
+
+  <div class="live">
+    <h2 id="s7-title">
+      <span lang="en">This is already running.</span>
+      <span lang="ru">Это уже работает. Прямо сейчас.</span>
+    </h2>
+
+    <ul class="checklist">
+      <li>
+        <span lang="en">Live PWA, no install required</span>
+        <span lang="ru">Live PWA, ничего ставить не нужно</span>
+      </li>
+      <li>
+        <span lang="en">Sign in with Google or a passkey</span>
+        <span lang="ru">Вход через Google или passkey</span>
+      </li>
+      <li>
+        <span lang="en">Real-time map with people nearby</span>
+        <span lang="ru">Real-time карта людей рядом</span>
+      </li>
+      <li>
+        <span lang="en">Topic chat</span>
+        <span lang="ru">Чат под пинами</span>
+      </li>
+      <li>
+        <span lang="en">Public profile pages, free, with all your links</span>
+        <span lang="ru">Публичный профиль, бесплатный, со всеми твоими ссылками</span>
+      </li>
+    </ul>
+
+    <p class="live-sub">
+      <span lang="en">Open it. Authenticate. Drop a joke. See what happens.</span>
+      <span lang="ru">Открой. Зарегистрируйся. Кинь мысль. Посмотри что произойдёт.</span>
+    </p>
+
+    <a class="cta" href="https://app.lokio.org" target="_blank" rel="noopener">
+      <span style="font-family:var(--mono);">app.lokio.org</span>
+      <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     FOOTER
+     ══════════════════════════════════ -->
+<footer>
+  <div class="foot-inner">
+
+    <div class="foot-col">
+      <div class="foot-contact">
+        <a href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a>
+        <a href="https://app.lokio.org" target="_blank" rel="noopener">app.lokio.org</a>
+      </div>
+      <h4>
+        <span lang="en">Contact</span>
+        <span lang="ru">Контакт</span>
+      </h4>
+      <ul>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Business%20inquiry"><span lang="en">For business</span><span lang="ru">Для бизнеса</span></a></li>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Press%20inquiry"><span lang="en">Press</span><span lang="ru">Пресса</span></a></li>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Investor%20inquiry"><span lang="en">Investors</span><span lang="ru">Инвесторам</span></a></li>
+        <li><a href="mailto:hello&#64;lokio.org?subject=Partnership%20inquiry"><span lang="en">Partnerships</span><span lang="ru">Партнёрам</span></a></li>
+      </ul>
+    </div>
+
+    <div class="foot-col">
+      <h4>
+        <span lang="en">Documents</span>
+        <span lang="ru">Документы</span>
+      </h4>
+      <ul>
+        <li><a href="/documents/whitepaper"><span lang="en">Whitepaper</span><span lang="ru">Whitepaper</span></a></li>
+        <li><a href="/documents/pitch"><span lang="en">Pitch deck</span><span lang="ru">Pitch deck</span></a></li>
+        <li><a href="/documents/presentation"><span lang="en">Presentation</span><span lang="ru">Презентация</span></a></li>
+        <li><a href="/documents/business"><span lang="en">Business case</span><span lang="ru">Бизнес-кейс</span></a></li>
+      </ul>
+    </div>
+
+    <div class="foot-col">
+      <h4>
+        <span lang="en">Legal</span>
+        <span lang="ru">Правовое</span>
+      </h4>
+      <ul>
+        <li><a href="/documents/privacy"><span lang="en">Privacy</span><span lang="ru">Приватность</span></a></li>
+        <li><a href="/documents/terms"><span lang="en">Terms</span><span lang="ru">Условия</span></a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="foot-mark">© 2025 – 2026 LOKIO® GLOBAL LLC</div>
+</footer>
+
+<script>
+(function(){
+  /* ── Build hero pins ── */
+  var c=document.getElementById('pins');
+  if(c){
+    var pts=[
+      {x:8,y:18,col:'#FF00FF'},{x:78,y:14,col:'#007FFF'},
+      {x:18,y:62,col:'#FBEC5D'},{x:62,y:72,col:'#FF00FF'},
+      {x:88,y:46,col:'#007FFF'},{x:42,y:30,col:'#30D158'}
+    ];
+    pts.forEach(function(p,i){
+      var w=document.createElement('div');
+      w.className='pin';
+      w.style.left=p.x+'%';
+      w.style.top=p.y+'%';
+      w.style.color=p.col;
+      [0,1,2].forEach(function(ri){
+        var r=document.createElement('div');
+        r.className='pin-r';
+        var sz=20+ri*14;
+        r.style.width=sz+'px';
+        r.style.height=sz+'px';
+        r.style.top='50%';
+        r.style.left='50%';
+        r.style.marginTop=(-sz/2)+'px';
+        r.style.marginLeft=(-sz/2)+'px';
+        r.style.animationDelay=(i*0.3+ri*0.85).toFixed(2)+'s';
+        w.appendChild(r);
+      });
+      var core=document.createElement('div');
+      core.className='pin-c';
+      core.style.position='absolute';
+      core.style.top='50%';
+      core.style.left='50%';
+      core.style.marginTop='-4px';
+      core.style.marginLeft='-4px';
+      w.appendChild(core);
+      c.appendChild(w);
+    });
+  }
+
+  /* ── Language routing ──
+     /     → EN
+     /ru   → RU
+     /ru/  → RU
+     Browser language is the only signal otherwise. */
+  var html=document.documentElement;
+
+  function pickLang(){
+    var p=(location.pathname||'/').toLowerCase();
+    if(p==='/ru'||p==='/ru/'||p.indexOf('/ru/')===0||p.indexOf('/ru?')===0) return 'ru';
+    var nav=(navigator.language||'').toLowerCase();
+    if(nav.indexOf('ru')===0) return 'ru';
+    return 'en';
+  }
+
+  function applyLang(lang){
+    html.setAttribute('lang',lang);
+    html.setAttribute('data-lang',lang);
+    document.title=lang==='ru'
+      ? 'LOKIO. Карта города на которую люди кидают мысли.'
+      : 'LOKIO. A map of your city where people drop thoughts.';
+  }
+
+  applyLang(pickLang());
+
+  window.addEventListener('popstate',function(){applyLang(pickLang());});
+
+  /* ── Reveal on scroll ── */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
+      });
+    },{rootMargin:'-10% 0px -10% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  }else{
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0a0a"/>
+<title>LOKIO. Presentation.</title>
+<meta name="description" content="LOKIO live deck. 15 slides. For investor and partner meetings."/>
+<meta property="og:title" content="LOKIO Presentation"/>
+<meta property="og:url" content="https://lokio.org/documents/presentation"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --magenta:#FF00FF;--male:#007FFF;--gold:#FBEC5D;
+  --blue:#0A84FF;--green:#30D158;--purple:#BF5AF2;--red:#FF375F;
+  --magenta-d:rgba(255,0,255,0.15);--male-d:rgba(0,127,255,0.15);
+  --gold-d:rgba(251,236,93,0.15);--blue-d:rgba(10,132,255,0.15);
+  --surface:rgba(22,22,34,0.72);--surface-hi:rgba(16,16,26,0.95);
+  --mock-bg:rgba(10,10,18,0.92);
+  --border:rgba(255,255,255,0.10);--border-hi:rgba(255,255,255,0.18);
+  --w14:rgba(255,255,255,0.14);--w10:rgba(255,255,255,0.10);
+  --w08:rgba(255,255,255,0.08);--w06:rgba(255,255,255,0.06);
+  --whi:rgba(255,255,255,0.96);--wmid:rgba(255,255,255,0.62);--wlo:rgba(255,255,255,0.40);
+  --r-sm:12px;--r-md:16px;--r-lg:20px;--r-xl:24px;--r-2xl:28px;--r-pill:999px;
+  --font:'Geist',-apple-system,system-ui,sans-serif;
+  --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+}
+html,body{
+  background:#0a0a0a;color:var(--whi);font-family:var(--font);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  height:100%;overflow:hidden;
+}
+body{position:relative;isolation:isolate;}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-2;
+  background:
+    radial-gradient(ellipse 70% 55% at 10% 5%,  rgba(155,0,195,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 92% 12%, rgba(10,132,255,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 96%, rgba(251,236,93,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 85% 60% at 85% 100%,rgba(48,209,88,0.10) 0%, transparent 60%),
+    #0a0a0a;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 90% 85% at center,black 10%,transparent 78%);
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+
+.deck{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:64px 48px;opacity:0;pointer-events:none;transition:opacity .35s var(--ease);}
+@media (max-width:768px){.slide{padding:64px 24px 80px;}}
+.slide.active{opacity:1;pointer-events:auto;}
+.slide-inner{width:100%;max-width:1100px;max-height:100%;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--w10) transparent;}
+.slide-inner::-webkit-scrollbar{width:4px;}
+.slide-inner::-webkit-scrollbar-thumb{background:var(--w10);border-radius:2px;}
+
+h1.deck-h1{font-weight:900;letter-spacing:-0.04em;line-height:0.95;font-size:clamp(56px,9vw,120px);}
+h2.deck-h2{font-weight:800;letter-spacing:-0.03em;line-height:1.05;font-size:clamp(36px,5.5vw,68px);margin-bottom:24px;}
+.deck-tagline{font-weight:700;letter-spacing:-0.02em;line-height:1.15;font-size:clamp(28px,4vw,52px);color:var(--whi);}
+.deck-sub{font-size:clamp(15px,1.6vw,20px);line-height:1.55;color:var(--wmid);max-width:60ch;}
+.deck-sub strong{color:#fff;}
+
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);margin-bottom:24px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--r-pill);background:var(--w06);}
+.chip.live{color:var(--green);border-color:rgba(48,209,88,0.32);background:rgba(48,209,88,0.06);}
+.chip.live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green);animation:livepulse 2s var(--ease) infinite;}
+.chip.magenta{color:var(--magenta);border-color:var(--magenta-d);background:var(--magenta-d);}
+.chip.gold{color:var(--gold);border-color:var(--gold-d);background:var(--gold-d);}
+@keyframes livepulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+
+.mock{background:var(--mock-bg);border:1px solid var(--border-hi);border-radius:var(--r-lg);padding:18px 20px;font-family:var(--mono);font-size:14px;line-height:1.6;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,0,0,0.32);}
+.mock-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:rgba(255,255,255,0.78);font-size:12px;margin-bottom:10px;}
+.mock-user{color:rgba(255,255,255,0.92);font-weight:500;}
+.mock-meta{color:rgba(255,255,255,0.62);}
+.mock-dot{color:rgba(255,255,255,0.40);}
+.mock-body{color:var(--whi);font-size:15px;line-height:1.5;margin-bottom:12px;font-family:var(--font);}
+.mock-foot{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.78);font-size:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);}
+.mock-arrow{color:rgba(255,255,255,0.50);}
+.mock-echo{color:#3FA0FF;font-weight:600;}
+.mock-joined{color:#4FD971;font-weight:600;}
+.mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--male);box-shadow:0 0 8px var(--male);margin-right:6px;vertical-align:middle;}
+.mock.f .mock-user::before{background:var(--magenta);box-shadow:0 0 8px var(--magenta);}
+.mock.b .mock-user::before{background:var(--gold);box-shadow:0 0 8px var(--gold);}
+
+.tbl{border:1px solid var(--border-hi);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);}
+.tbl table{width:100%;border-collapse:collapse;font-size:15px;}
+.tbl thead{background:var(--w06);}
+.tbl th, .tbl td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.tbl th{font-weight:600;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--wmid);}
+.tbl td{color:var(--whi);line-height:1.5;}
+.tbl td strong{color:#fff;}
+.tbl tbody tr:last-child td{border-bottom:none;}
+.tbl .num{font-family:var(--mono);}
+.tbl tr.hl td{background:linear-gradient(90deg, rgba(10,132,255,0.10), rgba(10,132,255,0.02));font-weight:700;color:#fff;}
+.tbl tr.hl td:first-child{font-weight:800;}
+.tbl tr.dim td{color:var(--wmid);}
+
+/* S1 */
+.s1{flex-direction:column;text-align:center;gap:32px;}
+.s1 .logo-mark{width:80px;height:80px;border-radius:18px;background:var(--gold);color:#0a0a0a;display:grid;place-items:center;font-family:var(--font);font-weight:900;font-size:48px;letter-spacing:-0.04em;margin:0 auto 16px;}
+.s1 .brand{font-family:var(--font);font-weight:900;font-size:clamp(48px,7vw,80px);letter-spacing:-0.04em;line-height:1;}
+.s1 .url{font-family:var(--mono);font-size:18px;color:var(--wmid);letter-spacing:0.04em;margin-top:24px;}
+
+/* S2 */
+.s2-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:24px;}
+@media (min-width:768px){.s2-grid{grid-template-columns:1fr 1fr;gap:24px;}}
+.s2-caption{margin-top:32px;font-size:clamp(18px,2.2vw,26px);line-height:1.4;color:var(--whi);font-weight:500;text-align:center;letter-spacing:-0.01em;}
+
+/* S3 */
+.s3-title-block{font-weight:800;letter-spacing:-0.025em;line-height:1.1;font-size:clamp(32px,4.5vw,52px);margin-bottom:32px;}
+.s3-title-block .sub{display:block;color:var(--blue);font-size:clamp(28px,3.8vw,44px);margin-top:8px;}
+.s3-diagram{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);padding:48px 32px;margin:24px 0;overflow-x:auto;text-align:center;min-height:200px;}
+.s3-diagram svg{max-width:100%;height:auto;}
+.s3-bottom{margin-top:24px;font-size:clamp(16px,2vw,22px);color:var(--wmid);text-align:center;}
+
+/* S4 */
+.s4-stack{display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center;}
+.s4-line{font-size:clamp(18px,2.2vw,28px);line-height:1.4;color:var(--wmid);max-width:32ch;font-weight:500;letter-spacing:-0.01em;}
+.s4-line.outcome{color:#fff;font-weight:700;font-size:clamp(20px,2.5vw,32px);}
+
+/* S5 */
+.s5-table{margin:32px 0;border:1px solid var(--border-hi);border-radius:var(--r-xl);overflow:hidden;background:var(--surface);max-width:680px;margin-left:auto;margin-right:auto;}
+.s5-row{display:grid;grid-template-columns:1fr 1.5fr;border-bottom:1px solid var(--border);}
+.s5-row:last-child{border-bottom:none;}
+.s5-row.head{font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);background:var(--w06);}
+.s5-row.head>div{padding:12px 24px;}
+.s5-row>div{padding:18px 24px;font-size:18px;}
+.s5-row>div:first-child{color:var(--whi);border-right:1px solid var(--border);font-weight:500;}
+.s5-row>div:last-child{color:var(--wmid);}
+.s5-row.lokio{background:linear-gradient(90deg, rgba(10,132,255,0.14), rgba(10,132,255,0.03));border-top:1px solid var(--border-hi);}
+.s5-row.lokio>div{padding:28px 24px;}
+.s5-row.lokio>div:first-child{color:#fff;font-weight:800;font-size:28px;letter-spacing:-0.02em;}
+.s5-row.lokio>div:last-child{color:#fff;font-weight:800;font-size:32px;letter-spacing:-0.02em;}
+.s5-bottom{margin-top:32px;font-size:clamp(18px,2.2vw,28px);color:var(--whi);text-align:center;line-height:1.4;font-weight:600;letter-spacing:-0.01em;}
+@media (max-width:640px){.s5-row.lokio>div:first-child{font-size:22px;}.s5-row.lokio>div:last-child{font-size:24px;}}
+
+/* S6 */
+.s6-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:24px 0;}
+@media (min-width:1024px){.s6-grid{grid-template-columns:1fr 1fr 1fr;gap:20px;}}
+.s6-bottom{margin-top:32px;font-size:clamp(16px,2vw,22px);color:var(--whi);text-align:center;line-height:1.5;font-weight:500;}
+.s6-bottom strong{color:var(--magenta);font-weight:700;}
+
+/* S7 */
+.s7-grid{display:grid;grid-template-columns:1fr;gap:16px;margin:24px 0;}
+@media (min-width:768px){.s7-grid{grid-template-columns:1fr 1fr;gap:20px;}}
+.s7-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:14px;transition:border-color .25s var(--ease);}
+.s7-card:hover{border-color:var(--border-hi);}
+.s7-trigger{font-size:16px;color:var(--whi);font-weight:600;line-height:1.3;}
+.s7-arrow{color:var(--blue);font-size:20px;align-self:center;line-height:1;}
+.s7-outcome{font-size:15px;color:var(--wmid);line-height:1.5;}
+.s7-bottom{margin-top:32px;font-size:clamp(18px,2.2vw,26px);color:#fff;text-align:center;line-height:1.4;font-weight:700;letter-spacing:-0.01em;}
+.s7-bottom .lead{display:block;margin-bottom:8px;}
+.s7-bottom .sub{display:block;color:var(--wmid);font-weight:500;font-size:0.7em;}
+
+/* S8 */
+.s8-url{font-family:var(--mono);font-size:clamp(40px,7vw,80px);font-weight:700;letter-spacing:-0.03em;color:var(--blue);text-align:center;margin-bottom:32px;}
+.s8-checks{list-style:none;display:flex;flex-direction:column;gap:14px;max-width:520px;margin:0 auto 32px;}
+.s8-checks li{display:flex;align-items:center;gap:14px;font-size:18px;color:var(--whi);padding:12px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);}
+.s8-checks li::before{content:"";flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--green);background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a0a0a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3.5 8.5 6.5 11.5 12.5 5'/></svg>");background-size:14px;background-position:center;background-repeat:no-repeat;}
+.s8-traction{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:24px;font-size:15px;line-height:1.6;color:var(--wmid);max-width:640px;margin:0 auto;}
+.s8-traction strong{color:var(--whi);}
+.s8-traction .zeroes{font-family:var(--mono);font-weight:600;color:var(--gold);margin-top:14px;display:block;font-size:14px;letter-spacing:0.04em;}
+
+/* S9 */
+.s9-bignum{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;margin-bottom:32px;}
+.s9-against{font-size:clamp(20px,2.4vw,28px);color:var(--wmid);font-weight:500;}
+.s9-cheap{font-family:var(--mono);font-weight:900;font-size:clamp(80px,14vw,180px);line-height:0.95;background:linear-gradient(135deg, var(--gold), #ffa07a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.04em;}
+.s9-expensive{font-family:var(--mono);font-weight:900;font-size:clamp(56px,9vw,120px);line-height:0.95;color:var(--wlo);text-decoration:line-through;text-decoration-thickness:4px;letter-spacing:-0.04em;}
+.s9-sub{font-size:clamp(15px,1.8vw,20px);color:var(--wmid);text-align:center;max-width:50ch;margin:0 auto 32px;line-height:1.5;}
+
+/* S10 */
+.s10-bottom{margin-top:32px;text-align:center;font-size:clamp(17px,2vw,24px);font-weight:600;color:var(--whi);line-height:1.4;}
+.s10-bottom .uber{display:block;color:var(--gold);margin-top:8px;font-size:0.85em;font-weight:500;}
+
+/* S11 */
+.s11-grid{display:grid;grid-template-columns:1fr;gap:20px;margin:24px 0;}
+@media (min-width:1024px){.s11-grid{grid-template-columns:1fr 1fr;gap:32px;}}
+.s11-cap{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);margin-bottom:12px;}
+.s11-bottom{margin-top:32px;text-align:center;font-size:clamp(16px,2vw,22px);color:var(--wmid);line-height:1.5;}
+.s11-bottom strong{color:#fff;}
+
+/* S12 */
+.s12-pair{display:flex;flex-direction:column;align-items:center;gap:24px;}
+@media (min-width:768px){.s12-pair{flex-direction:row;justify-content:center;gap:48px;}}
+.s12-col{display:flex;flex-direction:column;align-items:center;gap:8px;}
+.s12-year{font-family:var(--mono);font-size:clamp(13px,1.6vw,18px);color:var(--wmid);letter-spacing:0.16em;font-weight:600;}
+.s12-num{font-family:var(--mono);font-weight:900;letter-spacing:-0.04em;font-size:clamp(56px,11vw,140px);line-height:0.95;}
+.s12-num.from{color:var(--wmid);}
+.s12-num.to{background:linear-gradient(135deg, var(--gold), #ffa07a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.s12-arrow{font-size:clamp(40px,6vw,80px);color:var(--wlo);font-weight:300;align-self:center;}
+@media (max-width:767px){.s12-arrow{transform:rotate(90deg);}}
+.s12-caption{margin-top:40px;text-align:center;font-size:clamp(18px,2.2vw,28px);font-weight:600;line-height:1.4;letter-spacing:-0.01em;}
+.s12-caption .sub{display:block;margin-top:8px;color:var(--gold);font-family:var(--mono);font-size:clamp(14px,1.6vw,18px);font-weight:600;letter-spacing:0.04em;}
+.s12-caption .ssub{display:block;margin-top:6px;color:var(--wmid);font-weight:500;font-size:clamp(13px,1.5vw,16px);}
+.s12-source{margin-top:32px;text-align:center;font-family:var(--mono);font-size:11px;color:var(--wlo);letter-spacing:0.12em;}
+
+/* S13 */
+.s13-title{font-weight:700;letter-spacing:-0.02em;line-height:1.2;font-size:clamp(22px,3vw,36px);text-align:center;margin-bottom:32px;color:var(--whi);}
+.s13-title .accent{color:var(--gold);font-weight:800;}
+.s13-bottom{margin-top:32px;text-align:center;font-size:clamp(17px,2vw,24px);font-weight:600;color:#fff;line-height:1.4;}
+.s13-bottom .num{font-family:var(--mono);color:var(--gold);font-weight:800;}
+
+/* S14 */
+.s14-grid{display:grid;grid-template-columns:1fr;gap:14px;margin:24px 0;}
+@media (min-width:768px){.s14-grid{grid-template-columns:1fr 1fr;gap:18px;}}
+@media (min-width:1024px){.s14-grid{grid-template-columns:1fr 1fr 1fr 1fr;}}
+.s14-card{background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.01));border:1px solid rgba(251,236,93,0.20);border-radius:var(--r-lg);padding:20px;font-size:15px;color:var(--whi);line-height:1.5;}
+.s14-card .price{color:var(--gold);font-weight:700;font-family:var(--mono);}
+.s14-bottom{margin-top:32px;text-align:center;font-size:clamp(20px,2.6vw,32px);font-weight:800;letter-spacing:-0.02em;line-height:1.3;background:linear-gradient(135deg, var(--gold), #ffa07a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+
+/* S15 */
+.s15-roadmap{margin-bottom:48px;}
+.s15-closing{text-align:center;margin-top:48px;padding:40px 24px;background:linear-gradient(135deg, rgba(255,0,255,0.08), rgba(10,132,255,0.06));border:1px solid var(--border-hi);border-radius:var(--r-2xl);}
+.s15-money{font-size:clamp(24px,3.5vw,42px);font-weight:800;letter-spacing:-0.02em;line-height:1.25;color:#fff;margin-bottom:24px;}
+.s15-contact{font-family:var(--mono);font-size:clamp(15px,1.8vw,18px);color:var(--wmid);letter-spacing:0.04em;}
+.s15-contact a{color:var(--blue);}
+.s15-contact a:hover{color:#3FA0FF;}
+
+/* CHROME */
+.deck-bar{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:14px 24px;z-index:50;background:linear-gradient(180deg, rgba(10,10,10,0.72) 0%, rgba(10,10,10,0) 100%);pointer-events:none;}
+.deck-bar > *{pointer-events:auto;}
+.deck-bar-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.02em;font-size:15px;}
+.deck-bar-mark{width:24px;height:24px;border-radius:6px;background:var(--gold);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:13px;letter-spacing:-0.04em;}
+.deck-bar-title{font-family:var(--mono);font-size:11px;color:var(--wmid);letter-spacing:0.16em;text-transform:uppercase;margin-left:4px;}
+@media (max-width:640px){.deck-bar-title{display:none;}}
+.deck-bar-actions{display:flex;align-items:center;gap:8px;}
+.deck-bar-btn{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:12px;font-weight:500;color:var(--wmid);border:1px solid var(--border);background:var(--w06);border-radius:var(--r-pill);transition:color .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);font-family:var(--font);}
+.deck-bar-btn:hover{color:var(--whi);background:var(--w10);border-color:var(--border-hi);}
+.deck-bar-btn svg{width:14px;height:14px;}
+.deck-bar-btn .lbl-md{display:none;}
+@media (min-width:640px){.deck-bar-btn .lbl-md{display:inline;}}
+
+.deck-nav{position:fixed;bottom:24px;left:0;right:0;display:flex;align-items:center;justify-content:center;gap:12px;z-index:50;pointer-events:none;}
+.deck-nav > *{pointer-events:auto;}
+.deck-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--mock-bg);border:1px solid var(--border-hi);border-radius:50%;color:var(--whi);transition:background .2s var(--ease),transform .2s var(--ease),opacity .2s var(--ease);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
+.deck-nav-btn:hover{background:var(--w14);}
+.deck-nav-btn:active{transform:scale(0.94);}
+.deck-nav-btn[disabled]{opacity:0.32;pointer-events:none;}
+.deck-nav-btn svg{width:18px;height:18px;}
+.deck-counter{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--wmid);letter-spacing:0.06em;padding:10px 18px;background:var(--mock-bg);border:1px solid var(--border-hi);border-radius:var(--r-pill);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);min-width:80px;text-align:center;}
+.deck-counter .total{color:var(--wlo);}
+
+.deck-progress{position:fixed;top:0;left:0;right:0;height:2px;background:var(--w06);z-index:51;}
+.deck-progress-fill{height:100%;background:var(--blue);width:0%;transition:width .35s var(--ease);box-shadow:0 0 12px var(--blue);}
+
+/* PRESENTER */
+.notes{display:none;}
+body.presenter .notes{display:block;position:fixed;left:0;right:0;bottom:80px;z-index:55;margin:0 24px;padding:18px 22px;background:var(--mock-bg);border:1px solid var(--border-hi);border-radius:var(--r-lg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);font-size:14px;line-height:1.55;color:var(--whi);max-height:36vh;overflow-y:auto;box-shadow:0 -16px 48px rgba(0,0,0,0.48);}
+body.presenter .notes-tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:700;}
+body.presenter .slide-inner{padding-bottom:40vh;}
+.notes-section{display:none;}
+body.presenter .notes-section.active{display:block;}
+
+/* PRINT */
+@media print{
+  @page{size:A4 landscape;margin:0;}
+  html,body{height:auto;overflow:visible;background:#fff;color:#000;}
+  body::before,body::after{display:none;}
+  .deck-bar,.deck-nav,.deck-progress,.notes{display:none !important;}
+  .deck{position:static;display:block;height:auto;}
+  .slide{position:relative;inset:auto;display:flex;opacity:1;pointer-events:auto;page-break-after:always;break-after:page;width:297mm;min-height:210mm;height:auto;padding:24mm 20mm;background:#fff;color:#000;}
+  .slide:last-child{page-break-after:auto;}
+  h1,h2,h3,h4,.deck-h1,.deck-h2,.brand,.deck-tagline{color:#0a0a0a;}
+  .mock,.tbl,.s7-card,.s14-card,.s15-closing,.s8-traction,.s8-checks li,.s3-diagram,.s5-table{background:#f7f7f7 !important;border-color:#bbb !important;color:#222;}
+  .mock-body, .mock-user{color:#0a0a0a;}
+  .mock-meta, .mock-dot, .mock-foot{color:#666;}
+  .mock-echo{color:#0050b3;}
+  .mock-joined{color:#0a8a3f;}
+  .deck-sub, .s2-caption, .s4-line, .s6-bottom, .s11-bottom, .s10-bottom .uber, .s12-caption .ssub, .s9-sub, .s12-source{color:#444;}
+  .s9-cheap, .s12-num.to, .s14-bottom{-webkit-text-fill-color:#a07000;color:#a07000;background:none;}
+  .s9-expensive, .s12-num.from{color:#999;}
+  .s5-row.lokio{background:#eef5ff !important;}
+  .s5-row.lokio>div{color:#0a0a0a !important;}
+  .tbl tr.hl td{background:#eef5ff !important;color:#0a0a0a;}
+  .s8-url{color:#0050b3;}
+}
+</style>
+</head>
+<body>
+
+<header class="deck-bar">
+  <a href="/" class="deck-bar-logo" aria-label="LOKIO home">
+    <span class="deck-bar-mark">L</span>
+    <span>LOKIO</span>
+    <span class="deck-bar-title">/ Presentation</span>
+  </a>
+  <div class="deck-bar-actions">
+    <button id="btn-presenter" class="deck-bar-btn" aria-pressed="false" aria-label="Toggle speaker notes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 5h20v12H13l-1 3-1-3H2z"/></svg>
+      <span class="lbl-md">Notes</span>
+    </button>
+    <button id="btn-fullscreen" class="deck-bar-btn" aria-label="Toggle fullscreen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      <span class="lbl-md">Full</span>
+    </button>
+    <button id="btn-print" class="deck-bar-btn" aria-label="Print to PDF">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      <span class="lbl-md">PDF</span>
+    </button>
+  </div>
+</header>
+
+<div class="deck-progress"><div class="deck-progress-fill" id="progress-fill"></div></div>
+
+<div class="deck" id="deck">
+
+<section class="slide active" id="s1" data-slide="1">
+  <div class="slide-inner s1">
+    <div>
+      <div class="logo-mark">L</div>
+      <div class="brand">LOKIO</div>
+    </div>
+    <p class="deck-tagline">A thought on a map.<br/>No strings attached.</p>
+    <div class="url">app.lokio.org</div>
+  </div>
+</section>
+
+<section class="slide" id="s2" data-slide="2">
+  <div class="slide-inner">
+    <span class="chip">02 · What it actually looks like</span>
+    <div class="s2-grid">
+      <div class="mock m">
+        <div class="mock-head"><span class="mock-user">@user_a1b2c</span><span class="mock-dot">·</span><span class="mock-meta">80m · 23h remaining</span></div>
+        <div class="mock-body">"Coffee near the airport, anyone want company in 30 min?"</div>
+        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">3 echo</span><span class="mock-dot">·</span><span class="mock-joined">1 joined</span></div>
+      </div>
+      <div class="mock f">
+        <div class="mock-head"><span class="mock-user">@user_h4x</span><span class="mock-dot">·</span><span class="mock-meta">0m · 12h remaining</span></div>
+        <div class="mock-body">"22:47. Time to pretend I have plans."</div>
+        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">24 echo</span><span class="mock-dot">·</span><span class="mock-joined">ongoing</span></div>
+      </div>
+    </div>
+    <p class="s2-caption">A neighbourhood meme. A coffee company.<br/>A free first coffee from the café across the street.</p>
+  </div>
+</section>
+
+<section class="slide" id="s3" data-slide="3">
+  <div class="slide-inner">
+    <span class="chip magenta">03 · The mechanic</span>
+    <h2 class="s3-title-block">Drop a joke, a thought, anything. Publish.<span class="sub">Five seconds.</span></h2>
+    <div class="s3-diagram" id="dia-flow">
+      <svg viewBox="0 0 1280 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:1280px;font-family:'Geist',-apple-system,sans-serif;">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+            <path d="M0,0 L10,5 L0,10 z" fill="rgba(255,255,255,0.55)"/>
+          </marker>
+        </defs>
+        <!-- Connectors. Nodes are 160w starting at x=20, 200, 380, 560, 740, 920, 1100. Gap = 20px between. -->
+        <g stroke="rgba(255,255,255,0.36)" stroke-width="2" fill="none" marker-end="url(#arr)">
+          <path d="M180,160 L196,160"/>
+          <path d="M360,160 L376,160"/>
+          <path d="M540,160 L556,160"/>
+          <path d="M720,160 L736,160"/>
+          <path d="M900,160 L916,160"/>
+          <path d="M1080,160 L1096,160"/>
+        </g>
+        <!-- Nodes -->
+        <g font-weight="700">
+          <g transform="translate(20,110)">
+            <rect width="160" height="100" rx="16" fill="rgba(22,22,34,0.72)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <text x="80" y="58" text-anchor="middle" fill="#ffffff" font-size="19">Open the map</text>
+          </g>
+          <g transform="translate(200,110)">
+            <rect width="160" height="100" rx="16" fill="rgba(22,22,34,0.72)" stroke="rgba(255,0,255,0.40)" stroke-width="1.5"/>
+            <text x="80" y="48" text-anchor="middle" fill="#ffffff" font-size="19">Drop a joke</text>
+            <text x="80" y="74" text-anchor="middle" fill="rgba(255,255,255,0.62)" font-size="14" font-weight="500">or thought</text>
+          </g>
+          <g transform="translate(380,110)">
+            <rect width="160" height="100" rx="16" fill="rgba(22,22,34,0.72)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <text x="80" y="48" text-anchor="middle" fill="#ffffff" font-size="19">Publish</text>
+            <text x="80" y="76" text-anchor="middle" fill="#0A84FF" font-family="ui-monospace,Menlo,monospace" font-size="15" font-weight="700">5 sec</text>
+          </g>
+          <g transform="translate(560,110)">
+            <rect width="160" height="100" rx="16" fill="rgba(22,22,34,0.72)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <text x="80" y="48" text-anchor="middle" fill="#ffffff" font-size="19">People nearby</text>
+            <text x="80" y="74" text-anchor="middle" fill="rgba(255,255,255,0.62)" font-size="14" font-weight="500">see it</text>
+          </g>
+          <g transform="translate(740,110)">
+            <rect width="160" height="100" rx="16" fill="rgba(22,22,34,0.72)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <text x="80" y="48" text-anchor="middle" fill="#ffffff" font-size="19">Reply in</text>
+            <text x="80" y="74" text-anchor="middle" fill="rgba(255,255,255,0.62)" font-size="14" font-weight="500">topic chat</text>
+          </g>
+          <g transform="translate(920,110)">
+            <rect width="160" height="100" rx="16" fill="rgba(22,22,34,0.72)" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+            <text x="80" y="58" text-anchor="middle" fill="#ffffff" font-size="19">Meet</text>
+          </g>
+          <g transform="translate(1100,110)">
+            <rect width="160" height="100" rx="16" fill="rgba(22,22,34,0.72)" stroke="rgba(48,209,88,0.48)" stroke-width="1.5"/>
+            <text x="80" y="58" text-anchor="middle" fill="#4FD971" font-size="22" font-weight="800">Habit</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <p class="s3-bottom">The product asks nothing of you before letting you in.</p>
+  </div>
+</section>
+
+<section class="slide" id="s4" data-slide="4">
+  <div class="slide-inner">
+    <span class="chip">04 · Istanbul, 19:00</span>
+    <div class="s4-stack">
+      <p class="s4-line">A traveller in Istanbul.<br/>Third night dining alone.<br/>Speaks no Turkish.</p>
+      <div class="mock f" style="max-width:520px;width:100%;">
+        <div class="mock-head"><span class="mock-user">@user_b7c2e</span><span class="mock-dot">·</span><span class="mock-meta">200m · 2h remaining</span></div>
+        <div class="mock-body">"Steak at Mikla, table for two at 20:30. One spot open."</div>
+        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">4 echo</span><span class="mock-dot">·</span><span class="mock-joined">1 joined</span></div>
+      </div>
+      <p class="s4-line outcome">At 20:30 the traveller is not alone.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s5" data-slide="5">
+  <div class="slide-inner">
+    <span class="chip magenta">05 · What other products require</span>
+    <h2 class="deck-h2" style="text-align:center;">Other products demand. LOKIO does not.</h2>
+    <div class="s5-table">
+      <div class="s5-row head"><div>Product</div><div>What it requires</div></div>
+      <div class="s5-row"><div>Tinder</div><div>A declaration of intent</div></div>
+      <div class="s5-row"><div>Meetup</div><div>Responsibility for an event</div></div>
+      <div class="s5-row"><div>Instagram</div><div>Followers and content plan</div></div>
+      <div class="s5-row lokio"><div>LOKIO</div><div>Nothing</div></div>
+    </div>
+    <p class="s5-bottom">That is why it works for the median person<br/>who is not willing to do any of the above.</p>
+  </div>
+</section>
+
+<section class="slide" id="s6" data-slide="6">
+  <div class="slide-inner">
+    <span class="chip magenta">06 · The daily reason</span>
+    <h2 class="deck-h2" style="text-align:center;">Local humour pulls them in every day.</h2>
+    <div class="s6-grid">
+      <div class="mock m">
+        <div class="mock-head"><span class="mock-user">@user_h4x</span><span class="mock-dot">·</span><span class="mock-meta">0m · 12h</span></div>
+        <div class="mock-body">"22:47. Time to pretend I have plans."</div>
+        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">24 echo</span><span class="mock-dot">·</span><span class="mock-joined">ongoing</span></div>
+      </div>
+      <div class="mock f">
+        <div class="mock-head"><span class="mock-user">@user_p2g</span><span class="mock-dot">·</span><span class="mock-meta">0m · 8h</span></div>
+        <div class="mock-body">"Nobody cares. Me especially."</div>
+        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">31 echo</span><span class="mock-dot">·</span><span class="mock-joined">4 offered to come</span></div>
+      </div>
+      <div class="mock m">
+        <div class="mock-head"><span class="mock-user">@user_m3t</span><span class="mock-dot">·</span><span class="mock-meta">0m · 6h</span></div>
+        <div class="mock-body">"Life is rough but the view from here is fine."</div>
+        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">18 echo</span></div>
+      </div>
+    </div>
+    <p class="s6-bottom">Twitter is global. Local memes have no surface today.<br/><strong>LOKIO is that surface.</strong></p>
+  </div>
+</section>
+
+<section class="slide" id="s7" data-slide="7">
+  <div class="slide-inner">
+    <span class="chip">07 · Without us doing anything</span>
+    <div class="s7-grid">
+      <div class="s7-card">
+        <div class="s7-trigger">Joined a fishing thread.</div>
+        <div class="s7-arrow">↓</div>
+        <div class="s7-outcome">Friend → restaurant opening → met partner → free concert.</div>
+      </div>
+      <div class="s7-card">
+        <div class="s7-trigger">Saw a free coffee deal nearby.</div>
+        <div class="s7-arrow">↓</div>
+        <div class="s7-outcome">Sent to friend. Evening together.</div>
+      </div>
+      <div class="s7-card">
+        <div class="s7-trigger">Moved to a new city. No friends.</div>
+        <div class="s7-arrow">↓</div>
+        <div class="s7-outcome">Map post → 1 week → company for sport, coffee, weekends.</div>
+      </div>
+      <div class="s7-card">
+        <div class="s7-trigger">Café posted "first coffee free."</div>
+        <div class="s7-arrow">↓</div>
+        <div class="s7-outcome">5 came. 3 returned. Customer LTV started with one map post.</div>
+      </div>
+    </div>
+    <p class="s7-bottom">
+      <span class="lead">All of it happens on its own.</span>
+      <span class="sub">We built not an app but a simple format. People find the uses themselves.</span>
+    </p>
+  </div>
+</section>
+
+<section class="slide" id="s8" data-slide="8">
+  <div class="slide-inner">
+    <span class="chip live">08 · This is already running</span>
+    <div class="s8-url">app.lokio.org</div>
+    <ul class="s8-checks">
+      <li>Live PWA on production</li>
+      <li>Google OAuth + WebAuthn passkeys</li>
+      <li>Real-time map with WebSocket presence</li>
+      <li>Topic chat</li>
+      <li>Public profile pages</li>
+    </ul>
+    <div class="s8-traction">
+      <strong>Pre-launch.</strong> The first 22+ organic topics arrived from external users without us telling anyone. This is an early signal that the format propagates without push, not a claim of meaningful traction.
+      <span class="zeroes">$0 advertising · $0 outreach · $0 marketing</span>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s9" data-slide="9">
+  <div class="slide-inner">
+    <span class="chip gold">09 · The economics for a business</span>
+    <div class="s9-bignum">
+      <div class="s9-cheap">$4.99</div>
+      <div class="s9-against">against</div>
+      <div class="s9-expensive">$3,500/month</div>
+    </div>
+    <p class="s9-sub">What a small café spends to reach customers,<br/>old way vs LOKIO way.</p>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Channel</th><th>Cost</th><th>Targeting</th><th>ROI signal</th></tr></thead>
+        <tbody>
+          <tr><td>Google Ads click</td><td class="num">$3–5 per click</td><td>Non-targeted, often out-of-area</td><td>Days to weeks</td></tr>
+          <tr><td>Facebook Ads</td><td class="num">$7–12 per 1,000 impressions</td><td>Mostly out-of-area</td><td>Days to weeks</td></tr>
+          <tr class="hl"><td>LOKIO map banner</td><td class="num">$4.99 per topic, full life</td><td>District viewport, present moment</td><td>Same day</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s10" data-slide="10">
+  <div class="slide-inner">
+    <span class="chip">10 · How a city activates itself</span>
+    <h2 class="deck-h2" style="text-align:center;">Cities ramp themselves automatically.</h2>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Tier</th><th>When</th><th>Coef.</th><th>Banner</th><th>Slot</th><th>Visibility</th></tr></thead>
+        <tbody>
+          <tr class="dim"><td><strong>0 · Seed</strong></td><td>New city</td><td class="num">× 0</td><td>Free</td><td>Free</td><td>Free</td></tr>
+          <tr><td><strong>1 · Early</strong></td><td>First active publishers</td><td class="num">× 0.3</td><td class="num">$1.49</td><td class="num">$0.15</td><td class="num">$0.59</td></tr>
+          <tr><td><strong>2 · Growing</strong></td><td>District-level density</td><td class="num">× 0.6</td><td class="num">$2.99</td><td class="num">$0.29</td><td class="num">$1.19</td></tr>
+          <tr class="hl"><td><strong>3 · Active</strong></td><td>City threshold crossed</td><td class="num">× 1.0</td><td class="num">$4.99</td><td class="num">$0.49</td><td class="num">$1.99</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="s10-bottom">
+      The same idea Uber discovered through driver subsidies.
+      <span class="uber">Automated. One-way.</span>
+    </p>
+  </div>
+</section>
+
+<section class="slide" id="s11" data-slide="11">
+  <div class="slide-inner">
+    <span class="chip">11 · Unit economics + scaling</span>
+    <div class="s11-grid">
+      <div>
+        <div class="s11-cap">Per 10k MAU city · tier 3</div>
+        <div class="tbl">
+          <table>
+            <tbody>
+              <tr><td>Total cost</td><td class="num">$300 / month</td></tr>
+              <tr><td>Paying users (3–5%)</td><td class="num">300–500</td></tr>
+              <tr><td>Active paying businesses</td><td class="num">50–100</td></tr>
+              <tr class="hl"><td><strong>Total revenue</strong></td><td class="num">$1,100–1,950 / mo</td></tr>
+              <tr class="hl"><td><strong>Margin</strong></td><td>70–85%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="s11-cap">Scaling</div>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Configuration</th><th>Monthly</th><th>Annualised</th></tr></thead>
+            <tbody>
+              <tr><td>1 city × 10k MAU</td><td class="num">$1,950</td><td class="num">$23k</td></tr>
+              <tr><td>10 cities × 10k MAU</td><td class="num">$19,500</td><td class="num">$234k</td></tr>
+              <tr><td>1 city × 100k MAU</td><td class="num">$19,500</td><td class="num">$234k</td></tr>
+              <tr class="hl"><td>10 cities × 100k MAU</td><td class="num">$195,000</td><td class="num">$2.3M</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="s11-bottom">CAC trends to zero. <strong>The product explains itself in five seconds.</strong></p>
+  </div>
+</section>
+
+<section class="slide" id="s12" data-slide="12">
+  <div class="slide-inner">
+    <span class="chip gold">12 · The Shanghai principle · the numbers</span>
+    <div class="s12-pair">
+      <div class="s12-col">
+        <div class="s12-year">1978</div>
+        <div class="s12-num from">$156</div>
+      </div>
+      <div class="s12-arrow">→</div>
+      <div class="s12-col">
+        <div class="s12-year">2022</div>
+        <div class="s12-num to">$12,663</div>
+      </div>
+    </div>
+    <p class="s12-caption">
+      China's GDP per capita.
+      <span class="sub">81-fold growth in 44 years.</span>
+      <span class="ssub">The largest sustained growth in recorded history.</span>
+    </p>
+    <p class="s12-source">Source · World Bank · OECD · Chinese State Council</p>
+  </div>
+</section>
+
+<section class="slide" id="s13" data-slide="13">
+  <div class="slide-inner">
+    <span class="chip gold">13 · What drove it</span>
+    <p class="s13-title">The driver was not heavy industry.<br/>Not foreign capital. Not state enterprises.<br/><span class="accent">It was the layer below them.</span></p>
+    <div class="tbl" style="max-width:680px;margin:0 auto;">
+      <table>
+        <thead><tr><th>Share of</th><th>Chinese SMEs</th></tr></thead>
+        <tbody>
+          <tr><td>All enterprises in the country</td><td class="num"><strong>98.5%</strong></td></tr>
+          <tr><td>GDP</td><td class="num"><strong>60%+</strong></td></tr>
+          <tr><td>Urban employment</td><td class="num"><strong>80%</strong></td></tr>
+          <tr><td>Tax revenue</td><td class="num"><strong>50%</strong></td></tr>
+          <tr><td>Patents and innovation</td><td class="num"><strong>70%+</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="s13-bottom"><span class="num">140 million</span> SMEs. <strong>The country grew through them, not despite them.</strong></p>
+  </div>
+</section>
+
+<section class="slide" id="s14" data-slide="14">
+  <div class="slide-inner">
+    <span class="chip gold">14 · Where LOKIO fits</span>
+    <h2 class="deck-h2" style="text-align:center;">LOKIO is infrastructure for the same layer.</h2>
+    <div class="s14-grid">
+      <div class="s14-card">A café reaches the people in its district for <span class="price">$4.99</span>.</div>
+      <div class="s14-card">A solo trainer fills a class with <strong>one map post</strong>.</div>
+      <div class="s14-card">A neighbourhood market: <strong>"fresh fish today"</strong>, no marketer.</div>
+      <div class="s14-card">A street vendor announces today's location to passers-by within walking distance.</div>
+    </div>
+    <p class="s14-bottom">Every paid post on LOKIO is, by design,<br/>an act of small commerce.</p>
+  </div>
+</section>
+
+<section class="slide" id="s15" data-slide="15">
+  <div class="slide-inner">
+    <span class="chip">15 · Roadmap + closing</span>
+    <div class="s15-roadmap tbl">
+      <table>
+        <tbody>
+          <tr><td><strong>May–Jun 2026</strong></td><td>Outreach. Investor and partner conversations.</td></tr>
+          <tr><td><strong>Q3 2026</strong></td><td>One-tap publish. Decay visuals. Reports wired.</td></tr>
+          <tr><td><strong>Q4 2026</strong></td><td>Payment integration. Billing live. Entity formed.</td></tr>
+          <tr><td><strong>Q1 2027</strong></td><td>Profile unification. "Tonight" filter chip.</td></tr>
+          <tr><td><strong>Q2 2027</strong></td><td>iOS/Android wrap. Push notifications. Stores.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="s15-closing">
+      <p class="s15-money">We are not raising on a deck.<br/>We are raising on a working product.</p>
+      <p class="s15-contact"><a href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a> · <a href="https://app.lokio.org" target="_blank" rel="noopener">app.lokio.org</a></p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div class="notes" id="notes" aria-live="polite">
+  <span class="notes-tag">Speaker notes</span>
+  <div class="notes-section active" data-for="1"><p>This is LOKIO. A new format of social interaction tied to a place rather than a feed. The product is live at app.lokio.org. You can open it on any device while we talk.</p></div>
+  <div class="notes-section" data-for="2"><p>Two examples of what gets posted on LOKIO. Left: a need (someone asks for company at the airport). Right: a self-deprecating thought from a bench, the kind of post that is the daily reason people open the app. The product handles both registers from the same single text field.</p></div>
+  <div class="notes-section" data-for="3"><p>The entire mechanic is this flow. Open the map of your city. Type. Publish. The thought appears at your location, visible to people physically nearby. They reply, conversation starts, you meet. Five seconds from opening to publishing. Everything else in the product is downstream of this.</p></div>
+  <div class="notes-section" data-for="4"><p>This is the kind of moment LOKIO solves that no other product touches cleanly. A traveller alone in Istanbul, hotel in Sultanahmet. They open LOKIO, see pins around the hotel, find someone with a free seat at a restaurant table, tap join. No dating profile. No event creation. No "looking for friends" forum. A pin and a tap.</p></div>
+  <div class="notes-section" data-for="5"><p>The most underestimated part of the product is psychological. Every existing alternative requires something of the user before letting them in. A declaration of intent for Tinder. Responsibility to organise an event for Meetup. A content plan for Instagram. The median person is not willing to do any of those things. They will never use these products. LOKIO requires nothing. That's why it works for them. This is product-market fit at the level of psychology.</p></div>
+  <div class="notes-section" data-for="6"><p>Coffee posts and meet-ups happen when a user has a need. That is episodic. The daily reason people open LOKIO is humour. Self-deprecating thoughts from a bench. Recognition. People who pass that intersection daily nod and reply with their own version. A district develops a shared voice. Twitter is global, so local memes have no surface today. LOKIO is that surface, and it is what brings users back when they don't need anything specifically.</p></div>
+  <div class="notes-section" data-for="7"><p>The flywheel is what people do without our intervention. A user came in to drop a thought, did not expect a reply, got one. From there: friendships, partners, businesses, communities, all emerging without product features added. We did not build dating, we did not build events, we did not build a marketplace. We built a single primitive (a thought tied to a place) and people found these uses themselves.</p></div>
+  <div class="notes-section" data-for="8"><p>Everything in the previous slides exists in software you can open right now at app.lokio.org. Authentication, real-time map, chat, public profiles, all live. The 22+ organic topics that have appeared on it. We frame them honestly as an early propagation signal, not as traction. We have spent $0 on advertising, outreach, or marketing. The product is open and verifiable in this room while we talk.</p></div>
+  <div class="notes-section" data-for="9"><p>This is the economic case for the business side of LOKIO. A small café in the existing model spends $3,500 a month (marketer, ads, SEO) and the result is unknown until the month closes. On LOKIO the same café publishes a banner pin for $4.99, geo-bounded to the district, surfaces on the free-coffee filter for users actively looking for offers, ROI measurable on the same day. Google Ads, Facebook Ads. Neither is local-bounded the way LOKIO is. The economics are not comparable.</p></div>
+  <div class="notes-section" data-for="10"><p>Pricing is not static. A new city has zero supply, charging $4.99 on day one would kill adoption. So prices ramp with city density. Tier 0 is new city, everything free. Tier 1 is first publishers, prices at 30%. Tier 2 is district density, 60%. Tier 3 is city has crossed threshold, full prices. The coefficient is automatic, not human-set. The ramp is one-way: once a city moves up, prices do not come back down. Same logic Uber used with driver subsidies, automated. No quarterly business review per market. The system runs itself.</p></div>
+  <div class="notes-section" data-for="11"><p>Per city of 10,000 monthly active users at tier 3, costs about $300/month, revenue $1,100 to $1,950, margin 70 to 85%. Margin is high because user acquisition cost trends to zero. The product explains itself, no convincing required. Scaling: ten cities of that size, $234k annualised. A single 100k-MAU city, also $234k. Ten such cities, $2.3M. We grow city by city, like Uber, not winner-takes-all.</p></div>
+  <div class="notes-section" data-for="12"><p>Here is a fact most people do not have at hand. China's GDP per capita in 1978 was $156. In 2022 it was $12,663. An 81-fold increase in 44 years. The largest sustained per-capita growth in recorded history of any large economy. The next slide shows what drove it. And why this is directly relevant to the product we are talking about.</p></div>
+  <div class="notes-section" data-for="13"><p>What drove China's growth was the layer of small and medium enterprises. Today they make up 98.5% of all enterprises in the country. They produce 60% of GDP, 80% of urban employment, 50% of tax revenue, 70% of patents. 140 million businesses. Alibaba's first product in 1999 was a marketplace for small Chinese exporters. Tencent's WeChat Pay turned every street vendor into a digital business. The trillion-dollar names that emerged from China started as infrastructure for small business, not as alternatives to it.</p></div>
+  <div class="notes-section" data-for="14"><p>LOKIO mechanically sits on the small business side of the divide. A café reaches its district for $4.99. A solo trainer fills a class with one map post. A neighbourhood market announces fresh stock without a marketer. A street vendor tells the street where they are today. None of this scales for chains because chains do not need geo-bounded posts. They own broadcast advertising. Every paid post on LOKIO is, by structural design, an act of small commerce.</p></div>
+  <div class="notes-section" data-for="15"><p>This is what we are doing through Q2 2027. First revenue Q4 2026, mobile launch Q2 2027. We are open to investor conversations aligned with consumer products and city-by-city marketplace expansion, strategic partners in mobility, hospitality, tourism, and small business activation, advisors with operational experience in marketplace consumer products at city scale. There is no fixed funding ask in this room. Engagement is per conversation. The product is open at app.lokio.org. We are not raising on a deck. We are raising on a working product.</p></div>
+</div>
+
+<div class="deck-nav">
+  <button class="deck-nav-btn" id="btn-prev" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="deck-counter" id="counter">01<span class="total"> / 15</span></div>
+  <button class="deck-nav-btn" id="btn-next" aria-label="Next slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  var slides=Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var TOTAL=slides.length;
+  var btnPrev=document.getElementById('btn-prev');
+  var btnNext=document.getElementById('btn-next');
+  var counter=document.getElementById('counter');
+  var progress=document.getElementById('progress-fill');
+  var notesSecs=Array.prototype.slice.call(document.querySelectorAll('.notes-section'));
+  var current=1;
+
+  function pad(n){return n<10?'0'+n:''+n;}
+
+  function syncURL(idx){
+    var hash='#s'+idx;
+    if(location.hash!==hash){
+      try{history.replaceState(null,'',hash+location.search);}catch(e){}
+    }
+  }
+
+  function go(idx){
+    if(idx<1) idx=1;
+    if(idx>TOTAL) idx=TOTAL;
+    slides.forEach(function(s){
+      var n=parseInt(s.getAttribute('data-slide'),10);
+      s.classList.toggle('active',n===idx);
+      if(n===idx){
+        var inner=s.querySelector('.slide-inner');
+        if(inner) inner.scrollTop=0;
+      }
+    });
+    notesSecs.forEach(function(n){
+      n.classList.toggle('active',parseInt(n.getAttribute('data-for'),10)===idx);
+    });
+    counter.innerHTML=pad(idx)+'<span class="total"> / '+pad(TOTAL)+'</span>';
+    progress.style.width=(idx/TOTAL*100)+'%';
+    btnPrev.disabled=(idx===1);
+    btnNext.disabled=(idx===TOTAL);
+    syncURL(idx);
+    current=idx;
+  }
+
+  btnPrev.addEventListener('click',function(){go(current-1);});
+  btnNext.addEventListener('click',function(){go(current+1);});
+
+  document.addEventListener('keydown',function(e){
+    if(e.target&&(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')) return;
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '||e.key==='Enter'){
+      e.preventDefault();go(current+1);
+    } else if(e.key==='ArrowLeft'||e.key==='PageUp'||e.key==='Backspace'){
+      e.preventDefault();go(current-1);
+    } else if(e.key==='Home'){
+      e.preventDefault();go(1);
+    } else if(e.key==='End'){
+      e.preventDefault();go(TOTAL);
+    }
+  });
+
+  var sx=0, sy=0, st=0;
+  document.addEventListener('touchstart',function(e){
+    var t=e.touches[0];sx=t.clientX;sy=t.clientY;st=Date.now();
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    var t=e.changedTouches[0];
+    var dx=t.clientX-sx, dy=t.clientY-sy, dt=Date.now()-st;
+    if(dt>600) return;
+    if(Math.abs(dx)<48||Math.abs(dy)>Math.abs(dx)) return;
+    if(dx<0) go(current+1); else go(current-1);
+  },{passive:true});
+
+  function pickInitial(){
+    var m=(location.hash||'').match(/^#s(\d+)$/);
+    if(m){
+      var n=parseInt(m[1],10);
+      if(n>=1&&n<=TOTAL) return n;
+    }
+    return 1;
+  }
+
+  var qs=(location.search||'');
+  if(/[?&]presenter=1/.test(qs)){
+    document.body.classList.add('presenter');
+    var pb=document.getElementById('btn-presenter');
+    if(pb) pb.setAttribute('aria-pressed','true');
+  }
+
+  go(pickInitial());
+
+  window.addEventListener('hashchange',function(){
+    var m=(location.hash||'').match(/^#s(\d+)$/);
+    if(m) go(parseInt(m[1],10));
+  });
+
+  document.getElementById('btn-presenter').addEventListener('click',function(){
+    var on=document.body.classList.toggle('presenter');
+    this.setAttribute('aria-pressed',on?'true':'false');
+    try{
+      var url=new URL(location.href);
+      if(on) url.searchParams.set('presenter','1'); else url.searchParams.delete('presenter');
+      history.replaceState(null,'',url.toString());
+    }catch(e){}
+  });
+
+  document.getElementById('btn-fullscreen').addEventListener('click',function(){
+    var d=document.documentElement;
+    if(!document.fullscreenElement){
+      if(d.requestFullscreen) d.requestFullscreen();
+      else if(d.webkitRequestFullscreen) d.webkitRequestFullscreen();
+    } else {
+      if(document.exitFullscreen) document.exitFullscreen();
+      else if(document.webkitExitFullscreen) document.webkitExitFullscreen();
+    }
+  });
+
+  document.getElementById('btn-print').addEventListener('click',function(){
+    window.print();
+  });
+})();
+</script>
+
+</body>
+</html>
