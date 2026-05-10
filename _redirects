@@ -41,9 +41,18 @@
 /app                         https://app.lokio.org           302
 /map                         https://app.lokio.org           302
 
+# ── Public profiles → PWA ──────────────────
+/u/*                         https://app.lokio.org/u/:splat  302
+
 # ── Email shortcut (mailto) ────────────────
 # Browsers handle mailto: directly; no rewrite needed.
 
 # ── 404 handler ────────────────────────────
 # Cloudflare Pages serves /404.html automatically if present.
 # We rely on its default behaviour for now.
+
+# ── Username catch-all → PWA (MUST BE LAST) ──
+# lokio.org/dexterrion → app.lokio.org/dexterrion
+# Static files (robots.txt, sitemap.xml) are served from assets BEFORE _redirects.
+# All specific routes above match first. This only catches unknown single-segment paths.
+/*                           https://app.lokio.org/:splat    302
