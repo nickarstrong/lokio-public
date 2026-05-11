@@ -353,7 +353,7 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 .foot-col a:hover{color:var(--whi);}
 .foot-contact{font-family:var(--mono);font-size:13px;color:var(--wmid);display:flex;flex-direction:column;gap:4px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
 .foot-contact a{padding:0;}.foot-contact a:hover{color:var(--whi);}
-.foot-mark{max-width:var(--max);margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--wlo);letter-spacing:0.08em;}
+.foot-mark{max-width:var(--max);margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--wlo);letter-spacing:0.08em;display:flex;align-items:center;justify-content:space-between;}
 
 /* ── REVEAL ── */
 @media (prefers-reduced-motion:no-preference){
@@ -381,7 +381,7 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
         <span lang="ru">Контакт</span>
       </a>
     </nav>
-    <button class="lang-sw" id="langBtn" aria-label="Switch language">RU</button>
+    <button class="lang-sw" id="langBtn" aria-label="Switch language" style="display:none;">RU</button>
     <a class="hdr-cta" href="https://app.lokio.org" target="_blank" rel="noopener">
       <span lang="en">Open map</span>
       <span lang="ru">Открой карту</span>
@@ -871,7 +871,10 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
       </ul>
     </div>
   </div>
-  <div class="foot-mark">© 2025 – 2026 LOKIO® GLOBAL LLC</div>
+  <div class="foot-mark">
+    <span>© 2025 – 2026 LOKIO® GLOBAL LLC</span>
+    <button class="lang-sw" id="langBtnFooter" aria-label="Switch language" style="margin-left:16px;">RU</button>
+  </div>
 </footer>
 
 <script>
@@ -907,11 +910,9 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 
   /* ── Language ── */
   var html=document.documentElement;
-  var btn=document.getElementById('langBtn');
+  var btn=document.getElementById('langBtnFooter');
 
   function pickLang(){
-    var p=(location.pathname||'/').toLowerCase();
-    if(p==='/ru'||p==='/ru/'||p.indexOf('/ru/')===0) return 'ru';
     var nav=(navigator.language||'').toLowerCase();
     if(nav.indexOf('ru')===0) return 'ru';
     return 'en';
@@ -920,7 +921,7 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
   function applyLang(lang){
     html.setAttribute('lang',lang);
     html.setAttribute('data-lang',lang);
-    btn.textContent=lang==='en'?'RU':'EN';
+    if(btn) btn.textContent=lang==='en'?'RU':'EN';
     document.title=lang==='ru'
       ? 'LOKIO — Что происходит вокруг тебя прямо сейчас'
       : 'LOKIO — What\'s happening around you right now';
@@ -928,12 +929,10 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 
   applyLang(pickLang());
 
-  btn.addEventListener('click',function(){
+  if(btn) btn.addEventListener('click',function(){
     var cur=html.getAttribute('data-lang');
     applyLang(cur==='en'?'ru':'en');
   });
-
-  window.addEventListener('popstate',function(){applyLang(pickLang());});
 
   /* ── Reveal on scroll ── */
   if('IntersectionObserver' in window){
