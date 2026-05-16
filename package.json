@@ -1,0 +1,13 @@
+{
+  "name": "lokio-public",
+  "version": "1.1.0",
+  "description": "LOKIO landing pages + legal documents",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:docs": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "marked": "^12.0.0"
+  }
+}
