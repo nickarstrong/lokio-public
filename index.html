@@ -941,6 +941,22 @@ footer{
 }
 .foot-bot .meta{display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap;}
 
+.foot-lang{
+  padding:2px 8px;
+  border-radius:var(--r-pill);
+  background:var(--c-surface-3);
+  border:1px solid var(--c-border-hi);
+  color:var(--c-text-mid);
+  font:700 11px/1 var(--font);
+  letter-spacing:0.06em;
+  cursor:pointer;
+  transition:color 140ms var(--ease), background 140ms var(--ease);
+}
+.foot-lang:hover{
+  color:var(--c-text);
+  background:var(--c-surface);
+}
+
 /* ════════════════════════════════
    PRESS PLAY — brand closer перед final CTA
    ════════════════════════════════ */
@@ -1872,25 +1888,27 @@ footer{
         <span class="foot-brand-name">LOKIO</span>
       </a>
       <div class="foot-links">
-        <a href="#how">How it works</a>
-        <a href="#values">Why it&rsquo;s different</a>
+        <a href="#how" data-en="How it works" data-ru="Как это работает">How it works</a>
+        <a href="#values" data-en="Why it's different" data-ru="Чем отличается">Why it&rsquo;s different</a>
         <a href="https://t.me/lokioapp">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="display:inline-block;vertical-align:-1px;margin-right:4px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Telegram community
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="display:inline-block;vertical-align:-1px;margin-right:4px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg><span data-en="Telegram community" data-ru="Telegram сообщество">Telegram community</span>
         </a>
-        <a href="/about">About</a>
-        <a href="/terms">Terms</a>
-        <a href="/privacy">Privacy</a>
-        <a href="/cdn-cgi/l/email-protection#6d05080101022d010206040243021f0a">Contact</a>
+        <a href="/about" data-en="About" data-ru="О нас">About</a>
+        <a href="/terms" data-en="Terms" data-ru="Условия">Terms</a>
+        <a href="/privacy" data-en="Privacy" data-ru="Конфиденциальность">Privacy</a>
+        <a href="/cdn-cgi/l/email-protection#6d05080101022d010206040243021f0a" data-en="Contact" data-ru="Контакты">Contact</a>
       </div>
     </div>
     <div class="foot-bot">
       <div class="meta">
         <span>&copy; 2026 LOKIO</span>
         <span>·</span>
-        <span>Built for close range.</span>
+        <span data-en="Built for close range." data-ru="Создан для ближнего круга.">Built for close range.</span>
       </div>
       <div class="meta">
-        <span>3 cities live &middot; expanding</span>
+        <span data-en="3 cities live · expanding" data-ru="3 города · расширяемся">3 cities live &middot; expanding</span>
+        <span>·</span>
+        <button class="foot-lang" id="lang-toggle-foot" aria-label="Switch language">EN</button>
       </div>
     </div>
   </div>
@@ -1908,18 +1926,21 @@ footer{
       if (t !== undefined) el.innerHTML = t;
     });
     document.documentElement.lang = lang;
-    var toggle = document.getElementById('lang-toggle');
-    if (toggle) toggle.textContent = (lang === 'en' ? 'RU' : 'EN');
+    var label = (lang === 'en' ? 'RU' : 'EN');
+    var t1 = document.getElementById('lang-toggle');
+    var t2 = document.getElementById('lang-toggle-foot');
+    if (t1) t1.textContent = label;
+    if (t2) t2.textContent = label;
     try { localStorage.setItem('lokio-lang', lang); } catch(e){}
   }
   var saved = 'en';
   try { saved = localStorage.getItem('lokio-lang') || 'en'; } catch(e){}
   setLang(saved);
+  function switchLang(){ var next = document.documentElement.lang === 'ru' ? 'en' : 'ru'; setLang(next); }
   var toggle = document.getElementById('lang-toggle');
-  if (toggle) toggle.addEventListener('click', function(){
-    var next = document.documentElement.lang === 'ru' ? 'en' : 'ru';
-    setLang(next);
-  });
+  var toggleFoot = document.getElementById('lang-toggle-foot');
+  if (toggle) toggle.addEventListener('click', switchLang);
+  if (toggleFoot) toggleFoot.addEventListener('click', switchLang);
 })();
 
 /* Cinematic reveal on scroll */
