@@ -1,950 +1,1943 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<meta name="theme-color" content="#0a0a0a"/>
-<title>LOKIO — What's happening around you right now</title>
-<meta name="description" content="A map of your city where people drop thoughts. People nearby see them. Conversations start. Meetings happen. No followers, no algorithm, no feed."/>
-<meta property="og:title" content="LOKIO"/>
-<meta property="og:description" content="What's happening around you right now. You just don't see it yet."/>
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://lokio.org/"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>LOKIO &mdash; the map where your neighbours actually talk</title>
+<meta name="description" content="Drop a pin with a thought, a plan, an invitation. Anyone within walking distance can open the chat. Meet for real if it clicks."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-
 :root{
-  --magenta:#FF00FF;
-  --male:#007FFF;
-  --gold:#FBEC5D;
-  --blue:#0A84FF;
-  --green:#30D158;
-  --purple:#BF5AF2;
+  --glass: rgba(18,18,26,0.78);
+  --glass-blur: blur(28px) saturate(180%);
+  --glass-border: rgba(255,255,255,0.10);
 
-  --magenta-d:rgba(255,0,255,0.15);
-  --male-d:rgba(0,127,255,0.15);
-  --gold-d:rgba(251,236,93,0.15);
-  --blue-d:rgba(10,132,255,0.15);
+  --bg: #FAFAFA;
+  --bg-warm: #ECEAE5;
+  --c-surface:#FFFFFF;
+  --c-surface-2:#F2F2F4;
+  --c-surface-3:#EBEBED;
+  --c-border: rgba(0,0,0,0.06);
+  --c-border-hi: rgba(0,0,0,0.10);
+  --c-text: #0F0F18;
+  --c-text-mid:#5C5C66;
+  --c-text-lo:#8E8E96;
 
-  --surface:rgba(22,22,34,0.72);
-  --surface-hi:rgba(16,16,26,0.95);
-  --mock-bg:rgba(10,10,18,0.92);
-  --border:rgba(255,255,255,0.10);
-  --border-hi:rgba(255,255,255,0.18);
-  --w14:rgba(255,255,255,0.14);
-  --w10:rgba(255,255,255,0.10);
-  --w08:rgba(255,255,255,0.08);
-  --w06:rgba(255,255,255,0.06);
+  --on-glass:    rgba(255,255,255,0.95);
+  --on-glass-mid:rgba(255,255,255,0.66);
+  --on-glass-lo: rgba(255,255,255,0.42);
 
-  --whi:rgba(255,255,255,0.96);
-  --wmid:rgba(255,255,255,0.62);
-  --wlo:rgba(255,255,255,0.40);
+  --accent:#0A84FF;
+  --accent-hi:#2D96FF;
+  --accent-on:#FFFFFF;
 
-  --r-sm:12px;
-  --r-md:16px;
-  --r-lg:20px;
-  --r-xl:24px;
-  --r-2xl:28px;
+  --pin-female:#FF3DBA;
+  --pin-male:  #0A84FF;
+  --pin-neutral:#C7C9D1;
+  --pin-business:#FBEC5D;
+
+  --success:#30D158;
+
+  --r:12px;
   --r-pill:999px;
 
-  --font:'Geist',-apple-system,system-ui,sans-serif;
-  --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-  --ease:cubic-bezier(0.32,0.72,0,1);
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px;
+  --s-5:20px; --s-6:24px; --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-20:80px; --s-24:96px;
 
-  --pad:24px;
-  --max:1200px;
+  --t-display:28px; --t-title:20px; --t-headline:17px;
+  --t-body:15px; --t-callout:14px; --t-footnote:12px; --t-micro:11px;
+
+  --font:'Geist',-apple-system,system-ui,sans-serif;
+  --font-mono:'Geist Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+  --ease-sp:cubic-bezier(0.34,1.56,0.64,1);
+
+  --maxw:1200px;
 }
 
-@media (min-width:768px){:root{--pad:48px;}}
-@media (min-width:1280px){:root{--pad:80px;}}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 
 html,body{
-  background:#0a0a0a;
-  color:var(--whi);
   font-family:var(--font);
-  font-size:16px;
-  line-height:1.5;
+  background:var(--bg);
+  color:var(--c-text);
+  font-feature-settings:'tnum' 1;
   -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
+  text-rendering:optimizeLegibility;
 }
+html{scroll-behavior:smooth;}
+body{overflow-x:hidden;}
 
-body{position:relative;min-height:100dvh;isolation:isolate;}
-
-body::before{
-  content:"";
-  position:fixed;inset:0;z-index:-2;
-  background:
-    radial-gradient(ellipse 70% 55% at 10% 5%,  rgba(155,0,195,0.22) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 92% 12%, rgba(10,132,255,0.22) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 20% 96%, rgba(251,236,93,0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 85% 60% at 85% 100%,rgba(48,209,88,0.12) 0%, transparent 60%),
-    #0a0a0a;
-}
-
-body::after{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(ellipse 90% 85% at center, black 10%, transparent 78%);
-}
-
+img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
-button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
+button{font-family:inherit;cursor:pointer;}
 
-/* ── LANG SWAP ── */
-[data-lang="en"] [lang="ru"]{display:none;}
-[data-lang="ru"] [lang="en"]{display:none;}
-
-/* ── TYPOGRAPHY ── */
-h1,h2,h3{font-weight:800;letter-spacing:-0.03em;line-height:1.05;}
-h1{font-size:clamp(40px,8vw,92px);}
-h2{font-size:clamp(32px,5.5vw,64px);}
-h3{font-size:clamp(22px,3vw,28px);letter-spacing:-0.02em;line-height:1.2;}
-p{color:var(--whi);}
-.muted{color:var(--wmid);}
-
-/* ── HEADER ── */
-.hdr{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:16px var(--pad);
-  background:rgba(10,10,10,0.72);
-  backdrop-filter:saturate(160%) blur(18px);
-  -webkit-backdrop-filter:saturate(160%) blur(18px);
-  border-bottom:1px solid var(--border);
+/* ════════════════════════════════
+   FLOATING NAV (glass pill)
+   ════════════════════════════════ */
+.nav-wrap{
+  position:fixed;top:14px;left:0;right:0;z-index:100;
+  display:flex;justify-content:center;
+  padding:0 var(--s-3);
+  pointer-events:none;
 }
-.hdr-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.02em;font-size:18px;}
-.hdr-mark{width:28px;height:28px;border-radius:8px;background:var(--gold);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:16px;letter-spacing:-0.04em;}
-.hdr-right{display:flex;align-items:center;gap:8px;}
-.hdr-nav{display:none;align-items:center;gap:4px;margin-right:4px;}
-.hdr-nav a{padding:8px 14px;font-size:14px;font-weight:500;color:var(--wmid);border-radius:var(--r-pill);transition:color .2s var(--ease), background .2s var(--ease);}
-.hdr-nav a:hover{color:var(--whi);background:var(--w06);}
-@media (min-width:768px){.hdr-nav{display:flex;}}
-.hdr-cta{display:none;padding:8px 18px;border-radius:var(--r-pill);background:var(--blue);color:#fff;font-weight:600;font-size:14px;transition:transform .2s var(--ease), background .2s var(--ease);}
-.hdr-cta:hover{background:#1A8FFF;}
-.hdr-cta:active{transform:scale(0.97);}
-@media (min-width:768px){.hdr-cta{display:inline-flex;}}
-.lang-sw{padding:6px 10px;font-size:12px;font-weight:600;color:var(--wlo);border:1px solid var(--border);border-radius:var(--r-pill);cursor:pointer;transition:color .2s, border-color .2s;}
-.lang-sw:hover{color:var(--whi);border-color:var(--border-hi);}
-
-/* ── SECTIONS ── */
-.sec{
-  position:relative;
-  min-height:100dvh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:120px var(--pad) 80px;
-  max-width:var(--max);
-  margin:0 auto;
+.nav{
+  pointer-events:auto;
+  width:100%;max-width:740px;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-2);
+  padding:6px 6px 6px 14px;
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r-pill);
+  box-shadow:0 12px 28px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.05);
 }
-.sec-short{min-height:auto;padding:80px var(--pad) 80px;}
-@media (min-width:768px){.sec{padding:140px var(--pad) 100px;}.sec-short{padding:100px var(--pad) 100px;}}
+.nav-brand{
+  display:flex;align-items:center;gap:9px;
+  color:var(--on-glass);
+}
+.nav-mark{width:24px;height:24px;flex-shrink:0;}
+.nav-name{
+  font:700 15px/1 var(--font);letter-spacing:-0.02em;
+}
+.nav-links{
+  display:flex;gap:var(--s-1);align-items:center;
+}
+.nav-links a{
+  padding:8px 12px;border-radius:var(--r-pill);
+  font:600 var(--t-footnote)/1 var(--font);
+  color:var(--on-glass-mid);letter-spacing:-0.005em;
+  transition:color 140ms var(--ease),background 140ms var(--ease);
+}
+.nav-links a:hover{color:var(--on-glass);background:rgba(255,255,255,0.06);}
+@media(max-width:580px){.nav-links a:not(.nav-cta){display:none;}}
+
+.nav-cta{
+  height:36px;padding:0 14px;
+  border-radius:var(--r-pill);
+  background:var(--accent);color:var(--accent-on)!important;
+  font:600 13px/36px var(--font);
+  letter-spacing:-0.005em;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:background 140ms var(--ease),transform 140ms var(--ease-sp);
+}
+.nav-cta:hover{background:var(--accent-hi)!important;}
+.nav-cta:active{transform:scale(0.97);}
+.nav-cta svg{width:14px;height:14px;}
+
+/* ════════════════════════════════
+   GENERIC SECTION
+   ════════════════════════════════ */
+section{padding:var(--s-20) var(--s-5);}
+.cont{max-width:var(--maxw);margin:0 auto;}
 
 .eyebrow{
-  display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--wmid);
-  margin-bottom:24px;padding:6px 14px;border:1px solid var(--border);border-radius:var(--r-pill);
+  font:600 var(--t-micro)/1 var(--font);
+  text-transform:uppercase;letter-spacing:0.12em;
+  color:var(--c-text-lo);
+  display:inline-flex;align-items:center;gap:8px;
+  margin-bottom:var(--s-4);
+}
+.eyebrow::before{
+  content:"";width:6px;height:6px;border-radius:var(--r-pill);
+  background:var(--accent);
 }
 
-.sub{font-size:clamp(16px,2vw,20px);line-height:1.6;color:var(--wmid);max-width:52ch;margin-top:24px;}
-.sub-sm{font-size:clamp(14px,1.6vw,17px);line-height:1.6;color:var(--wmid);max-width:48ch;}
+h2.sect-h{
+  font:700 clamp(36px,5vw,56px)/1.05 var(--font);
+  letter-spacing:-0.03em;color:var(--c-text);
+  max-width:760px;
+  text-wrap:balance;
+}
+.sect-sub{
+  font:500 clamp(16px,1.4vw,19px)/1.55 var(--font);
+  color:var(--c-text-mid);
+  margin-top:var(--s-4);max-width:580px;
+  letter-spacing:-0.005em;
+}
 
-/* ── CTA ── */
-.cta{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:18px 36px;background:var(--blue);color:#fff;font-weight:600;font-size:17px;
+/* ════════════════════════════════
+   HERO
+   ════════════════════════════════ */
+.hero{
+  padding:130px var(--s-5) var(--s-20);
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  /* faint warm aura behind */
+  content:"";position:absolute;inset:-100px -100px auto auto;
+  width:780px;height:780px;border-radius:50%;
+  background:radial-gradient(circle, rgba(10,132,255,0.07) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero::after{
+  content:"";position:absolute;inset:auto auto -200px -200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle, rgba(255,61,186,0.05) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:relative;z-index:1;
+  display:grid;gap:var(--s-12);
+  grid-template-columns:1fr;
+  align-items:center;
+}
+@media(min-width:960px){
+  .hero-grid{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:var(--s-16);}
+}
+
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 12px 6px 8px;border-radius:var(--r-pill);
+  background:var(--c-surface);
+  border:1px solid var(--c-border);
+  font:600 var(--t-footnote)/1 var(--font);
+  color:var(--c-text-mid);letter-spacing:-0.005em;
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  margin-bottom:var(--s-5);
+}
+.hero-tag .dot{
+  width:6px;height:6px;border-radius:var(--r-pill);
+  background:var(--success);
+  box-shadow:0 0 6px var(--success);
+  animation:dotBlink 2s ease-in-out infinite;
+}
+@keyframes dotBlink{0%,100%{opacity:1;}50%{opacity:0.5;}}
+
+h1.hero-h{
+  font:700 clamp(44px,7.5vw,88px)/0.98 var(--font);
+  letter-spacing:-0.04em;
+  color:var(--c-text);
+  text-wrap:balance;
+}
+.hero-h .accent{color:var(--accent);}
+.hero-h .strike{
+  position:relative;display:inline-block;
+}
+.hero-h .strike::after{
+  content:"";position:absolute;left:-2%;right:-2%;top:52%;height:8px;
+  background:var(--accent);
+  transform:skewY(-3deg);
+  opacity:0.18;
+  border-radius:4px;
+}
+
+.hero-sub{
+  font:500 clamp(17px,1.5vw,21px)/1.5 var(--font);
+  color:var(--c-text-mid);
+  margin-top:var(--s-5);max-width:540px;
+  letter-spacing:-0.005em;
+}
+
+.hero-actions{
+  margin-top:var(--s-8);
+  display:flex;flex-wrap:wrap;gap:var(--s-3);
+  align-items:center;
+}
+.btn{
+  height:54px;padding:0 var(--s-6);
   border-radius:var(--r-pill);
-  box-shadow:0 12px 40px rgba(10,132,255,0.32);
-  transition:transform .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+  display:inline-flex;align-items:center;gap:8px;
+  font:600 var(--t-body)/1 var(--font);
+  letter-spacing:-0.01em;
+  border:1px solid transparent;
+  transition:background 140ms var(--ease),transform 140ms var(--ease-sp),border-color 140ms var(--ease);
 }
-.cta:hover{background:#1A8FFF;box-shadow:0 16px 48px rgba(10,132,255,0.42);}
-.cta:active{transform:scale(0.98);}
-.cta .arrow{display:inline-block;transition:transform .2s var(--ease);}
-.cta:hover .arrow{transform:translateX(4px);}
-.cta-sub{display:block;margin-top:14px;font-family:var(--mono);font-size:13px;color:var(--wlo);}
-
-/* ── HERO PINS ── */
-.pins{position:absolute;inset:0;pointer-events:none;z-index:-1;overflow:hidden;}
-.pin{position:absolute;width:48px;height:48px;display:grid;place-items:center;}
-.pin-c{width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 16px currentColor;}
-.pin-r{position:absolute;border:1.5px solid currentColor;border-radius:50%;opacity:0.5;animation:pulse 3s var(--ease) infinite;}
-@keyframes pulse{0%{transform:scale(0.6);opacity:0.7;}100%{transform:scale(1.4);opacity:0;}}
-
-/* ── MOCK POST CARD ── */
-.mock{
-  background:var(--mock-bg);border:1px solid var(--border-hi);border-radius:var(--r-lg);
-  padding:18px 20px;font-family:var(--mono);font-size:14px;line-height:1.6;
-  max-width:520px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,0,0,0.32);
+.btn:active{transform:scale(0.98);}
+.btn.primary{background:var(--accent);color:var(--accent-on);}
+.btn.primary:hover{background:var(--accent-hi);}
+.btn.ghost{
+  background:transparent;border-color:var(--c-border-hi);color:var(--c-text);
 }
-.mock-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:rgba(255,255,255,0.78);font-size:12px;margin-bottom:10px;}
-.mock-user{color:rgba(255,255,255,0.92);font-weight:500;}
-.mock-meta{color:rgba(255,255,255,0.62);}
-.mock-dot{color:rgba(255,255,255,0.40);}
-.mock-body{color:var(--whi);font-size:15px;line-height:1.5;margin-bottom:12px;font-family:var(--font);}
-.mock-foot{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.78);font-size:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);}
-.mock-arrow{color:rgba(255,255,255,0.50);}
-.mock-echo{color:#3FA0FF;font-weight:600;}
-.mock-joined{color:#4FD971;font-weight:600;}
+.btn.ghost:hover{background:var(--c-surface);}
+.btn svg{width:18px;height:18px;}
 
-.mock.f{border-color:rgba(255,0,255,0.32);box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,0,255,0.14);}
-.mock.m{border-color:rgba(0,127,255,0.32);box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,127,255,0.14);}
-.mock.b{border-color:rgba(251,236,93,0.32);box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(251,236,93,0.14);}
-.mock.f .mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--magenta);box-shadow:0 0 8px var(--magenta);margin-right:6px;vertical-align:middle;}
-.mock.m .mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--male);box-shadow:0 0 8px var(--male);margin-right:6px;vertical-align:middle;}
-.mock.b .mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);margin-right:6px;vertical-align:middle;}
-
-/* ── MOCK STACK (cascading cards) ── */
-.mock-stack{
-  display:flex;flex-direction:column;gap:16px;margin-top:48px;
-  max-width:560px;
+.hero-meta{
+  margin-top:var(--s-6);
+  display:flex;flex-wrap:wrap;gap:8px;
 }
-.mock-stack .mock{
-  transition:transform .4s var(--ease), opacity .4s var(--ease);
+.hero-meta span{
+  height:34px; padding:0 14px;
+  border-radius:var(--r-pill);
+  background:var(--c-surface);
+  border:1px solid var(--c-border);
+  font:600 12px/1 var(--font);
+  color:var(--c-text-mid);
+  letter-spacing:-0.005em;
+  display:inline-flex; align-items:center; gap:7px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
 }
-.mock-stack .mock:nth-child(2){transform:translateX(24px);}
-.mock-stack .mock:nth-child(3){transform:translateX(48px);}
-@media (min-width:768px){
-  .mock-stack .mock:nth-child(2){transform:translateX(40px);}
-  .mock-stack .mock:nth-child(3){transform:translateX(80px);}
+.hero-meta svg{
+  width:13px;height:13px;stroke-width:2;
+  color:var(--accent);
 }
 
-/* ── STEPS ── */
-.steps{display:grid;gap:16px;grid-template-columns:1fr;margin-top:48px;}
-@media (min-width:768px){.steps{grid-template-columns:repeat(3,1fr);gap:20px;}}
-.step{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);
-  padding:32px 28px;position:relative;transition:border-color .3s var(--ease);
+/* Native app coming — placeholder вместо App Store / Play Store кнопок */
+.hero-store-note{
+  margin-top:var(--s-5);
+  font:500 12px/1.5 var(--font);
+  color:var(--c-text-lo);
+  letter-spacing:-0.005em;
+  display:inline-flex; align-items:center; gap:6px;
 }
-.step:hover{border-color:var(--border-hi);}
-.step-num{font-family:var(--mono);font-size:12px;color:var(--wlo);letter-spacing:0.16em;margin-bottom:20px;}
-.step-icon{
-  width:56px;height:56px;border-radius:var(--r-lg);display:grid;place-items:center;
-  margin-bottom:20px;border:1.5px solid currentColor;background:transparent;
+.hero-store-note strong{
+  color:var(--c-text-mid);
+  font-weight:600;
 }
-.step-icon svg{width:24px;height:24px;}
-.step:nth-child(1) .step-icon{color:var(--magenta);background:var(--magenta-d);}
-.step:nth-child(2) .step-icon{color:var(--blue);background:var(--blue-d);}
-.step:nth-child(3) .step-icon{color:var(--green);background:rgba(48,209,88,0.10);}
-.step h3{margin-bottom:8px;}
-.step p{color:var(--wmid);font-size:14px;line-height:1.5;}
+.hero-store-note svg{
+  width:13px; height:13px; stroke-width:2;
+  color:var(--c-text-lo);
+}
 
-/* ── SITUATIONS GRID ── */
-.sits{display:grid;gap:16px;grid-template-columns:1fr;margin-top:48px;}
-@media (min-width:640px){.sits{grid-template-columns:1fr 1fr;}}
-@media (min-width:1024px){.sits{grid-template-columns:1fr 1fr 1fr;}}
-.sit{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-xl);
-  padding:28px 24px;transition:border-color .3s var(--ease);
+/* Hero device — a phone showing the actual product */
+.hero-stage{
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  min-height:520px;
 }
-.sit:hover{border-color:var(--border-hi);}
-.sit-icon{font-size:28px;margin-bottom:16px;display:block;}
-.sit h3{font-size:18px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em;}
-.sit p{color:var(--wmid);font-size:14px;line-height:1.55;}
+.hero-stage::before{
+  /* warm map glow behind phone */
+  content:"";position:absolute;inset:6% 12%;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(255,61,186,0.18) 0%, transparent 45%),
+    radial-gradient(circle at 70% 70%, rgba(10,132,255,0.16) 0%, transparent 50%);
+  filter:blur(40px);
+  border-radius:40%;
+}
 
-/* ── STORY (Berlin) ── */
-.story{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--r-2xl);
-  padding:48px 32px;margin-top:48px;max-width:640px;
+.dev{
+  position:relative;
+  width:340px;height:680px;
+  border-radius:42px;
+  background:#000;padding:8px;
+  box-shadow:0 40px 80px -20px rgba(0,0,0,0.32),
+             0 0 0 1px rgba(0,0,0,0.06),
+             0 0 60px rgba(10,132,255,0.10);
+  transform:rotate(-2deg);
+  transition:transform 600ms var(--ease);
 }
-@media (min-width:768px){.story{padding:56px 48px;}}
-.story-tag{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);margin-bottom:24px;display:block;}
-.story p{font-size:17px;line-height:1.7;margin-bottom:20px;}
-.story p:last-of-type{margin-bottom:0;}
-.story .muted{color:var(--wmid);}
-.story .mock{margin:24px 0;}
+.dev:hover{transform:rotate(0deg);}
+@media(max-width:560px){.dev{width:300px;height:610px;transform:rotate(0deg);}}
 
-/* ── COMPARISON TABLE ── */
-.compare{margin-top:48px;border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;background:var(--surface);max-width:640px;}
-.compare-row{display:grid;grid-template-columns:1fr 1.5fr;border-bottom:1px solid var(--border);font-size:16px;}
-.compare-row:last-child{border-bottom:none;}
-.compare-row.head{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);background:var(--w06);}
-.compare-row.head>div{padding:14px 24px;}
-.compare-row>div{padding:18px 24px;}
-.compare-row>div:first-child{color:var(--whi);border-right:1px solid var(--border);font-weight:500;}
-.compare-row>div:last-child{color:var(--wmid);}
-.compare-row.lokio{background:linear-gradient(90deg, rgba(10,132,255,0.10), rgba(10,132,255,0.02));border-top:1px solid var(--border-hi);}
-.compare-row.lokio>div{color:#fff;font-weight:800;font-size:18px;}
+.dev-screen{
+  width:100%;height:100%;
+  border-radius:34px;overflow:hidden;
+  position:relative;
+  background:linear-gradient(180deg, #F5F2EC 0%, #E3DFD8 100%);
+}
+.dev-status{
+  position:absolute;top:0;left:0;right:0;z-index:50;
+  height:38px;display:flex;align-items:center;justify-content:space-between;
+  padding:11px 22px 0;
+  font:600 13px/1 var(--font);color:var(--c-text);
+}
 
-/* ── LINKFREE ── */
-.linkfree{
-  background:linear-gradient(135deg, rgba(191,90,242,0.06), rgba(191,90,242,0.02));
-  border:1px solid rgba(191,90,242,0.20);border-radius:var(--r-2xl);padding:48px 32px;
+/* Map content inside hero phone */
+.dev-map{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg, rgba(15,15,24,0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15,15,24,0.05) 1px, transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 50%, black 50%, transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 50%, black 50%, transparent 90%);
 }
-@media (min-width:768px){.linkfree{padding:64px 56px;}}
-.linkfree-badge{
-  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
-  background:rgba(191,90,242,0.12);border:1px solid rgba(191,90,242,0.32);
-  border-radius:var(--r-pill);font-size:11px;font-weight:700;letter-spacing:0.16em;
-  text-transform:uppercase;color:var(--purple);margin-bottom:24px;
+.dev-map::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(72deg, transparent 49.4%, rgba(15,15,24,0.06) 49.6%, rgba(15,15,24,0.06) 50.4%, transparent 50.6%),
+    linear-gradient(155deg, transparent 39.5%, rgba(15,15,24,0.04) 39.7%, rgba(15,15,24,0.04) 40.3%, transparent 40.5%);
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
 }
-.linkfree-badge::before{content:"";width:8px;height:8px;background:var(--purple);border-radius:50%;box-shadow:0 0 12px var(--purple);}
-.linkfree h2{margin-bottom:24px;}
-.linkfree-body{color:var(--whi);font-size:17px;line-height:1.6;max-width:56ch;margin-bottom:20px;}
-.linkfree-url{
-  display:inline-block;font-family:var(--mono);font-size:15px;color:var(--purple);
-  padding:10px 18px;border:1px solid rgba(191,90,242,0.32);border-radius:var(--r-pill);
+
+/* Floating glass header inside phone */
+.dev-header{
+  position:absolute;top:50px;left:12px;right:12px;z-index:40;
+  display:flex;align-items:center;gap:8px;
+  padding:6px 10px 6px 6px;
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r-pill);
+  box-shadow:0 8px 24px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.dev-loc{
+  width:30px;height:30px;border-radius:var(--r-pill);
+  background:rgba(255,255,255,0.10);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--on-glass);flex-shrink:0;
+}
+.dev-loc svg{width:15px;height:15px;stroke-width:2;}
+.dev-loc-text{
+  flex:1;min-width:0;
+  font:600 12px/1.2 var(--font);color:var(--on-glass);
+}
+.dev-loc-meta{
+  font:500 10px/1.2 var(--font);color:var(--on-glass-mid);margin-top:2px;
+}
+.dev-counter{
+  display:flex;align-items:center;gap:8px;
+  padding:0 4px;
+  font:600 11px/1 var(--font);color:var(--on-glass);
+}
+.dev-counter .sep{width:1px;height:10px;background:var(--on-glass-lo);}
+
+/* Pins on hero phone — speech-bubble (единый с продом) */
+.dev-pin{
+  position:absolute;
+  width:36px; height:41px;
+  z-index:20;
+  transform:translate(-50%, -100%);
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,0.16));
+}
+.dev-pin-svg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+}
+.dev-pin-body{
+  fill:#FFFFFF;
+  stroke:var(--pin-neutral);
+  stroke-width:2.5;
+  stroke-linejoin:round;
+}
+.dev-pin.f .dev-pin-body{ stroke:var(--pin-female); }
+.dev-pin.m .dev-pin-body{ stroke:var(--pin-male); }
+.dev-pin.b .dev-pin-body{
+  fill:#FBEC5D;
+  stroke:#A88500;
+  stroke-width:1.2;
+}
+.dev-pin-letter{
+  position:absolute;
+  left:50%; top:36%;
+  transform:translate(-50%, -50%);
+  font:700 12px/1 var(--font);
+  color:var(--c-text);
+  letter-spacing:-0.02em;
+  z-index:2;
+}
+.dev-pin.n .dev-pin-letter{ color:#5C5C66; }
+.dev-pin.b .dev-pin-letter{ color:#1A1000; font-weight:800; font-size:14px; }
+.dev-pin.pulse::after{
+  content:"";
+  position:absolute;
+  left:50%; top:36%;
+  width:30px; height:30px;
+  border-radius:var(--r-pill);
+  transform:translate(-50%, -50%);
+  border:2px solid currentColor;
+  animation:devPulse 2s ease-out infinite;
+  pointer-events:none;
+}
+.dev-pin.f.pulse{ color:var(--pin-female); }
+.dev-pin.m.pulse{ color:var(--pin-male); }
+@keyframes devPulse{
+  0%{transform:translate(-50%,-50%) scale(0.6); opacity:0.55;}
+  100%{transform:translate(-50%,-50%) scale(1.6); opacity:0;}
+}
+
+/* Pin-preview card (one open) */
+.dev-preview{
+  position:absolute;z-index:30;
+  width:226px;
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r);
+  box-shadow:0 12px 28px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.04);
+  overflow:hidden;
+}
+.dev-preview-photo{
+  height:96px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,61,186,0.25), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(10,132,255,0.25), transparent 60%),
+    linear-gradient(135deg, #2A1830 0%, #0E2244 100%);
+  position:relative;
+}
+.dev-preview-photo::after{
+  content:"📍 Rooftop · 7 PM";
+  position:absolute;left:10px;bottom:8px;
+  font:600 10px/1 var(--font);color:#fff;
+  padding:4px 8px;border-radius:var(--r-pill);
+  background:rgba(0,0,0,0.32);backdrop-filter:blur(6px);
+}
+.dev-preview-body{padding:10px;color:var(--on-glass);}
+.dev-preview-author{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.dev-preview-av{
+  width:18px;height:18px;border-radius:var(--r-pill);
+  background:var(--pin-female);
+  border:1.5px solid #fff;
+  display:flex;align-items:center;justify-content:center;
+  font:700 8px/1 var(--font);color:#fff;
+}
+.dev-preview-name{font:600 11px/1 var(--font);color:var(--on-glass);}
+.dev-preview-meta{font:500 10px/1 var(--font);color:var(--on-glass-mid);}
+.dev-preview-title{
+  font:600 13px/1.3 var(--font);
+  letter-spacing:-0.01em;color:var(--on-glass);
+  margin-bottom:6px;
+}
+.dev-preview-chips{display:flex;gap:4px;margin-top:6px;}
+.dev-chip{
+  padding:3px 7px;border-radius:var(--r-pill);
+  background:rgba(255,255,255,0.10);
+  font:600 9px/1 var(--font);color:var(--on-glass-mid);
+  display:inline-flex;align-items:center;gap:3px;
+}
+
+/* ════════════════════════════════
+   SECTION · WHAT IT IS (3 cards)
+   ════════════════════════════════ */
+.what{padding-top:var(--s-12);}
+.what-grid{
+  display:grid;gap:var(--s-3);
+  grid-template-columns:1fr;
+  margin-top:var(--s-12);
+}
+@media(min-width:780px){.what-grid{grid-template-columns:repeat(3,1fr);}}
+
+.card{
+  background:var(--c-surface);
+  border:1px solid var(--c-border);
+  border-radius:var(--r);
+  padding:var(--s-6);
+  display:flex;flex-direction:column;gap:var(--s-3);
+  min-height:300px;
+  position:relative;overflow:hidden;
+  transition:border-color 200ms var(--ease),transform 200ms var(--ease);
+}
+.card:hover{border-color:var(--c-border-hi);transform:translateY(-2px);}
+
+.card-num{
+  font:600 var(--t-micro)/1 var(--font-mono);
+  letter-spacing:0.04em;
+  color:var(--c-text-lo);
+}
+.card-h{
+  font:700 22px/1.15 var(--font);
+  letter-spacing:-0.02em;color:var(--c-text);
+  margin-top:var(--s-2);
+}
+.card-p{
+  font:500 var(--t-body)/1.5 var(--font);
+  color:var(--c-text-mid);
+  letter-spacing:-0.005em;
+  max-width:280px;
+}
+.card-art{
+  margin-top:auto;
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  border:1px solid var(--c-border);
+  border-radius:var(--r);
+  height:130px;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* Art · map slice — speech-bubble pins */
+.art-map{
+  background-image:
+    linear-gradient(90deg, rgba(15,15,24,0.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15,15,24,0.06) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+.art-map .pin{
+  position:absolute;
+  width:22px; height:25px;
+  transform:translate(-50%, -100%);
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,0.18));
+}
+.art-map .pin svg{ width:100%; height:100%; display:block; }
+.art-map .pin path{
+  fill:#FFFFFF;
+  stroke-width:2;
+  stroke-linejoin:round;
+}
+.art-map .pin.f path{ stroke:var(--pin-female); }
+.art-map .pin.m path{ stroke:var(--pin-male); }
+.art-map .pin.b path{
+  fill:#FBEC5D;
+  stroke:#A88500;
+  stroke-width:1;
+}
+
+/* Art · chat bubbles */
+.art-chat{padding:12px;display:flex;flex-direction:column;gap:6px;align-items:stretch;justify-content:center;}
+.art-bubble{
+  background:#fff;border:1px solid var(--c-border);border-radius:var(--r);
+  padding:6px 10px;font:500 11px/1.3 var(--font);color:var(--c-text);
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);max-width:80%;
+}
+.art-bubble.own{align-self:flex-end;background:var(--bg-warm);}
+.art-bubble .name{display:block;font:600 9px/1 var(--font);color:var(--c-text-lo);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;}
+
+/* Art · meeting (handshake placeholder) */
+.art-meet{display:flex;align-items:center;justify-content:center;gap:8px;}
+.art-meet .a,.art-meet .b{
+  width:48px;height:48px;border-radius:var(--r-pill);
+  display:flex;align-items:center;justify-content:center;
+  font:700 16px/1 var(--font);color:#fff;
+  border:3px solid #fff;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
+.art-meet .a{background:var(--pin-female);}
+.art-meet .b{background:var(--pin-male);}
+.art-meet .line{
+  width:32px;height:2px;background:var(--c-text-lo);position:relative;
+}
+.art-meet .line::after{content:"";position:absolute;inset:-3px 40%;background:var(--accent);border-radius:var(--r-pill);}
+
+/* ════════════════════════════════
+   DEMO STRIP (3 mini phones — pin → chat → meet)
+   Universal blue+magenta base — связь с продом
+   ════════════════════════════════ */
+.demo{
+  background:
+    radial-gradient(85% 95% at 0% 35%,    rgba(10,132,255,0.55) 0%, transparent 68%),
+    radial-gradient(75% 80% at 100% 100%, rgba(255,61,186,0.38) 0%, transparent 65%),
+    radial-gradient(60% 60% at 100% 0%,   rgba(10,132,255,0.20) 0%, transparent 70%),
+    linear-gradient(180deg, #06060C 0%, #0A0A14 100%);
+  color:#fff;
+  padding:var(--s-20) var(--s-5);
+}
+.demo .eyebrow{color:rgba(255,255,255,0.45);}
+.demo h2.sect-h{color:#fff;}
+.demo .sect-sub{color:rgba(255,255,255,0.62);}
+
+.demo-row{
+  margin-top:var(--s-12);
+  display:grid;gap:var(--s-6);
+  grid-template-columns:1fr;
+  align-items:start;
+}
+@media(min-width:880px){.demo-row{grid-template-columns:repeat(3,1fr);}}
+
+.demo-cell{
+  display:flex;flex-direction:column;align-items:flex-start;gap:var(--s-4);
+}
+.demo-step{
+  font:600 var(--t-micro)/1 var(--font-mono);
+  letter-spacing:0.08em;
+  color:rgba(255,255,255,0.45);
+}
+.demo-h{
+  font:700 22px/1.2 var(--font);
+  letter-spacing:-0.02em;color:#fff;
+}
+.demo-p{
+  font:500 var(--t-callout)/1.55 var(--font);
+  color:rgba(255,255,255,0.65);
+  letter-spacing:-0.005em;max-width:320px;
+}
+
+/* Mini phone for demo */
+.mini{
+  width:100%;max-width:280px;aspect-ratio:9/19;
+  border-radius:36px;background:#000;padding:6px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
+  align-self:center;
+}
+.mini-screen{
+  width:100%;height:100%;
+  border-radius:30px;overflow:hidden;
+  position:relative;
+  background:linear-gradient(180deg, #F5F2EC 0%, #E3DFD8 100%);
+}
+/* Step 1: map with pulse pin */
+.mini-map{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg, rgba(15,15,24,0.05) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(15,15,24,0.05) 1px, transparent 1px);
+  background-size:32px 32px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 50%, black 45%, transparent 90%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 50%, black 45%, transparent 90%);
+}
+.mini-header{
+  position:absolute;top:32px;left:8px;right:8px;
+  height:32px;border-radius:var(--r-pill);
+  background:var(--glass);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;
+  font:600 10px/1 var(--font);color:var(--on-glass);
+  gap:6px;
+}
+.mini-pin-big{
+  position:absolute;
+  top:55%; left:50%;
+  width:38px; height:43px;
+  transform:translate(-50%, -100%);
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.20));
+}
+.mini-pin-big-svg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+}
+.mini-pin-big-body{
+  fill:#FFFFFF;
+  stroke:var(--pin-female);
+  stroke-width:3;
+  stroke-linejoin:round;
+}
+.mini-pin-big-letter{
+  position:absolute;
+  left:50%; top:36%;
+  transform:translate(-50%, -50%);
+  font:700 13px/1 var(--font);
+  color:var(--c-text);
+  letter-spacing:-0.02em;
+}
+.mini-pin-big::after{
+  content:"";
+  position:absolute;
+  left:50%; top:36%;
+  width:34px; height:34px;
+  border-radius:var(--r-pill);
+  transform:translate(-50%, -50%);
+  border:2px solid var(--pin-female);
+  animation:devPulse 2s ease-out infinite;
+  pointer-events:none;
+}
+.mini-pin-small{
+  position:absolute;
+  width:22px; height:25px;
+  transform:translate(-50%, -100%);
+  filter:drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+}
+.mini-pin-small svg{ width:100%; height:100%; display:block; }
+.mini-pin-small path{
+  fill:#FFFFFF;
+  stroke-width:2;
+  stroke-linejoin:round;
+}
+.mini-pin-small.f path{ stroke:var(--pin-female); }
+.mini-pin-small.m path{ stroke:var(--pin-male); }
+.mini-pin-small.n path{ stroke:var(--pin-neutral); }
+
+/* Step 2: chat with bubbles */
+.mini-chat{
+  position:absolute;inset:0;
+  padding:62px 12px 64px;
+  display:flex;flex-direction:column;gap:6px;
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+}
+.mini-bubble{
+  background:#fff;border:1px solid var(--c-border);border-radius:14px;
+  padding:6px 10px;font:500 11px/1.35 var(--font);color:var(--c-text);
+  max-width:75%;
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  letter-spacing:-0.005em;
+}
+.mini-bubble.own{align-self:flex-end;background:var(--bg-warm);}
+.mini-bubble .nm{display:block;font:600 9px/1 var(--font);color:var(--c-text-lo);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;}
+.mini-input{
+  position:absolute;bottom:12px;left:8px;right:8px;
+  height:34px;border-radius:var(--r-pill);
+  background:var(--glass);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:4px 4px 4px 12px;
+  font:500 10px/1 var(--font);color:var(--on-glass-lo);
+}
+.mini-send{
+  width:26px;height:26px;border-radius:var(--r-pill);background:var(--accent);
+  display:flex;align-items:center;justify-content:center;color:#fff;
+}
+.mini-send svg{width:11px;height:11px;}
+
+/* Step 3: meetup confirmation */
+.mini-meet{
+  position:absolute;inset:0;
+  padding:50px 16px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+}
+.mini-meet-handshake{
+  display:flex; align-items:center; gap:10px;
+  position:relative;
+  padding:6px 0 4px;
+}
+.mini-meet-av{
+  width:48px; height:48px;
+  border-radius:var(--r-pill);
+  display:flex; align-items:center; justify-content:center;
+  font:700 17px/1 var(--font);
+  color:#fff;
+  border:3px solid #fff;
+  box-shadow:0 4px 12px rgba(0,0,0,0.18);
+  letter-spacing:-0.01em;
+}
+.mini-meet-av--m{ background:linear-gradient(135deg, var(--pin-male) 0%, #0067CC 100%); }
+.mini-meet-av--f{ background:linear-gradient(135deg, var(--pin-female) 0%, #B82A85 100%); }
+.mini-meet-check{
+  width:26px; height:26px;
+  border-radius:var(--r-pill);
+  background:var(--success);
+  color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 4px 10px rgba(48,209,88,0.40);
+  flex-shrink:0;
+}
+.mini-meet-check svg{ width:13px; height:13px; stroke-width:3.5; }
+.mini-meet-h{font:700 14px/1.2 var(--font);letter-spacing:-0.015em;color:var(--c-text);text-align:center;}
+.mini-meet-when{
+  font:500 11px/1 var(--font);color:var(--c-text-mid);text-align:center;
+}
+.mini-meet-pill{
+  margin-top:4px;height:32px;padding:0 14px;border-radius:var(--r-pill);
+  background:var(--c-surface);border:1px solid var(--c-border);
+  font:600 10px/32px var(--font);color:var(--c-text);
+  display:inline-flex;align-items:center;gap:6px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+}
+
+/* ════════════════════════════════
+   VALUES — "It's local. By design."
+   ════════════════════════════════ */
+.values-grid{
+  margin-top:var(--s-12);
+  display:grid;gap:var(--s-3);
+  grid-template-columns:repeat(2,1fr);
+}
+@media(min-width:780px){.values-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:520px){.values-grid{grid-template-columns:1fr;}}
+
+.value{
+  padding:var(--s-5);
+  background:var(--c-surface);
+  border:1px solid var(--c-border);
+  border-radius:var(--r);
+  display:flex;flex-direction:column;gap:8px;
+}
+.value-h{
+  display:flex;align-items:center;gap:8px;
+  font:600 var(--t-headline)/1.2 var(--font);
+  letter-spacing:-0.015em;color:var(--c-text);
+}
+.value-h .x{
+  width:20px;height:20px;border-radius:var(--r-pill);
+  background:var(--c-surface-3);
+  display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;color:var(--c-text-lo);
+}
+.value-h .x svg{width:11px;height:11px;stroke-width:2.4;}
+.value-h.yes .x{background:rgba(48,209,88,0.16);color:#1d8a3d;}
+.value-p{
+  font:500 var(--t-callout)/1.5 var(--font);
+  color:var(--c-text-mid);letter-spacing:-0.005em;
+}
+
+/* ════════════════════════════════
+   FINAL CTA
+   ════════════════════════════════ */
+.final{
+  padding:var(--s-20) var(--s-5);
+}
+.final-card{
+  max-width:var(--maxw);margin:0 auto;
+  background:
+    radial-gradient(85% 95% at 0% 35%,    rgba(10,132,255,0.55) 0%, transparent 68%),
+    radial-gradient(75% 80% at 100% 100%, rgba(255,61,186,0.38) 0%, transparent 65%),
+    radial-gradient(60% 60% at 100% 0%,   rgba(10,132,255,0.20) 0%, transparent 70%),
+    linear-gradient(180deg, #06060C 0%, #0A0A14 100%);
+  border-radius:24px;
+  padding:var(--s-16) var(--s-8);
+  text-align:center;
+  position:relative;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.05);
+}
+.final-card::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);
+  pointer-events:none;
+}
+.final-mark{
+  width:64px;height:64px;margin:0 auto var(--s-5);
+  position:relative;z-index:1;
+}
+.final-h{
+  font:700 clamp(32px,4.5vw,52px)/1.05 var(--font);
+  letter-spacing:-0.03em;color:#fff;
+  max-width:680px;margin:0 auto;
+  text-wrap:balance;
+  position:relative;z-index:1;
+}
+.final-sub{
+  margin-top:var(--s-4);
+  font:500 var(--t-body)/1.55 var(--font);
+  color:rgba(255,255,255,0.68);
+  max-width:480px;margin-left:auto;margin-right:auto;
+  letter-spacing:-0.005em;
+  position:relative;z-index:1;
+}
+.final-actions{
+  margin-top:var(--s-8);
+  display:flex;flex-wrap:wrap;gap:var(--s-3);
+  justify-content:center;
+  position:relative;z-index:1;
+}
+.btn.light{
+  background:#fff;color:var(--c-text);
+}
+.btn.light:hover{background:#f0f0f3;}
+.btn.dark-ghost{
+  background:transparent;color:var(--on-glass);
+  border-color:rgba(255,255,255,0.16);
+}
+.btn.dark-ghost:hover{background:rgba(255,255,255,0.06);}
+
+/* ════════════════════════════════
+   FOOTER
+   ════════════════════════════════ */
+footer{
+  padding:var(--s-12) var(--s-5) var(--s-8);
+  border-top:1px solid var(--c-border);
+}
+.foot{
+  max-width:var(--maxw);margin:0 auto;
+  display:flex;flex-direction:column;gap:var(--s-6);
+}
+.foot-top{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);
+  flex-wrap:wrap;
+}
+.foot-brand{
+  display:flex;align-items:center;gap:10px;
+  color:var(--c-text);
+}
+.foot-brand-mark{width:28px;height:28px;}
+.foot-brand-name{font:700 17px/1 var(--font);letter-spacing:-0.02em;}
+.foot-links{
+  display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);
+}
+.foot-links a{
+  font:500 var(--t-callout)/1 var(--font);
+  color:var(--c-text-mid);
+  padding:6px 0;letter-spacing:-0.005em;
+}
+.foot-links a:hover{color:var(--c-text);}
+
+.foot-bot{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:var(--s-3);
+  font:500 var(--t-footnote)/1.4 var(--font);
+  color:var(--c-text-lo);
+  padding-top:var(--s-5);
+  border-top:1px solid var(--c-border);
+}
+.foot-bot .meta{display:flex;gap:var(--s-3);align-items:center;flex-wrap:wrap;}
+
+/* ════════════════════════════════
+   PRESS PLAY — brand closer перед final CTA
+   ════════════════════════════════ */
+.press-play{
+  padding:var(--s-24) var(--s-5) var(--s-12);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.press-play .cont{ max-width:780px; position:relative; z-index:1; }
+.press-play::before{
+  content:"";
+  position:absolute;
+  inset:auto auto -240px 50%;
+  transform:translateX(-50%);
+  width:760px; height:760px;
+  border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(10,132,255,0.10) 0%,
+    rgba(255,61,186,0.06) 35%,
+    transparent 65%);
+  pointer-events:none;
+}
+.press-play-mark{
+  width:96px; height:96px;
+  margin:0 auto var(--s-6);
+  color:var(--c-text);
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  filter:drop-shadow(0 16px 40px rgba(10,132,255,0.15));
+}
+.press-play-mark svg{ width:100%; height:100%; }
+.press-play-h{
+  font:700 clamp(48px, 8vw, 96px)/0.98 var(--font);
+  letter-spacing:-0.045em;
+  color:var(--c-text);
+  text-wrap:balance;
+}
+.press-play-h .accent{ color:var(--accent); }
+.press-play-sub{
+  margin-top:var(--s-6);
+  font:500 clamp(17px, 1.5vw, 21px)/1.55 var(--font);
+  color:var(--c-text-mid);
+  letter-spacing:-0.005em;
+  max-width:540px;
+  margin-left:auto; margin-right:auto;
+  text-wrap:pretty;
+}
+
+/* ════════════════════════════════
+   APP STORE / PLAY STORE — Coming soon buttons
+   ════════════════════════════════ */
+.store-row{
+  margin-top:var(--s-6);
+  display:flex; gap:10px; flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+  position:relative; z-index:1;
+}
+.store-btn{
+  height:54px; padding:0 18px 0 14px;
+  border-radius:var(--r-pill);
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.14);
+  color:#fff;
+  display:inline-flex; align-items:center; gap:11px;
+  transition:background 140ms var(--ease), transform 140ms var(--ease-sp);
+  cursor:default;
+  text-align:left;
+}
+.store-btn:hover{ background:rgba(255,255,255,0.12); transform:translateY(-1px); }
+.store-btn-icon{
+  width:26px; height:26px;
+  flex-shrink:0;
+  color:#fff;
+}
+.store-btn-icon svg{ width:100%; height:100%; }
+.store-btn-text{
+  display:flex; flex-direction:column;
+  line-height:1;
+}
+.store-btn-soon{
+  font:600 9px/1 var(--font);
+  letter-spacing:0.10em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.55);
+  margin-bottom:4px;
+}
+.store-btn-name{
+  font:600 15px/1 var(--font);
+  letter-spacing:-0.01em;
+  color:#fff;
+}
+
+/* ════════════════════════════════
+   LANG TOGGLE in nav
+   ════════════════════════════════ */
+.nav-lang{
+  height:30px; padding:0 11px;
+  border-radius:var(--r-pill);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.10);
+  color:var(--on-glass-mid);
+  font:700 11px/28px var(--font);
+  letter-spacing:0.06em;
+  margin-right:2px;
+  cursor:pointer;
+  transition:color 140ms var(--ease), background 140ms var(--ease), border-color 140ms var(--ease);
+}
+.nav-lang:hover{
+  color:var(--on-glass);
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(255,255,255,0.16);
+}
+@media(max-width:580px){
+  .nav-lang{ display:none; } /* на mobile спрячем в menu, оставим CTA */
+}
+
+/* ════════════════════════════════
+   YOUR PAGE — linkfree-визитка как второй вход
+   ════════════════════════════════ */
+.profile-section{
+  padding:var(--s-20) var(--s-5);
+  background:linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  position:relative;
+}
+.profile-grid{
+  display:grid; gap:var(--s-12);
+  grid-template-columns:1fr;
+  align-items:center;
+  max-width:var(--maxw);
+  margin:0 auto;
+}
+@media(min-width:960px){
+  .profile-grid{
+    grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+    gap:var(--s-16);
+  }
+}
+.profile-text{ order:2; }
+@media(min-width:960px){ .profile-text{ order:1; padding-right:var(--s-6); } }
+.profile-stage{
+  order:1;
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  min-height:560px;
+}
+@media(min-width:960px){ .profile-stage{ order:2; } }
+.profile-stage::before{
+  content:""; position:absolute;
+  inset:2% 8%;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255,61,186,0.22) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(10,132,255,0.20) 0%, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(10,132,255,0.08) 0%, transparent 70%);
+  filter:blur(50px);
+  border-radius:40%;
+  pointer-events:none;
+}
+
+/* Profile phone mockup — premium depth with 3D tilt */
+.profile-phone{
+  width:300px; height:600px;
+  border-radius:38px;
+  background:#000; padding:7px;
+  box-shadow:
+    0 40px 80px -20px rgba(0,0,0,0.50),
+    0 20px 40px -10px rgba(0,0,0,0.35),
+    0 0 0 1px rgba(255,255,255,0.06),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  transform:rotate(2deg) perspective(1200px) rotateY(-4deg);
+  transition:transform 600ms var(--ease), box-shadow 600ms var(--ease);
+  position:relative; z-index:1;
+}
+.profile-phone:hover{
+  transform:rotate(0deg) perspective(1200px) rotateY(0deg);
+  box-shadow:
+    0 50px 100px -24px rgba(0,0,0,0.55),
+    0 24px 48px -12px rgba(0,0,0,0.40),
+    0 0 0 1px rgba(255,255,255,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+}
+.profile-phone-screen{
+  width:100%; height:100%;
+  border-radius:31px;
+  overflow:hidden;
+  position:relative;
+  background:
+    radial-gradient(85% 95% at 0% 35%, rgba(10,132,255,0.45) 0%, transparent 68%),
+    radial-gradient(75% 80% at 100% 100%, rgba(255,61,186,0.35) 0%, transparent 65%),
+    linear-gradient(180deg, #06060C 0%, #0A0A14 100%);
+  color:rgba(255,255,255,0.95);
+  padding:50px 16px 16px;
+}
+/* Screen glare overlay */
+.profile-phone-screen::after{
+  content:""; position:absolute; inset:0; z-index:20; pointer-events:none;
+  background:linear-gradient(110deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 40%);
+  border-radius:inherit;
+}
+.profile-phone .status{
+  position:absolute; top:0; left:0; right:0;
+  z-index:10;
+  height:34px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 22px 0;
+  font:600 11px/1 var(--font);
+  color:rgba(255,255,255,0.85);
+}
+.profile-phone .status .icons{ font-size:9px; opacity:0.7; }
+
+.pp-topbar{
+  position:absolute;
+  top:42px; right:12px;
+  display:flex; gap:6px;
+  z-index:5;
+}
+.pp-topbar-btn{
+  width:28px; height:28px;
+  border-radius:var(--r-pill);
+  background:rgba(255,255,255,0.10);
+  border:1px solid rgba(255,255,255,0.10);
+  color:rgba(255,255,255,0.85);
+  display:flex; align-items:center; justify-content:center;
+}
+.pp-topbar-btn svg{ width:11px; height:11px; stroke-width:2; }
+
+.pp-avatar{
+  width:64px; height:64px;
+  margin:14px auto 12px;
+  border-radius:var(--r-pill);
+  overflow:hidden;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.40),
+    0 0 0 2.5px rgba(255,255,255,0.18);
+}
+.pp-name{
+  text-align:center;
+  font:700 16px/1.15 var(--font);
+  letter-spacing:-0.02em;
+  color:#fff;
+}
+.pp-handle{
+  text-align:center;
+  font:500 10px/1.3 var(--font);
+  color:rgba(255,255,255,0.55);
+  margin-top:3px;
+}
+.pp-trust{
+  display:flex; justify-content:center; gap:5px;
+  margin-top:12px;
+  flex-wrap:wrap;
+}
+.pp-pill{
+  height:22px; padding:0 9px;
+  border-radius:var(--r-pill);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.85);
+  font:600 9px/1 var(--font);
+  display:inline-flex; align-items:center; gap:4px;
+  letter-spacing:-0.005em;
+}
+.pp-pill svg{ width:9px; height:9px; stroke-width:2.4; color:var(--success); }
+
+.pp-section-h{
+  margin-top:16px;
+  font:600 9px/1 var(--font);
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.40);
+  text-align:center;
+  display:flex; align-items:center; gap:10px;
+  justify-content:center;
+}
+.pp-section-h::before, .pp-section-h::after{
+  content:""; flex:1; height:1px;
+  background:rgba(255,255,255,0.06);
+  max-width:48px;
+}
+
+.pp-links{
+  display:flex; flex-direction:column; gap:5px;
   margin-top:8px;
 }
-.linkfree-features{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
-.linkfree-feat{
-  padding:6px 14px;font-size:13px;font-weight:500;color:var(--whi);
-  background:rgba(191,90,242,0.08);border:1px solid rgba(191,90,242,0.18);
+.pp-link{
+  display:flex; align-items:center; gap:8px;
+  height:34px; padding:0 10px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.06);
+  color:#fff;
+}
+.pp-link-ico{
+  width:20px; height:20px;
+  border-radius:6px;
+  display:flex; align-items:center; justify-content:center;
+  font:700 9px/1 var(--font);
+  color:#fff;
+  flex-shrink:0;
+}
+.pp-link-ico.ig{ background:linear-gradient(135deg,#FEDA77,#F58529,#DD2A7B,#8134AF); }
+.pp-link-ico.tg{ background:#229ED9; }
+.pp-link-ico.be{ background:#fff; color:#000; }
+.pp-link-lbl{
+  flex:1;
+  font:600 11px/1 var(--font);
+  letter-spacing:-0.005em;
+}
+.pp-link-arr{
+  color:rgba(255,255,255,0.40);
+  font:400 14px/1 var(--font);
+}
+
+.pp-funnel{
+  margin-top:12px;
+  padding:14px 12px;
+  border-radius:14px;
+  background:linear-gradient(135deg, rgba(10,132,255,0.10), rgba(255,61,186,0.06));
+  border:1px solid rgba(255,255,255,0.08);
+  text-align:center;
+}
+.pp-funnel-eyebrow{
+  font:700 8px/1 var(--font);
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.55);
+  margin-bottom:4px;
+}
+.pp-funnel-h{
+  font:700 15px/1.15 var(--font);
+  letter-spacing:-0.018em;
+  color:#fff;
+  text-wrap:balance;
+}
+.pp-funnel-cta{
+  margin-top:8px;
+  height:34px; padding:0 12px;
+  width:100%;
   border-radius:var(--r-pill);
+  background:#fff;
+  color:var(--c-text);
+  border:none;
+  font:700 11px/1 var(--font);
+  letter-spacing:-0.005em;
+  display:flex; align-items:center; justify-content:center; gap:5px;
+  cursor:pointer;
+}
+.pp-funnel-cta svg{ width:11px; height:11px; stroke-width:2.4; }
+
+/* ════════════════════════════════
+   CINEMATIC REVEAL SYSTEM
+   ════════════════════════════════ */
+.cin{
+  opacity:0;
+  transform:translateY(40px) scale(0.97);
+  filter:blur(8px);
+  transition:opacity 0.9s var(--ease), transform 0.9s var(--ease), filter 0.9s var(--ease);
+  will-change:opacity, transform, filter;
+}
+.cin.vis{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+/* Stagger children */
+.cin-s1{ transition-delay:0.08s; }
+.cin-s2{ transition-delay:0.16s; }
+.cin-s3{ transition-delay:0.24s; }
+.cin-s4{ transition-delay:0.32s; }
+.cin-s5{ transition-delay:0.40s; }
+
+/* Phone mockups get extra lift */
+.cin-lift{
+  opacity:0;
+  transform:translateY(60px) scale(0.92) perspective(1200px) rotateX(8deg);
+  filter:blur(12px);
+  transition:opacity 1.1s var(--ease), transform 1.1s var(--ease), filter 1.1s var(--ease);
+  will-change:opacity, transform, filter;
+}
+.cin-lift.vis{
+  opacity:1;
+  transform:translateY(0) scale(1) perspective(1200px) rotateX(0deg);
+  filter:blur(0);
 }
 
-/* ── BUSINESS ── */
-.biz{
-  background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.02));
-  border:1px solid rgba(251,236,93,0.20);border-radius:var(--r-2xl);padding:48px 32px;
+/* Film grain overlay */
+.film-grain{
+  position:fixed; inset:0;
+  pointer-events:none; z-index:9999;
+  opacity:0.03; mix-blend-mode:overlay;
+  background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
 }
-@media (min-width:768px){.biz{padding:64px 56px;}}
-.biz-badge{
-  display:inline-flex;align-items:center;gap:8px;padding:6px 14px;
-  background:rgba(251,236,93,0.12);border:1px solid rgba(251,236,93,0.32);
-  border-radius:var(--r-pill);font-size:11px;font-weight:700;letter-spacing:0.16em;
-  text-transform:uppercase;color:var(--gold);margin-bottom:24px;
-}
-.biz-badge::before{content:"";width:8px;height:8px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px var(--gold);}
-.biz h2{margin-bottom:24px;}
-.biz .num{color:var(--gold);}
-.biz .strike{color:var(--wlo);text-decoration:line-through;text-decoration-thickness:2px;}
-.biz-body{color:var(--whi);font-size:17px;line-height:1.6;max-width:56ch;margin-bottom:20px;}
-.biz-tag{font-size:19px;font-weight:700;color:#fff;margin-top:12px;max-width:48ch;}
-.biz-cta{
-  display:inline-flex;align-items:center;gap:10px;padding:14px 24px;
-  background:transparent;border:1.5px solid var(--gold);color:var(--gold);
-  font-weight:600;font-size:15px;border-radius:var(--r-pill);transition:background .2s var(--ease);
-  margin-top:32px;
-}
-.biz-cta:hover{background:rgba(251,236,93,0.10);}
 
-/* ── LIVE / FINAL CTA ── */
-.live{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-2xl);padding:48px 32px;}
-@media (min-width:768px){.live{padding:64px 56px;}}
-.live h2{margin-bottom:32px;}
-.checklist{list-style:none;display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
-.checklist li{display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--whi);line-height:1.5;}
-.checklist li::before{
-  content:"";flex-shrink:0;width:22px;height:22px;margin-top:1px;border-radius:50%;
-  background:var(--green);
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230a0a0a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='3.5 8.5 6.5 11.5 12.5 5'/></svg>");
-  background-size:14px 14px;background-position:center;background-repeat:no-repeat;
+/* Hero entrance — starts visible but text animates in */
+.hero-cin{
+  opacity:0;
+  transform:translateY(30px) scale(0.95);
+  filter:blur(12px);
+  animation:heroIn 1.2s var(--ease) 0.2s forwards;
 }
-.live-sub{color:var(--wmid);font-size:17px;line-height:1.6;margin-bottom:32px;max-width:48ch;}
-
-/* ── ANTI (not a social network) ── */
-.anti{margin-top:48px;display:flex;flex-direction:column;gap:16px;max-width:52ch;}
-.anti-line{font-size:clamp(18px,2.5vw,24px);font-weight:700;line-height:1.35;color:var(--whi);}
-.anti-line .dim{color:var(--wlo);font-weight:400;}
-
-/* ── FOOTER ── */
-footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-top:48px;}
-.foot-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px;}
-@media (min-width:640px){.foot-inner{grid-template-columns:1fr 1fr;gap:32px 48px;}}
-@media (min-width:1024px){.foot-inner{grid-template-columns:1.4fr 1fr 1fr;gap:64px;}}
-.foot-col h4{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--wlo);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);}
-.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.foot-col a{font-size:14px;color:var(--wmid);transition:color .2s var(--ease);line-height:1.4;display:inline-block;padding:2px 0;}
-.foot-col a:hover{color:var(--whi);}
-.foot-contact{font-family:var(--mono);font-size:13px;color:var(--wmid);display:flex;flex-direction:column;gap:4px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
-.foot-contact a{padding:0;}.foot-contact a:hover{color:var(--whi);}
-.foot-mark{max-width:var(--max);margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--wlo);letter-spacing:0.08em;display:flex;align-items:center;justify-content:space-between;}
-
-/* ── REVEAL ── */
-@media (prefers-reduced-motion:no-preference){
-  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease), transform .7s var(--ease);}
-  .reveal.in{opacity:1;transform:none;}
+.hero-cin-delay{
+  opacity:0;
+  transform:translateY(20px);
+  filter:blur(8px);
+  animation:heroIn 1s var(--ease) 0.6s forwards;
 }
+.hero-cin-delay2{
+  opacity:0;
+  transform:translateY(16px);
+  animation:heroIn 0.8s var(--ease) 0.9s forwards;
+}
+.hero-cin-delay3{
+  opacity:0;
+  transform:translateY(16px);
+  animation:heroIn 0.8s var(--ease) 1.1s forwards;
+}
+@keyframes heroIn{
+  to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}
+}
+
 </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ═══ -->
-<header class="hdr">
-  <a href="/" class="hdr-logo">
-    <span class="hdr-mark">L</span>
-    LOKIO
-  </a>
-  <div class="hdr-right">
-    <nav class="hdr-nav">
-      <a href="#business">
-        <span lang="en">Business</span>
-        <span lang="ru">Бизнесу</span>
-      </a>
-      <a href="mailto:hello&#64;lokio.org">
-        <span lang="en">Contact</span>
-        <span lang="ru">Контакт</span>
-      </a>
-    </nav>
-    <button class="lang-sw" id="langBtn" aria-label="Switch language" style="display:none;">RU</button>
-    <a class="hdr-cta" href="https://app.lokio.org" target="_blank" rel="noopener">
-      <span lang="en">Open map</span>
-      <span lang="ru">Открой карту</span>
+<div class="film-grain" aria-hidden="true"></div>
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="nav-brand" href="#top">
+      <svg class="nav-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(80,80) rotate(45)">
+          <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
+        </g>
+      </svg>
+      <span class="nav-name">LOKIO</span>
     </a>
-  </div>
-</header>
+    <div class="nav-links">
+      <a href="#how" data-en="How it works" data-ru="Как это работает">How it works</a>
+      <a href="#values" data-en="Why it&rsquo;s different" data-ru="Чем отличается">Why it&rsquo;s different</a>
+      <button class="nav-lang" id="lang-toggle" aria-label="Switch language">RU</button>
+      <a class="nav-cta" href="https://app.lokio.org" data-en="Open the app" data-ru="Открыть">
+        Open the app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>
 
-<!-- ═══ HERO ═══ -->
-<section class="sec" id="hero">
-  <div class="pins" id="pins" aria-hidden="true"></div>
+<!-- ════════ HERO ════════ -->
+<section class="hero" id="top">
+  <div class="cont">
+    <div class="hero-grid">
 
-  <h1>
-    <span lang="en">Drop a joke, a&nbsp;thought, anything. On&nbsp;the&nbsp;map.</span>
-    <span lang="ru">Кинь шутку, мысль, что угодно. На&nbsp;карту.</span>
-  </h1>
+      <div>
+        <div class="hero-tag hero-cin">
+          <span class="dot"></span>
+          <span data-en="Live in 3 cities — expanding" data-ru="Запущен в 3 городах — расширяемся">Live in 3 cities — expanding</span>
+        </div>
 
-  <p class="sub" style="margin-top:32px;">
-    <span lang="en">Dozens of people nearby will join the conversation. Right now, around you, life is happening — you just don't see it yet.</span>
-    <span lang="ru">Десятки людей поблизости присоединятся к разговору. Прямо сейчас вокруг тебя происходит жизнь — ты просто её не видишь.</span>
-  </p>
+        <h1 class="hero-h hero-cin-delay" data-en-html='The map where the people <span class="strike">around you</span> actually <span class="accent">talk</span>.' data-ru-html='Карта, где люди <span class="strike">рядом</span> реально <span class="accent">встречаются</span>.'>
+          The map where the people <span class="strike">around you</span> actually <span class="accent">talk</span>.
+        </h1>
 
-  <div style="margin-top:48px;">
-    <a class="cta" href="https://app.lokio.org" target="_blank" rel="noopener">
-      <span lang="en">Open the map</span>
-      <span lang="ru">Открой карту</span>
-      <span class="arrow" aria-hidden="true">→</span>
-    </a>
-    <span class="cta-sub">app.lokio.org</span>
+        <p class="hero-sub hero-cin-delay2" data-en="Drop a pin with a thought, a plan, or an invitation. Anyone within walking distance can open the chat. Meet for real if it clicks." data-ru="Поставь пин — мысль, план или приглашение. Любой в пешей доступности открывает чат. Встречаетесь вживую если совпало.">
+          Drop a pin with a thought, a plan, or an invitation. Anyone within walking distance can open the chat. Meet for real if it clicks.
+        </p>
+
+        <div class="hero-actions hero-cin-delay3">
+          <a class="btn primary" href="https://app.lokio.org">
+            <span data-en="Open the app" data-ru="Открыть карту">Open the app</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a class="btn ghost" href="#how" data-en="See how it works" data-ru="Как это работает">
+            See how it works
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span data-en="Works on web · no install" data-ru="Работает в браузере · без установки">Works on web · no install</span></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> <span data-en="Anonymous by default" data-ru="Анонимно по умолчанию">Anonymous by default</span></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg> <span data-en="No feed · no follows" data-ru="Без ленты · без подписчиков">No feed · no follows</span></span>
+        </div>
+
+        <div class="hero-store-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          <span data-en-html="<strong>iOS &amp; Android coming.</strong> For now opens in any browser." data-ru-html="<strong>iOS и Android скоро.</strong> Пока открывается в любом браузере."><strong>iOS &amp; Android coming.</strong> For now opens in any browser.</span>
+        </div>
+      </div>
+
+      <!-- Device mockup -->
+      <div class="hero-stage cin-lift">
+        <div class="dev">
+          <div class="dev-screen">
+            <div class="dev-status"><span>9:41</span><span style="font-size:10px;opacity:0.7;">●●●</span></div>
+            <div class="dev-map"></div>
+
+            <!-- Floating glass header -->
+            <div class="dev-header">
+              <div class="dev-loc">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div class="dev-loc-text">Your neighborhood</div>
+                <div class="dev-loc-meta">200 m radius · 11 pins</div>
+              </div>
+              <div class="dev-counter">
+                <span>11</span><span class="sep"></span><span>3 live</span>
+              </div>
+            </div>
+
+            <!-- Pins — speech-bubble (матчит прод) -->
+            <div class="dev-pin f pulse" style="top:34%;left:14%;">
+              <svg class="dev-pin-svg" viewBox="0 0 44 50" fill="none"><path class="dev-pin-body" d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+              <span class="dev-pin-letter">A</span>
+            </div>
+            <div class="dev-pin m" style="top:58%;left:24%;">
+              <svg class="dev-pin-svg" viewBox="0 0 44 50" fill="none"><path class="dev-pin-body" d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+              <span class="dev-pin-letter">R</span>
+            </div>
+            <div class="dev-pin f" style="top:70%;left:64%;">
+              <svg class="dev-pin-svg" viewBox="0 0 44 50" fill="none"><path class="dev-pin-body" d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+              <span class="dev-pin-letter">L</span>
+            </div>
+            <div class="dev-pin n" style="top:42%;left:74%;">
+              <svg class="dev-pin-svg" viewBox="0 0 44 50" fill="none"><path class="dev-pin-body" d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+              <span class="dev-pin-letter">·</span>
+            </div>
+            <div class="dev-pin b" style="top:82%;left:42%;">
+              <svg class="dev-pin-svg" viewBox="0 0 44 50" fill="none"><path class="dev-pin-body" d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+              <span class="dev-pin-letter">★</span>
+            </div>
+
+            <!-- Open pin preview card -->
+            <div class="dev-preview" style="top:35%;left:32%;">
+              <div class="dev-preview-photo"></div>
+              <div class="dev-preview-body">
+                <div class="dev-preview-author">
+                  <span class="dev-preview-av">A</span>
+                  <span class="dev-preview-name">Anna</span>
+                  <span class="dev-preview-meta">· 50&thinsp;m</span>
+                </div>
+                <div class="dev-preview-title">5 boxes of free pizza at the office — come grab 🍕</div>
+                <div class="dev-preview-chips">
+                  <span class="dev-chip">⏱ ends 14:00</span>
+                  <span class="dev-chip">👥 3 going</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- ═══ LIVE PINS ═══ -->
-<section class="sec reveal" id="pins-demo">
-  <span class="eyebrow">
-    <span lang="en">Right now, nearby</span>
-    <span lang="ru">Прямо сейчас, рядом</span>
-  </span>
+<!-- ════════ WHAT IT IS ════════ -->
+<section class="what" id="how">
+  <div class="cont">
+    <div class="eyebrow cin" data-en="How it works" data-ru="Как это работает">How it works</div>
+    <h2 class="sect-h cin cin-s1" data-en="Three things, in order. That’s the whole app." data-ru="Три шага по порядку. Всё приложение.">Three things, in order. That’s the whole app.</h2>
+    <p class="sect-sub cin cin-s2" data-en="No timeline. No discovery feed. No suggested people. Just what someone within 500 metres of you is offering or asking right now." data-ru="Без ленты. Без рекомендаций. Только то, что кто-то в 500 метрах от тебя предлагает или ищет прямо сейчас.">No timeline. No discovery feed. No suggested people. Just what someone within 500 metres of you is offering or asking right now.</p>
 
-  <h2>
-    <span lang="en">This is what's on the map.</span>
-    <span lang="ru">Вот что на карте.</span>
-  </h2>
+    <div class="what-grid">
 
-  <div class="mock-stack">
-    <div class="mock m">
-      <div class="mock-head">
-        <span class="mock-user">@user_a1b2c</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">80m · 23h</span>
+      <div class="card cin cin-s1">
+        <div class="card-num">01 / DROP</div>
+        <div>
+          <div class="card-h" data-en="Pin a thought, a plan, an invitation." data-ru="Поставь пин — мысль, план, приглашение.">Pin a thought, a plan, an invitation.</div>
+          <div class="card-p" data-en="One line. «Free pizza at the office.» «Looking for a hiking partner Sunday.» «Why is floor 3 cooking borscht at 11am?»" data-ru="Одна строка. «Бесплатная пицца в офисе.» «Ищу напарника на хайк в воскресенье.» «Почему на 3 этаже варят борщ в 11 утра?»">One line. &laquo;Free pizza at the office.&raquo; &laquo;Looking for a hiking partner Sunday.&raquo; &laquo;Why is floor 3 cooking borscht at 11am?&raquo;</div>
+        </div>
+        <div class="card-art art-map">
+          <div class="pin f" style="top:48%;left:25%;"><svg viewBox="0 0 44 50" fill="none"><path d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg></div>
+          <div class="pin m" style="top:75%;left:55%;"><svg viewBox="0 0 44 50" fill="none"><path d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg></div>
+          <div class="pin b" style="top:55%;left:75%;"><svg viewBox="0 0 44 50" fill="none"><path d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg></div>
+        </div>
       </div>
-      <div class="mock-body">
-        <span lang="en">"Coffee near the airport, anyone want company in 30 min?"</span>
-        <span lang="ru">"Кофе у аэропорта, кто составит компанию через полчаса?"</span>
+
+      <div class="card cin cin-s2">
+        <div class="card-num">02 / OPEN</div>
+        <div>
+          <div class="card-h" data-en="The pin becomes a chat. Anyone in range can join." data-ru="Пин становится чатом. Любой в радиусе может войти.">The pin becomes a chat. Anyone in range can join.</div>
+          <div class="card-p" data-en="Your pin is its own chatroom. People nearby tap and reply. The author + the first to commit stay; everyone else sees the plan but doesn't crowd it." data-ru="Пин — это чат. Люди рядом открывают и отвечают. Автор + первый подтвердивший остаются; остальные видят план, но не толпятся.">Your pin is its own chatroom. People nearby tap and reply. The author + the first to commit stay; everyone else sees the plan but doesn&rsquo;t crowd it.</div>
+        </div>
+        <div class="card-art art-chat">
+          <div class="art-bubble"><span class="name">Asal</span>I&rsquo;m down. 19:30 The Pizza Mustaqillik?</div>
+          <div class="art-bubble own">Booked. 2 spots left.</div>
+        </div>
       </div>
-      <div class="mock-foot">
-        <span class="mock-arrow">↳</span>
-        <span class="mock-echo">3 echo</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-joined">1 joined</span>
+
+      <div class="card cin cin-s3">
+        <div class="card-num">03 / MEET</div>
+        <div>
+          <div class="card-h" data-en="Meet for real. The chat closes itself." data-ru="Встретьтесь вживую. Чат закрывается сам.">Meet for real. The chat closes itself.</div>
+          <div class="card-p" data-en="When the plan firms up — «see you at 7» — the chat archives. No follows, no DMs, no streaks, no notifications begging you back tomorrow." data-ru="Когда план готов — «в 7 на месте» — чат архивируется. Без подписок, без DM, без стриков, без уведомлений которые тянут обратно.">When the plan firms up — &laquo;see you at 7&raquo; — the chat archives. No follows, no DMs, no streaks, no notifications begging you back tomorrow.</div>
+        </div>
+        <div class="card-art art-meet">
+          <div class="a">A</div>
+          <div class="line"></div>
+          <div class="b">R</div>
+        </div>
       </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ DEMO STRIP (dark) ════════ -->
+<section class="demo">
+  <div class="cont">
+    <div class="eyebrow cin" data-en="Walkthrough" data-ru="Как это выглядит">Walkthrough</div>
+    <h2 class="sect-h cin cin-s1" data-en="Tap a pin. Get a coffee. Go home." data-ru="Тыкни пин. Выпей кофе. Иди домой.">Tap a pin. Get a coffee. Go home.</h2>
+    <p class="sect-sub cin cin-s2" data-en="A round trip is usually under an hour. The whole point is that nothing about LOKIO outlives the meeting itself." data-ru="Весь цикл обычно под час. Смысл в том, что ничего в LOKIO не живёт дольше самой встречи.">A round trip is usually under an hour. The whole point is that nothing about LOKIO outlives the meeting itself.</p>
+
+    <div class="demo-row">
+
+      <!-- Step 1: see the map -->
+      <div class="demo-cell cin">
+        <div class="demo-step">STEP 01</div>
+        <div class="demo-h" data-en="You see a pin on the map." data-ru="Ты видишь пин на карте.">You see a pin on the map.</div>
+        <div class="demo-p" data-en="Anna, 50 m away, posted «free pizza, 5 boxes, before 14:00». The pin pulses because the offer is fresh." data-ru="Анна, в 50 м от тебя, написала «бесплатная пицца, 5 коробок, до 14:00». Пин пульсирует — предложение свежее.">Anna, 50&thinsp;m away, posted &laquo;free pizza, 5 boxes, before 14:00&raquo;. The pin pulses because the offer is fresh.</div>
+        <div class="mini cin-lift">
+          <div class="mini-screen">
+            <div class="mini-map"></div>
+            <div class="mini-header">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Nearby · 200&thinsp;m
+            </div>
+            <div class="mini-pin-big">
+              <svg class="mini-pin-big-svg" viewBox="0 0 44 50" fill="none"><path class="mini-pin-big-body" d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+              <span class="mini-pin-big-letter">A</span>
+            </div>
+            <div class="mini-pin-small m" style="top:42%;left:24%;">
+              <svg viewBox="0 0 44 50" fill="none"><path d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+            </div>
+            <div class="mini-pin-small f" style="top:78%;left:70%;">
+              <svg viewBox="0 0 44 50" fill="none"><path d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+            </div>
+            <div class="mini-pin-small n" style="top:84%;left:20%;">
+              <svg viewBox="0 0 44 50" fill="none"><path d="M8 4 Q4 4 4 8 L4 28 Q4 32 8 32 L17 32 L22 38 L27 32 L36 32 Q40 32 40 28 L40 8 Q40 4 36 4 Z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: open chat -->
+      <div class="demo-cell cin">
+        <div class="demo-step">STEP 02</div>
+        <div class="demo-h" data-en="You tap in. Now you're in the chat." data-ru="Тапаешь. Ты в чате.">You tap in. Now you&rsquo;re in the chat.</div>
+        <div class="demo-p" data-en="Light bubbles, dark glass input. Two other people in the area joined. No DMs — everything is on the pin." data-ru="Светлые бабблы, тёмный стеклянный ввод. Ещё двое рядом зашли. Без DM — всё на пине.">Light bubbles, dark glass input. Two other people in the area joined. No DMs &mdash; everything is on the pin.</div>
+        <div class="mini cin-lift">
+          <div class="mini-screen">
+            <div class="mini-header" style="background:var(--glass);">
+              🍕 5 boxes · 3 going
+            </div>
+            <div class="mini-chat">
+              <div class="mini-bubble"><span class="nm">Anna</span>5th floor, ring at room 504</div>
+              <div class="mini-bubble own"><span class="nm">You</span>2 minutes, on my way</div>
+              <div class="mini-bubble"><span class="nm">Ruslan</span>Save me a slice 🙏</div>
+              <div class="mini-bubble own"><span class="nm">You</span>Walking in now</div>
+            </div>
+            <div class="mini-input">
+              Message…
+              <span class="mini-send">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 21.5 22 12 2.5 2.5l0 7.5 12 2-12 2 0 7.5z"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: meet, chat closes -->
+      <div class="demo-cell cin">
+        <div class="demo-step">STEP 03</div>
+        <div class="demo-h" data-en="You meet. The chat closes itself." data-ru="Встретились. Чат закрылся сам.">You meet. The chat closes itself.</div>
+        <div class="demo-p" data-en="Once the plan happens, the pin archives. No follower count, no «you and Anna are now connected». Tomorrow is a new map." data-ru="Когда план случился — пин архивируется. Без счётчика подписчиков, без «вы теперь подключены к Анне». Завтра — новая карта.">Once the plan happens, the pin archives. No follower count, no &laquo;you and Anna are now connected&raquo;. Tomorrow is a new map.</div>
+        <div class="mini cin-lift">
+          <div class="mini-screen">
+            <!-- Status bar -->
+            <div style="position:absolute;top:0;left:0;right:0;z-index:10;height:32px;display:flex;align-items:center;justify-content:space-between;padding:10px 18px 0;font:600 11px/1 var(--font);color:var(--c-text);">
+              <span>9:41</span><span style="font-size:9px;opacity:0.5;">●●●</span>
+            </div>
+            <!-- Back / glass header -->
+            <div style="position:absolute;top:32px;left:8px;right:8px;height:32px;border-radius:var(--r-pill);background:var(--glass);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);border:1px solid var(--glass-border);display:flex;align-items:center;padding:0 10px;gap:6px;font:600 10px/1 var(--font);color:var(--on-glass);z-index:10;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              <span style="opacity:0.6;">Pin archived</span>
+            </div>
+            <div class="mini-meet">
+              <div class="mini-meet-handshake">
+                <div class="mini-meet-av mini-meet-av--m">Y</div>
+                <div class="mini-meet-check">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div class="mini-meet-av mini-meet-av--f">A</div>
+              </div>
+              <div class="mini-meet-h">You met Anna.<br/>That&rsquo;s it. Bye.</div>
+              <div class="mini-meet-when">14&thinsp;Mar · 13:12 · Your area</div>
+              <div class="mini-meet-pill">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Archived
+              </div>
+            </div>
+            <!-- Bottom nav bar -->
+            <div style="position:absolute;bottom:0;left:0;right:0;height:44px;display:flex;align-items:center;justify-content:space-around;padding:0 20px;border-top:1px solid var(--c-border);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-text-lo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-text-lo)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ YOUR PAGE — linkfree-визитка как второй вход ════════ -->
+<section class="profile-section" id="profile">
+  <div class="cont">
+    <div class="profile-grid">
+
+      <div class="profile-text cin">
+        <div class="eyebrow cin" data-en="Your page" data-ru="Твоя страница">Your page</div>
+        <h2 class="sect-h cin cin-s1" data-en="Everything about you. One link." data-ru="Всё о тебе. Одна ссылка.">Everything about you. One link.</h2>
+        <p class="sect-sub cin cin-s2" data-en="Your LOKIO page is a free digital business card — links, bio, verified accounts. Share it in your Instagram bio, Telegram, or on a real business card. Anyone can see who you are without signing up." data-ru="Твоя страница LOKIO — бесплатная цифровая визитка: ссылки, био, верифицированные аккаунты. Кинь в bio Instagram, Telegram или на настоящую визитку. Любой увидит кто ты без регистрации.">Your LOKIO page is a free digital business card &mdash; links, bio, verified accounts. Share it in your Instagram bio, Telegram, or on a real business card. Anyone can see who you are without signing up.</p>
+        <div class="hero-actions" style="margin-top:32px;">
+          <a class="btn primary" href="https://app.lokio.org">
+            <span data-en="Create yours free" data-ru="Создать бесплатно">Create yours free</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="profile-stage">
+        <div class="profile-phone cin-lift">
+          <div class="profile-phone-screen">
+            <div class="status"><span>9:41</span><span class="icons">●●●</span></div>
+            <div class="pp-topbar">
+              <button class="pp-topbar-btn" aria-label="Share">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              </button>
+              <button class="pp-topbar-btn" aria-label="Block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+              </button>
+            </div>
+            <div class="pp-avatar"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;border-radius:inherit;">
+              <rect width="64" height="64" rx="32" fill="url(#av-bg)"/>
+              <circle cx="32" cy="24" r="11" fill="#F9D5C2"/>
+              <ellipse cx="32" cy="54" rx="18" ry="14" fill="#F9D5C2"/>
+              <circle cx="32" cy="24" r="10" fill="#F5C6A8"/>
+              <path d="M20 20c0-8 6-14 12-14s12 6 12 14c0 2-1 3-2 3-2-4-5-6-10-6s-8 2-10 6c-1 0-2-1-2-3z" fill="#2C1810"/>
+              <circle cx="28" cy="23" r="1.2" fill="#2C1810"/>
+              <circle cx="36" cy="23" r="1.2" fill="#2C1810"/>
+              <path d="M29 28q3 2.5 6 0" stroke="#C4836A" stroke-width="1" stroke-linecap="round" fill="none"/>
+              <defs><linearGradient id="av-bg" x1="0" y1="0" x2="64" y2="64"><stop stop-color="#FF3DBA"/><stop offset="1" stop-color="#A21D7A"/></linearGradient></defs>
+            </svg></div>
+            <div class="pp-name">Mia Laurent</div>
+            <div class="pp-handle">app.lokio.org/mia</div>
+            <div class="pp-trust">
+              <span class="pp-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Phone</span>
+              <span class="pp-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"/></svg>Telegram</span>
+            </div>
+            <div class="pp-section-h" data-en="Contacts" data-ru="Контакты">Contacts</div>
+            <div class="pp-links">
+              <div class="pp-link">
+                <span class="pp-link-ico ig">Ig</span>
+                <span class="pp-link-lbl">@mia.laurent</span>
+                <span class="pp-link-arr">›</span>
+              </div>
+              <div class="pp-link">
+                <span class="pp-link-ico tg">T</span>
+                <span class="pp-link-lbl">@mialaurent</span>
+                <span class="pp-link-arr">›</span>
+              </div>
+              <div class="pp-link">
+                <span class="pp-link-ico be">Be</span>
+                <span class="pp-link-lbl">behance.net/mialaurent</span>
+                <span class="pp-link-arr">›</span>
+              </div>
+            </div>
+            <div class="pp-funnel">
+              <div class="pp-funnel-eyebrow">LOKIO</div>
+              <div class="pp-funnel-h" data-en-html="Create yours.<br/>Free." data-ru-html="Создай свою.<br/>Бесплатно.">Create yours.<br/>Free.</div>
+              <button class="pp-funnel-cta">
+                <span data-en="Sign up" data-ru="Регистрация">Sign up</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ VALUES ════════ -->
+<section id="values">
+  <div class="cont">
+    <div class="eyebrow cin" data-en="Why it’s different" data-ru="Чем это отличается">Why it&rsquo;s different</div>
+    <h2 class="sect-h cin cin-s1" data-en="No followers. No feed. No reason to come back tomorrow." data-ru="Без подписчиков. Без ленты. Без причин возвращаться завтра.">No followers. No feed. No reason to come back tomorrow.</h2>
+    <p class="sect-sub cin cin-s2" data-en="LOKIO is for the next hour, the next block, the next person. We don't want your daily-active minutes — we want one good real-life meeting." data-ru="LOKIO — это про ближайший час, ближайший квартал, ближайшего человека. Нам не нужны твои минуты в приложении — нам нужна одна хорошая встреча вживую.">LOKIO is for the next hour, the next block, the next person. We don&rsquo;t want your daily-active minutes &mdash; we want one good real-life meeting.</p>
+
+    <div class="values-grid">
+
+      <div class="value cin cin-s1">
+        <div class="value-h">
+          <span class="x">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+          </span>
+          <span data-en="No global feed" data-ru="Без глобальной ленты">No global feed</span>
+        </div>
+        <div class="value-p" data-en="If you're not within walking distance of a pin, you don't see it. The map ends where you can't reach in 15 minutes." data-ru="Если ты не в пешей доступности от пина — ты его не видишь. Карта заканчивается там, куда не дойдёшь за 15 минут.">If you&rsquo;re not within walking distance of a pin, you don&rsquo;t see it. The map ends where you can&rsquo;t reach in 15 minutes.</div>
+      </div>
+
+      <div class="value cin cin-s2">
+        <div class="value-h">
+          <span class="x">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+          </span>
+          <span data-en="No followers" data-ru="Без подписчиков">No followers</span>
+        </div>
+        <div class="value-p" data-en="You don't collect people. After a chat closes, the only thing you keep is the memory of the coffee." data-ru="Ты не коллекционируешь людей. Когда чат закрывается, остаётся только воспоминание о кофе.">You don&rsquo;t collect people. After a chat closes, the only thing you keep is the memory of the coffee.</div>
+      </div>
+
+      <div class="value cin cin-s3">
+        <div class="value-h">
+          <span class="x">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+          </span>
+          <span data-en="No DMs" data-ru="Без DM">No DMs</span>
+        </div>
+        <div class="value-p" data-en="Conversation lives on the pin, in front of everyone in range. No silent slide-into-DMs — if someone's creepy, the room sees it." data-ru="Разговор живёт на пине, на виду у всех в радиусе. Никаких тихих заходов в DM — если кто-то стрёмный, комната это видит.">Conversation lives on the pin, in front of everyone in range. No silent slide-into-DMs &mdash; if someone&rsquo;s creepy, the room sees it.</div>
+      </div>
+
+      <div class="value cin cin-s4">
+        <div class="value-h yes">
+          <span class="x">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span data-en="Anonymous by default" data-ru="Анонимно по умолчанию">Anonymous by default</span>
+        </div>
+        <div class="value-p" data-en="Name + a gender tag is the minimum — the maximum is whatever links you choose to add later (Instagram, Telegram, nothing)." data-ru="Имя + тег пола — минимум. Максимум — любые ссылки которые добавишь позже (Instagram, Telegram, ничего).">Name + a gender tag is the minimum &mdash; the maximum is whatever links you choose to add later (Instagram, Telegram, nothing).</div>
+      </div>
+
+      <div class="value cin cin-s5">
+        <div class="value-h yes">
+          <span class="x">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span data-en="Free, works on the web" data-ru="Бесплатно, работает в браузере">Free, works on the web</span>
+        </div>
+        <div class="value-p" data-en="No App Store, no install, no «sign in with Apple» gate. Open app.lokio.org on any phone and you're in." data-ru="Без App Store, без установки, без «войти через Apple». Открой app.lokio.org на любом телефоне — и ты внутри.">No App Store, no install, no &laquo;sign in with Apple&raquo; gate. Open <span style="font-family:var(--font-mono);">app.lokio.org</span> on any phone and you&rsquo;re in.</div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PRESS PLAY — brand closer (перед final CTA) ════════ -->
+<section class="press-play">
+  <div class="cont">
+    <div class="press-play-mark cin">
+      <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(80,80) rotate(45)">
+          <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
+        </g>
+      </svg>
+    </div>
+    <h2 class="press-play-h cin cin-s1" data-en="Press Play on your life." data-ru="Нажми Play на свою жизнь.">Press <span class="accent">Play</span> on your life.</h2>
+    <p class="press-play-sub cin cin-s2" data-en="Stop scrolling. Start meeting. The next coffee is one tap on the map." data-ru="Хватит скроллить. Пора встречаться. Следующий кофе — в одном тапе на карте.">Stop scrolling. Start meeting. The next coffee is one tap on the map.</p>
+  </div>
+</section>
+
+<!-- ════════ FINAL CTA ════════ -->
+<section class="final">
+  <div class="final-card cin">
+    <svg class="final-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(80,80) rotate(45)">
+        <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="#FFFFFF"/>
+      </g>
+    </svg>
+    <div class="final-h" data-en="Open it in the city you&rsquo;re in&nbsp;right now." data-ru="Открой в своём городе прямо сейчас.">Open it in the city you&rsquo;re in&nbsp;right now.</div>
+    <div class="final-sub" data-en="No install, no signup wall. Browse as guest if you just want to look at the map first." data-ru="Без установки. Без регистрации. Зайди гостем и посмотри карту.">No install, no signup wall. Browse as guest if you just want to look at the map first.</div>
+    <div class="final-actions">
+      <a class="btn light" href="https://app.lokio.org" data-en="Open the app" data-ru="Открыть карту">
+        <span>Open the app</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a class="btn dark-ghost" href="https://app.lokio.org?guest=1" data-en="Browse as guest" data-ru="Посмотреть карту">Browse as guest</a>
     </div>
 
-    <div class="mock f">
-      <div class="mock-head">
-        <span class="mock-user">@user_h4x</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">0m · 12h</span>
-      </div>
-      <div class="mock-body">
-        <span lang="en">"Stepped out 'for some air' 40 minutes ago. Send help."</span>
-        <span lang="ru">"Вышел «подышать» 40 минут назад. Спасите."</span>
-      </div>
-      <div class="mock-foot">
-        <span class="mock-arrow">↳</span>
-        <span class="mock-echo">31 echo</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-joined">
-          <span lang="en">4 offered to come</span>
-          <span lang="ru">4 предложили прийти</span>
+    <!-- App Store / Play Store — Coming soon -->
+    <div class="store-row">
+      <button class="store-btn" type="button" aria-label="App Store coming soon">
+        <span class="store-btn-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c-.03-2.75 2.25-4.07 2.36-4.13-1.29-1.88-3.29-2.14-4-2.17-1.7-.17-3.32 1-4.18 1-.87 0-2.2-.97-3.62-.94-1.86.03-3.58 1.08-4.54 2.75-1.94 3.37-.49 8.34 1.39 11.07.92 1.33 2.01 2.83 3.43 2.78 1.38-.06 1.9-.89 3.57-.89 1.65 0 2.14.89 3.6.87 1.49-.03 2.43-1.36 3.34-2.7 1.05-1.55 1.49-3.05 1.51-3.13-.03-.01-2.89-1.11-2.92-4.41zM14.4 4.06c.75-.91 1.26-2.18 1.12-3.44-1.09.04-2.4.72-3.18 1.63-.69.8-1.31 2.08-1.14 3.32 1.21.09 2.45-.62 3.2-1.51z"/></svg>
         </span>
-      </div>
-    </div>
-
-    <div class="mock b">
-      <div class="mock-head">
-        <span class="mock-user">@roasters</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">300m · 6h</span>
-      </div>
-      <div class="mock-body">
-        <span lang="en">"Free pastries after 9 PM — leftover day. Come grab some."</span>
-        <span lang="ru">"Бесплатная выпечка после 21:00 — остатки дня. Приходи."</span>
-      </div>
-      <div class="mock-foot">
-        <span class="mock-arrow">↳</span>
-        <span class="mock-echo">8 echo</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-joined">5 joined</span>
-      </div>
+        <span class="store-btn-text">
+          <span class="store-btn-soon" data-en="Coming soon" data-ru="Скоро">Coming soon</span>
+          <span class="store-btn-name">App Store</span>
+        </span>
+      </button>
+      <button class="store-btn" type="button" aria-label="Google Play coming soon">
+        <span class="store-btn-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2.5v19l9-9.5z"/><path d="M3 2.5l13 7.5" stroke-width="1.6"/><path d="M3 21.5l13-7.5" stroke-width="1.6"/><path d="M16 10l5 2L16 14" stroke-width="1.6"/></svg>
+        </span>
+        <span class="store-btn-text">
+          <span class="store-btn-soon" data-en="Coming soon" data-ru="Скоро">Coming soon</span>
+          <span class="store-btn-name">Google Play</span>
+        </span>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- ═══ HOW IT WORKS ═══ -->
-<section class="sec sec-short reveal">
-  <span class="eyebrow">
-    <span lang="en">How it works</span>
-    <span lang="ru">Как это работает</span>
-  </span>
-
-  <h2>
-    <span lang="en">Signal → Radar → Meeting.</span>
-    <span lang="ru">Сигнал → Радар → Встреча.</span>
-  </h2>
-
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"/><circle cx="12" cy="14" r="6"/><circle cx="12" cy="14" r="2" fill="currentColor"/></svg>
-      </div>
-      <h3>
-        <span lang="en">Signal</span>
-        <span lang="ru">Сигнал</span>
-      </h3>
-      <p>
-        <span lang="en">Drop a thought on the map. Five seconds. No reason needed.</span>
-        <span lang="ru">Кинь мысль на карту. Пять секунд. Причина не нужна.</span>
-      </p>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
-      </div>
-      <h3>
-        <span lang="en">Radar</span>
-        <span lang="ru">Радар</span>
-      </h3>
-      <p>
-        <span lang="en">People nearby see it. A live chat opens under your pin. Up to 50 people.</span>
-        <span lang="ru">Люди рядом видят. Под пином живой чат. До 50 человек.</span>
-      </p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11a5 5 0 0 0-10 0v6h10z"/><path d="M9 17v2a3 3 0 0 0 6 0v-2"/><path d="M5 11h14"/></svg>
-      </div>
-      <h3>
-        <span lang="en">Meeting</span>
-        <span lang="ru">Встреча</span>
-      </h3>
-      <p>
-        <span lang="en">Someone replies. You read each other in the chat first. Then you meet.</span>
-        <span lang="ru">Кто-то ответил. Вы прочитали друг друга в чате. Потом встретились.</span>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ SITUATIONS ═══ -->
-<section class="sec sec-short reveal">
-  <span class="eyebrow">
-    <span lang="en">One protocol, every situation</span>
-    <span lang="ru">Один протокол, любая ситуация</span>
-  </span>
-
-  <h2>
-    <span lang="en">Pin + chat + 24 hours.<br/>Covers everything.</span>
-    <span lang="ru">Пин + чат + 24 часа.<br/>Закрывает всё.</span>
-  </h2>
-
-  <div class="sits">
-    <div class="sit">
-      <span class="sit-icon">☕</span>
-      <h3><span lang="en">Free stuff</span><span lang="ru">Халява</span></h3>
-      <p><span lang="en">Café gives away pastries after 9 PM. Coach runs a free boxing class in the park. Photographer needs three people for a sunset shoot — free, keeps the photos.</span><span lang="ru">Кафе раздаёт выпечку после 21:00. Тренер набирает бесплатную группу на бокс. Фотограф ищет трёх на закат — бесплатно, отдаст фото.</span></p>
-    </div>
-    <div class="sit">
-      <span class="sit-icon">🏔</span>
-      <h3><span lang="en">Spontaneous crews</span><span lang="ru">Спонтанные компании</span></h3>
-      <p><span lang="en">"Driving to a mountain lake, 2 seats, splitting gas, leaving at 6." Twelve replies overnight. You pick two. Not BlaBlaCar with schedules and fees.</span><span lang="ru">"Еду на горное озеро, 2 места, делим бензин, выезд в 6." За ночь 12 откликов. Выбрал двоих. Не BlaBlaCar с расписанием.</span></p>
-    </div>
-    <div class="sit">
-      <span class="sit-icon">🤝</span>
-      <h3><span lang="en">Friendship</span><span lang="ru">Дружба</span></h3>
-      <p><span lang="en">"Free tonight, just want to walk in the park, no strings." Five replies. Two are your kind of people. Friendship from action, not from a profile swipe.</span><span lang="ru">"Свободен вечером, просто пройтись по парку." Пять ответов. Двое — твои люди. Дружба из действия, не из анкеты.</span></p>
-    </div>
-    <div class="sit">
-      <span class="sit-icon">🎨</span>
-      <h3><span lang="en">Creative collabs</span><span lang="ru">Творчество</span></h3>
-      <p><span lang="en">"Jam session in the garage, Saturday night." "Shooting a short film, need an actor for 2 hours — free, portfolio for both." One pin, four replies, tomorrow you shoot.</span><span lang="ru">"Jam session в гараже, суббота вечер." "Снимаем короткометражку, нужен актёр на 2 часа." Один пин, 4 отклика, завтра снимаете.</span></p>
-    </div>
-    <div class="sit">
-      <span class="sit-icon">💼</span>
-      <h3><span lang="en">Cash today</span><span lang="ru">Деньги сегодня</span></h3>
-      <p><span lang="en">"Help with a move, 4 hours, same-day pay." No résumé, no commission. Neighbour to neighbour, cash in hand.</span><span lang="ru">"Помочь с переездом, 4 часа, оплата в тот же день." Без резюме, без комиссии. Сосед соседу.</span></p>
-    </div>
-    <div class="sit">
-      <span class="sit-icon">❤️</span>
-      <h3><span lang="en">Dating (without dating)</span><span lang="ru">Знакомства (без свайпов)</span></h3>
-      <p><span lang="en">"Going to an art exhibition, bored alone, who's in." Four people came. Met through doing, not swiping. Tinder earns billions on a mechanic everyone hates.</span><span lang="ru">"Иду на выставку, одному скучно, кто со мной." Пришли четверо. Познакомились через дело. Tinder зарабатывает миллиарды на механике которая всех бесит.</span></p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ BERLIN STORY ═══ -->
-<section class="sec reveal">
-  <span class="eyebrow">
-    <span lang="en">One product. Any city.</span>
-    <span lang="ru">Один продукт. Любой город.</span>
-  </span>
-
-  <h2>
-    <span lang="en">A year in Berlin.<br/>Through the map.</span>
-    <span lang="ru">Год в Берлине.<br/>Через карту.</span>
-  </h2>
-
-  <div class="story">
-    <span class="story-tag">
-      <span lang="en">The full cycle</span>
-      <span lang="ru">Полный цикл</span>
-    </span>
-
-    <p class="muted">
-      <span lang="en">Landed. Doesn't know anyone. Opens LOKIO at the airport.</span>
-      <span lang="ru">Прилетел. Никого не знает. Открывает LOKIO в аэропорту.</span>
-    </p>
-
-    <div class="mock m">
-      <div class="mock-head">
-        <span class="mock-user">@new_here</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">0m · 24h</span>
-      </div>
-      <div class="mock-body">
-        <span lang="en">"Just landed, looking for English speakers — where do I get a normal SIM?"</span>
-        <span lang="ru">"Только прилетел, ищу англоговорящих — где нормальную симку взять?"</span>
-      </div>
-      <div class="mock-foot">
-        <span class="mock-arrow">↳</span>
-        <span class="mock-echo">5 echo</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-joined">3 joined</span>
-      </div>
-    </div>
-
-    <p>
-      <span lang="en">Three answers before leaving the airport. A tandem partner for language. Free dinners with neighbours for €5 each. A co-working pin leads to a job contact. A pin "who's going to the exhibition" leads to a partner.</span>
-      <span lang="ru">Три ответа до выхода из аэропорта. Tandem-партнёр для языка. Домашние ужины с соседями за 5 евро. Co-working пин привёл к контакту на вакансию. Пин "кто на выставку" привёл к девушке.</span>
-    </p>
-
-    <p class="muted" style="font-weight:600;font-size:18px;margin-top:24px;">
-      <span lang="en">Six months. Job, friends, a partner, the language. Integrated — through the map.</span>
-      <span lang="ru">Полгода. Работа, друзья, девушка, язык. Интегрирован — через карту.</span>
-    </p>
-  </div>
-</section>
-
-<!-- ═══ ANY LANGUAGE ═══ -->
-<section class="sec reveal">
-  <span class="eyebrow">
-    <span lang="en">Any language, any city</span>
-    <span lang="ru">Любой язык, любой город</span>
-  </span>
-
-  <h2>
-    <span lang="en">Find your people.<br/>In your language.</span>
-    <span lang="ru">Найди своих.<br/>На своём языке.</span>
-  </h2>
-
-  <p class="sub">
-    <span lang="en">There is someone in every city who speaks your language. And someone learning it. Open the map. They are visible.</span>
-    <span lang="ru">В каждом городе есть кто-то говорящий на твоём языке. И кто-то его изучающий. Открой карту. Они видны.</span>
-  </p>
-
-  <div class="mock-stack" style="margin-top:40px;">
-    <div class="mock f">
-      <div class="mock-head">
-        <span class="mock-user">@user_x4t</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">200m · 5h</span>
-      </div>
-      <div class="mock-body">"Anyone in Shibuya speaks English? Lost in a menu, need someone to sit with me through dinner."</div>
-      <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">14 echo</span><span class="mock-dot">·</span><span class="mock-joined">3 joined</span></div>
-    </div>
-    <div class="mock m">
-      <div class="mock-head">
-        <span class="mock-user">@user_q9m</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">500m · 8h</span>
-      </div>
-      <div class="mock-body">"¿Alguien más llegó a Berlín este otoño? Hablemos en español, extraño la conversación."</div>
-      <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">22 echo</span><span class="mock-dot">·</span><span class="mock-joined">9 joined</span></div>
-    </div>
-    <div class="mock f">
-      <div class="mock-head">
-        <span class="mock-user">@user_b3n</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">150m · 4h</span>
-      </div>
-      <div class="mock-body">"Practising my Italian. Café in Trastevere right now. Native speakers welcome to correct my mistakes."</div>
-      <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">11 echo</span><span class="mock-dot">·</span><span class="mock-joined">4 joined</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ NOT A SOCIAL NETWORK ═══ -->
-<section class="sec reveal">
-  <span class="eyebrow">
-    <span lang="en">Not a social network</span>
-    <span lang="ru">Не соцсеть</span>
-  </span>
-
-  <h2>
-    <span lang="en">You're not a follower.<br/>You're a participant.</span>
-    <span lang="ru">Ты не фолловер.<br/>Ты участник.</span>
-  </h2>
-
-  <p class="sub">
-    <span lang="en">Social media algorithms show you someone else's life. LOKIO shows you where to start your own.</span>
-    <span lang="ru">Алгоритмы социальных сетей показывают чужую жизнь. LOKIO показывает где начать свою.</span>
-  </p>
-
-  <div class="anti">
-    <p class="anti-line">
-      <span lang="en"><span class="dim">No followers.</span> Your neighbourhood sees you.</span>
-      <span lang="ru"><span class="dim">Нет подписчиков.</span> Тебя видит район.</span>
-    </p>
-    <p class="anti-line">
-      <span lang="en"><span class="dim">No algorithm.</span> Geography is the algorithm.</span>
-      <span lang="ru"><span class="dim">Нет алгоритма.</span> География — алгоритм.</span>
-    </p>
-    <p class="anti-line">
-      <span lang="en"><span class="dim">No feed.</span> Pins disappear in 24 hours.</span>
-      <span lang="ru"><span class="dim">Нет ленты.</span> Пины исчезают через 24 часа.</span>
-    </p>
-    <p class="anti-line">
-      <span lang="en"><span class="dim">No fear.</span> Nothing stays. Post what you think.</span>
-      <span lang="ru"><span class="dim">Нет страха.</span> Ничего не остаётся. Пиши что думаешь.</span>
-    </p>
-  </div>
-
-  <div class="compare">
-    <div class="compare-row head">
-      <div><span lang="en">Product</span><span lang="ru">Продукт</span></div>
-      <div><span lang="en">What it requires</span><span lang="ru">Что требует</span></div>
-    </div>
-    <div class="compare-row"><div>Tinder</div><div><span lang="en">A declaration of intent</span><span lang="ru">Заявить о намерении</span></div></div>
-    <div class="compare-row"><div>Meetup</div><div><span lang="en">Responsibility for an event</span><span lang="ru">Взять ответственность</span></div></div>
-    <div class="compare-row"><div>Instagram</div><div><span lang="en">Followers and a content plan</span><span lang="ru">Подписчики и контент-план</span></div></div>
-    <div class="compare-row lokio"><div>LOKIO</div><div><span lang="en">Nothing</span><span lang="ru">Ничего</span></div></div>
-  </div>
-</section>
-
-<!-- ═══ LINKFREE PROFILE ═══ -->
-<section class="sec sec-short reveal">
-  <div class="linkfree">
-    <span class="linkfree-badge">
-      <span lang="en">Free forever</span>
-      <span lang="ru">Бесплатно навсегда</span>
-    </span>
-
-    <h2>
-      <span lang="en">Everything you are.<br/>One link.</span>
-      <span lang="ru">Всё что ты есть.<br/>Одна ссылка.</span>
-    </h2>
-
-    <p class="linkfree-body">
-      <span lang="en">Avatar, bio, interests, all your links — Telegram, Instagram, Behance, GitHub, whatever you need. A public profile page anyone can open. Linktree charges $5/month. LOKIO gives it free.</span>
-      <span lang="ru">Аватар, био, интересы, все ссылки — Telegram, Instagram, Behance, GitHub, что угодно. Публичная страница профиля доступная любому. Linktree берёт $5/мес. У нас бесплатно.</span>
-    </p>
-
-    <span class="linkfree-url">lokio.org/you</span>
-
-    <div class="linkfree-features">
-      <span class="linkfree-feat"><span lang="en">Avatar + cover theme</span><span lang="ru">Аватар + тема</span></span>
-      <span class="linkfree-feat"><span lang="en">Bio 300 chars</span><span lang="ru">Био 300 знаков</span></span>
-      <span class="linkfree-feat"><span lang="en">Interest tags</span><span lang="ru">Теги интересов</span></span>
-      <span class="linkfree-feat"><span lang="en">Unlimited links</span><span lang="ru">Без лимита ссылок</span></span>
-      <span class="linkfree-feat"><span lang="en">QR + share</span><span lang="ru">QR + поделиться</span></span>
-      <span class="linkfree-feat"><span lang="en">$0 forever</span><span lang="ru">$0 навсегда</span></span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ BUSINESS ═══ -->
-<section class="sec sec-short reveal" id="business">
-  <div class="biz">
-    <span class="biz-badge">
-      <span lang="en">For local businesses</span>
-      <span lang="ru">Локальному бизнесу</span>
-    </span>
-
-    <h2>
-      <span lang="en"><span class="strike">$3,500 a month.</span> Now <span class="num">$4.99</span>.</span>
-      <span lang="ru"><span class="strike">$3,500 в месяц.</span> Теперь <span class="num">$4.99</span>.</span>
-    </h2>
-
-    <p class="biz-body">
-      <span lang="en">A café publishes a banner pin on the map. Visible to every user who opens the map in the district right now. ROI measurable on the same day. A solo trainer fills a class with one post. A street vendor announces today's location to passers-by within walking distance.</span>
-      <span lang="ru">Кафе публикует баннер на карте. Виден каждому в районе прямо сейчас. ROI считается в тот же день. Тренер собирает группу одним постом. Уличный торговец объявляет место прохожим в шаговой доступности.</span>
-    </p>
-
-    <p class="biz-tag">
-      <span lang="en">Not advertising people hate. Invitations they wait for.</span>
-      <span lang="ru">Не реклама которую ненавидят. Приглашение которого ждут.</span>
-    </p>
-
-    <a class="biz-cta" href="mailto:hello&#64;lokio.org?subject=Business%20inquiry">
-      <span lang="en">Business inquiry</span>
-      <span lang="ru">Написать нам</span>
-      <span aria-hidden="true">→</span>
-    </a>
-  </div>
-</section>
-
-<!-- ═══ LIVE NOW ═══ -->
-<section class="sec sec-short reveal">
-  <div class="live">
-    <span class="eyebrow">
-      <span lang="en">Live now</span>
-      <span lang="ru">Уже работает</span>
-    </span>
-
-    <h2>
-      <span lang="en">This is already running.</span>
-      <span lang="ru">Это уже работает.</span>
-    </h2>
-
-    <ul class="checklist">
-      <li><span lang="en">Live PWA, no install required</span><span lang="ru">PWA, ничего ставить не нужно</span></li>
-      <li><span lang="en">Sign in with Google or a passkey</span><span lang="ru">Вход через Google или passkey</span></li>
-      <li><span lang="en">Real-time map of people nearby</span><span lang="ru">Real-time карта людей рядом</span></li>
-      <li><span lang="en">Chat under every pin</span><span lang="ru">Чат под каждым пином</span></li>
-      <li><span lang="en">Public profile with all your links — free</span><span lang="ru">Публичный профиль со всеми ссылками — бесплатно</span></li>
-    </ul>
-
-    <p class="live-sub">
-      <span lang="en">Open it. Sign in. Drop a thought. See what happens.</span>
-      <span lang="ru">Открой. Зарегистрируйся. Кинь мысль. Посмотри что будет.</span>
-    </p>
-
-    <a class="cta" href="https://app.lokio.org" target="_blank" rel="noopener">
-      <span style="font-family:var(--mono);">app.lokio.org</span>
-      <span class="arrow" aria-hidden="true">→</span>
-    </a>
-  </div>
-</section>
-
-<!-- ═══ FOOTER ═══ -->
+<!-- ════════ FOOTER ════════ -->
 <footer>
-  <div class="foot-inner">
-    <div class="foot-col">
-      <div class="foot-contact">
-        <a href="https://t.me/lokioapp" target="_blank" rel="noopener">t.me/lokioapp</a>
-        <a href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a>
-        <a href="https://app.lokio.org" target="_blank" rel="noopener">app.lokio.org</a>
+  <div class="foot">
+    <div class="foot-top">
+      <a class="foot-brand" href="#top">
+        <svg class="foot-brand-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(80,80) rotate(45)">
+            <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
+          </g>
+        </svg>
+        <span class="foot-brand-name">LOKIO</span>
+      </a>
+      <div class="foot-links">
+        <a href="#how">How it works</a>
+        <a href="#values">Why it&rsquo;s different</a>
+        <a href="https://t.me/lokioapp">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="display:inline-block;vertical-align:-1px;margin-right:4px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Telegram community
+        </a>
+        <a href="/about">About</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/cdn-cgi/l/email-protection#6d05080101022d010206040243021f0a">Contact</a>
       </div>
-      <h4><span lang="en">Contact</span><span lang="ru">Контакт</span></h4>
-      <ul>
-        <li><a href="https://t.me/lokioapp/589" target="_blank" rel="noopener"><span lang="en">Support · Telegram</span><span lang="ru">Поддержка · Telegram</span></a></li>
-        <li><a href="https://t.me/lokioapp" target="_blank" rel="noopener"><span lang="en">Community · Telegram</span><span lang="ru">Сообщество · Telegram</span></a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Business%20inquiry"><span lang="en">For business</span><span lang="ru">Для бизнеса</span></a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Press%20inquiry"><span lang="en">Press</span><span lang="ru">Пресса</span></a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Investor%20inquiry"><span lang="en">Investors</span><span lang="ru">Инвесторам</span></a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Partnership%20inquiry"><span lang="en">Partnerships</span><span lang="ru">Партнёрам</span></a></li>
-      </ul>
     </div>
-
-    <div class="foot-col">
-      <h4><span lang="en">Documents</span><span lang="ru">Документы</span></h4>
-      <ul>
-        <li><a href="/documents/whitepaper">Whitepaper</a></li>
-        <li><a href="/documents/pitch">Pitch deck</a></li>
-        <li><a href="/documents/presentation"><span lang="en">Presentation</span><span lang="ru">Презентация</span></a></li>
-        <li><a href="/documents/business"><span lang="en">Business case</span><span lang="ru">Бизнес-кейс</span></a></li>
-      </ul>
+    <div class="foot-bot">
+      <div class="meta">
+        <span>&copy; 2026 LOKIO</span>
+        <span>·</span>
+        <span>Built for close range.</span>
+      </div>
+      <div class="meta">
+        <span>3 cities live &middot; expanding</span>
+      </div>
     </div>
-
-    <div class="foot-col">
-      <h4><span lang="en">Legal</span><span lang="ru">Правовое</span></h4>
-      <ul>
-        <li><a href="/documents/privacy"><span lang="en">Privacy</span><span lang="ru">Приватность</span></a></li>
-        <li><a href="/documents/terms"><span lang="en">Terms</span><span lang="ru">Условия</span></a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="foot-mark">
-    <span>© 2025 – 2026 LOKIO® GLOBAL LLC</span>
-    <button class="lang-sw" id="langBtnFooter" aria-label="Switch language" style="margin-left:16px;">RU</button>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
-  /* ── Hero pins ── */
-  var c=document.getElementById('pins');
-  if(c){
-    var pts=[
-      {x:8,y:18,col:'#FF00FF'},{x:78,y:14,col:'#007FFF'},
-      {x:18,y:62,col:'#FBEC5D'},{x:62,y:72,col:'#FF00FF'},
-      {x:88,y:46,col:'#007FFF'},{x:42,y:30,col:'#30D158'},
-      {x:52,y:85,col:'#BF5AF2'},{x:92,y:75,col:'#FF00FF'}
-    ];
-    pts.forEach(function(p,i){
-      var w=document.createElement('div');
-      w.className='pin';w.style.left=p.x+'%';w.style.top=p.y+'%';w.style.color=p.col;
-      [0,1,2].forEach(function(ri){
-        var r=document.createElement('div');r.className='pin-r';
-        var sz=20+ri*14;
-        r.style.width=sz+'px';r.style.height=sz+'px';
-        r.style.top='50%';r.style.left='50%';
-        r.style.marginTop=(-sz/2)+'px';r.style.marginLeft=(-sz/2)+'px';
-        r.style.animationDelay=(i*0.3+ri*0.85).toFixed(2)+'s';
-        w.appendChild(r);
-      });
-      var core=document.createElement('div');
-      core.className='pin-c';core.style.position='absolute';
-      core.style.top='50%';core.style.left='50%';
-      core.style.marginTop='-4px';core.style.marginLeft='-4px';
-      w.appendChild(core);c.appendChild(w);
+  function setLang(lang){
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var t = el.dataset[lang];
+      if (t !== undefined) el.textContent = t;
     });
+    document.querySelectorAll('[data-en-html]').forEach(function(el){
+      var t = el.dataset[lang+'Html'];
+      if (t !== undefined) el.innerHTML = t;
+    });
+    document.documentElement.lang = lang;
+    var toggle = document.getElementById('lang-toggle');
+    if (toggle) toggle.textContent = (lang === 'en' ? 'RU' : 'EN');
+    try { localStorage.setItem('lokio-lang', lang); } catch(e){}
   }
-
-  /* ── Language ── */
-  var html=document.documentElement;
-  var btn=document.getElementById('langBtnFooter');
-
-  function pickLang(){
-    var nav=(navigator.language||'').toLowerCase();
-    if(nav.indexOf('ru')===0) return 'ru';
-    return 'en';
-  }
-
-  function applyLang(lang){
-    html.setAttribute('lang',lang);
-    html.setAttribute('data-lang',lang);
-    if(btn) btn.textContent=lang==='en'?'RU':'EN';
-    document.title=lang==='ru'
-      ? 'LOKIO — Что происходит вокруг тебя прямо сейчас'
-      : 'LOKIO — What\'s happening around you right now';
-  }
-
-  applyLang(pickLang());
-
-  if(btn) btn.addEventListener('click',function(){
-    var cur=html.getAttribute('data-lang');
-    applyLang(cur==='en'?'ru':'en');
+  var saved = 'en';
+  try { saved = localStorage.getItem('lokio-lang') || 'en'; } catch(e){}
+  setLang(saved);
+  var toggle = document.getElementById('lang-toggle');
+  if (toggle) toggle.addEventListener('click', function(){
+    var next = document.documentElement.lang === 'ru' ? 'en' : 'ru';
+    setLang(next);
   });
+})();
 
-  /* ── Reveal on scroll ── */
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
-      });
-    },{rootMargin:'-8% 0px -8% 0px'});
-    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  }else{
-    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
+/* Cinematic reveal on scroll */
+(function(){
+  var els = document.querySelectorAll('.cin, .cin-lift');
+  if (!els.length || !('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('vis'); });
+    return;
   }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('vis');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold:0.15, rootMargin:'0px 0px -40px 0px' });
+  els.forEach(function(el){ obs.observe(el); });
 })();
 </script>
 
