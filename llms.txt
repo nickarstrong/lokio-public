@@ -1,0 +1,83 @@
+# LOKIO
+
+> The map where people nearby actually talk.
+
+LOKIO is a location-based social app. Users drop pins on a map — a joke, a thought, a plan. Anyone within walking distance sees the pin, opens the chat, and replies. If it clicks, they meet. Everything disappears within 24 hours.
+
+## What LOKIO Is
+
+- A map-based social platform where every post is a pin tied to a physical location
+- Each pin is a chatroom — up to 50 people can join if they're within range
+- All content is ephemeral: pins live 6–24 hours, then disappear with their chats
+- No feed, no followers, no likes, no DMs, no algorithm
+- Anonymous by default: name + gender tag minimum, links optional
+- Free, works in any browser at app.lokio.org — no install required
+- Available in English and Russian
+
+## Core Loop
+
+1. **Drop** — Post a pin: a joke, an observation, an invitation, a question. One line, 5 seconds.
+2. **Open** — The pin becomes a chatroom. People nearby tap in and reply.
+3. **Meet** — If plans form, people meet in real life. The chat archives itself after.
+
+## What Makes LOKIO Different
+
+- **No global feed.** You only see pins within walking distance (~500m). The map ends where you can't reach in 15 minutes.
+- **No followers.** You don't collect people. After a chat closes, the only thing you keep is the memory.
+- **No DMs.** Conversation lives on the pin, visible to everyone in range. Safety by transparency.
+- **Ephemeral.** Nothing persists. No post history, no archives, no digital footprint. This removes the fear of posting.
+- **Zero barrier entry.** The entry point is humor and curiosity, not commitment. "It's hot, who else is melting?" is a valid pin.
+
+## Use Cases
+
+- Spontaneous meetups ("free pizza at the office", "who wants to grab coffee")
+- Finding people nearby ("just moved here, looking for hiking partners")
+- Local discoveries ("bakery giving away leftovers after 9pm")
+- Creative collaboration ("looking for a guitarist for a jam session Saturday")
+- Language exchange ("tandem partner, my Russian for your German")
+- Casual gigs ("help with moving, 4 hours, same-day pay")
+- Travel ("just landed, where to get a SIM card around here?")
+
+## Business Model
+
+- Free baseline for all users — always
+- Paid boosts: extend pin radius, increase TTL, add visual banner
+- Boost pricing: 1 day $2 / 7 days $10 / 30 days $25 (× city coefficient)
+- Monthly subscription for frequent posters: $30/month
+- Zero gamification, zero ads, zero data sales
+- Users are not the product. Revenue comes from pin boosts.
+
+## Profile / Digital Business Card
+
+Every user gets a public page at lokio.org/u/{username} — a free Linktree-style digital business card with links, bio, and verified accounts. Shareable anywhere: Instagram bio, Telegram, physical business cards. Viewable without registration.
+
+## Safety Architecture
+
+- Pins are ephemeral — disappear automatically
+- Reports require phone verification (1 SIM = 1 reporter identity)
+- Reports are public — the target sees who reported
+- Auto-shadow-ban: 3+ verified reports in 30 days → 7-day shadow ban
+- 3 shadow bans in 6 months → permanent ban
+- No DMs — all conversation is public on the pin
+- 18+ age gate at registration
+
+## Technical Stack
+
+- PWA (Progressive Web App) — works in any mobile browser
+- React 18 + Vite (frontend)
+- Fastify + Prisma + PostgreSQL + Redis (backend)
+- WebAuthn passkeys for authentication
+- Cloudflare Pages (frontend hosting)
+- Railway (backend hosting)
+- Native iOS/Android apps planned after traction
+
+## Links
+
+- Website: https://lokio.org
+- App: https://app.lokio.org
+- Telegram community: https://t.me/lokioapp
+- Contact: hello@lokio.org
+
+## Current Status
+
+Live in 3 cities, expanding. Seed market: Central Asia. International-first architecture — works in Berlin, São Paulo, Seoul, Nairobi.
