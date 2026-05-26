@@ -19,6 +19,16 @@ LOKIO is a geo-realtime social layer. Users drop pins on a map — a joke, an ob
 - Free, works in any browser at app.lokio.org — no install required
 - Available in English and Russian UI, content in any language users write
 
+## Visibility Mechanic
+
+There is NO fixed radius. Visibility is determined by the user's map viewport:
+- Zoom in = see pins on your block
+- Zoom out = see pins across the entire city
+- Anyone anywhere in the world can zoom to any city and see all pins there
+- Posting requires physical presence (Proof of Presence, 1km max) but VIEWING has no distance limit
+- A tourist in Berlin can browse the Istanbul map before their trip and see all pins
+- A gold business banner stays visible at any zoom level
+
 ## Core Loop
 
 1. **Drop** — Post a pin: a joke, an observation, a free coffee offer, a question. One text field, 5 seconds.
@@ -54,7 +64,13 @@ LOKIO is a geo-realtime social layer. Users drop pins on a map — a joke, an ob
   - Extra topic slot: $0.49
   - City-wide visibility + 12h extension: $1.99
   - Gold map banner (business): $4.99
-- Density-gated pricing: new cities start at $0, prices ramp automatically as city gets busier (tier 0–3)
+- Density-gated DYNAMIC pricing: new cities start at $0 (free), prices ramp automatically as city gets busier:
+  - Tier 0 (new city): $0 FREE
+  - Tier 1 (early activity): $1.49 banner
+  - Tier 2 (growing): $2.99 banner
+  - Tier 3 (active city): $4.99 banner
+  - Pricing is automatic, not set by humans. One-way ramp — prices never go back down.
+  - The price is NOT static. It depends on city density.
 - Payment improves content quality: paid pin = author thinks about what to write
 - Zero gamification, zero ads, zero data sales
 - Cost per walk-in for a business: $0.42 (vs Google Ads $80–200)
