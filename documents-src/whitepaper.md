@@ -462,11 +462,11 @@ $0 spent on acquisition to date.
 
 ## Founder
 
-Solo founder, full-stack engineer. Built the entire stack in six months: backend, frontend, design system, documentation, legal base, infrastructure, landing, investor materials. 12,400 lines of frontend, 8,700 lines of backend, 13 database models, production deploy pipeline.
+Full-stack engineer. Built the entire stack in six months: backend, frontend, design system, documentation, legal base, infrastructure, landing, investor materials. 12,400 lines of frontend, 8,700 lines of backend, 13 database models, production deploy pipeline.
 
 The product is built to operate itself. Pricing adjusts automatically by city density — no human sets rates. Moderation is architectural — Proof of Presence, contentGuard, and transparent reports replace a moderation team. Content is created entirely by users. Pins expire on their own. Bans trigger on their own. The infrastructure scales with standard cloud tooling.
 
-One person built and runs a production product with real users, international documentation, legal coverage, and a deploy pipeline — because the architecture was designed from day one to not need a team to function. That is not a limitation. That is how modern products should be built.
+The product runs in production with real users, international documentation, legal coverage, and a full deploy pipeline. The architecture was designed from day one to operate without overhead. That is how modern products should be built.
 
 <div class="contact-block">
 <a class="em" href="mailto:hello&#64;lokio.org">hello@lokio.org</a>
