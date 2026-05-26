@@ -946,6 +946,48 @@ h1.hero-h{
 .btn.dark-ghost:hover{background:rgba(255,255,255,0.06);}
 
 /* ════════════════════════════════
+   FAQ
+   ════════════════════════════════ */
+.faq{
+  padding:var(--s-20) var(--s-5);
+  max-width:760px;margin:0 auto;
+}
+.faq-eyebrow{
+  font:700 var(--t-micro)/1 var(--font-mono);
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--c-text-lo);margin-bottom:var(--s-3);
+}
+.faq-h{
+  font:800 var(--t-title)/1.2 var(--font);
+  letter-spacing:-0.025em;color:var(--c-text);
+  margin-bottom:var(--s-8);
+}
+@media(min-width:768px){.faq-h{font-size:28px;}}
+.faq-list{display:flex;flex-direction:column;gap:0;}
+.faq-item{border-top:1px solid var(--c-border);}
+.faq-item:last-child{border-bottom:1px solid var(--c-border);}
+.faq-item summary{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);
+  padding:var(--s-5) 0;
+  font:600 var(--t-body)/1.4 var(--font);
+  color:var(--c-text);cursor:pointer;
+  list-style:none;
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item summary::after{
+  content:"";width:20px;height:20px;flex-shrink:0;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%235C5C66' stroke-width='2' stroke-linecap='round'%3E%3Cline x1='10' y1='5' x2='10' y2='15'/%3E%3Cline x1='5' y1='10' x2='15' y2='10'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform 200ms var(--ease);
+}
+.faq-item[open] summary::after{transform:rotate(45deg);}
+.faq-item .faq-a{
+  padding:0 0 var(--s-5);
+  font:400 var(--t-callout)/1.65 var(--font);
+  color:var(--c-text-mid);
+  max-width:62ch;
+}
+
+/* ════════════════════════════════
    FOOTER
    ════════════════════════════════ */
 footer{
@@ -954,27 +996,40 @@ footer{
 }
 .foot{
   max-width:var(--maxw);margin:0 auto;
-  display:flex;flex-direction:column;gap:var(--s-6);
+  display:flex;flex-direction:column;gap:var(--s-8);
 }
-.foot-top{
-  display:flex;align-items:center;justify-content:space-between;gap:var(--s-4);
-  flex-wrap:wrap;
+.foot-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--s-8);
 }
-.foot-brand{
-  display:flex;align-items:center;gap:10px;
-  color:var(--c-text);
+@media(min-width:640px){.foot-grid{grid-template-columns:1.6fr 1fr 1fr;gap:var(--s-6) var(--s-10);}}
+@media(min-width:1024px){.foot-grid{grid-template-columns:1.8fr 1fr 1fr 1fr;gap:var(--s-16);}}
+
+.foot-col h4{
+  font:700 var(--t-micro)/1 var(--font-mono);
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--c-text-lo);
+  margin-bottom:var(--s-4);padding-bottom:var(--s-3);
+  border-bottom:1px solid var(--c-border);
 }
-.foot-brand-mark{width:28px;height:28px;}
-.foot-brand-name{font:700 17px/1 var(--font);letter-spacing:-0.02em;}
-.foot-links{
-  display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);
-}
-.foot-links a{
-  font:500 var(--t-callout)/1 var(--font);
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:var(--s-2);padding:0;margin:0;}
+.foot-col a{
+  font:500 var(--t-callout)/1.4 var(--font);
   color:var(--c-text-mid);
-  padding:6px 0;letter-spacing:-0.005em;
+  transition:color 140ms var(--ease);
+  display:inline-block;padding:2px 0;
 }
-.foot-links a:hover{color:var(--c-text);}
+.foot-col a:hover{color:var(--c-text);}
+.foot-contact{
+  display:flex;flex-direction:column;gap:4px;
+  margin-bottom:var(--s-5);padding-bottom:var(--s-5);
+  border-bottom:1px solid var(--c-border);
+  font:500 var(--t-footnote)/1.4 var(--font-mono);
+  color:var(--c-text-mid);
+}
+.foot-contact a{font:inherit;color:inherit;padding:0;}
+.foot-contact a:hover{color:var(--c-text);}
 
 .foot-bot{
   display:flex;align-items:center;justify-content:space-between;
@@ -1992,30 +2047,98 @@ footer{
   </div>
 </section>
 
+<!-- ════════ FAQ ════════ -->
+<section class="faq" id="faq">
+  <div class="faq-eyebrow" data-en="FAQ" data-ru="Вопросы">FAQ</div>
+  <h2 class="faq-h" data-en="Common questions" data-ru="Частые вопросы">Common questions</h2>
+  <div class="faq-list">
+
+    <details class="faq-item">
+      <summary data-en="Is LOKIO free?" data-ru="LOKIO бесплатен?">Is LOKIO free?</summary>
+      <div class="faq-a" data-en="Yes. Posting, reading, joining chats, and your profile page are free forever. Optional paid boosts ($0.49–$4.99) amplify reach — you never need them to use the product." data-ru="Да. Публикация, чтение, чаты и ваша страница профиля — бесплатны навсегда. Платные бусты ($0.49–$4.99) увеличивают охват — они не обязательны для использования.">Yes. Posting, reading, joining chats, and your profile page are free forever. Optional paid boosts ($0.49–$4.99) amplify reach — you never need them to use the product.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary data-en="Do I need to install anything?" data-ru="Нужно что-то устанавливать?">Do I need to install anything?</summary>
+      <div class="faq-a" data-en="No. LOKIO is a web app. Open app.lokio.org in your browser and you are in. No download, no app store. Native iOS and Android apps are coming in 2027." data-ru="Нет. LOKIO — веб-приложение. Откройте app.lokio.org в браузере. Без скачивания, без App Store. Нативные приложения для iOS и Android — в 2027.">No. LOKIO is a web app. Open app.lokio.org in your browser and you are in. No download, no app store. Native iOS and Android apps are coming in 2027.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary data-en="Is it safe to meet people from LOKIO?" data-ru="Безопасно ли встречаться с людьми из LOKIO?">Is it safe to meet people from LOKIO?</summary>
+      <div class="faq-a" data-en="LOKIO is 18+ only. Every account is verified via Google or passkey — no anonymous posting. Pins auto-expire, reports are transparent (the reported person sees who reported them), and repeat offenders are auto-banned. You decide if and when to meet. Always meet in public places." data-ru="LOKIO только для 18+. Каждый аккаунт верифицирован через Google или passkey — анонимных публикаций нет. Пины автоудаляются, жалобы прозрачны (тот, на кого жалуются, видит кто пожаловался), повторные нарушители банятся автоматически. Вы сами решаете, встречаться ли. Встречайтесь в людных местах.">Is it safe to meet people from LOKIO?</div>
+    </details>
+
+    <details class="faq-item">
+      <summary data-en="How is this different from Tinder or Instagram?" data-ru="Чем это отличается от Tinder или Instagram?">How is this different from Tinder or Instagram?</summary>
+      <div class="faq-a" data-en="No profile form. No swipes. No followers. No feed. You drop a thought on the map — people nearby see it and reply. Meeting happens through shared context, not a self-sale. No one knows you are &quot;looking.&quot;" data-ru="Нет анкеты. Нет свайпов. Нет подписчиков. Нет ленты. Вы пишете мысль на карте — люди рядом видят и отвечают. Знакомство происходит через общий контекст, а не самопрезентацию. Никто не знает, что вы «ищете».">How is this different from Tinder or Instagram?</div>
+    </details>
+
+    <details class="faq-item">
+      <summary data-en="Can my business use LOKIO?" data-ru="Мой бизнес может использовать LOKIO?">Can my business use LOKIO?</summary>
+      <div class="faq-a" data-en-html="Yes. A banner pin makes your café, studio, or market visible to everyone who opens the map in your district. From $0 (new cities) to $4.99. <a href='/documents/business' style='color:var(--accent)'>Read the business case →</a>" data-ru-html="Да. Баннер-пин делает ваше кафе, студию или магазин видимым для всех, кто открывает карту в вашем районе. От $0 (новые города) до $4.99. <a href='/documents/business' style='color:var(--accent)'>Читать бизнес-кейс →</a>">Yes. A banner pin makes your café, studio, or market visible to everyone who opens the map in your district. From $0 (new cities) to $4.99. <a href="/documents/business" style="color:var(--accent)">Read the business case →</a></div>
+    </details>
+
+    <details class="faq-item">
+      <summary data-en="What cities is LOKIO available in?" data-ru="В каких городах доступен LOKIO?">What cities is LOKIO available in?</summary>
+      <div class="faq-a" data-en="Everywhere. LOKIO works in any city on the planet. The map is live, and anyone can post. Some cities have more activity than others — you can be the first to start yours." data-ru="Везде. LOKIO работает в любом городе на планете. Карта живая, любой может писать. В некоторых городах активности больше — вы можете стать первым в своём.">Everywhere. LOKIO works in any city on the planet. The map is live, and anyone can post. Some cities have more activity than others — you can be the first to start yours.</div>
+    </details>
+
+    <details class="faq-item">
+      <summary data-en="What data does LOKIO collect?" data-ru="Какие данные собирает LOKIO?">What data does LOKIO collect?</summary>
+      <div class="faq-a" data-en-html="Your account identity (Google or passkey), profile info you choose to share, and your approximate location for posting. Pins auto-delete. We do not sell data. We do not run ads. <a href='/documents/privacy' style='color:var(--accent)'>Full privacy policy →</a>" data-ru-html="Идентификатор аккаунта (Google или passkey), информацию профиля которую вы выбрали, и приблизительное местоположение для публикации. Пины автоудаляются. Мы не продаём данные. Мы не показываем рекламу. <a href='/documents/privacy' style='color:var(--accent)'>Полная политика конфиденциальности →</a>">What data does LOKIO collect?</div>
+    </details>
+
+  </div>
+</section>
+
 <!-- ════════ FOOTER ════════ -->
 <footer>
   <div class="foot">
-    <div class="foot-top">
-      <a class="foot-brand" href="#top">
-        <svg class="foot-brand-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(80,80) rotate(45)">
-            <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
-          </g>
-        </svg>
-        <span class="foot-brand-name">LOKIO</span>
-      </a>
-      <div class="foot-links">
-        <a href="#how" data-en="How it works" data-ru="Как это работает">How it works</a>
-        <a href="#values" data-en="Why it's different" data-ru="Чем отличается">Why it&rsquo;s different</a>
-        <a href="https://t.me/lokioapp">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" style="display:inline-block;vertical-align:-1px;margin-right:4px;"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg><span data-en="Telegram community" data-ru="Telegram сообщество">Telegram community</span>
-        </a>
-        <a href="/about" data-en="About" data-ru="О нас">About</a>
-        <a href="#" data-legal="/documents/terms.html" data-en="Terms" data-ru="Условия">Terms</a>
-        <a href="#" data-legal="/documents/privacy.html" data-en="Privacy" data-ru="Конфиденциальность">Privacy</a>
-        <a href="/cdn-cgi/l/email-protection#6d05080101022d010206040243021f0a" data-en="Contact" data-ru="Контакты">Contact</a>
+    <div class="foot-grid">
+
+      <div class="foot-col">
+        <div class="foot-contact">
+          <a href="https://t.me/lokioapp" target="_blank" rel="noopener">t.me/lokioapp</a>
+          <a href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a>
+          <a href="https://app.lokio.org" target="_blank" rel="noopener">app.lokio.org</a>
+        </div>
+        <h4 data-en="Contact" data-ru="Контакты">Contact</h4>
+        <ul>
+          <li><a href="https://t.me/lokioapp" target="_blank" rel="noopener" data-en="Community · Telegram" data-ru="Сообщество · Telegram">Community · Telegram</a></li>
+          <li><a href="mailto:hello&#64;lokio.org?subject=Business%20inquiry" data-en="For business" data-ru="Для бизнеса">For business</a></li>
+          <li><a href="mailto:hello&#64;lokio.org?subject=Investor%20inquiry" data-en="Investors" data-ru="Инвесторам">Investors</a></li>
+        </ul>
       </div>
+
+      <div class="foot-col">
+        <h4 data-en="Product" data-ru="Продукт">Product</h4>
+        <ul>
+          <li><a href="#how" data-en="How it works" data-ru="Как это работает">How it works</a></li>
+          <li><a href="#values" data-en="Why it's different" data-ru="Чем отличается">Why it&rsquo;s different</a></li>
+          <li><a href="#faq" data-en="FAQ" data-ru="Вопросы">FAQ</a></li>
+          <li><a href="https://app.lokio.org" target="_blank" rel="noopener" data-en="Open the map" data-ru="Открыть карту">Open the map</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-en="Documents" data-ru="Документы">Documents</h4>
+        <ul>
+          <li><a href="/documents/pitch" data-en="Pitch" data-ru="Питч">Pitch</a></li>
+          <li><a href="/documents/business" data-en="Business case" data-ru="Бизнес-кейс">Business case</a></li>
+          <li><a href="/documents/whitepaper" data-en="Whitepaper" data-ru="Вайтпейпер">Whitepaper</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h4 data-en="Legal" data-ru="Юридическое">Legal</h4>
+        <ul>
+          <li><a href="#" data-legal="/documents/privacy.html" data-en="Privacy" data-ru="Конфиденциальность">Privacy</a></li>
+          <li><a href="#" data-legal="/documents/terms.html" data-en="Terms" data-ru="Условия">Terms</a></li>
+        </ul>
+      </div>
+
     </div>
+
     <div class="foot-bot">
       <div class="meta">
         <span>&copy; 2026 LOKIO</span>
