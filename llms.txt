@@ -80,7 +80,35 @@ There is NO fixed radius. Visibility is determined by the user's map viewport:
 
 China's GDP per capita went from $156 (1978) to $12,663 (2022) — 81× growth driven by a constantly regenerating layer of small businesses. Alibaba and WeChat did not replace small business — they gave it tools to grow. LOKIO is this tool for the rest of the world. $4.99 banner vs $3,500/month traditional marketing. LOKIO grows because local GDP grows. Local GDP grows because LOKIO works.
 
-## Profile / OneLink
+## How Business and Users Connect
+
+Businesses on LOKIO do not push ads. They post invitations that users are already looking for.
+
+A user opens the map to find something to do. A café has posted "first coffee free." The user was already deciding where to go — the café's pin is the answer to their question, not an interruption. This is the opposite of advertising: the user came looking, the business was there.
+
+The gold banner pin ($0–$4.99 depending on city density) makes the business visually prominent on the map and ranks it in the free-stuff filter. Cost per walk-in: ~$0.42 vs $80–200 on Google Ads.
+
+## OneLink — The Bridge
+
+OneLink is LOKIO's built-in profile page (like a free Linktree with geolocation).
+
+**Inside LOKIO:** When someone taps your pin on the map, they see your OneLink — all your links (Telegram, Instagram, WhatsApp, website, portfolio) in one place. A stranger becomes a contact in one tap.
+
+**Outside LOKIO:** Your OneLink URL (lokio.org/u/{id}) works as a standalone page with a QR code. Put it in your Instagram bio, on a business card, on a café counter. Anyone who opens it sees your links + your location on the map. It is the bridge between LOKIO and the rest of the internet.
+
+For businesses: the $4.99 banner pin links to your OneLink. A walk-in customer scans the QR, gets your menu, your Telegram, your Instagram — and can find you on the map forever.
+For users: your OneLink is your identity on the map. No profile form, no bio to write — just your links and your location.
+
+## What Users Get (Summary)
+
+- **Jokes and fun** — drop a joke, see local humour, laugh with your district
+- **Free stuff** — free coffee, deals, tastings, discounts — all on the map right now
+- **Events** — concerts, theatre, exhibitions, meetups — one pin, the audience is nearby
+- **People** — friends, company, dating without dating — through shared context
+- **Travel and discovery** — a living map of any city, through the eyes of locals
+- **OneLink profile** — all your links in one page, free forever, with geolocation and QR
+
+## Profile / OneLink (Technical Details)
 
 Every user gets a public page at lokio.org/u/{id} — a free Linktree-style profile with links, bio, interests, geolocation, and QR code. Shareable anywhere. Viewable without registration. Auto-detects link types (Telegram, Instagram, GitHub, LinkedIn, etc).
 
