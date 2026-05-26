@@ -2,30 +2,30 @@
 title: "LOKIO. Pitch."
 docTitle: "Pitch"
 ogTitle: "LOKIO Pitch"
-description: "The investor case. The Shanghai principle. Unit economics. What the business becomes."
+description: "Geo-realtime social layer for local economies. One mechanic, six broken industries, zero competition."
 slug: "pitch"
 lang: "en"
-tocTag: "Pitch deck"
-eyebrow: "Pitch deck · v5"
+tocTag: "Pitch"
+eyebrow: "Pitch · v6"
 heading: "LOKIO."
-lede: "Drop a joke, a thought, anything. On the map. Five seconds from opening the app to publishing."
+lede: "Drop a joke on the map. Or open it and find a free coffee, a concert, a deal around the corner. Five seconds in — everything else follows."
 effective: "26 May 2026"
 updated: "26 May 2026"
-version: "v5 · Live"
+version: "v6 · Live"
 toc:
-  - { href: "#what",     label: "What this is" }
-  - { href: "#istanbul", label: "Istanbul" }
-  - { href: "#why",      label: "Why you use it" }
-  - { href: "#daily",    label: "Daily reason" }
-  - { href: "#flywheel", label: "Flywheel" }
-  - { href: "#shanghai", label: "Shanghai principle" }
-  - { href: "#running",  label: "Already running" }
-  - { href: "#business", label: "Business" }
-  - { href: "#city",     label: "City monetisation" }
-  - { href: "#now",      label: "What we are doing now" }
+  - { href: "#what",       label: "What this is" }
+  - { href: "#soft-entry", label: "Why people use it" }
+  - { href: "#daily",      label: "The daily reason" }
+  - { href: "#flywheel",   label: "Flywheel" }
+  - { href: "#safety",     label: "Safety architecture" }
+  - { href: "#competitors",label: "Competitors" }
+  - { href: "#business",   label: "Business model" }
+  - { href: "#shanghai",   label: "Shanghai principle" }
+  - { href: "#meituan",    label: "The Meituan parallel" }
+  - { href: "#traction",   label: "Traction" }
+  - { href: "#founder",    label: "Founder" }
+  - { href: "#ask",        label: "The ask" }
 ---
-
-A neighbourhood meme. A coffee company. A free first coffee from the café across the street. Whatever you think, it lands on the map of your district, and the people there see it.
 
 ---
 
@@ -33,43 +33,27 @@ A neighbourhood meme. A coffee company. A free first coffee from the café acros
 
 ## What this actually is
 
-Open the map of your city. Drop a joke, a thought, anything. Publish.
+Open the map of your city. Drop a joke, an observation, anything. You are sitting in a park and notice something funny — post it. You hear a good one-liner — put it on the map. You just want company for coffee — write it down. Publish.
 
 A pin appears at your location. People nearby see it. Someone replies. Conversation starts. You meet.
 
-A thought tied to a place. Text, a location, a short lifetime, a chat. Four ingredients, one format.
+A thought tied to a place. Text, a location, a short lifetime, a chat. Four ingredients, one format. A free pin lives for a few hours. A boosted pin — up to 30 days. When it expires, it disappears. No digital footprint, no archive, no "what will people think a year from now."
 
 The entry is a single text field. The product asks nothing of you before letting you in.
 
+There are two ways people come in. The first is posting: a joke, a thought, an observation — zero effort, zero stakes. The second is browsing: you open the map to decide where to go tonight, and there is already a free coffee deal nearby, a concert in an hour, a theatre discount, a restaurant running a tasting. **The map is never empty of reasons to go somewhere.** One entry point creates content. The other consumes it. Both start with opening the map.
+
 <div class="callout">
-<p><strong>This is the entire mechanic. Everything else in the product is a downstream use of it.</strong></p>
+<p><strong>This is the entire mechanic. Everything else in the product — friendships, dates, business deals, local discovery — is a downstream use of it.</strong></p>
 </div>
 
 :::
 
 ---
 
-::: section id=istanbul num="02"
+::: section id=soft-entry num="02"
 
-## A traveller, alone in Istanbul
-
-19:00. A traveller is in a hotel in Sultanahmet. Dinner alone for the third night. Knows no one in the city. Speaks no Turkish.
-
-Opens LOKIO. The map shows pins around the hotel.
-
-Taps join. At 20:30 the traveller is not alone.
-
-No dating profile. No event creation. No "looking for friends" forum from 2010. A pin on a map and a tap.
-
-This is what every product in the dating, social, events, and discovery space has been failing to deliver for a decade. It is not a complicated product. It is a product no one had the discipline to build because every standard playbook insists on adding a feed, a follower count, a swipe, a profile form. **LOKIO ships none of them.**
-
-:::
-
----
-
-::: section id=why num="03"
-
-## Why you will actually use it
+## Why people actually use it
 
 This is the most important part and the most underestimated.
 
@@ -77,18 +61,18 @@ Not everyone has the courage to create an event. It is responsibility: what if n
 
 But everyone can drop a joke. Or a thought. Or anything.
 
-A thought without an ask. You wrote what you were thinking. Nothing else. You did not wait for a reply. You did not declare you wanted to be noticed, so being unnoticed costs you nothing. You asked for nothing, so the reply or its absence carries no rejection. You posted a thought, not an event, so nobody is owed anything if no one comes.
+You wrote what you were thinking. Nothing else. You did not declare you wanted to be noticed, so being unnoticed costs you nothing. You asked for nothing, so the reply or its absence carries no rejection. You posted a thought, not an event, so nobody is owed anything if no one comes.
 
 But the reply comes. People nearby see it. Someone is thinking the same thing. They reply. Conversation begins. Naturally.
 
-| Product | What it requires |
+Through humour and idle thoughts, even people who have never posted on social media post on LOKIO.
+
+| Product | What it costs you to start |
 |---|---|
 | Tinder | A declaration of intent |
 | Meetup | Responsibility for an event |
 | Instagram | Followers and a content plan |
 | **LOKIO** | **Nothing** |
-
-That is why it works for the median person, who is not willing to do any of those things.
 
 <div class="callout">
 <p><strong>This is not a feature. This is product-market fit at the level of psychology.</strong></p>
@@ -98,131 +82,155 @@ That is why it works for the median person, who is not willing to do any of thos
 
 ---
 
-::: section id=daily num="04"
+::: section id=daily num="03"
 
 ## The daily reason
 
-The other use cases pull people in when they need something. Company for dinner. A free coffee. A meet-up.
+The functional use cases — company for dinner, a free coffee, a meetup — pull people in when they need something.
 
 Local humour pulls them in every day.
 
-Twenty people see one of these and recognise themselves. Five reply with their own version. A district develops a shared voice.
+A self-deprecating thought from a park bench. A sarcastic observation about life. "Stepped out for air 40 minutes ago, send help." Twenty people see it and recognise themselves. Five reply with their own version. A district develops a shared voice.
 
 Twitter is global. Local memes have no surface today. **LOKIO is that surface.**
 
-Coffee posts and meetups happen when a need arrives. A self-deprecating thought from a bench happens every day. The user who came for company comes back for the recognition. And the recognition makes the city feel like a place, not a backdrop.
+The user who came for company stays for the recognition. And the recognition makes the city feel like a place, not a backdrop.
 
 :::
 
 ---
 
-::: section id=flywheel num="05"
+::: section id=flywheel num="04"
 
 ## What people do with it without us doing anything
 
-A person comes in just to drop something on the map. A joke, a thought, anything. Does not expect a reply. Reply comes. From there, without a single line of new code:
+A person enters just to drop something on the map. Does not expect a reply. Reply comes. From there, without a single line of new code:
 
-Joined a thread about fishing. Found a like-minded person. Became friends naturally. Later met that same friend at a restaurant opening. Found the love of their life there. Went with her to a free concert they both found in LOKIO.
+**Friendship.** Moved to a new city. Wrote a thought on the map. A week later has company for sport, coffee, weekends.
 
-A girl opened the map, saw a free coffee deal nearby and a theatre discount. Sent the link to a friend: "let's go." Spent the evening together.
+**Dating — without dating.** Not Tinder. Nobody declares "I am looking." You replied to someone's joke on the map. You talked in the thread. Turns out you are both nearby. You went for coffee. No profile form, no swipe, no declared intent — it happened the way it happens in real life: through shared context, not a self-sale.
 
-Moved to a new city. No friends. Wrote a thought on the map. A week later has company for sport, coffee, weekends.
+**Spontaneous groups.** "Who is going to the mountains." "Need a fourth for the sauna." "Anyone want ice cream, it is 40 degrees." Assembled, went, dispersed.
 
-A café wrote "first coffee free." Five people came. Three returned the next week. A customer LTV started with one post on a map.
+**Local business.** A café wrote "first coffee free." Five people walked in. Three returned the next week. Customer LTV started with one post on a map.
 
-People meet. Date. Marry. Find friends and groups. Plan trips. Discover places. Help each other. Make business contacts. **All of it happens on its own.**
+**Discovery.** "Best coffee in this neighbourhood?" — locals answer in five minutes, not in a week on a forum.
 
-This is not a feature roadmap. This is what already works in the deployed product. We built not an app but a simple format. People find the uses themselves.
+**Travel.** Landed in Istanbul. Knows no one. Where are locals eating tonight? Where is the free concert? Where is the street food no guidebook mentions? Opens LOKIO — a living map of the city through the eyes of people standing there right now. A completely different travel experience.
 
-:::
+**Expats and relocators.** Moved to a new country. Not a single contact. Writes a thought in their own language on the map — finds their people. Speakers of one language in Berlin, of another in Seoul, English speakers anywhere. The language barrier dissolves because any city has speakers of every major language, and the map makes them visible.
 
----
+**Events.** A poster on the map. A concert, a theatre, a tasting. One pin — the audience is in the district.
 
-::: section id=shanghai num="06"
-
-## The Shanghai principle
-
-A thesis rarely articulated in consumer product pitches but underlying what this product mechanically does. We name it explicitly because we believe nobody else in this category does.
-
-### The numbers nobody puts together
-
-In 1978 China's GDP per capita was $156. In 2022 it was $12,663.
-
-That is an **81-fold increase in 44 years**, an average real growth rate above 8% per year sustained over four decades. No other large economy has ever done this in recorded history.
-
-What drove it was not heavy industry, not foreign capital, not state enterprises. It was the layer below them.
-
-By 2020, the OECD counted over 140 million SMEs in China. Today they account for:
-
-| Share of | Chinese SMEs |
-|---|---|
-| All enterprises in the country | **98.5%** |
-| GDP | **60%+** |
-| Urban employment | **80%** |
-| Tax revenue | **50%** |
-| Patents and technological innovation | **70%+** |
-
-The trillion-dollar names that emerged from this layer were originally infrastructure for it. Alibaba's first product in 1999 was a marketplace for small Chinese exporters who could not afford international trade fairs. Tencent's WeChat Pay made every street vendor a digital business. Pinduoduo grew on group-buying for budget shoppers. The country grew **through** small business, not despite it. New small businesses appeared faster than old ones consolidated.
-
-### The opposite pattern
-
-In economies built on the opposite model (concentration of capital in incumbents, regulatory frameworks shaped by them, advertising infrastructure priced for them) the small-business share of GDP has been declining for forty years. The corner café cannot afford customer acquisition because Google Ads cost $3–5 per click, Facebook CPM is $7–12, Yelp listings $300+ per month. The chain across the street can. The local economy hollows out one district at a time. **Stagnation regardless of starting strength.**
-
-### Where LOKIO fits
-
-A café reaches every person who opens the map in its district for $4.99. A solo trainer fills a class with one map post. A neighbourhood market lets the street know they have fresh fish today, no marketer required. A street vendor announces today's location to passers-by within walking distance right now.
-
-None of this scales for a chain. Chains do not need geo-bounded posts because they own broadcast advertising.
-
-<div class="callout gold">
-<p><strong>Every paid post on LOKIO is, by design, an act of small commerce.</strong></p>
-</div>
-
-A city with 100,000 active small businesses on LOKIO is a city where 100,000 merchants reach customers for the price of a coffee instead of $3,500 a month. Multiply by the share of GDP that small business represents in any local economy. **The arithmetic of who grows is changed.**
-
-### What this means for the partner
-
-This is not framed as policy. It is what the product does mechanically. But every government, regional development fund, and chamber of commerce that recognises small business activation as the foundational growth lever, the one China rode from $156 to $12,663 per capita, will recognise LOKIO as aligned infrastructure.
-
-The insight is structural and has been sitting in plain sight in OECD data and Chinese State Council reports for two decades. Nobody in the consumer product category has built around it. **We are.**
+All of these use cases run on a single protocol: a pin with a chat that dies in 24 hours. We built not an app but a format. People find the uses themselves. And in new cities, every feature — including business banners — starts at **$0**. The product is free until the city is busy enough that paid reach is worth paying for.
 
 :::
 
 ---
 
-::: section id=running num="07"
+::: section id=safety num="05"
 
-## This is already running
+## Safety architecture
 
-`app.lokio.org` is open right now.
+Safety is structural, not moderation.
 
-- Live PWA on production infrastructure
-- Google OAuth + WebAuthn passkey authentication
-- Real-time map with WebSocket presence
-- Topic chat
-- Public profile pages
+**18+ hard age gate.** LOKIO is not for minors. The product enables real-world meetings between strangers.
 
-Pre-launch. The first 22+ organic topics arrived from external users without us telling anyone. This is an early signal that the format propagates without push, not a claim of meaningful traction. $0 advertising · $0 outreach · $0 marketing.
+**Proof of Presence.** Server-side GPS check — you cannot post from a place where you are not. This kills 90% of spam architecturally, without moderators.
 
-The product is open. Whoever is reading this can verify everything above. Click the link. Authenticate. Look at the map. Drop a joke or a thought. See what happens.
+**contentGuard.** Server-side regex filter blocks URLs, phone numbers, and card numbers in all user content. No ML, no remote calls, deterministic.
+
+**Transparent reports.** The person you report sees who reported them and why. Three verified reports in 30 days — automatic shadow ban. Three shadow bans in six months — permanent.
+
+**TTL decay.** Every pin dies after its lifetime expires. The product does not accumulate a permanent record of user statements.
+
+**Pseudonymous identity.** Display names are optional. Every account is cryptographically verified via Google OAuth or WebAuthn passkeys. Privacy-first, not anonymity-first.
+
+:::
+
+---
+
+::: section id=competitors num="06"
+
+## Competitors
+
+None fully. Each occupies a piece of the space. None occupies LOKIO's intersection.
+
+### Tinder, Bumble
+
+**Reputation cost.** Being on a dating app means admitting you cannot meet people in real life. Users hide it from friends. On LOKIO you are not "looking" — you wrote a joke on a map.
+
+**Declared intent.** Every action on Tinder is an explicit signal: "I am alone and searching." On LOKIO there is no intent. You are just nearby.
+
+**Rejection by photo.** A swipe left is a blow to self-worth. Swipe fatigue is a documented phenomenon — people burn out. On LOKIO nobody rejects you by appearance because appearance is not the interface.
+
+**Profile form is a self-sale.** Photo, bio, interests — optimised for the market. In real life people do not meet this way. In real life you were in the same place, started talking, and it clicked.
+
+**The business model depends on loneliness.** If you find a partner, you leave and stop paying. Tinder is financially incentivised for you to not find what you came for.
+
+**Only pairs, only dating.** "Who is going to the mountains" or "need a fourth for board games" is impossible. The format is locked to romantic pairs.
+
+**Bots and fakes.** Half the profiles are bots, escorts, or commercial accounts.
+
+### Instagram, TikTok
+
+**Content, not contact.** You watch someone else's edited life. Likes are not a meeting. A hundred thousand followers does not mean a single person nearby who wants coffee right now.
+
+**Entry barrier.** To post, you need followers, a content plan, the will to perform. "Anyone for coffee?" has nowhere to go — and if you post it, 300 followers see it, 290 of whom are in other cities.
+
+**Feed instead of life.** An algorithmic feed optimised for retention. Real life nearby does not happen. A person sits in a café and scrolls instead of talking to the person at the next table.
+
+**Fake reality.** Filters, staged photos, rented cars for stories. People compare their real life to someone else's curated highlight reel and lose every time.
+
+### Meetup
+
+**Heavy event creation.** Title, description, category, time, venue. For "anyone for coffee in 30 minutes" this is absurd.
+
+**90% never create.** Too much responsibility. Too scary that no one will come. Meetup serves the 10% who organise. The other 90% scroll empty calendars.
+
+**English-first, US-centric.** Many cities outside the US have zero active groups.
+
+### Telegram chats
+
+**Invite-only.** You need a link to join. You cannot discover a stranger nearby — there is no map, no geo, no open surface.
+
+**No geo-realtime.** A Telegram group in "Berlin expats" is 10,000 people across the entire city and three time zones. LOKIO shows you who is within walking distance right now.
+
+**Spam and noise.** Open Telegram location groups fill with dating spam and commercial noise within weeks.
+
+### Foursquare / Swarm
+
+**Check-in is not conversation.** "I was here" is past tense. It tells nobody anything actionable. The product is functionally dead.
+
+### Nextdoor
+
+**US only.** Address verification gate. Nobody outside the United States can use it. Not international by architecture.
+
+### Linktree
+
+**Static page.** A list of links with no location, no presence, no context, no chat. LOKIO profiles are a free Linktree with geolocation, interests, and a living map of what you wrote.
+
+---
+
+Their shared weakness: **not geo-realtime**, or **not open**, or **not built for meeting.** LOKIO sits in the gap between all of them.
+
+The technology has been off-the-shelf for a decade. The reason no one shipped this is the discipline to omit a feed, a follower count, a swipe, a profile form. Each of those is an active anti-feature in this category. Every prior attempt added one back.
 
 <div class="callout">
-<p><strong>Not a mockup. Not a Figma. Not a "coming soon."</strong></p>
+<p><strong>If Telegram adds a map:</strong> Telegram is a messenger. A map inside it would be a feature, not a product. Every decision in LOKIO — from decay to Proof of Presence — is built around geography. Different architectures. Plus Telegram is blocked in several countries in the target region. LOKIO is independent infrastructure.</p>
 </div>
 
 :::
 
 ---
 
-::: section id=business num="08"
+::: section id=business num="07"
 
 ## The business this becomes
 
-The full product is permanently free. Posting, reading, joining, chatting, profile, public profile page. All of it free, in any city, on any device. Forever.
+The full product is permanently free. Posting, reading, joining, chatting, profile page — free, in any city, on any device, forever.
 
 Money comes from amplification. **Three single-purchase upsells, no subscriptions.**
-
-Single-purchase prices match the impulse model of the product itself. A subscription would gate casual users out and convert only the 2–3% willing to commit monthly. Single $0.49–$4.99 purchases capture the impulse of the median user who paid because the moment was worth it, not because they signed up to a plan. Mobile games discovered this before us. Margin 70–85% confirms the model.
 
 | Upsell | Audience | Price |
 |---|---|---|
@@ -230,99 +238,171 @@ Single-purchase prices match the impulse model of the product itself. A subscrip
 | City-wide visibility + 12h extension | User | **$1.99** |
 | Map banner | Business | **$4.99** |
 
-The economics for a business are not comparable to existing alternatives.
+Single-purchase prices match the impulse model of the product. A subscription would gate casual users out and convert only the 2–3% willing to commit monthly. $0.49–$4.99 purchases capture the median user who pays because the moment is worth it, not because they signed up to a plan. Mobile games discovered this before us.
 
-| Channel | Cost | Targeting | ROI signal |
-|---|---|---|---|
-| Google Ads click | $3–5 per click | Non-targeted, often out-of-area | Days to weeks |
-| Facebook Ads | $7–12 per 1,000 impressions | Mostly out-of-area | Days to weeks |
-| **LOKIO map banner** | **$4.99 per topic, full lifetime** | **District viewport, present moment** | **Same day** |
+There is a second-order effect: **payment improves content quality without moderation.** A free pin can be anything. A paid pin — even at $0.49 — makes the author think about what to write. "First coffee free until 7pm, five tables open" beats "aaaa." The price is a natural quality filter. And even free pins self-improve over time: users see which posts get replies and which get ignored. The feedback comes from the environment, not from an algorithm.
 
-A small café spends $3,500 per month on marketing in the existing model: $2,000 on a marketer, $1,000 on ads, $500 on SEO. The result is unknown until the month closes. On LOKIO the same café publishes a banner pin for $4.99. The pin is visible to every user who opens the map in the district. The free-coffee filter surfaces it on top of regular pins to people actively looking for offers right now. ROI is measurable on the same day.
+### The café example
+
+A small café spends roughly **$3,500** per month on marketing: $2,000 on a marketer, $1,000 on ads, $500 on SEO. The result is unknown until the month closes.
+
+On LOKIO, the same café publishes a banner pin for **$4.99**. The pin appears gold on the map — visually distinct from regular pins. It is visible to every user whose viewport covers the district, and as they zoom out, it stays visible across the city. A free-coffee filter surfaces it to people actively looking for offers right now. Ten people walk in. ROI is measurable on the same day. **Two thousand percent return on a single event.**
+
+This is not advertising people scroll past. This is an invitation they are looking for — because the user has the map open and is deciding where to go right now.
 
 <div class="callout gold">
 <p><strong>$4.99 against $3,500 per month.</strong></p>
 </div>
 
-### Why no one else is in this category
+### Density-gated pricing
 
-| Product | Cost to user | Where it works | Why it fails |
-|---|---|---|---|
-| Tinder, Bumble | $20–40/mo for visibility | Global | Profile form. Swipe by photo. Half are bots. |
-| Instagram, TikTok | Free | Global | Need followers, content plan, will to perform |
-| Meetup | $9.99/mo organisers | Global, English-first | 90% never originate an event |
-| Foursquare | Free | Global | Past tense. "I was here" is not a value. |
-| Nextdoor | Free | **US only** | Address verification gate, no international |
-| Linktree | $5–24/mo Premium | Global | Static page. No location. No presence. |
-| Telegram Nearby | Free | Global | List of phone numbers. Spam fills the surface. |
+New cities start free. Prices ramp with density. The coefficient is automatic, not set by a human. One-way: once a city moves up, prices do not come back down.
 
-The technology has been off-the-shelf for a decade. The reason no one shipped this is the discipline to omit a feed, a follower count, a swipe, a profile form. Each of those is, in this market, an active anti-feature. Every prior attempt added one back.
+| Tier | When | Banner | Slot | Visibility |
+|---|---|---|---|---|
+| **0 · Seed** | New city | Free | Free | Free |
+| **1 · Early** | First publishers | $1.49 | $0.15 | $0.59 |
+| **2 · Growing** | District density | $2.99 | $0.29 | $1.19 |
+| **3 · Active** | Threshold crossed | $4.99 | $0.49 | $1.99 |
 
-:::
-
----
-
-::: section id=city num="09"
-
-## How a city monetises itself
-
-A new city starts empty. Charging full upsell prices on day one would kill adoption. So the prices ramp with city density. A coefficient multiplies the published rate. **The coefficient is automatic, not set by a human.**
-
-| Tier | When | Coef. | Banner | Slot | Visibility |
-|---|---|---|---|---|---|
-| **0 · Seed** | New city, no critical mass | × 0 | Free | Free | Free |
-| **1 · Early** | First active publishers | × 0.3 | $1.49 | $0.15 | $0.59 |
-| **2 · Growing** | District-level density | × 0.6 | $2.99 | $0.29 | $1.19 |
-| **3 · Active** | City has crossed threshold | × 1.0 | $4.99 | $0.49 | $1.99 |
-
-The ramp is one-way. Once a city moves up, prices do not come back down.
-
-A new city seeds itself for free. The product earns nothing from that city until density creates real value. Then it earns proportionally as value grows. No negotiation, no manual pricing per market, no quarterly business review for a single city.
-
-**The same idea Uber discovered through driver subsidies. Automated.**
-
-### Unit economics per city
+### Unit economics
 
 | Metric | Per 10k MAU city · tier 3 |
 |---|---|
-| Total cost | $300 / month |
+| Infrastructure cost | ~$300 / month |
 | Paying users (3–5%) | 300–500 |
 | Active paying businesses | 50–100 |
-| **Total revenue** | **$1,100–1,950 / month** |
+| **Revenue** | **$1,100–1,950 / month** |
 | **Margin** | **70–85%** |
 
-### Scaling
-
-| Configuration | Monthly revenue (high) | Annualised |
+| Scale | Monthly revenue | Annualised |
 |---|---|---|
 | 1 city × 10k MAU | $1,950 | $23k |
 | 10 cities × 10k MAU | $19,500 | $234k |
-| 1 city × 100k MAU | $19,500 | $234k |
 | **10 cities × 100k MAU** | **$195,000** | **$2.3M** |
 
-CAC trends to zero. The product explains itself in the first five seconds of use. There is nothing to argue. People open the map, see thoughts pinned around them, and either understand immediately or close the tab. **No acquisition spend was wasted convincing them.**
+CAC trends to zero. The product explains itself in the first five seconds of use.
 
 :::
 
 ---
 
-::: section id=now num="10"
+::: section id=shanghai num="08"
 
-## What we are doing now
+## The Shanghai principle
 
-Building toward first revenue. Four quarters.
+In 1978 China's GDP per capita was $156. In 2022 it was $12,663. An **81-fold increase in 44 years**. No other large economy has done this in recorded history.
+
+What drove it was not heavy industry or foreign capital. It was a cycle that never stopped.
+
+The Chinese government systematically supported small business formation — through policy, infrastructure, and platforms. Small businesses grew into medium ones. Medium ones grew into large ones. But the cycle did not end there: **new small businesses kept appearing at the bottom**, because the infrastructure that helped the previous generation grow was still there for the next one. Alibaba did not replace street vendors — it gave them tools to become regional sellers. WeChat Pay did not kill corner shops — it made every one of them a digital business. And the next corner shop that opened got the same tools on day one.
+
+This is the engine. Not 140 million SMEs as a static fact — but 140 million SMEs as a **constantly regenerating layer**, where each generation grows and makes room for the next. Government, large business, and small business in a reinforcing loop. That is what took GDP per capita from $156 to $12,663.
+
+Now look at what happens without this cycle. A new café opens. To get customers, it needs advertising. Google Ads cost $3–5 per click. Facebook charges $7–12 per thousand impressions. A marketer costs $2,000 a month. The café cannot afford any of this — but the chain across the street can. The café gets no customers, closes in a year, and the chain expands into its space. No new small business replaces it. The cycle that built China's economy never starts. The local economy hollows out, one district at a time.
+
+**Where LOKIO fits.** A café reaches every person who opens the map in its district for $4.99. It grows. It becomes a chain. But the new café that opens next door also gets the same $4.99 reach on day one. The cycle continues. A solo trainer fills a class with one post. A street vendor announces today's location within walking distance. None of this scales for existing chains — chains already own broadcast advertising.
+
+<div class="callout gold">
+<p><strong>Every paid post on LOKIO is, by design, an act of small commerce. And every small business that grows on LOKIO makes room for the next one.</strong></p>
+</div>
+
+Every government, development fund, and chamber of commerce that recognises this cycle as the foundational growth lever will recognise LOKIO as aligned infrastructure. The data has been in OECD reports for two decades. Nobody in consumer products built around it. **We are.**
+
+And there is a feedback loop. Small businesses on LOKIO get customers. They grow. The district's economy grows. More people with spending power appear on the map. Density rises, LOKIO's tier goes up, revenue increases — and the next small business that opens still gets the same $4.99 reach on day one. **LOKIO grows because local GDP grows. Local GDP grows because LOKIO works.** The incentives are structurally aligned.
+
+:::
+
+---
+
+::: section id=meituan num="09"
+
+## The Meituan parallel
+
+The closest analogy to what LOKIO becomes is not a Western product. It is what happened in China when local commerce went digital.
+
+**Meituan.** ~$100B market cap. ~700M active users. 60% of all food orders in China. Started with group-buying coupons in 2010, became the super-app for everything local.
+
+**Dianping.** The local Yelp + booking. 200M MAU. In China, nobody walks into a café without checking Dianping first.
+
+**WeChat location groups.** Tens of millions of micro-chats around a building, a block, a neighbourhood. Closed, invite-only.
+
+What they share: they turned the **local physical world into a digital layer.** Cafés, barbershops, gyms, markets — everything became clickable within walking distance.
+
+In Central Asia, the Middle East, Southeast Asia, Latin America — this layer does not exist. Food delivery apps handle logistics, not discovery. Payment apps handle transactions, not connection. Nobody has closed "local events and businesses around you right now."
+
+**LOKIO is this layer.** Built from the bottom up — from spontaneous meetings and thoughts, not from coupons. The social surface comes first. Commerce rides on top of it.
+
+:::
+
+---
+
+::: section id=traction num="10"
+
+## Traction
+
+`app.lokio.org` is open right now. Not a mockup. Not a Figma. Not a prototype.
+
+- Live PWA on production infrastructure (Cloudflare + Railway)
+- Google OAuth + WebAuthn passkey authentication
+- Real-time map with WebSocket presence
+- Topic creation, topic chat, public profile pages (linkfree)
+- Transparent reports, Proof of Presence, contentGuard
+- Full legal documentation (Terms, Privacy, GDPR posture)
+- International from day one: EN + RU, no culture-specific features in core
+- Stack: React 18, Vite, Fastify, PostgreSQL, Redis, MapLibre GL
+
+The public launch was deliberately held until the full end-to-end product was ready. The product is now open. Anyone reading this can verify every claim above.
+
+$0 advertising. $0 outreach. $0 marketing spend.
+
+:::
+
+---
+
+::: section id=founder num="11"
+
+## Founder
+
+Solo founder, full-stack engineer. Built the entire stack in six months: backend, frontend, design system, documentation, legal base, infrastructure, landing, investor materials. 12,400 lines of frontend, 8,700 lines of backend, 13 database models, production deploy pipeline.
+
+No co-founder. No team yet. No external capital to date.
+
+This is not a constraint. It is a design decision made visible.
+
+The product is built to operate itself. Pricing adjusts automatically by city density — no human sets rates. Moderation is architectural — Proof of Presence, contentGuard, and transparent reports replace a moderation team. Content is created entirely by users. Pins expire on their own. Bans trigger on their own. The infrastructure scales with standard cloud tooling.
+
+One person built and runs a production product with real users, international documentation, legal coverage, and a deploy pipeline — because the architecture was designed from day one to not need a team to function. That is not a limitation. That is a statement about how modern products should be built.
+
+What remains is distribution: community seeding, local partnerships, and native app wraps. That requires capital and people.
+
+:::
+
+---
+
+::: section id=ask num="12"
+
+## The ask
+
+**$50,000–100,000** for 12 months of runway.
+
+**Use of funds:** one mobile engineer (Capacitor/native wraps, push notifications), one community manager (seed content, local partnerships, growth). The founder continues as sole technical lead.
+
+**Launch sequence:** Tashkent → Almaty → Tbilisi → Istanbul. Each city is a separate market. First city proves the model. Each subsequent city is cheaper to launch because the product, tooling, and playbook already exist.
+
+Tashkent is not a test market. It is the **first strategic market.** 3.6 million metro population, 85% smartphone penetration, no incumbent in this category, high density of small business, cultural appetite for spontaneous socialising.
+
+**Milestones on the capital:**
 
 | Period | Milestone |
 |---|---|
-| **May–Jun 2026** | Outreach materials. Investor and partner conversations. Payment provider selection. |
-| **Q3 2026** | One-tap publish. Decay visuals. Reports and saved screens wired. |
-| **Q4 2026** | Payment integration. Billing live per city. Legal entity incorporated on first transaction. |
-| **Q1 2027** | Profile screen unification. "Tonight" filter chip. |
-| **Q2 2027** | iOS and Android wraps. Push notifications. App Store + Play Store submission. GDPR-compliant policy. |
+| **Month 1–2** | Public launch Tashkent. Community seeding. 500+ organic users. |
+| **Month 3–4** | Payment integration live. First paying businesses. |
+| **Month 5–6** | Almaty launch. iOS + Android wraps submitted. |
+| **Month 7–9** | 5,000+ MAU Tashkent. Tbilisi launch. |
+| **Month 10–12** | Istanbul prep. Series A materials. 10,000+ MAU across region. |
 
-We are open to conversations with investors aligned with consumer-product, city-by-city marketplace expansion. With strategic partners in urban mobility, hospitality, tourism, local services, city administrations and chambers of commerce focused on small business activation, regional development funds aligned with local commerce growth. With advisors who have run marketplace consumer products at city scale.
-
-There is no fixed funding ask attached to this document. Engagement terms are determined per conversation.
+There is no fixed valuation attached to this document. Terms are determined per conversation.
 
 <div class="callout">
 <p><strong>We are not raising on a deck. We are raising on a working product.</strong></p>
