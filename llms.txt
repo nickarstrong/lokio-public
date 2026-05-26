@@ -1,83 +1,126 @@
 # LOKIO
 
-> The map where people nearby actually talk.
+> Drop a joke on the map. Or open it and find a free coffee, a concert, a deal around the corner.
 
-LOKIO is a location-based social app. Users drop pins on a map — a joke, a thought, a plan. Anyone within walking distance sees the pin, opens the chat, and replies. If it clicks, they meet. Everything disappears within 24 hours.
+LOKIO is a geo-realtime social layer. Users drop pins on a map — a joke, an observation, a free coffee deal, an event, anything. Anyone who opens the map sees the pins. They reply, conversation starts, people meet. Pins expire automatically. No feed, no followers, no likes, no algorithm.
+
+## Two Entry Points
+
+1. **Post.** A joke, an observation, a thought — zero effort, zero stakes. You are in a park, notice something funny, post it.
+2. **Browse.** Open the map to see what is nearby right now — free coffee deals, concerts tonight, theatre discounts, people looking for company. The map is never empty of reasons to go somewhere.
 
 ## What LOKIO Is
 
 - A map-based social platform where every post is a pin tied to a physical location
-- Each pin is a chatroom — up to 50 people can join if they're within range
-- All content is ephemeral: pins live 6–24 hours, then disappear with their chats
-- No feed, no followers, no likes, no DMs, no algorithm
-- Anonymous by default: name + gender tag minimum, links optional
+- Each pin has a chat thread — anyone who sees the pin can join
+- All content is ephemeral: a free pin lives for a few hours, a boosted pin up to 30 days, then it disappears
+- No feed, no followers, no likes, no DMs, no algorithm, no swipes
+- Pseudonymous: every account verified via Google OAuth or WebAuthn passkeys, display names optional
 - Free, works in any browser at app.lokio.org — no install required
-- Available in English and Russian
+- Available in English and Russian UI, content in any language users write
 
 ## Core Loop
 
-1. **Drop** — Post a pin: a joke, an observation, an invitation, a question. One line, 5 seconds.
-2. **Open** — The pin becomes a chatroom. People nearby tap in and reply.
-3. **Meet** — If plans form, people meet in real life. The chat archives itself after.
+1. **Drop** — Post a pin: a joke, an observation, a free coffee offer, a question. One text field, 5 seconds.
+2. **See** — People nearby (or anyone who zooms to your area) see the pin on the map.
+3. **Reply** — They open the chat. Conversation starts.
+4. **Meet** — If it clicks, people meet in real life. The pin dies on its own.
 
 ## What Makes LOKIO Different
 
-- **No global feed.** You only see pins within walking distance (~500m). The map ends where you can't reach in 15 minutes.
-- **No followers.** You don't collect people. After a chat closes, the only thing you keep is the memory.
-- **No DMs.** Conversation lives on the pin, visible to everyone in range. Safety by transparency.
-- **Ephemeral.** Nothing persists. No post history, no archives, no digital footprint. This removes the fear of posting.
-- **Zero barrier entry.** The entry point is humor and curiosity, not commitment. "It's hot, who else is melting?" is a valid pin.
+- **No global feed.** You see pins in your map viewport. Zoom in = your block. Zoom out = the whole city.
+- **No followers.** Visibility is by geography, not popularity. A new user's pin is as visible as anyone else's.
+- **No declared intent.** Unlike dating apps, you never say "I am looking." You posted a joke. Someone replied. Meeting happened through context, not a profile form.
+- **Ephemeral.** Pins expire. No permanent record, no digital footprint. This removes the fear of posting.
+- **Zero barrier entry.** The entry point is humour and free stuff, not commitment. "Stepped out for air 40 minutes ago, send help" is a valid pin.
 
-## Use Cases
+## Use Cases — All on One Mechanic
 
-- Spontaneous meetups ("free pizza at the office", "who wants to grab coffee")
-- Finding people nearby ("just moved here, looking for hiking partners")
-- Local discoveries ("bakery giving away leftovers after 9pm")
-- Creative collaboration ("looking for a guitarist for a jam session Saturday")
-- Language exchange ("tandem partner, my Russian for your German")
-- Casual gigs ("help with moving, 4 hours, same-day pay")
-- Travel ("just landed, where to get a SIM card around here?")
+- **Jokes and observations** — local humour, the Twitter-of-a-place layer
+- **Free stuff and deals** — cafés, restaurants, businesses post offers visible on the map
+- **Spontaneous groups** — "who is going to the mountains", "need a fourth for board games"
+- **Dating without dating** — you replied to someone's joke, talked in the thread, went for coffee. No swipe, no profile form
+- **Friendship** — moved to a new city, wrote a thought on the map, found company
+- **Travel** — landed in Istanbul, opened the map, found where locals eat tonight
+- **Expats and relocators** — write in your language, find speakers of your language in any city
+- **Events** — concerts, theatres, tastings — one pin, the audience is in the district
+- **Local discovery** — "best coffee in this neighbourhood?" — locals answer in five minutes
+- **Business reach** — café posts "first coffee free" for $4.99, twelve people walk in
 
 ## Business Model
 
-- Free baseline for all users — always
-- Paid boosts: extend pin radius, increase TTL, add visual banner
-- Boost pricing: 1 day $2 / 7 days $10 / 30 days $25 (× city coefficient)
-- Monthly subscription for frequent posters: $30/month
+- Free baseline for all users — posting, reading, joining chats, profile page — free forever
+- Three single-purchase upsells, no subscriptions:
+  - Extra topic slot: $0.49
+  - City-wide visibility + 12h extension: $1.99
+  - Gold map banner (business): $4.99
+- Density-gated pricing: new cities start at $0, prices ramp automatically as city gets busier (tier 0–3)
+- Payment improves content quality: paid pin = author thinks about what to write
 - Zero gamification, zero ads, zero data sales
-- Users are not the product. Revenue comes from pin boosts.
+- Cost per walk-in for a business: $0.42 (vs Google Ads $80–200)
+- Unit economics: 10k MAU city at tier 3 = $1,100–1,950/month revenue, 70–85% margin
 
-## Profile / Digital Business Card
+## The China Parallel (Shanghai Principle)
 
-Every user gets a public page at lokio.org/u/{username} — a free Linktree-style digital business card with links, bio, and verified accounts. Shareable anywhere: Instagram bio, Telegram, physical business cards. Viewable without registration.
+China's GDP per capita went from $156 (1978) to $12,663 (2022) — 81× growth driven by a constantly regenerating layer of small businesses. Alibaba and WeChat did not replace small business — they gave it tools to grow. LOKIO is this tool for the rest of the world. $4.99 banner vs $3,500/month traditional marketing. LOKIO grows because local GDP grows. Local GDP grows because LOKIO works.
+
+## Profile / OneLink
+
+Every user gets a public page at lokio.org/u/{id} — a free Linktree-style profile with links, bio, interests, geolocation, and QR code. Shareable anywhere. Viewable without registration. Auto-detects link types (Telegram, Instagram, GitHub, LinkedIn, etc).
 
 ## Safety Architecture
 
-- Pins are ephemeral — disappear automatically
-- Reports require phone verification (1 SIM = 1 reporter identity)
-- Reports are public — the target sees who reported
-- Auto-shadow-ban: 3+ verified reports in 30 days → 7-day shadow ban
-- 3 shadow bans in 6 months → permanent ban
-- No DMs — all conversation is public on the pin
-- 18+ age gate at registration
+Safety is structural, not moderation:
+- **18+ hard age gate** — product enables real-world meetings between strangers
+- **Proof of Presence** — server-side GPS check, cannot post from a place where you are not (1km max, 120s freshness). Kills 90% of spam architecturally.
+- **contentGuard** — server-side regex filter blocks URLs, phone numbers, card numbers. Deterministic, no ML.
+- **Transparent reports** — the reported person sees who reported and why. 3 verified reports in 30 days = auto shadow ban. 3 shadow bans in 6 months = permanent.
+- **TTL decay** — every pin dies after its lifetime. No permanent record.
+- **Pseudonymous identity** — every account cryptographically verified via Google OAuth or WebAuthn. Privacy-first, not anonymity-first.
 
 ## Technical Stack
 
 - PWA (Progressive Web App) — works in any mobile browser
-- React 18 + Vite (frontend)
-- Fastify + Prisma + PostgreSQL + Redis (backend)
-- WebAuthn passkeys for authentication
-- Cloudflare Pages (frontend hosting)
-- Railway (backend hosting)
-- Native iOS/Android apps planned after traction
+- React 18 + Vite (frontend, ~12,400 lines)
+- Fastify + Prisma + PostgreSQL + Redis (backend, ~8,700 lines)
+- 13 database models, ~418 lines Prisma schema
+- WebAuthn passkeys + Google OAuth authentication
+- WebSocket real-time presence
+- MapLibre GL + OpenStreetMap (no per-render fees)
+- Cloudflare Pages (frontend), Railway (backend), R2 (avatars)
+- Product operates itself: automatic pricing, architectural moderation, user-generated content, auto-expiring pins, auto-triggering bans
+
+## Founder
+
+Full-stack engineer. Built the entire stack in six months: backend, frontend, design system, documentation, legal base, infrastructure, landing, investor materials. Architecture designed from day one to operate without overhead.
+
+## Expansion
+
+- Launch sequence: Tashkent → Almaty → Tbilisi → Istanbul → Bangkok → São Paulo → Tokyo
+- City launch cost: $1,700–3,500 (community manager + local materials)
+- City won = 1,000+ MAU, 10+ paying businesses, organic growth exceeds seeded growth
+- Infrastructure scales without per-city cost increase
 
 ## Links
 
 - Website: https://lokio.org
 - App: https://app.lokio.org
+- Pitch: https://lokio.org/documents/pitch
+- Business case: https://lokio.org/documents/business
+- Whitepaper: https://lokio.org/documents/whitepaper
+- Terms: https://lokio.org/documents/terms
+- Privacy: https://lokio.org/documents/privacy
 - Telegram community: https://t.me/lokioapp
 - Contact: hello@lokio.org
 
+## Documents
+
+- [Pitch](/documents/pitch) — product thesis, psychology, competitors, business model, the China parallel
+- [For Local Businesses](/documents/business) — ROI walkthrough, cost comparison, how to start
+- [Whitepaper](/documents/whitepaper) — full thesis + market sizing + expansion strategy + technical appendix
+- [Terms of Service](/documents/terms)
+- [Privacy Policy](/documents/privacy)
+
 ## Current Status
 
-Live in 3 cities, expanding. Seed market: Central Asia. International-first architecture — works in Berlin, São Paulo, Seoul, Nairobi.
+Live in production. Pre-launch. 22+ organic topics from users who arrived without any outreach. $0 spent on acquisition. International from day one. 3 cities seeded, expanding.
