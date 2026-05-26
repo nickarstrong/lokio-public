@@ -1352,6 +1352,31 @@ footer{
 }
 .pp-funnel-cta svg{ width:11px; height:11px; stroke-width:2.4; }
 
+/* OneLink list */
+.onelink-list{
+  list-style:none; padding:0; margin:24px 0 0;
+  display:flex; flex-direction:column; gap:12px;
+}
+.onelink-list li{
+  font:500 var(--t-body)/1.5 var(--font);
+  color:rgba(255,255,255,0.75);
+  padding-left:20px;
+  position:relative;
+}
+.onelink-list li::before{
+  content:"";
+  position:absolute; left:0; top:9px;
+  width:8px; height:8px; border-radius:999px;
+  background:var(--accent);
+  opacity:0.7;
+}
+.onelink-free{
+  margin-top:20px;
+  font:700 var(--t-body)/1.4 var(--font);
+  color:#fff;
+  letter-spacing:-0.01em;
+}
+
 /* ════════════════════════════════
    CINEMATIC REVEAL SYSTEM
    ════════════════════════════════ */
@@ -1752,9 +1777,15 @@ footer{
     <div class="profile-grid">
 
       <div class="profile-text cin">
-        <div class="eyebrow cin" data-en="Your page" data-ru="Твоя страница">Your page</div>
-        <h2 class="sect-h cin cin-s1" data-en="Everything about you. One link." data-ru="Всё о тебе. Одна ссылка.">Everything about you. One link.</h2>
-        <p class="sect-sub cin cin-s2" data-en="Your LOKIO page is a free digital business card — links, bio, verified accounts. Share it in your Instagram bio, Telegram, or on a real business card. Anyone can see who you are without signing up." data-ru="Твоя страница LOKIO — бесплатная цифровая визитка: ссылки, био, верифицированные аккаунты. Кинь в bio Instagram, Telegram или на настоящую визитку. Любой увидит кто ты без регистрации.">Your LOKIO page is a free digital business card &mdash; links, bio, verified accounts. Share it in your Instagram bio, Telegram, or on a real business card. Anyone can see who you are without signing up.</p>
+        <div class="eyebrow cin" data-en="OneLink" data-ru="OneLink">OneLink</div>
+        <h2 class="sect-h cin cin-s1" data-en="One page — all your links." data-ru="Одна страница — все ссылки.">One page &mdash; all your links.</h2>
+        <p class="sect-sub cin cin-s2" data-en="All your socials, messengers, websites and portfolio — on one page." data-ru="Все соцсети, мессенджеры, сайты и портфолио — на одной странице.">All your socials, messengers, websites and portfolio &mdash; on one page.</p>
+        <ul class="onelink-list cin cin-s3">
+          <li data-en="Socials &amp; messengers — Instagram, Telegram, WhatsApp, TikTok" data-ru="Соцсети и мессенджеры — Instagram, Telegram, WhatsApp, TikTok">Socials &amp; messengers &mdash; Instagram, Telegram, WhatsApp, TikTok</li>
+          <li data-en="Websites &amp; portfolio — Behance, GitHub, personal site" data-ru="Сайты и портфолио — Behance, GitHub, личный сайт">Websites &amp; portfolio &mdash; Behance, GitHub, personal site</li>
+          <li data-en="Contacts — email, phone, location" data-ru="Контакты — почта, телефон, геолокация">Contacts &mdash; email, phone, location</li>
+        </ul>
+        <p class="onelink-free cin cin-s4" data-en="Free. No ads. Forever." data-ru="Бесплатно. Без рекламы. Навсегда.">Free. No ads. Forever.</p>
         <div class="hero-actions" style="margin-top:32px;">
           <a class="btn primary" href="https://app.lokio.org">
             <span data-en="Create yours free" data-ru="Создать бесплатно">Create yours free</span>
