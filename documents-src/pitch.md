@@ -358,15 +358,9 @@ $0 spent on acquisition to date.
 
 Solo founder, full-stack engineer. Built the entire stack in six months: backend, frontend, design system, documentation, legal base, infrastructure, landing, investor materials. 12,400 lines of frontend, 8,700 lines of backend, 13 database models, production deploy pipeline.
 
-No co-founder. No team yet. No external capital to date.
-
-This is not a constraint. It is a design decision made visible.
-
 The product is built to operate itself. Pricing adjusts automatically by city density — no human sets rates. Moderation is architectural — Proof of Presence, contentGuard, and transparent reports replace a moderation team. Content is created entirely by users. Pins expire on their own. Bans trigger on their own. The infrastructure scales with standard cloud tooling.
 
-One person built and runs a production product with real users, international documentation, legal coverage, and a deploy pipeline — because the architecture was designed from day one to not need a team to function. That is not a limitation. That is a statement about how modern products should be built.
-
-What remains is distribution: community seeding, local partnerships, and native app wraps. That requires capital and people.
+One person built and runs a production product with real users, international documentation, legal coverage, and a deploy pipeline — because the architecture was designed from day one to not need a team to function. That is not a limitation. That is how modern products should be built.
 
 :::
 
