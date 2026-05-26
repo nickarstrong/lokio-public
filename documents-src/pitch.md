@@ -23,7 +23,6 @@ toc:
   - { href: "#shanghai",   label: "The China parallel" }
   - { href: "#traction",   label: "Traction" }
   - { href: "#founder",    label: "Founder" }
-  - { href: "#ask",        label: "The ask" }
 ---
 
 ---
@@ -361,38 +360,6 @@ Solo founder, full-stack engineer. Built the entire stack in six months: backend
 The product is built to operate itself. Pricing adjusts automatically by city density — no human sets rates. Moderation is architectural — Proof of Presence, contentGuard, and transparent reports replace a moderation team. Content is created entirely by users. Pins expire on their own. Bans trigger on their own. The infrastructure scales with standard cloud tooling.
 
 One person built and runs a production product with real users, international documentation, legal coverage, and a deploy pipeline — because the architecture was designed from day one to not need a team to function. That is not a limitation. That is how modern products should be built.
-
-:::
-
----
-
-::: section id=ask num="11"
-
-## The ask
-
-**$50,000–100,000** for 12 months of runway.
-
-**Use of funds:** one mobile engineer (Capacitor/native wraps, push notifications), one community manager (seed content, local partnerships, growth). The founder continues as sole technical lead.
-
-**Launch sequence:** Tashkent → Almaty → Tbilisi → Istanbul. Each city is a separate market. First city proves the model. Each subsequent city is cheaper to launch because the product, tooling, and playbook already exist.
-
-Tashkent is not a test market. It is the **first strategic market.** 3.6 million metro population, 85% smartphone penetration, no incumbent in this category, high density of small business, cultural appetite for spontaneous socialising.
-
-**Milestones on the capital:**
-
-| Period | Milestone |
-|---|---|
-| **Month 1–2** | Public launch Tashkent. Community seeding. Target: 500+ organic users. |
-| **Month 3–4** | Payment integration live. First paying businesses. |
-| **Month 5–6** | Almaty launch. iOS + Android wraps submitted. |
-| **Month 7–9** | Target: 5,000+ MAU Tashkent. Tbilisi launch. |
-| **Month 10–12** | Istanbul prep. Series A materials. Target: 10,000+ MAU across region. |
-
-There is no fixed valuation attached to this document. Terms are determined per conversation.
-
-<div class="callout">
-<p><strong>We are not raising on a deck. We are raising on a working product.</strong></p>
-</div>
 
 <div class="contact-block">
 <a class="em" href="mailto:hello&#64;lokio.org">hello@lokio.org</a>
