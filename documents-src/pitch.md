@@ -2,7 +2,7 @@
 title: "LOKIO. Pitch."
 docTitle: "Pitch"
 ogTitle: "LOKIO Pitch"
-description: "Geo-realtime social layer for local economies. One mechanic, six broken industries, zero competition."
+description: "Geo-realtime social layer for local economies. The China parallel. Working product, no incumbent."
 slug: "pitch"
 lang: "en"
 tocTag: "Pitch"
@@ -14,14 +14,13 @@ updated: "26 May 2026"
 version: "v6 · Live"
 toc:
   - { href: "#what",       label: "What this is" }
-  - { href: "#soft-entry", label: "Why people use it" }
+  - { href: "#soft-entry", label: "Zero-cost entry" }
   - { href: "#daily",      label: "The daily reason" }
   - { href: "#flywheel",   label: "Flywheel" }
   - { href: "#safety",     label: "Safety architecture" }
   - { href: "#competitors",label: "Competitors" }
   - { href: "#business",   label: "Business model" }
-  - { href: "#shanghai",   label: "Shanghai principle" }
-  - { href: "#meituan",    label: "The Meituan parallel" }
+  - { href: "#shanghai",   label: "The China parallel" }
   - { href: "#traction",   label: "Traction" }
   - { href: "#founder",    label: "Founder" }
   - { href: "#ask",        label: "The ask" }
@@ -53,19 +52,15 @@ There are two ways people come in. The first is posting: a joke, a thought, an o
 
 ::: section id=soft-entry num="02"
 
-## Why people actually use it
+## The zero-cost entry
 
-This is the most important part and the most underestimated.
+Every social product demands something before you can participate. A dating app demands you declare intent. An events platform demands you take responsibility. A content network demands an audience.
 
-Not everyone has the courage to create an event. It is responsibility: what if no one comes. It is fear: what if people judge. It is effort: invent a title, a description, a category, a time.
+LOKIO demands nothing.
 
-But everyone can drop a joke. Or a thought. Or anything.
+You did not declare you wanted to be noticed, so being unnoticed costs you nothing. You asked for nothing, so the reply or its absence carries no rejection. You posted a thought, not an event, so nobody is owed anything if no one comes.
 
-You wrote what you were thinking. Nothing else. You did not declare you wanted to be noticed, so being unnoticed costs you nothing. You asked for nothing, so the reply or its absence carries no rejection. You posted a thought, not an event, so nobody is owed anything if no one comes.
-
-But the reply comes. People nearby see it. Someone is thinking the same thing. They reply. Conversation begins. Naturally.
-
-Through humour and idle thoughts, even people who have never posted on social media post on LOKIO.
+The reply comes anyway. People nearby see it. Someone is thinking the same thing. Conversation begins on its own.
 
 | Product | What it costs you to start |
 |---|---|
@@ -90,11 +85,11 @@ The functional use cases — company for dinner, a free coffee, a meetup — pul
 
 Local humour pulls them in every day.
 
-A self-deprecating thought from a park bench. A sarcastic observation about life. "Stepped out for air 40 minutes ago, send help." Twenty people see it and recognise themselves. Five reply with their own version. A district develops a shared voice.
+Someone posts from a park bench: "Officially the most interesting person within 300 metres. No evidence to support this." Twenty people see it. Five reply with their own version. A guy on the next street writes: "Stepped out for air 40 minutes ago. Send help." Thirty-one replies. Four people offer to come.
 
-Twitter is global. Local memes have no surface today. **LOKIO is that surface.**
+A district develops a shared voice. Inside jokes that only locals get. Observations that only make sense if you are standing right there. This is the Twitter-of-a-place layer that no other product has. **Twitter is global. Local memes have no surface today. LOKIO is that surface.**
 
-The user who came for company stays for the recognition. And the recognition makes the city feel like a place, not a backdrop.
+The user who came for a free coffee or company for dinner stays for the recognition. And the recognition makes the city feel like a place, not a backdrop.
 
 :::
 
@@ -289,7 +284,9 @@ CAC trends to zero. The product explains itself in the first five seconds of use
 
 ::: section id=shanghai num="08"
 
-## The Shanghai principle
+## The China parallel
+
+### The cycle
 
 In 1978 China's GDP per capita was $156. In 2022 it was $12,663. An **81-fold increase in 44 years**. No other large economy has done this in recorded history.
 
@@ -299,9 +296,27 @@ The Chinese government systematically supported small business formation — thr
 
 This is the engine. Not 140 million SMEs as a static fact — but 140 million SMEs as a **constantly regenerating layer**, where each generation grows and makes room for the next. Government, large business, and small business in a reinforcing loop. That is what took GDP per capita from $156 to $12,663.
 
+### What it produced
+
+**Meituan.** ~$100B market cap. ~700M active users. 60% of all food orders in China. Started with group-buying coupons in 2010, became the super-app for everything local.
+
+**Dianping.** The local Yelp + booking. 200M MAU. In China, nobody walks into a café without checking Dianping first.
+
+**WeChat location groups.** Tens of millions of micro-chats around a building, a block, a neighbourhood. Closed, invite-only.
+
+What they share: they turned the **local physical world into a digital layer.** Cafés, barbershops, gyms, markets — everything became clickable within walking distance.
+
+### The opposite pattern
+
 Now look at what happens without this cycle. A new café opens. To get customers, it needs advertising. Google Ads cost $3–5 per click. Facebook charges $7–12 per thousand impressions. A marketer costs $2,000 a month. The café cannot afford any of this — but the chain across the street can. The café gets no customers, closes in a year, and the chain expands into its space. No new small business replaces it. The cycle that built China's economy never starts. The local economy hollows out, one district at a time.
 
-**Where LOKIO fits.** A café reaches every person who opens the map in its district for $4.99. It grows. It becomes a chain. But the new café that opens next door also gets the same $4.99 reach on day one. The cycle continues. A solo trainer fills a class with one post. A street vendor announces today's location within walking distance. None of this scales for existing chains — chains already own broadcast advertising.
+In Central Asia, the Middle East, Southeast Asia, Latin America — the digital layer that Meituan and WeChat built in China does not exist. Food delivery apps handle logistics, not discovery. Payment apps handle transactions, not connection. Nobody has closed "local events and businesses around you right now."
+
+### Where LOKIO fits
+
+**LOKIO is this layer.** Built from the bottom up — from spontaneous meetings and thoughts, not from coupons. The social surface comes first. Commerce rides on top of it.
+
+A café reaches every person who opens the map in its district for $4.99. It grows. It becomes a chain. But the new café that opens next door also gets the same $4.99 reach on day one. The cycle continues.
 
 <div class="callout gold">
 <p><strong>Every paid post on LOKIO is, by design, an act of small commerce. And every small business that grows on LOKIO makes room for the next one.</strong></p>
@@ -315,29 +330,7 @@ And there is a feedback loop. Small businesses on LOKIO get customers. They grow
 
 ---
 
-::: section id=meituan num="09"
-
-## The Meituan parallel
-
-The closest analogy to what LOKIO becomes is not a Western product. It is what happened in China when local commerce went digital.
-
-**Meituan.** ~$100B market cap. ~700M active users. 60% of all food orders in China. Started with group-buying coupons in 2010, became the super-app for everything local.
-
-**Dianping.** The local Yelp + booking. 200M MAU. In China, nobody walks into a café without checking Dianping first.
-
-**WeChat location groups.** Tens of millions of micro-chats around a building, a block, a neighbourhood. Closed, invite-only.
-
-What they share: they turned the **local physical world into a digital layer.** Cafés, barbershops, gyms, markets — everything became clickable within walking distance.
-
-In Central Asia, the Middle East, Southeast Asia, Latin America — this layer does not exist. Food delivery apps handle logistics, not discovery. Payment apps handle transactions, not connection. Nobody has closed "local events and businesses around you right now."
-
-**LOKIO is this layer.** Built from the bottom up — from spontaneous meetings and thoughts, not from coupons. The social surface comes first. Commerce rides on top of it.
-
-:::
-
----
-
-::: section id=traction num="10"
+::: section id=traction num="09"
 
 ## Traction
 
@@ -345,22 +338,21 @@ In Central Asia, the Middle East, Southeast Asia, Latin America — this layer d
 
 - Live PWA on production infrastructure (Cloudflare + Railway)
 - Google OAuth + WebAuthn passkey authentication
-- Real-time map with WebSocket presence
-- Topic creation, topic chat, public profile pages (linkfree)
-- Transparent reports, Proof of Presence, contentGuard
-- Full legal documentation (Terms, Privacy, GDPR posture)
+- Real-time map with WebSocket presence, topic chat, public profile pages
+- Transparent reports, Proof of Presence, contentGuard, full legal documentation
 - International from day one: EN + RU, no culture-specific features in core
-- Stack: React 18, Vite, Fastify, PostgreSQL, Redis, MapLibre GL
 
 The public launch was deliberately held until the full end-to-end product was ready. The product is now open. Anyone reading this can verify every claim above.
 
-$0 advertising. $0 outreach. $0 marketing spend.
+Pre-launch organic signal: 22+ topics created by external users who arrived without any outreach, advertising, or invitation. This is not traction — it is a format-propagation signal before a single dollar was spent on distribution.
+
+$0 spent on acquisition to date.
 
 :::
 
 ---
 
-::: section id=founder num="11"
+::: section id=founder num="10"
 
 ## Founder
 
@@ -380,7 +372,7 @@ What remains is distribution: community seeding, local partnerships, and native 
 
 ---
 
-::: section id=ask num="12"
+::: section id=ask num="11"
 
 ## The ask
 
@@ -396,11 +388,11 @@ Tashkent is not a test market. It is the **first strategic market.** 3.6 million
 
 | Period | Milestone |
 |---|---|
-| **Month 1–2** | Public launch Tashkent. Community seeding. 500+ organic users. |
+| **Month 1–2** | Public launch Tashkent. Community seeding. Target: 500+ organic users. |
 | **Month 3–4** | Payment integration live. First paying businesses. |
 | **Month 5–6** | Almaty launch. iOS + Android wraps submitted. |
-| **Month 7–9** | 5,000+ MAU Tashkent. Tbilisi launch. |
-| **Month 10–12** | Istanbul prep. Series A materials. 10,000+ MAU across region. |
+| **Month 7–9** | Target: 5,000+ MAU Tashkent. Tbilisi launch. |
+| **Month 10–12** | Istanbul prep. Series A materials. Target: 10,000+ MAU across region. |
 
 There is no fixed valuation attached to this document. Terms are determined per conversation.
 
