@@ -215,6 +215,28 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 .foot-contact a:hover{color:var(--text);}
 .foot-mark{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text-lo);letter-spacing:0.08em;}
 
+/* ═══ SMALL VIEWPORT / IFRAME ═══ */
+@media (max-width:520px){
+  :root{--pad:16px;}
+  .hdr{padding:10px var(--pad);}
+  .hdr-logo{font-size:15px;gap:8px;}
+  .hdr-mark{width:22px;height:22px;}
+  .hdr-doc-title{display:none;}
+  .hdr-back{padding:6px 10px;font-size:12px;}
+  .page{padding:72px var(--pad) 48px;gap:24px;}
+  .col{max-width:100%;}
+  h1{font-size:28px;margin-bottom:14px;}
+  h2{font-size:22px;}
+  h3{font-size:16px;}
+  .lede{font-size:15px;}
+  .eyebrow{font-size:10px;padding:4px 10px;}
+  .meta-row span{font-size:10px;padding:4px 8px;}
+  .beta-notice,.acceptance,.shield,.callout,.contact-block{padding:16px 18px;}
+  .tbl th,.tbl td{padding:8px 10px;font-size:13px;}
+  footer{padding:32px var(--pad) 24px;}
+  .foot-inner{gap:24px;}
+}
+
 /* ═══ PRINT ═══ */
 @media print{
   .hdr,.toc,footer{display:none;}
