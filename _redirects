@@ -9,7 +9,7 @@
 # ── Common shortcut aliases ──
 /whitepaper     /documents/whitepaper     301
 /pitch          /documents/pitch          301
-/presentation   /documents/presentation   301
+/presentation   /documents/pitch          301
 /business       /documents/business       301
 /privacy        /documents/privacy        301
 /terms          /documents/terms          301

@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<meta name="theme-color" content="#0a0a0a"/>
+<meta name="theme-color" content="#FAFAFA"/>
 <title>LOKIO. Whitepaper.</title>
-<meta name="description" content="The full product. Six markets, one mechanic, business model from day one, technical architecture."/>
+<meta name="description" content="A thought on a map. No strings attached. The full product thesis, market analysis, business model, technical architecture."/>
 <meta property="og:title" content="LOKIO Whitepaper"/>
-<meta property="og:description" content="The full product. Six markets, one mechanic, business model from day one."/>
 <meta property="og:url" content="https://lokio.org/documents/whitepaper"/>
+<meta name="robots" content="index,follow"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-
 :root{
-  --magenta:#FF00FF;--male:#007FFF;--gold:#FBEC5D;
-  --blue:#0A84FF;--green:#30D158;--purple:#BF5AF2;--red:#FF375F;
-  --magenta-d:rgba(255,0,255,0.15);--male-d:rgba(0,127,255,0.15);
-  --gold-d:rgba(251,236,93,0.15);--blue-d:rgba(10,132,255,0.15);
-  --surface:rgba(22,22,34,0.72);--surface-hi:rgba(16,16,26,0.95);
-  --mock-bg:rgba(10,10,18,0.92);
-  --border:rgba(255,255,255,0.10);--border-hi:rgba(255,255,255,0.18);
-  --w14:rgba(255,255,255,0.14);--w10:rgba(255,255,255,0.10);
-  --w08:rgba(255,255,255,0.08);--w06:rgba(255,255,255,0.06);
-  --whi:rgba(255,255,255,0.96);--wmid:rgba(255,255,255,0.62);--wlo:rgba(255,255,255,0.40);
-  --r-sm:12px;--r-md:16px;--r-lg:20px;--r-xl:24px;--r-2xl:28px;--r-pill:999px;
+  --accent:#0A84FF;
+  --accent-lo:rgba(10,132,255,0.10);
+  --accent-border:rgba(10,132,255,0.20);
+  --gold:#FBEC5D;
+  --red:#FF375F;
+  --red-lo:rgba(255,55,95,0.08);
+  --red-border:rgba(255,55,95,0.28);
+  --gold-lo:rgba(251,236,93,0.10);
+  --gold-border:rgba(251,236,93,0.28);
+  --bg:#FAFAFA;
+  --surface:#FFFFFF;
+  --surface-hi:#F2F0EB;
+  --text:#0F0F18;
+  --text-mid:#5C5C66;
+  --text-lo:#8E8E96;
+  --border:rgba(0,0,0,0.08);
+  --border-hi:rgba(0,0,0,0.14);
+  --glass:rgba(18,18,26,0.82);
+  --glass-border:rgba(255,255,255,0.10);
+  --on-glass:rgba(255,255,255,0.95);
+  --on-glass-mid:rgba(255,255,255,0.62);
+  --on-glass-lo:rgba(255,255,255,0.40);
+  --r:12px;
+  --r-pill:999px;
   --font:'Geist',-apple-system,system-ui,sans-serif;
   --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   --ease:cubic-bezier(0.32,0.72,0,1);
@@ -35,468 +47,206 @@
 @media (min-width:768px){:root{--pad:48px;}}
 @media (min-width:1280px){:root{--pad:80px;}}
 
-html{scroll-behavior:smooth;scroll-padding-top:96px;}
+html{scroll-behavior:smooth;scroll-padding-top:80px;}
 html,body{
-  background:#0a0a0a;color:var(--whi);font-family:var(--font);
-  font-size:16px;line-height:1.6;
+  background:var(--bg);color:var(--text);font-family:var(--font);
+  font-size:16px;line-height:1.65;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
 }
-body{position:relative;min-height:100dvh;isolation:isolate;}
-
-body::before{
-  content:"";position:fixed;inset:0;z-index:-2;
-  background:
-    radial-gradient(ellipse 70% 55% at 10% 5%,  rgba(155,0,195,0.18) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 92% 12%, rgba(10,132,255,0.18) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 20% 96%, rgba(251,236,93,0.08) 0%, transparent 55%),
-    radial-gradient(ellipse 85% 60% at 85% 100%,rgba(48,209,88,0.10) 0%, transparent 60%),
-    #0a0a0a;
-}
-body::after{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(ellipse 90% 85% at center,black 10%,transparent 78%);
-}
+body{position:relative;min-height:100dvh;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 
-/* HEADER */
+/* ═══ HEADER (glass, matches landing) ═══ */
 .hdr{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:14px var(--pad);
-  background:rgba(10,10,10,0.72);
-  backdrop-filter:saturate(160%) blur(18px);
-  -webkit-backdrop-filter:saturate(160%) blur(18px);
-  border-bottom:1px solid var(--border);
+  background:var(--glass);
+  backdrop-filter:saturate(160%) blur(28px);
+  -webkit-backdrop-filter:saturate(160%) blur(28px);
+  border-bottom:1px solid var(--glass-border);
 }
-.hdr-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.02em;font-size:18px;}
-.hdr-mark{width:28px;height:28px;border-radius:8px;background:var(--gold);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:16px;letter-spacing:-0.04em;}
-.hdr-doc-title{
-  display:none;font-family:var(--mono);font-size:12px;
-  color:var(--wmid);letter-spacing:0.16em;text-transform:uppercase;
-}
+.hdr-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.02em;font-size:18px;color:var(--on-glass);}
+.hdr-mark{width:28px;height:28px;color:var(--gold);flex-shrink:0;}
+.hdr-doc-title{display:none;font-family:var(--mono);font-size:12px;color:var(--on-glass-mid);letter-spacing:0.16em;text-transform:uppercase;}
 @media (min-width:768px){.hdr-doc-title{display:inline-block;}}
 .hdr-right{display:flex;align-items:center;gap:8px;}
-.hdr-back{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px;font-size:13px;font-weight:500;color:var(--wmid);
-  border-radius:var(--r-pill);
-  transition:color .2s var(--ease),background .2s var(--ease);
-}
-.hdr-back:hover{color:var(--whi);background:var(--w06);}
-.hdr-cta{
-  display:none;padding:8px 18px;border-radius:var(--r-pill);
-  background:var(--blue);color:#fff;font-weight:600;font-size:14px;
-  transition:transform .2s var(--ease),background .2s var(--ease);
-}
+.hdr-back{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--on-glass-mid);border-radius:var(--r-pill);transition:color .2s var(--ease),background .2s var(--ease);}
+.hdr-back:hover{color:var(--on-glass);background:rgba(255,255,255,0.08);}
+.hdr-cta{display:none;padding:8px 18px;border-radius:var(--r-pill);background:var(--accent);color:#fff;font-weight:600;font-size:14px;transition:transform .2s var(--ease),background .2s var(--ease);}
 .hdr-cta:hover{background:#1A8FFF;}
 @media (min-width:768px){.hdr-cta{display:inline-flex;}}
 
-/* PROGRESS BAR */
-.progress{
-  position:fixed;top:60px;left:0;height:2px;width:0;
-  background:var(--blue);z-index:99;
-  transition:width .12s linear;
-}
-@media (min-width:768px){.progress{top:64px;}}
+/* ═══ PAGE GRID ═══ */
+.page{display:grid;grid-template-columns:1fr;max-width:1200px;margin:0 auto;padding:96px var(--pad) 96px;gap:48px;}
+@media (min-width:1024px){.page{grid-template-columns:220px minmax(0,1fr);padding:120px var(--pad) 96px;gap:56px;}}
+@media (min-width:1280px){.page{grid-template-columns:240px minmax(0,1fr);gap:80px;}}
 
-/* PAGE LAYOUT */
-.page{
-  display:grid;
-  grid-template-columns:1fr;
-  max-width:1400px;
-  margin:0 auto;
-  padding:96px var(--pad) 96px;
-  gap:48px;
-}
-@media (min-width:1024px){
-  .page{
-    grid-template-columns:240px minmax(0,1fr);
-    padding:120px var(--pad) 96px;
-    gap:64px;
-  }
-}
-@media (min-width:1280px){
-  .page{grid-template-columns:260px minmax(0,1fr);gap:96px;}
-}
-
-/* TOC */
-.toc{
-  display:none;
-  position:sticky;top:96px;
-  align-self:start;
-  max-height:calc(100dvh - 120px);
-  overflow-y:auto;
-  padding-right:8px;
-}
+/* ═══ TOC SIDEBAR ═══ */
+.toc{display:none;position:sticky;top:96px;align-self:start;max-height:calc(100dvh - 120px);overflow-y:auto;padding-right:8px;}
 @media (min-width:1024px){.toc{display:block;}}
-
 .toc::-webkit-scrollbar{width:4px;}
-.toc::-webkit-scrollbar-thumb{background:var(--w10);border-radius:2px;}
-
-.toc-tag{
-  font-family:var(--mono);font-size:10px;font-weight:700;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--wlo);margin-bottom:14px;
-  padding-bottom:10px;border-bottom:1px solid var(--border);
-}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.10);border-radius:2px;}
+.toc-tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-lo);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
 .toc-list{list-style:none;display:flex;flex-direction:column;gap:2px;}
-.toc-list a{
-  display:block;
-  padding:8px 12px;
-  font-size:13px;line-height:1.4;
-  color:var(--wmid);
-  border-left:2px solid transparent;
-  border-radius:0 6px 6px 0;
-  transition:color .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
-}
-.toc-list a:hover{color:var(--whi);background:var(--w06);}
-.toc-list a.active{color:var(--whi);background:var(--w08);border-left-color:var(--blue);}
-.toc-list a.appendix{color:var(--wlo);font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;}
+.toc-list a{display:block;padding:8px 12px;font-size:13px;line-height:1.4;color:var(--text-mid);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:color .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);}
+.toc-list a:hover{color:var(--text);background:rgba(0,0,0,0.04);}
+.toc-list a.active{color:var(--text);background:rgba(0,0,0,0.06);border-left-color:var(--accent);}
+.toc-list a.warn{color:var(--red);}
+.toc-list a.warn.active{color:var(--red);border-left-color:var(--red);}
 
-.toc-section{
-  margin-top:18px;padding-top:14px;
-  border-top:1px solid var(--border);
-}
-.toc-section .toc-tag{margin-bottom:10px;padding-bottom:0;border-bottom:none;}
-
-/* MAIN COLUMN */
-.col{max-width:760px;}
+/* ═══ CONTENT COLUMN ═══ */
+.col{max-width:720px;}
 
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:11px;font-weight:600;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--blue);margin-bottom:24px;
-  padding:6px 12px;border:1px solid var(--blue-d);
-  background:var(--blue-d);border-radius:var(--r-pill);
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:24px;
+  padding:6px 12px;border:1px solid var(--accent-border);background:var(--accent-lo);border-radius:var(--r-pill);
 }
-.eyebrow::before{
-  content:"";width:8px;height:8px;border-radius:50%;
-  background:var(--blue);box-shadow:0 0 12px var(--blue);
-}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);}
 
-h1{
-  font-weight:800;letter-spacing:-0.03em;line-height:1.05;
-  font-size:48px;margin-bottom:20px;
-}
-@media (min-width:768px){h1{font-size:64px;}}
-@media (min-width:1280px){h1{font-size:72px;}}
+h1{font-weight:800;letter-spacing:-0.03em;line-height:1.05;font-size:42px;margin-bottom:20px;color:var(--text);}
+@media (min-width:768px){h1{font-size:52px;}}
+@media (min-width:1280px){h1{font-size:60px;}}
 
-.lede{
-  font-size:20px;line-height:1.55;color:var(--whi);
-  max-width:64ch;margin-bottom:32px;font-weight:400;
-}
-@media (min-width:768px){.lede{font-size:23px;}}
+.lede{font-size:18px;line-height:1.55;color:var(--text-mid);max-width:60ch;margin-bottom:24px;font-weight:400;}
 
-.meta-row{
-  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:48px;
-}
-.meta-row span{
-  font-family:var(--mono);font-size:11px;
-  padding:5px 10px;border:1px solid var(--border);
-  border-radius:var(--r-pill);color:var(--wmid);
-}
-.meta-row span.live{
-  border-color:rgba(48,209,88,0.32);color:var(--green);
-  background:rgba(48,209,88,0.06);
-}
-.meta-row span.live::before{
-  content:"";display:inline-block;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--green);margin-right:6px;vertical-align:middle;
-  box-shadow:0 0 8px var(--green);
-  animation:livepulse 2s var(--ease) infinite;
-}
-@keyframes livepulse{
-  0%,100%{opacity:1;}
-  50%{opacity:0.4;}
-}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.meta-row span{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--r-pill);color:var(--text-lo);}
+.meta-row span.beta{border-color:var(--gold-border);color:#9A8400;background:var(--gold-lo);}
 
-/* SECTIONS */
-section{
-  scroll-margin-top:96px;
-  margin-top:80px;
-}
+/* ═══ BETA NOTICE ═══ */
+.beta-notice{margin-bottom:32px;padding:24px 28px;background:var(--gold-lo);border:1px solid var(--gold-border);border-radius:var(--r);}
+.beta-notice .tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#9A8400;margin-bottom:10px;}
+.beta-notice .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px rgba(251,236,93,0.5);}
+.beta-notice p{margin:0;font-size:15px;line-height:1.6;color:var(--text);}
+.beta-notice p + p{margin-top:8px;color:var(--text-mid);font-size:14px;}
+
+/* ═══ ACCEPTANCE NOTICE ═══ */
+.acceptance{margin-bottom:48px;padding:24px 28px;background:var(--red-lo);border:1px solid var(--red-border);border-radius:var(--r);}
+.acceptance .tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.acceptance .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 8px rgba(255,55,95,0.4);}
+.acceptance p{margin:0;font-size:15px;line-height:1.6;color:var(--text);font-weight:500;}
+.acceptance p + p{margin-top:8px;color:var(--text);font-weight:400;}
+
+/* ═══ SECTIONS ═══ */
+section{scroll-margin-top:96px;margin-top:56px;}
 section:first-of-type{margin-top:0;}
 
-.section-num{
-  font-family:var(--mono);font-size:11px;font-weight:600;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--wlo);margin-bottom:16px;display:block;
-}
+.section-num{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-lo);margin-bottom:12px;display:block;}
+.section-num.warn{color:var(--red);}
 
-h2{
-  font-weight:800;letter-spacing:-0.025em;line-height:1.1;
-  font-size:32px;margin-bottom:20px;
-}
-@media (min-width:768px){h2{font-size:42px;}}
+h2{font-weight:800;letter-spacing:-0.025em;line-height:1.15;font-size:26px;margin-bottom:16px;color:var(--text);}
+@media (min-width:768px){h2{font-size:32px;}}
+h3{font-weight:700;letter-spacing:-0.015em;line-height:1.3;font-size:18px;margin-top:28px;margin-bottom:10px;color:var(--text);}
+h4{font-weight:600;font-size:15px;line-height:1.3;margin-top:20px;margin-bottom:6px;color:var(--text);}
 
-h3{
-  font-weight:700;letter-spacing:-0.015em;line-height:1.2;
-  font-size:22px;margin-top:40px;margin-bottom:14px;
-}
-@media (min-width:768px){h3{font-size:26px;}}
+p{margin-bottom:14px;color:var(--text);font-size:15px;line-height:1.7;}
+p strong,li strong{color:var(--text);font-weight:600;}
+.muted{color:var(--text-mid);}
 
-h4{
-  font-weight:600;font-size:16px;line-height:1.3;
-  margin-top:28px;margin-bottom:8px;color:var(--whi);
-}
+ul,ol{margin:0 0 14px 0;padding-left:20px;}
+li{margin-bottom:6px;color:var(--text);line-height:1.6;font-size:15px;}
+ul li::marker,ol li::marker{color:var(--text-lo);}
 
-p{margin-bottom:16px;color:var(--whi);font-size:16px;line-height:1.65;}
-@media (min-width:768px){p{font-size:17px;}}
+code{font-family:var(--mono);font-size:0.92em;padding:2px 7px;background:rgba(0,0,0,0.05);border:1px solid var(--border);border-radius:6px;color:#C7254E;}
+a.inline{color:var(--accent);border-bottom:1px solid var(--accent-lo);transition:border-color .2s var(--ease);}
+a.inline:hover{border-bottom-color:var(--accent);}
+hr{border:none;border-top:1px solid var(--border);margin:32px 0;}
 
-p strong, li strong{color:#fff;font-weight:600;}
+/* ═══ TABLES ═══ */
+.tbl{margin:20px 0;overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;}
+.tbl thead{background:rgba(0,0,0,0.03);}
+.tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
+.tbl th{font-weight:600;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-lo);}
+.tbl td{color:var(--text);line-height:1.5;}
+.tbl td strong{color:var(--text);}
+.tbl tbody tr:last-child td{border-bottom:none;}
 
-ul,ol{margin:0 0 16px 0;padding-left:20px;}
-li{margin-bottom:8px;color:var(--whi);line-height:1.6;}
-ul li::marker{color:var(--wlo);}
+/* ═══ CALLOUTS ═══ */
+.callout{background:var(--accent-lo);border:1px solid var(--accent-border);border-radius:var(--r);padding:18px 22px;margin:20px 0;}
+.callout p{margin:0;font-size:15px;line-height:1.55;color:var(--text);}
+.callout p strong{color:var(--text);}
+.callout p + p{margin-top:6px;}
+.callout.warn{background:var(--red-lo);border-color:var(--red-border);}
+.callout.gold{background:var(--gold-lo);border-color:var(--gold-border);}
 
-code{
-  font-family:var(--mono);font-size:0.92em;
-  padding:2px 7px;background:var(--w08);
-  border:1px solid var(--border);border-radius:6px;
-  color:#FFC857;
+/* ═══ SHIELD (hard protective blocks) ═══ */
+.shield{
+  margin:24px 0;padding:24px 26px;
+  background:var(--red-lo);
+  border:1.5px solid var(--red-border);
+  border-radius:var(--r);
 }
+.shield .shield-tag{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
+  padding:4px 10px;border:1px solid var(--red-border);
+  background:rgba(255,55,95,0.06);border-radius:var(--r-pill);margin-bottom:14px;
+}
+.shield p{margin-bottom:10px;font-size:13.5px;font-weight:600;line-height:1.55;text-transform:uppercase;letter-spacing:0.02em;color:var(--text);}
+.shield p:last-child{margin-bottom:0;}
+.shield p strong{color:var(--text);font-weight:800;}
+.shield ul,.shield ol{margin:8px 0 10px 0;padding-left:22px;}
+.shield li{font-size:13.5px;font-weight:600;line-height:1.5;text-transform:uppercase;letter-spacing:0.02em;color:var(--text);}
 
-a.inline{color:var(--blue);text-decoration:none;border-bottom:1px solid var(--blue-d);transition:border-color .2s var(--ease);}
-a.inline:hover{border-bottom-color:var(--blue);}
+/* ═══ CONTACT ═══ */
+.contact-block{margin:32px 0 0;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);}
+.contact-block .em{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--accent);display:inline-block;}
+.contact-block .em:hover{color:#1A8FFF;}
+.contact-block p{margin-top:8px;color:var(--text-mid);font-size:14px;}
 
-hr{border:none;border-top:1px solid var(--border);margin:48px 0;}
-
-/* MOCK POSTS */
-.mock{
-  background:var(--mock-bg);
-  border:1px solid var(--border-hi);
-  border-radius:var(--r-lg);
-  padding:18px 20px;
-  font-family:var(--mono);font-size:14px;line-height:1.6;
-  margin:24px 0;max-width:560px;
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,0,0,0.32);
-}
-.mock-head{
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-  color:rgba(255,255,255,0.78);font-size:12px;margin-bottom:10px;
-}
-.mock-user{color:rgba(255,255,255,0.92);font-weight:500;}
-.mock-meta{color:rgba(255,255,255,0.62);}
-.mock-dot{color:rgba(255,255,255,0.40);}
-.mock-body{color:var(--whi);font-size:15px;line-height:1.5;margin-bottom:12px;font-family:var(--font);}
-.mock-foot{
-  display:flex;align-items:center;gap:6px;
-  color:rgba(255,255,255,0.78);font-size:12px;
-  padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);
-}
-.mock-arrow{color:rgba(255,255,255,0.50);}
-.mock-echo{color:#3FA0FF;font-weight:600;}
-.mock-joined{color:#4FD971;font-weight:600;}
-.mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--male);box-shadow:0 0 8px var(--male);margin-right:6px;vertical-align:middle;}
-.mock.f .mock-user::before{background:var(--magenta);box-shadow:0 0 8px var(--magenta);}
-.mock.b .mock-user::before{background:var(--gold);box-shadow:0 0 8px var(--gold);}
-
-/* TABLES */
-.table-wrap{
-  margin:24px 0;
-  overflow-x:auto;
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  background:var(--surface);
-}
-table{
-  width:100%;border-collapse:collapse;
-  font-size:14px;
-}
-thead{
-  background:var(--w06);
-}
-th, td{
-  text-align:left;padding:14px 18px;
-  border-bottom:1px solid var(--border);
-  vertical-align:top;
-}
-th{
-  font-weight:600;font-size:11px;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--wmid);
-}
-td{color:var(--whi);line-height:1.5;}
-td strong{color:#fff;}
-tbody tr:last-child td{border-bottom:none;}
-tbody tr:hover td{background:var(--w06);}
-table .num{font-family:var(--mono);}
-
-/* HIGHLIGHT ROW (LOKIO row in compare tables) */
-tr.highlight td{
-  background:linear-gradient(90deg, rgba(10,132,255,0.10), rgba(10,132,255,0.02));
-  font-weight:600;
-}
-tr.highlight td:first-child{color:#fff;font-weight:800;}
-
-/* MARKETS GRID */
-.markets{
-  display:grid;grid-template-columns:1fr;gap:16px;
-  margin:32px 0;
-}
-@media (min-width:640px){.markets{grid-template-columns:1fr 1fr;}}
-
-.market{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--r-xl);
-  padding:24px;
-  transition:border-color .25s var(--ease);
-}
-.market:hover{border-color:var(--border-hi);}
-
-.market-tag{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:12px;
-}
-.market-num{
-  font-family:var(--mono);font-size:11px;font-weight:600;
-  letter-spacing:0.12em;color:var(--wmid);
-}
-.market-size{
-  font-family:var(--mono);font-size:11px;font-weight:600;
-  color:var(--gold);
-}
-.market h3{
-  font-size:17px;margin:0 0 8px 0;color:#fff;
-}
-.market p{
-  font-size:14px;color:var(--wmid);margin:0;line-height:1.55;
-}
-
-/* CALLOUT */
-.callout{
-  background:linear-gradient(135deg, rgba(10,132,255,0.08), rgba(10,132,255,0.02));
-  border:1px solid rgba(10,132,255,0.24);
-  border-radius:var(--r-xl);
-  padding:24px 28px;
-  margin:32px 0;
-}
-.callout p{margin:0;font-size:17px;line-height:1.55;}
-.callout p strong{color:#fff;}
-
-.callout.gold{
-  background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.02));
-  border-color:rgba(251,236,93,0.24);
-}
-
-/* MERMAID DIAGRAMS */
-.diagram{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--r-xl);
-  padding:32px 24px;
-  margin:32px 0;
-  overflow-x:auto;
-  text-align:center;
-}
-.diagram svg{max-width:100%;height:auto;}
-
-/* PILL TAGS (flywheel use cases) */
-.pills{
-  display:flex;flex-wrap:wrap;gap:8px;
-  margin:24px 0;
-}
-.pills span{
-  font-family:var(--mono);font-size:12px;
-  padding:6px 12px;border:1px solid var(--border);
-  border-radius:var(--r-pill);color:var(--wmid);
-  background:var(--w06);
-  transition:border-color .2s var(--ease),color .2s var(--ease);
-}
-.pills span:hover{border-color:var(--border-hi);color:var(--whi);}
-
-/* APPENDIX */
-.appendix-wrap{
-  margin-top:96px;
-  padding-top:48px;
-  border-top:1px solid var(--border);
-}
-
-.appendix-wrap > h2{
-  font-size:36px;margin-bottom:12px;
-}
-
-.appendix-intro{
-  color:var(--wmid);font-size:16px;line-height:1.6;
-  max-width:64ch;margin-bottom:48px;
-}
-
-.appendix-section{
-  margin-top:48px;
-  scroll-margin-top:96px;
-}
-
-.appendix-section h3{
-  display:flex;align-items:baseline;gap:12px;
-  font-family:var(--mono);font-size:14px;
-  letter-spacing:0.08em;text-transform:uppercase;
-  color:var(--wmid);font-weight:600;
-  padding-bottom:10px;border-bottom:1px solid var(--border);
-  margin-top:0;margin-bottom:20px;
-}
-.appendix-section h3 .ax-letter{
-  display:inline-block;
-  width:28px;height:28px;
-  background:var(--blue);color:#fff;
-  border-radius:6px;
-  display:grid;place-items:center;
-  font-weight:800;font-size:13px;
-  font-family:var(--font);
-}
-
-/* CONTACT BLOCK */
-.contact-block{
-  margin:48px 0 0;
-  padding:32px;
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--r-xl);
-  text-align:center;
-}
-.contact-block .em{
-  font-family:var(--mono);font-size:18px;font-weight:600;
-  color:var(--blue);display:inline-block;margin-bottom:8px;
-}
-.contact-block .em:hover{color:#3FA0FF;}
-.contact-block .lo{
-  font-family:var(--mono);font-size:13px;color:var(--wlo);
-  letter-spacing:0.04em;
-}
-
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-top:80px;}
+/* ═══ FOOTER ═══ */
+footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-top:64px;background:var(--surface);}
 .foot-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px;}
 @media (min-width:640px){.foot-inner{grid-template-columns:1fr 1fr;gap:32px 48px;}}
 @media (min-width:1024px){.foot-inner{grid-template-columns:1.4fr 1fr 1fr;gap:64px;}}
-.foot-col h4{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--wlo);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-top:0;}
+.foot-col h4{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-lo);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-top:0;}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;margin:0;}
 .foot-col li{margin:0;}
-.foot-col a{font-size:14px;color:var(--wmid);transition:color .2s var(--ease);line-height:1.4;display:inline-block;padding:2px 0;}
-.foot-col a:hover{color:var(--whi);}
-.foot-contact{font-family:var(--mono);font-size:13px;color:var(--wmid);display:flex;flex-direction:column;gap:4px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.foot-col a{font-size:14px;color:var(--text-mid);transition:color .2s var(--ease);line-height:1.4;display:inline-block;padding:2px 0;}
+.foot-col a:hover{color:var(--text);}
+.foot-contact{font-family:var(--mono);font-size:13px;color:var(--text-mid);display:flex;flex-direction:column;gap:4px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
 .foot-contact a{padding:0;}
-.foot-contact a:hover{color:var(--whi);}
-.foot-mark{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--wlo);letter-spacing:0.08em;}
+.foot-contact a:hover{color:var(--text);}
+.foot-mark{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text-lo);letter-spacing:0.08em;}
 
-/* PRINT */
+/* ═══ SMALL VIEWPORT / IFRAME ═══ */
+@media (max-width:520px){
+  :root{--pad:16px;}
+  .hdr{padding:10px var(--pad);}
+  .hdr-logo{font-size:15px;gap:8px;}
+  .hdr-mark{width:22px;height:22px;}
+  .hdr-doc-title{display:none;}
+  .hdr-back{padding:6px 10px;font-size:12px;}
+  .page{padding:72px var(--pad) 48px;gap:24px;}
+  .col{max-width:100%;}
+  h1{font-size:28px;margin-bottom:14px;}
+  h2{font-size:22px;}
+  h3{font-size:16px;}
+  .lede{font-size:15px;}
+  .eyebrow{font-size:10px;padding:4px 10px;}
+  .meta-row span{font-size:10px;padding:4px 8px;}
+  .beta-notice,.acceptance,.shield,.callout,.contact-block{padding:16px 18px;}
+  .tbl th,.tbl td{padding:8px 10px;font-size:13px;}
+  footer{padding:32px var(--pad) 24px;}
+  .foot-inner{gap:24px;}
+}
+
+/* ═══ PRINT ═══ */
 @media print{
-  .hdr,.toc,.progress,footer,.contact-block .lo{display:none;}
-  body::before,body::after{display:none;}
+  .hdr,.toc,footer{display:none;}
   body{background:#fff;color:#000;}
   .page{display:block;padding:0;}
   h1,h2,h3,h4{color:#000;}
   p,li,td{color:#222;}
-  .mock{break-inside:avoid;background:#f5f5f5;border-color:#ccc;}
-  .table-wrap{break-inside:avoid;}
+  .callout,.beta-notice,.acceptance,.contact-block,.tbl,.shield{break-inside:avoid;background:#f5f5f5;border-color:#bbb;}
+  .shield{background:#ffeded !important;border-color:#cc4444 !important;}
+  .shield p,.shield li{color:#220000;}
   section{break-inside:avoid-page;}
 }
 </style>
@@ -505,7 +255,11 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 
 <header class="hdr">
   <a href="/" class="hdr-logo" aria-label="LOKIO home">
-    <span class="hdr-mark">L</span>
+    <svg class="hdr-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(80,80) rotate(45)">
+        <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
+      </g>
+    </svg>
     <span>LOKIO</span>
     <span class="hdr-doc-title">/ Whitepaper</span>
   </a>
@@ -518,618 +272,649 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
   </div>
 </header>
 
-<div class="progress" id="progress"></div>
-
 <div class="page">
-
-  <!-- ─── TOC ─── -->
   <aside class="toc" aria-label="Contents">
-    <div class="toc-tag">Contents</div>
+    <div class="toc-tag">Whitepaper</div>
     <ul class="toc-list">
       <li><a href="#intro">Introduction</a></li>
-      <li><a href="#markets">Markets · why this is big</a></li>
+      <li><a href="#markets">Markets</a></li>
       <li><a href="#broken">What is broken</a></li>
-      <li><a href="#mechanic">One mechanic solves it all</a></li>
-      <li><a href="#psychology">Psychology of the soft entry</a></li>
+      <li><a href="#mechanic">One mechanic</a></li>
+      <li><a href="#psychology">Psychology</a></li>
       <li><a href="#flywheel">Flywheel</a></li>
       <li><a href="#humour">Local humour</a></li>
       <li><a href="#competitors">Competitors</a></li>
       <li><a href="#business">Business model</a></li>
       <li><a href="#traction">Traction</a></li>
       <li><a href="#next">What ships next</a></li>
-      <li><a href="#exploring">Currently exploring</a></li>
+      <li><a href="#exploring">Exploring</a></li>
+      <li><a href="#appendix">Appendix · Technical</a></li>
     </ul>
-    <div class="toc-section">
-      <div class="toc-tag">Appendix · Technical</div>
-      <ul class="toc-list">
-        <li><a href="#ax-a" class="appendix">A · Architecture</a></li>
-        <li><a href="#ax-b" class="appendix">B · Principles</a></li>
-        <li><a href="#ax-c" class="appendix">C · Safety</a></li>
-        <li><a href="#ax-d" class="appendix">D · Data flows</a></li>
-        <li><a href="#ax-e" class="appendix">E · Auth</a></li>
-        <li><a href="#ax-f" class="appendix">F · GDPR</a></li>
-        <li><a href="#ax-g" class="appendix">G · DB models</a></li>
-        <li><a href="#ax-h" class="appendix">H · API surface</a></li>
-        <li><a href="#ax-i" class="appendix">I · Glossary</a></li>
-      </ul>
-    </div>
   </aside>
 
-  <!-- ─── MAIN ─── -->
   <main class="col">
 
     <span class="eyebrow">Whitepaper · v1</span>
     <h1>LOKIO.</h1>
     <p class="lede">A thought on a map. No strings attached.</p>
     <div class="meta-row">
-      <span>~36 KB</span>
-      <span>~20 min read</span>
-      <span>EN</span>
-      <span class="live">Live now · app.lokio.org</span>
+      <span>Effective: 26 May 2026</span>
+      <span>Last updated: 26 May 2026</span>
+      <span class="beta">v1 · Live</span>
     </div>
 
-    <section id="intro">
-      <p>The only product in the world that lets you drop a joke, a thought, anything onto the map of your city in 5 seconds, without an audience, without followers, without a content plan, and without the fear of rejection. A new format of social interaction tied to a place, not to a feed.</p>
+<p>The only product in the world that lets you drop a joke, a thought, anything onto the map of your city in 5 seconds, without an audience, without followers, without a content plan, and without the fear of rejection. A new format of social interaction tied to a place, not to a feed.</p>
+<hr>
+<section id="intro">
+<p>The only product in the world that lets you drop a joke, a thought, anything onto the map of your city in 5 seconds, without an audience, without followers, without a content plan, and without the fear of rejection. A new format of social interaction tied to a place, not to a feed.</p>
+</section>
 
-      <div class="mock m">
-        <div class="mock-head">
-          <span class="mock-user">@user_a1b2c</span>
-          <span class="mock-dot">·</span>
-          <span class="mock-meta">80m · 23h remaining</span>
-        </div>
-        <div class="mock-body">"Coffee near the airport, anyone want company in 30 min?"</div>
-        <div class="mock-foot">
-          <span class="mock-arrow">↳</span>
-          <span class="mock-echo">3 echo replies</span>
-          <span class="mock-dot">·</span>
-          <span class="mock-joined">1 joined</span>
-        </div>
-      </div>
-    </section>
 
-    <hr/>
 
-    <section id="markets">
-      <span class="section-num">01</span>
-      <h2>Markets. Why this is big.</h2>
-      <p>LOKIO does not compete in one market. One mechanic crosses six giant industries, each broken in its own way.</p>
+<hr>
+<section id="markets">
+<span class="section-num">01</span>
+<h2>Markets. Why this is big.</h2>
+<p>LOKIO does not compete in one market. One mechanic crosses six giant industries, each broken in its own way.</p>
+<h3>1. Dating · $12B+ per year</h3>
+<p>An industry that earns from loneliness but has no interest in solving it. Tinder, Bumble, Hinge, Badoo. Combined revenue more than $12 billion per year. And yet:</p>
+<p><strong>Reputation cost.</strong> Decent people do not sit on dating sites. The belief gets stronger every year. Installing a dating app means admitting you cannot meet people in real life. Users hide it from friends.</p>
+<p><strong>Intent.</strong> You are required to arrive with a stated request: &quot;I am looking.&quot; There is no way to just be near an interesting person. Every action is an explicit signal: &quot;I am alone.&quot;</p>
+<p><strong>Trust.</strong> Half the profiles are fakes, bots, commerce. The escort industry parasitises every platform. VIP services at $500 per month offer the same mercenary people for more money.</p>
+<p><strong>Payment.</strong> Free, you are invisible. You pay, still no guarantee. The business model of dating apps depends on you not finding a partner. Because if you do, you leave and stop paying.</p>
+<p><strong>Rejection.</strong> You are rejected by a photo. A swipe to the left is a destructive blow to self-worth. Swipe-fatigue is a real, documented phenomenon. People burn out.</p>
+<p><strong>Psychology.</strong> Insecurity: maybe I am not attractive enough for this app. Anxiety: what to write first. Objectification: people become cards to flick through.</p>
+<p><strong>Format.</strong> A dating profile is a self-sale. Photo, bio, interests, optimised for the market. This is not how people meet in real life. In real life you were just in the same place. You started talking. It clicked.</p>
+<div class="callout">
+<p><strong>LOKIO.</strong> No profile form. No swipe. No "I am looking" signal. You wrote a thought on a map. Someone replied. The meeting happened through context, not a self-sale.</p>
+</div>
 
-      <div class="markets">
-        <div class="market">
-          <div class="market-tag"><span class="market-num">01</span><span class="market-size">$12B+/yr</span></div>
-          <h3>Dating</h3>
-          <p>An industry that earns from loneliness but has no interest in solving it. Reputation cost, declared intent, fakes and bots, swipe fatigue.</p>
-        </div>
-        <div class="market">
-          <div class="market-tag"><span class="market-num">02</span><span class="market-size">$230B/yr</span></div>
-          <h3>Social networks</h3>
-          <p>A hierarchy where 99% of people are consumers of someone else's edited life. Followers, content plans, fake reality, feed instead of life.</p>
-        </div>
-        <div class="market">
-          <div class="market-tag"><span class="market-num">03</span><span class="market-size">$45B/yr</span></div>
-          <h3>Local discovery</h3>
-          <p>Reviews from months ago. No realtime. No voice of the people who live here right now. Tourists see the same monuments everyone in the world knows about.</p>
-        </div>
-        <div class="market">
-          <div class="market-tag"><span class="market-num">04</span><span class="market-size">$1.5B/yr</span></div>
-          <h3>Events &amp; meetups</h3>
-          <p>High barrier. Create an event, describe it, set a category, set a time. 90% of people will never originate one.</p>
-        </div>
-        <div class="market">
-          <div class="market-tag"><span class="market-num">05</span><span class="market-size">$0.5B/yr</span></div>
-          <h3>Linktree &amp; bio pages</h3>
-          <p>You pay to collect links in one place. No geo, no context, no interests. Just a list of links.</p>
-        </div>
-        <div class="market">
-          <div class="market-tag"><span class="market-num">06</span><span class="market-size">$150B+/yr</span></div>
-          <h3>Local business marketing</h3>
-          <p>Small business spends $3,500/month on average. Marketer, ads, SEO. No instrument for a café to say "first coffee free, anyone in the district right now."</p>
-        </div>
-      </div>
+<h3>2. Social networks · $230B per year</h3>
+<p>Instagram, TikTok, Facebook. The largest market. The most toxic by architecture.</p>
+<p><strong>Followers.</strong> The whole model is built on inequality. One person at the top collects likes and attention. Millions at the bottom sit, watch other people&#39;s lives, like, supporting the destructive pendulum. This is not social interaction. This is a hierarchy where 99% of people are consumers of someone else&#39;s content, not participants in their own life.</p>
+<p><strong>Fake reality.</strong> Filters, staged photos, rented cars for stories. People compare their real life to someone else&#39;s edited life and lose every time. Depression, anxiety, low self-esteem. Documented by research. Admitted by Facebook in their own internal reports.</p>
+<p><strong>Entry barrier.</strong> To write a post you need an account with followers, a content plan, a strategy. &quot;Anyone for coffee?&quot; has nowhere to go. And if you write it, 300 followers see it, of whom 290 are in other cities.</p>
+<p><strong>Feed instead of life.</strong> Social networks are bound to an endless algorithmic feed optimised for retention. Real life nearby does not happen. A person sits in a café and scrolls Instagram instead of talking to the person at the next table.</p>
+<div class="callout">
+<p>LOKIO is the anti-follower model. No hierarchy. No likes. No followers. <strong>Everyone equal on the map.</strong> Your thought is visible not because you have a million followers but because you are nearby. Geography instead of popularity. Reality instead of a shop window.</p>
+</div>
 
-      <h3>1. Dating · $12B+ per year</h3>
-      <p>An industry that earns from loneliness but has no interest in solving it. Tinder, Bumble, Hinge, Badoo. Combined revenue more than $12 billion per year. And yet:</p>
-      <p><strong>Reputation cost.</strong> Decent people do not sit on dating sites. The belief gets stronger every year. Installing a dating app means admitting you cannot meet people in real life. Users hide it from friends.</p>
-      <p><strong>Intent.</strong> You are required to arrive with a stated request: "I am looking." There is no way to just be near an interesting person. Every action is an explicit signal: "I am alone."</p>
-      <p><strong>Trust.</strong> Half the profiles are fakes, bots, commerce. The escort industry parasitises every platform. VIP services at $500 per month offer the same mercenary people for more money.</p>
-      <p><strong>Payment.</strong> Free, you are invisible. You pay, still no guarantee. The business model of dating apps depends on you not finding a partner. Because if you do, you leave and stop paying.</p>
-      <p><strong>Rejection.</strong> You are rejected by a photo. A swipe to the left is a destructive blow to self-worth. Swipe-fatigue is a real, documented phenomenon. People burn out.</p>
-      <p><strong>Psychology.</strong> Insecurity: maybe I am not attractive enough for this app. Anxiety: what to write first. Objectification: people become cards to flick through.</p>
-      <p><strong>Format.</strong> A dating profile is a self-sale. Photo, bio, interests, optimised for the market. This is not how people meet in real life. In real life you were just in the same place. You started talking. It clicked.</p>
+<h3>3. Local discovery · $45B per year</h3>
+<p>Google Maps, Yelp, 2GIS, TripAdvisor. They show points on a map, but without the voice of people. Reviews written months ago. No realtime information about what is happening right now.</p>
+<p>A tourist arrives in a city and sees the same monuments everyone in the world knows about. Unique finds, local secrets, live events right now. No platform shows this.</p>
+<p><strong>LOKIO.</strong> A living map of the city through the eyes of those who live there. The street where locals are eating tonight, the free concert this evening, the alley with the best food no guidebook mentions. Pinned in real time by people standing there now.</p>
+<h4>The forgotten pain. Tourists, relocators, business trips.</h4>
+<p>A huge layer of people no one serves at all.</p>
+<p><strong>Tourist.</strong> Lands in Istanbul. Knows no one. Google Maps will show Hagia Sophia and the Grand Bazaar. The whole world knows about them. But where are locals eating tonight? Where is the free concert this evening? Where is that alley with the best street food no guidebook mentions? Nowhere to find out. Opens LOKIO. Sees a living map of the city through the eyes of those who live there. A completely different travel experience.</p>
+<p><strong>Relocator.</strong> Moved to a new country. Not a single contact. Does not know the city, does not know the language, does not know where to go. Loneliness in a foreign city is a real problem millions of people live with. Expat forums from 2005 do not help. Telegram chats with 10,000 people are chaos. Opens LOKIO, writes a thought in their own language, finds their people.</p>
+<p><strong>Business trip.</strong> Arrived for a week of work. Evenings empty. You can sit in a hotel. You can open LOKIO and find company for dinner, a concert, a walk. Not a dating app. Not &quot;I am looking for a date.&quot; Just a thought on a map.</p>
+<p><strong>Moving home.</strong> The most stressful period of life. New district, new routes, new neighbours you do not know. LOKIO turns an unfamiliar district into a living space where you can see what is happening and who is around.</p>
+<p><strong>Finding your own people in your own language.</strong> In any city in the world there are people who speak your language, share your culture, miss home. LOKIO lets you find them without forums, without 10,000-member chats. Just open the map and see.</p>
+<p><strong>A people&#39;s map of discoveries.</strong> Other tourists and experienced travellers found places Google Maps does not even know about. An abandoned temple in the jungle. A beach with no people. A café with the best coffee in the city missing from every guidebook. Pinned in real time by people standing there now.</p>
+<p><strong>Language without a barrier.</strong> You write on the map in your own language. Anyone in the city who reads that language sees the pin and can reply. A traveller writes in English in Tokyo and finds the English-speaking part of the city. A relocator writes in their native language in Berlin and finds the diaspora. The barrier is not removed by translation. It is removed by the fact that any city of any size has speakers of every major language, and the map makes them visible.</p>
+<h3>4. Events and meetups · $1.5B per year</h3>
+<p>Meetup, Eventbrite, TimePad. High barrier: create an event, describe it, pick a category, set a time. For a thought like &quot;anyone for coffee in 30 minutes&quot; this is excessive.</p>
+<p>90% of people will never create an event on Meetup. Too much responsibility. Too scary that no one will come.</p>
+<div class="callout">
+<p><strong>LOKIO.</strong> "Anyone for coffee in 30 minutes" is already an event. No title, no description, no category, no time form. Five seconds. The 90% who never created an event on Meetup post on LOKIO every day.</p>
+</div>
 
-      <div class="callout">
-        <p><strong>LOKIO.</strong> No profile form. No swipe. No "I am looking" signal. You wrote a thought on a map. Someone replied. The meeting happened through context, not a self-sale.</p>
-      </div>
+<h3>5. Linktree and bio pages · $0.5B per year</h3>
+<p>Linktree, Carrd, bio pages. You pay to collect links in one place. No geo, no context, no interests. Just a list of links.</p>
+<p><strong>LOKIO.</strong> A LOKIO profile at <code>lokio.org/u/&lt;id&gt;</code> is all your links in one place. Plus geolocation. Plus interests. Plus what you wrote on the map. Free. Forever. People nearby see not only what you wrote, but who you are.</p>
+<h3>6. Local business marketing · $150B+ per year</h3>
+<p>Small business spends on average $3,500 per month on marketing. Marketer $2,000, ads $1,000, SEO $500. The result: maybe customers come, maybe not. A click in Google Ads costs $3 to 5 and it is a non-targeted click from a person who may be in another city.</p>
+<p>There is no instrument for a café to say &quot;first coffee free, anyone in the district right now, come over.&quot; Direct-to-customer without an intermediary.</p>
+<div class="callout gold">
+<p><strong>LOKIO.</strong> $4.99 for a banner pin on the map. Visible to every user who opens the map in the district. The free-coffee filter surfaces it on top of regular pins to people actively looking for offers right now. For $1.99 the pin lifts to full city visibility. ROI measurable on the same day. <strong>$4.99 against $3,500 per month.</strong></p>
+</div>
+</section>
 
-      <h3>2. Social networks · $230B per year</h3>
-      <p>Instagram, TikTok, Facebook. The largest market. The most toxic by architecture.</p>
-      <p><strong>Followers.</strong> The whole model is built on inequality. One person at the top collects likes and attention. Millions at the bottom sit, watch other people's lives, like, supporting the destructive pendulum. "Look how many followers I have," and you are the one who sits and likes someone else's lie about a luxurious life. This is not social interaction. This is a hierarchy where 99% of people are consumers of someone else's content, not participants in their own life.</p>
-      <p><strong>Fake reality.</strong> Filters, staged photos, rented cars for stories. People compare their real life to someone else's edited life and lose every time. Depression, anxiety, low self-esteem. Documented by research. Admitted by Facebook in their own internal reports.</p>
-      <p><strong>Entry barrier.</strong> To write a post you need an account with followers, a content plan, a strategy. "Anyone for coffee?" has nowhere to go. And if you write it, 300 followers see it, of whom 290 are in other cities.</p>
-      <p><strong>Feed instead of life.</strong> Social networks are bound to an endless algorithmic feed optimised for retention. Real life nearby does not happen. A person sits in a café and scrolls Instagram instead of talking to the person at the next table.</p>
 
-      <div class="callout">
-        <p>LOKIO is the anti-follower model. No hierarchy. No likes. No followers. <strong>Everyone equal on the map.</strong> Your thought is visible not because you have a million followers but because you are nearby. Geography instead of popularity. Reality instead of a shop window.</p>
-      </div>
 
-      <h3>3. Local discovery · $45B per year</h3>
-      <p>Google Maps, Yelp, 2GIS, TripAdvisor. They show points on a map, but without the voice of people. Reviews written months ago. No realtime information about what is happening right now.</p>
-      <p>A tourist arrives in a city and sees the same monuments everyone in the world knows about. Unique finds, local secrets, live events right now. No platform shows this.</p>
-      <p><strong>LOKIO.</strong> A living map of the city through the eyes of those who live there. The street where locals are eating tonight, the free concert this evening, the alley with the best food no guidebook mentions. Pinned in real time by people standing there now.</p>
+<hr>
+<section id="broken">
+<span class="section-num">02</span>
+<h2>What is broken across all six industries at once</h2>
+<p>The same root problem: <strong>a barrier between a person and the people physically near them.</strong></p>
+<p>To meet someone you need a dating app and the social cost of using it. To find sport company you need to create an event and take responsibility for it. To know what is around you you need to Google reviews from three months ago. For a business to reach a customer next door you need a marketer and an ad budget. To say what you are thinking you need an audience of followers.</p>
+<p>4.9 billion people own smartphones. No product in the world allows a person to spontaneously, without barriers, without payment, become visible to the people near them.</p>
+<div class="callout">
+<p><strong>LOKIO does.</strong></p>
+</div>
+</section>
 
-      <h3>3.1 The forgotten pain. Tourists, relocators, business trips.</h3>
-      <p>A huge layer of people no one serves at all.</p>
-      <p><strong>Tourist.</strong> Lands in Istanbul. Knows no one. Google Maps will show Hagia Sophia and the Grand Bazaar. The whole world knows about them. But where are locals eating tonight? Where is the free concert this evening? Where is that alley with the best street food no guidebook mentions? Nowhere to find out. Opens LOKIO. Sees a living map of the city through the eyes of those who live there. A completely different travel experience.</p>
-      <p><strong>Relocator.</strong> Moved to a new country. Not a single contact. Does not know the city, does not know the language, does not know where to go. Loneliness in a foreign city is a real problem millions of people live with. Expat forums from 2005 do not help. Telegram chats with 10,000 people are chaos. Opens LOKIO, writes a thought in their own language, finds their people. Speakers of one language in Berlin, of another in Seoul, English speakers anywhere. The language barrier stops being a wall, because the map shows who nearby speaks your language.</p>
-      <p><strong>Business trip.</strong> Arrived for a week of work. Evenings empty. You can sit in a hotel. You can open LOKIO and find company for dinner, a concert, a walk. Not a dating app. Not "I am looking for a date." Just a thought on a map: "anyone know a good bar nearby?" And now you have company and recommendations from locals.</p>
-      <p><strong>Moving home.</strong> The most stressful period of life. New district, new routes, new neighbours you do not know. LOKIO turns an unfamiliar district into a living space where you can see what is happening and who is around. A neighbour wrote: "free seedlings, who needs them?". Another neighbour wrote: "I walk my dog in the park every morning, who wants company?". The district starts to live.</p>
-      <p><strong>Finding your own people in your own language.</strong> In any city in the world there are people who speak your language, share your culture, miss home. LOKIO lets you find them without forums, without 10,000-member chats, without "is anyone here from...". Just open the map and see.</p>
-      <p><strong>A people's map of discoveries.</strong> Other tourists and experienced travellers found places Google Maps does not even know about. An abandoned temple in the jungle. A beach with no people. A café with the best coffee in the city missing from every guidebook. A viewpoint only locals know about. Pinned a point. Wrote what they found. The next traveller opens LOKIO and sees it. A living guide written by travellers in real time. Not a TripAdvisor review from six months ago. A pin placed by a person standing there right now.</p>
-      <p><strong>Language without a barrier.</strong> You write on the map in your own language. Anyone in the city who reads that language sees the pin and can reply. You do not need to learn the local language to publish a thought, ask a question, find company. A traveller writes in English in Tokyo and finds the English-speaking part of the city. A relocator writes in their native language in Berlin and finds the diaspora. A backpacker writes in Spanish in Bangkok and finds five other Spanish speakers within a kilometre. The barrier is not removed by translation. It is removed by the fact that any city of any size has speakers of every major language, and the map makes them visible.</p>
 
-      <h3>4. Events and meetups · $1.5B per year</h3>
-      <p>Meetup, Eventbrite, TimePad. High barrier: create an event, describe it, pick a category, set a time. For a thought like "anyone for coffee in 30 minutes" this is excessive.</p>
-      <p>90% of people will never create an event on Meetup. Too much responsibility. Too scary that no one will come.</p>
-      <div class="callout">
-        <p><strong>LOKIO.</strong> "Anyone for coffee in 30 minutes" is already an event. No title, no description, no category, no time form. Five seconds. The 90% who never created an event on Meetup post on LOKIO every day.</p>
-      </div>
 
-      <h3>5. Linktree and bio pages · $0.5B per year</h3>
-      <p>Linktree, Carrd, bio pages. You pay to collect links in one place. No geo, no context, no interests. Just a list of links.</p>
-      <p><strong>LOKIO.</strong> A LOKIO profile at <code>lokio.org/u/&lt;id&gt;</code> is all your links in one place. Plus geolocation. Plus interests. Plus what you wrote on the map. Free. Forever. People nearby see not only what you wrote, but who you are.</p>
+<hr>
+<section id="mechanic">
+<span class="section-num">03</span>
+<h2>LOKIO. One mechanic solves it all.</h2>
+<p>Open the map. Drop a joke, a thought, anything. Publish. That is it.</p>
+<p>It appears on the map. People nearby see it. Conversation begins on its own. Five seconds from opening to publishing.</p>
+<p>Not a feed. Not dating. Not a check-in. Not a review. <strong>A thought tied to a place.</strong></p>
+<h3>Visibility and participation</h3>
+<p>A pin&#39;s visibility depends on the user&#39;s map viewport. Open the map zoomed on your district, you see pins in your district. Zoom out to the city, you see pins across the city. The radius is not fixed. The viewport is.</p>
+<p>To <strong>publish</strong> a pin, the user must be physically there. The server enforces a maximum 1 km between the user&#39;s last known location and the publication coordinates (Proof of Presence). A user in Berlin cannot publish a pin in São Paulo.</p>
+<p>To <strong>read or reply</strong>, no distance restriction. Anyone who sees a pin in their viewport can open the topic chat and write. Conversation crosses any distance.</p>
+<p>To <strong>lift visibility beyond the viewport</strong>, the author pays a city-wide visibility upsell ($1.99 for users, free baseline for others). The pin then appears to every user across the city, not only those whose viewport covers the pin&#39;s location.</p>
+<h3>Why this solves all six industries</h3>
+<p><strong>Meeting people without the social cost.</strong> You are not &quot;on dating sites.&quot; You wrote a thought on a map. Someone replied. The meeting happened organically. Through a shared interest, not through a profile form. Like in real life: you were not going to meet someone, you were going fishing. But you joined a thread about fishing and found friends, company, a partner.</p>
+<p>No rejection by photo. No swipes. No profile form. No &quot;selling yourself.&quot; Match by interest, not by appearance.</p>
+<p><strong>A social network without barriers.</strong> No followers needed. No content plan needed. No audience needed. You wrote what you were thinking and the people nearby saw it. Not 290 followers in other cities, but 5 people across the street.</p>
+<p><strong>Discovery in real time.</strong> Not reviews from a month ago, but what is happening right now. A festival in an hour. A free tasting. A concert. A sale. A living map of the city.</p>
+<p><strong>Events in 5 seconds.</strong> No need to create an event with a 500-word description. &quot;Anyone for coffee?&quot; is already an event. 10 people nearby saw it. 3 replied. They went.</p>
+<p><strong>A bio with geolocation.</strong> A LOKIO profile is all your links in one place. Telegram, GitHub, Behance, your site. A free Linktree, but with geolocation and interests. People nearby see not only what you wrote, but who you are.</p>
+<p><strong>Business at $0 instead of $3,500 per month.</strong> A café writes on the map: &quot;first coffee free, anyone in the district right now.&quot; Does not hire a marketer. Does not pay for SEO. Does not buy ads at $3 to 5 per click for a non-targeted audience. Users who open the map in the district see the pin. The free-coffee filter surfaces it to people actively looking. They come, try it, return. ROI measurable on the same day.</p>
+</section>
 
-      <h3>6. Local business marketing · $150B+ per year</h3>
-      <p>Small business spends on average $3,500 per month on marketing. Marketer $2,000, ads $1,000, SEO $500. The result: maybe customers come, maybe not. A click in Google Ads costs $3 to 5 and it is a non-targeted click from a person who may be in another city.</p>
-      <p>There is no instrument for a café to say "first coffee free, anyone in the district right now, come over." Direct-to-customer without an intermediary.</p>
-      <div class="callout gold">
-        <p><strong>LOKIO.</strong> $4.99 for a banner pin on the map. Visible to every user who opens the map in the district. The free-coffee filter surfaces it on top of regular pins to people actively looking for offers right now. For $1.99 the pin lifts to full city visibility. ROI measurable on the same day. <strong>$4.99 against $3,500 per month.</strong></p>
-      </div>
-    </section>
 
-    <hr/>
 
-    <section id="broken">
-      <span class="section-num">02</span>
-      <h2>What is broken across all six industries at once</h2>
-      <p>The same root problem: <strong>a barrier between a person and the people physically near them.</strong></p>
-      <p>To meet someone you need a dating app and the social cost of using it. To find sport company you need to create an event and take responsibility for it. To know what is around you you need to Google reviews from three months ago. For a business to reach a customer next door you need a marketer and an ad budget. To say what you are thinking you need an audience of followers.</p>
-      <p>4.9 billion people own smartphones. No product in the world allows a person to spontaneously, without barriers, without payment, become visible to the people near them.</p>
-      <div class="callout">
-        <p><strong>LOKIO does.</strong></p>
-      </div>
-    </section>
+<hr>
+<section id="psychology">
+<span class="section-num">04</span>
+<h2>The psychology of the soft entry</h2>
+<p>This is the most important part of the product and the most underestimated.</p>
+<p>Not everyone has the courage to create an event. It is responsibility: what if no one comes. It is fear: what if people judge. It is effort: invent a title, a description, a category, a time.</p>
+<p>But everyone can drop a joke. Or a thought. Or anything.</p>
+<p>A thought without an ask. You wrote what you were thinking. Nothing else. You did not wait for a reply. There is no fear of being unnoticed because you did not declare you wanted to be noticed. There is no fear of rejection because you asked for nothing. There is no responsibility because it is a thought, not an event.</p>
+<p>But the reply comes. People nearby see it. Someone is thinking the same thing. They reply. Conversation begins. Naturally.</p>
+<div class="callout">
+<p><strong>Zero pressure. Zero obligation. Zero anxiety.</strong></p>
+<p>And the flywheel spins on its own.</p>
+<p>Thought. Reply. Conversation. Meeting. Habit.</p>
+</div>
+</section>
 
-    <hr/>
 
-    <section id="mechanic">
-      <span class="section-num">03</span>
-      <h2>LOKIO. One mechanic solves it all.</h2>
-      <p>Open the map. Drop a joke, a thought, anything. Publish. That is it.</p>
-      <p>It appears on the map. People nearby see it. Conversation begins on its own. Five seconds from opening to publishing.</p>
-      <p>Not a feed. Not dating. Not a check-in. Not a review. <strong>A thought tied to a place.</strong></p>
 
-      <div class="diagram" id="dia-flow"></div>
+<hr>
+<section id="flywheel">
+<span class="section-num">05</span>
+<h2>Flywheel. A billion possibilities without a single line of new code.</h2>
+<p>A person enters just to drop something on the map. A joke, a thought, anything. Does not expect a reply. Reply comes. From there, without a single line of new code:</p>
+<p>Joined a thread about fishing. Found a like-minded person. Became friends naturally. Later met that same friend at a restaurant opening. Found the love of their life there. Went with her to a concert they both found free in LOKIO.</p>
+<p>A girl opened the map, saw a free coffee deal nearby and a theatre discount. Sent the link to a friend: &quot;let&#39;s go!&quot; Spent the evening together.</p>
+<p>Moved to a new city. No friends. Wrote a thought on the map. A week later has company for sport, coffee, weekends.</p>
+<p>A café wrote &quot;first coffee free.&quot; 5 people came. 3 returned the next week. A customer LTV started with one post on a map.</p>
+<p>People meet. Date. Marry. Find friends and groups. Plan trips. Discover places. Help each other. Make business contacts. <strong>All of it happens on its own.</strong></p>
+<p>This is not a feature roadmap. This is not future plans. This is what already works in the deployed product. A billion possibilities because we built not an app but a simple format. People find the uses themselves.</p>
+<h3>What LOKIO does. One mechanic, infinite applications.</h3>
+<p>Casual conversation · meeting people without the social cost · making friends · pleasant company · shared travel · road trips · shared sport · concert company · coffee company · targeted business reach · free tastings · festivals · theatre · exhibitions · deals · book swaps · skill exchange · mutual help · SOS pin · neighbourhood network · dog walking · shared fishing trips · finding your people in a foreign city · a people&#39;s travel guide · secret places · ride-share · hike company · board games tonight · language exchange · freelance contacts · apartment rental · shared rentals · kids events · parent meetups · music jams · co-working partners · district book club · morning run with company · thoughts out loud on a map · humour and jokes tied to a place · local memes · graffiti of thoughts.</p>
+<p>Each of these scenarios works without a single additional feature. A thought on a map is all you need. And each of these scenarios is a separate business that raised millions or billions of dollars in funding. <strong>LOKIO covers them all with one mechanic.</strong></p>
+</section>
 
-      <h3>Visibility and participation</h3>
-      <p>A pin's visibility depends on the user's map viewport. Open the map zoomed on your district, you see pins in your district. Zoom out to the city, you see pins across the city. The radius is not fixed. The viewport is.</p>
-      <p>To <strong>publish</strong> a pin, the user must be physically there. The server enforces a maximum 1 km between the user's last known location and the publication coordinates (Proof of Presence). A user in Berlin cannot publish a pin in São Paulo.</p>
-      <p>To <strong>read or reply</strong>, no distance restriction. Anyone who sees a pin in their viewport can open the topic chat and write. Conversation crosses any distance.</p>
-      <p>To <strong>lift visibility beyond the viewport</strong>, the author pays a city-wide visibility upsell ($1.99 for users, free baseline for others). The pin then appears to every user across the city, not only those whose viewport covers the pin's location.</p>
 
-      <h3>Why this solves all six industries</h3>
-      <p><strong>Meeting people without the social cost.</strong> You are not "on dating sites." You wrote a thought on a map. Someone replied. The meeting happened organically. Through a shared interest, not through a profile form. Like in real life: you were not going to meet someone, you were going fishing. But you joined a thread about fishing and found friends, company, a partner.</p>
-      <p>No rejection by photo. No swipes. No profile form. No "selling yourself." Match by interest, not by appearance.</p>
-      <p><strong>A social network without barriers.</strong> No followers needed. No content plan needed. No audience needed. You wrote what you were thinking and the people nearby saw it. Not 290 followers in other cities, but 5 people across the street.</p>
-      <p><strong>Discovery in real time.</strong> Not reviews from a month ago, but what is happening right now. A festival in an hour. A free tasting. A concert. A sale. A living map of the city.</p>
-      <p><strong>Events in 5 seconds.</strong> No need to create an event with a 500-word description. "Anyone for coffee?" is already an event. 10 people nearby saw it. 3 replied. They went.</p>
-      <p><strong>A bio with geolocation.</strong> A LOKIO profile is all your links in one place. Telegram, GitHub, Behance, your site. A free Linktree, but with geolocation and interests. People nearby see not only what you wrote, but who you are.</p>
-      <p><strong>Business at $0 instead of $3,500 per month.</strong> A café writes on the map: "first coffee free, anyone in the district right now." Does not hire a marketer. Does not pay for SEO. Does not buy ads at $3 to 5 per click for a non-targeted audience. Users who open the map in the district see the pin. The free-coffee filter surfaces it to people actively looking. They come, try it, return. ROI measurable on the same day.</p>
-    </section>
 
-    <hr/>
+<hr>
+<section id="humour">
+<span class="section-num">06</span>
+<h2>Local humour. The daily reason to open the app.</h2>
+<p>The other use cases pull people in when they need something. Company for dinner. A free coffee. A meet-up.</p>
+<p>Local humour pulls them in every day.</p>
+<p>A self-deprecating thought from a park bench. A sarcastic observation about life that any city resident recognises. A &quot;stepped out for air, 40 minutes ago, send help&quot; moment that turns into 30 people saying &quot;me too.&quot; A district develops a shared voice through these.</p>
+<p>Twenty people see one of these and recognise themselves. Five reply with their own version.</p>
+<p>This is the Twitter-of-a-place layer no other product has. Twitter is global. Local memes have no surface today. LOKIO is that surface.</p>
+<p>Coffee posts and meetups happen when a need arrives. But a self-deprecating thought from a bench happens every day. The user who came for a free coffee or company comes back for the recognition. And the recognition makes the city feel like a place, not a backdrop.</p>
+</section>
 
-    <section id="psychology">
-      <span class="section-num">04</span>
-      <h2>The psychology of the soft entry</h2>
-      <p>This is the most important part of the product and the most underestimated.</p>
-      <p>Not everyone has the courage to create an event. It is responsibility: what if no one comes. It is fear: what if people judge. It is effort: invent a title, a description, a category, a time.</p>
-      <p>But everyone can drop a joke. Or a thought. Or anything.</p>
-      <p>A thought without an ask. You wrote what you were thinking. Nothing else. You did not wait for a reply. There is no fear of being unnoticed because you did not declare you wanted to be noticed. There is no fear of rejection because you asked for nothing. There is no responsibility because it is a thought, not an event.</p>
-      <p>But the reply comes. People nearby see it. Someone is thinking the same thing. They reply. Conversation begins. Naturally.</p>
-      <div class="callout">
-        <p><strong>Zero pressure. Zero obligation. Zero anxiety.</strong></p>
-        <p style="margin-top:8px;">And the flywheel spins on its own.</p>
-        <p style="margin-top:8px;">Thought. Reply. Conversation. Meeting. Habit.</p>
-      </div>
-    </section>
 
-    <hr/>
 
-    <section id="flywheel">
-      <span class="section-num">05</span>
-      <h2>Flywheel. A billion possibilities without a single line of new code.</h2>
-      <p>A person enters just to drop something on the map. A joke, a thought, anything. Does not expect a reply. Reply comes. From there, without a single line of new code:</p>
-      <p>Joined a thread about fishing. Found a like-minded person. Became friends naturally. Later met that same friend at a restaurant opening. Found the love of their life there. Went with her to a concert they both found free in LOKIO.</p>
-      <p>A girl opened the map, saw a free coffee deal nearby and a theatre discount. Sent the link to a friend: "let's go!" Spent the evening together.</p>
-      <p>Moved to a new city. No friends. Wrote a thought on the map. A week later has company for sport, coffee, weekends.</p>
-      <p>A café wrote "first coffee free." 5 people came. 3 returned the next week. A customer LTV started with one post on a map.</p>
-      <p>People meet. Date. Marry. Find friends and groups. Plan trips. Discover places. Help each other. Make business contacts. <strong>All of it happens on its own.</strong></p>
-      <p>This is not a feature roadmap. This is not future plans. This is what already works in the deployed product. A billion possibilities because we built not an app but a simple format. People find the uses themselves.</p>
+<hr>
+<section id="competitors">
+<span class="section-num">07</span>
+<h2>Competitors. Why none exist.</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Cost to user</th>
+<th>Where</th>
+<th>Why it fails</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tinder, Bumble</strong></td>
+<td>Free to be invisible. $20–40/mo for Premium.</td>
+<td>Global, English-first.</td>
+<td>Profile form. Swipe by photo. Half the profiles are bots and escorts. Business model depends on you not finding a partner.</td>
+</tr>
+<tr>
+<td><strong>Instagram, TikTok</strong></td>
+<td>Free.</td>
+<td>Global.</td>
+<td>A feed of edited lives. To post yourself you need followers, a content plan, the will to perform.</td>
+</tr>
+<tr>
+<td><strong>Meetup</strong></td>
+<td>Free to join. $9.99/mo organisers.</td>
+<td>Global, English-first.</td>
+<td>Heavy event creation. 90% of users will never originate one. Many cities have empty calendars.</td>
+</tr>
+<tr>
+<td><strong>Eventbrite</strong></td>
+<td>Free for free events. Service fees on paid.</td>
+<td>Global.</td>
+<td>A ticketing system, not a place to leave a thought.</td>
+</tr>
+<tr>
+<td><strong>Foursquare / Swarm</strong></td>
+<td>Free.</td>
+<td>Global.</td>
+<td>Check-ins. Past tense. The product is dying.</td>
+</tr>
+<tr>
+<td><strong>BeReal</strong></td>
+<td>Free.</td>
+<td>Global.</td>
+<td>One photo per day. No geography.</td>
+</tr>
+<tr>
+<td><strong>Telegram Nearby</strong></td>
+<td>Free.</td>
+<td>Global.</td>
+<td>A list of phone numbers. Surface fills with spam and dating noise.</td>
+</tr>
+<tr>
+<td><strong>Nextdoor</strong></td>
+<td>Free.</td>
+<td>US only. Address verification.</td>
+<td>A neighbourhood social network nobody outside the US can use.</td>
+</tr>
+<tr>
+<td><strong>Linktree</strong></td>
+<td>Free basic. $5–24/mo for features.</td>
+<td>Global.</td>
+<td>A static page that lists links. No location, no presence, no context.</td>
+</tr>
+<tr>
+<td><strong>Google Maps, Yelp, 2GIS, TripAdvisor</strong></td>
+<td>Free.</td>
+<td>Global.</td>
+<td>Reviews from the past. Information, not interaction.</td>
+</tr>
+<tr>
+<td><strong>LOKIO</strong></td>
+<td><strong>Free baseline. $0.49 / $1.99 / $4.99 single upsells.</strong></td>
+<td><strong>International from day one. No address gate.</strong></td>
+<td><strong>A single text field. Meeting through context, not declared intent. $4.99 for a business reach instead of $3,500/mo.</strong></td>
+</tr>
+</tbody></table></div>
+</section>
 
-      <h3>What LOKIO does. One mechanic, infinite applications.</h3>
-      <div class="pills">
-        <span>casual conversation</span>
-        <span>meeting people without the social cost</span>
-        <span>making friends</span>
-        <span>pleasant company</span>
-        <span>shared travel</span>
-        <span>road trips · BlaBlaCar on a map</span>
-        <span>shared sport · Strava but social</span>
-        <span>concert company</span>
-        <span>coffee company</span>
-        <span>targeted business reach</span>
-        <span>free tastings</span>
-        <span>festivals</span>
-        <span>theatre</span>
-        <span>exhibitions</span>
-        <span>deals · Groupon in real time</span>
-        <span>book swaps</span>
-        <span>skill exchange</span>
-        <span>mutual help · Nextdoor international</span>
-        <span>SOS pin</span>
-        <span>neighbourhood network</span>
-        <span>dog walking</span>
-        <span>shared fishing trips</span>
-        <span>finding your people in a foreign city</span>
-        <span>a people's travel guide</span>
-        <span>secret places</span>
-        <span>ride-share</span>
-        <span>hike company</span>
-        <span>board games tonight</span>
-        <span>language exchange · Tandem offline</span>
-        <span>freelance contacts</span>
-        <span>apartment rental</span>
-        <span>shared rentals</span>
-        <span>kids events</span>
-        <span>parent meetups</span>
-        <span>music jams</span>
-        <span>co-working partners</span>
-        <span>district book club</span>
-        <span>morning run with company</span>
-        <span>thoughts out loud, on a map</span>
-        <span>humour and jokes tied to a place</span>
-        <span>local memes</span>
-        <span>graffiti of thoughts</span>
-      </div>
-      <p>Each of these scenarios works without a single additional feature. A thought on a map is all you need. And each of these scenarios is a separate business that raised millions or billions of dollars in funding. <strong>LOKIO covers them all with one mechanic.</strong></p>
-    </section>
 
-    <hr/>
 
-    <section id="humour">
-      <span class="section-num">06</span>
-      <h2>Local humour. The daily reason to open the app.</h2>
-      <p>The other use cases pull people in when they need something. Company for dinner. A free coffee. A meet-up.</p>
-      <p>Local humour pulls them in every day.</p>
-      <p>A self-deprecating thought from a park bench. A sarcastic observation about life that any city resident recognises. A "stepped out for air, 40 minutes ago, send help" moment that turns into 30 people saying "me too." A district develops a shared voice through these.</p>
+<hr>
+<section id="business">
+<span class="section-num">08</span>
+<h2>Business model. From day one.</h2>
+<p>Not &quot;we will figure out monetisation later.&quot; The business model is built into the product from day one.</p>
+<h3>Free baseline</h3>
+<p>Anyone can drop a joke, a thought, an offer, an event, join a discussion, join a meet-up. Free. Forever. This is not a freemium trap. This is the base product that works without money.</p>
+<h3>Three paid upsells</h3>
+<p>You pay only for amplification. Not for access.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Upsell</th>
+<th>Audience</th>
+<th>Published price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Extra topic slot</td>
+<td>User</td>
+<td>$0.49</td>
+</tr>
+<tr>
+<td>City-wide visibility + 12h TTL extension</td>
+<td>User</td>
+<td>$1.99</td>
+</tr>
+<tr>
+<td>Map banner</td>
+<td>Business</td>
+<td>$4.99</td>
+</tr>
+</tbody></table></div>
+<p>Single purchases. No subscriptions. No status. No gamification.</p>
+<h3>Density-gated price ramp · the marketplace activation system</h3>
+<p>A new city has zero supply. Charging full price would kill adoption. Prices ramp with city density. A coefficient multiplies the published rate. The coefficient is automatic. Not set by a human.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>When</th>
+<th>Coef.</th>
+<th>Banner</th>
+<th>Slot</th>
+<th>Visibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>0 · Seed</strong></td>
+<td>New city, no critical mass</td>
+<td>× 0</td>
+<td>Free</td>
+<td>Free</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>1 · Early</strong></td>
+<td>First active publishers</td>
+<td>× 0.3</td>
+<td>$1.49</td>
+<td>$0.15</td>
+<td>$0.59</td>
+</tr>
+<tr>
+<td><strong>2 · Growing</strong></td>
+<td>District-level density</td>
+<td>× 0.6</td>
+<td>$2.99</td>
+<td>$0.29</td>
+<td>$1.19</td>
+</tr>
+<tr>
+<td><strong>3 · Active</strong></td>
+<td>City has crossed threshold</td>
+<td>× 1.0</td>
+<td>$4.99</td>
+<td>$0.49</td>
+<td>$1.99</td>
+</tr>
+</tbody></table></div>
+<p>The threshold function combines daily active users, active business accounts, and topic density, sustained over a window. Thresholds calibrate on first-city data and are published in the next revision of this document upon city-one product-market fit.</p>
+<p>The ramp is one-way. Once a city moves up a tier, prices do not come back down.</p>
+<p>A new city seeds itself for free. The product earns nothing from that city until density creates real value. Then it earns proportionally as value grows. No negotiation, no manual pricing per market, no quarterly business review for a single city. The same idea Uber discovered through driver subsidies. Automated.</p>
+<h3>Unit economics. Broken down to atoms.</h3>
+<h4>Cost of one user to us.</h4>
+<p>Infrastructure per user per month: $0.02 (Cloudflare free tier, Railway base plan, shared PostgreSQL, shared Redis). At 10,000 MAU that is approximately $200 per month for the entire infrastructure.</p>
+<p>CAC (customer acquisition cost): trending to $0. The product solves a real pain. A person tries it, tells a friend. Word of mouth works because the value is obvious in 5 seconds. No need to explain why it exists. Open it, see the map, write a thought, get a reply. That is it.</p>
+<h4>How much we earn from one city.</h4>
+<p>A city of 10,000 MAU at tier 3. Conversion to paid upsells 3 to 5% (standard freemium benchmark). That is 300 to 500 paying users.</p>
+<p>Average user check: $1.50/mo (mix of $0.49 slots and $1.99 city visibility, projected). User revenue: $750 to $1,250/mo.</p>
+<p>Businesses. At 10,000 MAU per city, active paying businesses: 50 to 100. Average business check: $7/mo (mostly $4.99 banners, projected). Business revenue: $350 to $700/mo.</p>
+<div class="callout">
+<p><strong>Total per city of 10,000 MAU at tier 3: $1,100 to $1,950 per month.</strong></p>
+<p>Costs per city: $300/mo (infrastructure plus minimal ops).</p>
+<p><strong>Margin: 70 to 85%.</strong></p>
+</div>
 
-      <div class="mock m">
-        <div class="mock-head"><span class="mock-user">@user_h4x</span><span class="mock-dot">·</span><span class="mock-meta">0m · 12h remaining</span></div>
-        <div class="mock-body">"Standing here like an idiot just watching people walk by. Anyone else doing the same?"</div>
-        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">24 echo replies</span><span class="mock-dot">·</span><span class="mock-joined">ongoing</span></div>
-      </div>
+<h4>Scaling.</h4>
+<p>10 cities × 10,000 MAU = $11,000 to $19,500/mo = $130k to $234k/year. Infrastructure scales sublinearly. 10 cities is not 10× cost. Approximately 3 to 4× the first-city baseline because shared services are the same.</p>
+<p>100,000 MAU in a single large city (Istanbul, Berlin, Almaty): the model is the same, but average check is higher because businesses are larger and competition for visibility grows.</p>
+<h3>Comparison with adjacent products</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Product</th>
+<th>CAC</th>
+<th>ARPU</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tinder</td>
+<td>$3–5 per install</td>
+<td>$15 / mo</td>
+</tr>
+<tr>
+<td>Meetup</td>
+<td>$10–15</td>
+<td>$8 / mo</td>
+</tr>
+<tr>
+<td>Nextdoor</td>
+<td>$8–12</td>
+<td>Local-ad-driven</td>
+</tr>
+<tr>
+<td><strong>LOKIO</strong></td>
+<td><strong>Trending to $0</strong></td>
+<td><strong>$1.50–7 / mo (mix)</strong></td>
+</tr>
+</tbody></table></div>
+<p>Tinder: heavy paid acquisition. Meetup: subscription on organisers, declining. Nextdoor: monetisation through local ads, US only.</p>
+<p>LOKIO: CAC trending to $0, ARPU $1.50 to $7 per month (users plus businesses), margin 70%+. Because we do not spend on marketing what the product explains in 5 seconds.</p>
+<h3>City-by-city, like Uber</h3>
+<p>Not winner-takes-all. Every city is a separate market. We can grow one city at a time. First city, then the next, then the next. In each city we seed the supply side: 50 active publishers in one district and organic growth begins.</p>
+</section>
 
-      <div class="mock f">
-        <div class="mock-head"><span class="mock-user">@user_p2g</span><span class="mock-dot">·</span><span class="mock-meta">0m · 8h remaining</span></div>
-        <div class="mock-body">"Not bored. Just in energy-saving mode."</div>
-        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">31 echo replies</span><span class="mock-dot">·</span><span class="mock-joined">4 offered to come</span></div>
-      </div>
 
-      <div class="mock m">
-        <div class="mock-head"><span class="mock-user">@user_m3t</span><span class="mock-dot">·</span><span class="mock-meta">0m · 6h remaining</span></div>
-        <div class="mock-body">"Officially the most interesting person within 300 metres (no evidence to support this)."</div>
-        <div class="mock-foot"><span class="mock-arrow">↳</span><span class="mock-echo">18 echo replies</span></div>
-      </div>
 
-      <p>Twenty people see one of these and recognise themselves. Five reply with their own version.</p>
-      <p>This is the Twitter-of-a-place layer no other product has. Twitter is global. Local memes have no surface today. LOKIO is that surface.</p>
-      <p>Humour is the daily flywheel. Coffee posts and meetups happen when a need arrives. A self-deprecating thought from a bench happens every day. The user who came for company comes back for the recognition. <strong>And the recognition makes the city feel like a place, not a backdrop.</strong></p>
-    </section>
+<hr>
+<section id="traction">
+<span class="section-num">09</span>
+<h2>Traction. What is here now.</h2>
+<p>A working product. Not a mockup. Not a Figma. Not a prototype. Live in production.</p>
+<p><code>app.lokio.org</code> is open right now.</p>
+<ul>
+<li>Live PWA on production infrastructure</li>
+<li>Google OAuth and WebAuthn passkey authentication</li>
+<li>Real-time presence on the map via WebSocket</li>
+<li>Topic creation, topic chat, public profile pages</li>
+<li>Reports, geofallback, session revocation flows</li>
+<li>Stack: React 18, Fastify, PostgreSQL, Redis, WebSocket, WebAuthn, Cloudflare, Railway, MapLibre GL</li>
+<li>22+ organic topics from users who arrived without external prompting</li>
+<li>Zero advertising. Zero outreach. Zero marketing spend.</li>
+</ul>
+<div class="callout">
+<p><strong>The product is open. Anyone reading this document can verify what it does.</strong></p>
+</div>
+</section>
 
-    <hr/>
 
-    <section id="competitors">
-      <span class="section-num">07</span>
-      <h2>Competitors. Why none exist.</h2>
-      <p>There are no direct competitors. Adjacent products touch single aspects, but none solve the underlying problem.</p>
-      <p><strong>Foursquare / Swarm.</strong> Check-ins: "I was here." Past tense. Zero value for forming connection. Died because a check-in is not a value. LOKIO is present tense: "I am thinking, here, now."</p>
-      <p><strong>BeReal.</strong> Proved people want unscripted reality, not a feed. But no geolocation for connection. One photo per day is not a tool for meeting people.</p>
-      <p><strong>Telegram Nearby.</strong> Spam and dating. No content, no events, no context. Just a list of phones nearby.</p>
-      <p><strong>Nextdoor.</strong> Neighbours only. United States only. Closed neighbourhoods, address verification. Not international.</p>
-      <p><strong>Blinkmaps and similar.</strong> A children's social network on a map. Empty map, "add friends," movement animations. A regular social network with a map skin. Zero real value beyond visuals. Requires huge marketing because the real value is impossible to explain. Just a new toy.</p>
-      <p><strong>Yandex Maps comments.</strong> We went further. Conversation under messages, events, requests for help. Context and community.</p>
-      <p><strong>Google Maps, Yelp, 2GIS.</strong> Reviews from the past. No realtime, no conversation, no events. Information, not interaction.</p>
-      <p><strong>Meetup, Eventbrite.</strong> High barrier: creating an event is responsibility. 90% of users will never originate one. LOKIO: a thought in 5 seconds.</p>
-      <p>LOKIO is the only product that removes all the barriers at once. The only one with a soft entry. The only one where meeting happens through context, not declared intent. The only socially meaningful and genuinely useful product in this category.</p>
 
-      <h3>Where each competitor fails the user</h3>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Product</th><th>What you pay</th><th>Where it works</th><th>Why it fails</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>Tinder, Bumble</strong></td><td>Free to be invisible. <span class="num">$20–40/mo</span> for Premium.</td><td>Global, English-first.</td><td>Profile form. Swipe by photo. Half the profiles are bots and escorts. Business model depends on you not finding a partner.</td></tr>
-            <tr><td><strong>Instagram, TikTok</strong></td><td>Free.</td><td>Global.</td><td>A feed of edited lives. To post yourself you need followers, a content plan, the will to perform.</td></tr>
-            <tr><td><strong>Meetup</strong></td><td>Free to join. <span class="num">$9.99/mo</span> organisers.</td><td>Global, English-first.</td><td>Heavy event creation. 90% of users will never originate one. Many cities have empty calendars.</td></tr>
-            <tr><td><strong>Eventbrite</strong></td><td>Free for free events. Service fees on paid.</td><td>Global.</td><td>A ticketing system, not a place to leave a thought.</td></tr>
-            <tr><td><strong>Foursquare / Swarm</strong></td><td>Free.</td><td>Global.</td><td>Check-ins. Past tense. The product is dying.</td></tr>
-            <tr><td><strong>BeReal</strong></td><td>Free.</td><td>Global.</td><td>One photo per day. No geography.</td></tr>
-            <tr><td><strong>Telegram Nearby</strong></td><td>Free.</td><td>Global.</td><td>A list of phone numbers. Surface fills with spam and dating noise.</td></tr>
-            <tr><td><strong>Nextdoor</strong></td><td>Free.</td><td>US only. Address verification.</td><td>A neighbourhood social network nobody outside the US can use.</td></tr>
-            <tr><td><strong>Linktree</strong></td><td>Free basic. <span class="num">$5–24/mo</span> for features.</td><td>Global.</td><td>A static page that lists links. No location, no presence, no context.</td></tr>
-            <tr><td><strong>Google Maps, Yelp, 2GIS, TripAdvisor</strong></td><td>Free.</td><td>Global.</td><td>Reviews from the past. Information, not interaction.</td></tr>
-            <tr><td><strong>Yandex Maps comments</strong></td><td>Free.</td><td>Russia and CIS only.</td><td>Comments on map points. Not a primary product.</td></tr>
-            <tr><td><strong>Blinkmaps and similar</strong></td><td>Free.</td><td>Limited regional.</td><td>A map skin on a regular social network. Empty maps.</td></tr>
-            <tr class="highlight"><td>LOKIO</td><td>Free baseline. <span class="num">$0.49 / $1.99 / $4.99</span> single upsells.</td><td>International from day one. No address gate.</td><td>A single text field. Meeting through context, not declared intent. <span class="num">$4.99</span> for a business reach instead of <span class="num">$3,500/mo</span>.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+<hr>
+<section id="next">
+<span class="section-num">10</span>
+<h2>What ships next</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Period</th>
+<th>Milestone</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>May–Jun 2026</strong></td>
+<td>Outreach materials finalised. Investor and partner conversations. Payment provider selection.</td>
+</tr>
+<tr>
+<td><strong>Q3 2026</strong></td>
+<td>&quot;I&#39;m Here&quot; one-tap publish. TTL decay visuals. Reports / Saved screens wired.</td>
+</tr>
+<tr>
+<td><strong>Q4 2026</strong></td>
+<td>Payment Request API integration. Billing live per city. Legal entity incorporated on first transaction. Echo-reply markers on map.</td>
+</tr>
+<tr>
+<td><strong>Q1 2027</strong></td>
+<td>Profile screen unified. &quot;Tonight / Right Now&quot; filter chip.</td>
+</tr>
+<tr>
+<td><strong>Q2 2027</strong></td>
+<td>Capacitor wrap for iOS/Android. Push notifications. App Store + Play Store submission. GDPR-compliant Privacy Policy and Terms.</td>
+</tr>
+</tbody></table></div>
+</section>
 
-    <hr/>
 
-    <section id="business">
-      <span class="section-num">08</span>
-      <h2>Business model. From day one.</h2>
-      <p>Not "we will figure out monetisation later." The business model is built into the product from day one.</p>
 
-      <h3>Free baseline</h3>
-      <p>Anyone can drop a joke, a thought, an offer, an event, join a discussion, join a meet-up. Free. Forever. This is not a freemium trap. This is the base product that works without money.</p>
+<hr>
+<section id="exploring">
+<span class="section-num">11</span>
+<h2>Currently exploring</h2>
+<ul>
+<li>Investors aligned with consumer-product, city-by-city marketplace expansion</li>
+<li>Strategic partners: urban mobility (rideshare, scooters), hospitality (hotels, hostels), tourism (boards, agencies), local services (delivery, dog-walking, neighbourhood marketplaces), city administrations and chambers of commerce focused on small business activation, regional development funds aligned with local commerce growth</li>
+<li>Advisors with operational experience in marketplace consumer products at city-by-city scale</li>
+</ul>
+<p>For the underlying economic positioning of the product (small-business activation as the growth lever that took China&#39;s GDP per capita from $156 to $12,663 in 44 years, and how LOKIO mechanically aligns with this model), see <a href="/documents/pitch#shanghai" class="inline">The Shanghai principle in the LOKIO pitch document</a>.</p>
+<p>There is no fixed funding ask. Engagement terms are determined per conversation.</p>
+<div class="callout">
+<p><strong>We are not raising on a deck. We are raising on a working product.</strong></p>
+</div>
 
-      <h3>Three paid upsells</h3>
-      <p>You pay only for amplification. Not for access.</p>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Upsell</th><th>Audience</th><th>Published price</th></tr></thead>
-          <tbody>
-            <tr><td>Extra topic slot</td><td>User</td><td class="num">$0.49</td></tr>
-            <tr><td>City-wide visibility + 12h TTL extension</td><td>User</td><td class="num">$1.99</td></tr>
-            <tr><td>Map banner</td><td>Business</td><td class="num">$4.99</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>Single purchases. No subscriptions. No status. No gamification.</p>
+<div class="contact-block">
+<a class="em" href="mailto:hello&#64;lokio.org">hello@lokio.org</a>
+<p>lokio.org · app.lokio.org</p>
+</div>
+</section>
 
-      <h3>Density-gated price ramp · the marketplace activation system</h3>
-      <p>A new city has zero supply. Charging full price would kill adoption. Prices ramp with city density. A coefficient multiplies the published rate. The coefficient is automatic. Not set by a human.</p>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Tier</th><th>When</th><th>Coef.</th><th>Banner</th><th>Slot</th><th>Visibility</th></tr></thead>
-          <tbody>
-            <tr><td><strong>0 · Seed</strong></td><td>New city, no critical mass</td><td class="num">× 0</td><td>Free</td><td>Free</td><td>Free</td></tr>
-            <tr><td><strong>1 · Early</strong></td><td>First active publishers</td><td class="num">× 0.3</td><td class="num">$1.49</td><td class="num">$0.15</td><td class="num">$0.59</td></tr>
-            <tr><td><strong>2 · Growing</strong></td><td>District-level density</td><td class="num">× 0.6</td><td class="num">$2.99</td><td class="num">$0.29</td><td class="num">$1.19</td></tr>
-            <tr><td><strong>3 · Active</strong></td><td>City has crossed threshold</td><td class="num">× 1.0</td><td class="num">$4.99</td><td class="num">$0.49</td><td class="num">$1.99</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>The threshold function combines daily active users, active business accounts, and topic density, sustained over a window. Thresholds calibrate on first-city data and are published in the next revision of this document upon city-one product-market fit.</p>
-      <p>The ramp is one-way. Once a city moves up a tier, prices do not come back down.</p>
-      <p>A new city seeds itself for free. The product earns nothing from that city until density creates real value. Then it earns proportionally as value grows. No negotiation, no manual pricing per market, no quarterly business review for a single city. The same idea Uber discovered through driver subsidies. Automated.</p>
 
-      <h3>Unit economics. Broken down to atoms.</h3>
-      <h4>Cost of one user to us.</h4>
-      <p>Infrastructure per user per month: <span class="num">$0.02</span> (Cloudflare free tier, Railway base plan, shared PostgreSQL, shared Redis). At 10,000 MAU that is approximately <span class="num">$200</span> per month for the entire infrastructure.</p>
-      <p>CAC (customer acquisition cost): trending to $0. The product solves a real pain. A person tries it, tells a friend. Word of mouth works because the value is obvious in 5 seconds. No need to explain why it exists. Open it, see the map, write a thought, get a reply. That is it.</p>
 
-      <h4>How much we earn from one city.</h4>
-      <p>A city of <span class="num">10,000 MAU</span> at tier 3. Conversion to paid upsells <span class="num">3 to 5%</span> (standard freemium benchmark). That is <span class="num">300 to 500</span> paying users.</p>
-      <p>Average user check: <span class="num">$1.50</span>/mo (mix of <span class="num">$0.49</span> slots and <span class="num">$1.99</span> city visibility, projected). User revenue: <span class="num">$750 to $1,250</span>/mo.</p>
-      <p>Businesses. At 10,000 MAU per city, active paying businesses: <span class="num">50 to 100</span>. Average business check: <span class="num">$7</span>/mo (mostly <span class="num">$4.99</span> banners, projected). Business revenue: <span class="num">$350 to $700</span>/mo.</p>
+<hr>
+<section id="appendix">
+<h2>Appendix · Technical</h2>
+<p>The body of this document describes what LOKIO does, who it serves, and how it makes money. The appendix describes how it is built. Investors who want product proof read the body. Engineers, regulators, and partners who want technical proof read the appendix.</p>
+<h3>A · System architecture</h3>
+<p><strong>Frontend.</strong> Single-page Progressive Web App. React 18, Vite. ~12,400 lines of source. Eight screens, seven modals, hard caps. Mobile-first, 360 to 390 dp viewport. No inline styles. CSS design tokens.</p>
+<p><strong>Backend.</strong> Fastify (TypeScript) on Railway. Prisma ORM. ~8,700 lines of source. Single deployable service. Automatic deploy on git push.</p>
+<p><strong>Real-time layer.</strong> WebSocket connection from the client to the API. Server publishes nearby-user events scoped to viewport. Redis as presence store and pub/sub backplane.</p>
+<p><strong>Map.</strong> MapLibre GL with OpenStreetMap tiles. Open-source. No per-render fees.</p>
+<h3>B · Architectural principles</h3>
+<ol>
+<li>Backend complexity 100×, frontend complexity 1×. Behaviour computed server-side never appears as client configuration.</li>
+<li>Single source of truth. No legacy ports. Components are rewritten when requirements change.</li>
+<li>Zero gamification. Token-economy subsystem deleted from production in v61.</li>
+<li>International-first. No deployment-city-specific strings in user-facing UI.</li>
+<li>Outline over fill. Visual hierarchy through stroke and contrast.</li>
+</ol>
+<h3>C · Safety architecture</h3>
+<p>Safety is structural, not reactive. Four mechanisms substitute for moderation.</p>
+<p><strong>TTL decay.</strong> Every topic has a default lifetime of 1,440 minutes. After that, the pin is removed and the chat is archived. The product does not accumulate a permanent record of user statements.</p>
+<p><strong>Pseudonymous identity.</strong> Display names are optional from other users&#39; perspective. Every account is cryptographically verified on the backend via Google OAuth or WebAuthn passkeys. There is no anonymous post surface. Bad actors are identifiable, blockable, and reportable. LOKIO is privacy-first, not anonymity-first.</p>
+<p><strong>contentGuard.</strong> Server-side input filter, deterministic regex. Blocks URLs, phone numbers, and card numbers in topic and chat content. Synchronous. No machine learning. No remote calls.</p>
+<p><strong>Proof of Presence.</strong> A topic can only be published from within 1 km of the user&#39;s last known location, with location freshness capped at 120 seconds. Enforced server-side. A user in Berlin cannot publish a topic in São Paulo. Eliminates the armchair-commentator failure mode and is a structural anti-spam measure: a spammer must physically traverse the territory they pollute.</p>
+<h3>D · Data flows</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Stored</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Account identity</td>
+<td>Yes</td>
+<td>Google OAuth subject, WebAuthn credential ID, optional Telegram phone</td>
+</tr>
+<tr>
+<td>Profile content</td>
+<td>Yes</td>
+<td>Display name, avatar, bio, links, interests. User-editable, user-deletable.</td>
+</tr>
+<tr>
+<td>Topics and messages</td>
+<td>Time-bounded</td>
+<td>TTL plus short audit window, then automated removal</td>
+</tr>
+<tr>
+<td>Presence</td>
+<td>No persistence</td>
+<td>Held in Redis with short retention</td>
+</tr>
+<tr>
+<td>Payment instruments</td>
+<td>No</td>
+<td>Pre-revenue. When billing activates: platform-native Payment Request API. LOKIO does not store cards.</td>
+</tr>
+</tbody></table></div>
+<h3>E · Authentication</h3>
+<p><strong>Google OAuth.</strong> Authorisation-code flow against Google Identity. Default sign-up path.</p>
+<p><strong>WebAuthn passkeys.</strong> Platform-bound credentials registered against <code>api.lokio.org</code>. Passwordless. No email or SMS verification leak vector. No credential database to breach. No &quot;forgot password&quot; flow to socially engineer.</p>
+<p><strong>Telegram phone verification.</strong> Optional secondary verification, exposed in settings.</p>
+<h3>F · GDPR posture</h3>
+<ul>
+<li><strong>Right to access.</strong> Profile fully visible in product. Explicit data-export endpoint scheduled in Q4 2026.</li>
+<li><strong>Right to deletion.</strong> Account deletion in settings. Cascades to topics, messages, presence. Not undoable.</li>
+<li><strong>Data residency.</strong> Database hosted on Railway. Default region US-West. EU residency addressed via region migration and a Data Processing Addendum upon first formal request from an EU enterprise customer or regulator.</li>
+<li><strong>Legal basis and DPA.</strong> Full GDPR compliance documentation prepared and provided on request before any EU enterprise customer onboarding. Current beta operates outside the EU on a legitimate-interest basis for account operation and explicit consent for optional features.</li>
+<li><strong>Legal entity.</strong> Pre-revenue. No operating company yet incorporated. Incorporation occurs at first paid transaction.</li>
+</ul>
+<h3>G · Database model inventory · v62.1.5</h3>
+<p>Thirteen models: <code>User</code>, <code>Profile</code>, <code>Topic</code>, <code>TopicParticipant</code>, <code>Message</code>, <code>Report</code>, <code>Session</code>, <code>Passkey</code>, <code>EchoInteraction</code>, <code>EmotionalWeather</code>, <code>ActivityLifecycleJob</code>, plus two supporting tables. ~418 lines of Prisma schema.</p>
+<h3>H · API surface · selected</h3>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>POST</td>
+<td><code>/auth/google</code></td>
+<td>Google OAuth code exchange</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/passkey/register</code></td>
+<td>WebAuthn registration</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/auth/passkey/assert</code></td>
+<td>WebAuthn assertion</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/profile/:userId</code></td>
+<td>Profile JSON</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td><code>/user/profile</code></td>
+<td>Update own profile</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/u/:userId</code></td>
+<td>Public profile HTML page</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/topics</code></td>
+<td>Create topic</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/topics</code></td>
+<td>List topics in viewport</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/topics/:id/messages</code></td>
+<td>Post chat message in topic</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/reports</code></td>
+<td>Report user or topic</td>
+</tr>
+<tr>
+<td>WSS</td>
+<td><code>/presence</code></td>
+<td>WebSocket presence stream</td>
+</tr>
+</tbody></table></div>
+<h3>I · Glossary</h3>
+<ul>
+<li><strong>TTL.</strong> Topic lifetime before decay. Free-baseline default: 1,440 minutes.</li>
+<li><strong>Pin.</strong> A topic rendered as a marker, anchored to publishing geographic coordinates.</li>
+<li><strong>Presence.</strong> Real-time stream of nearby-user events delivered over WebSocket.</li>
+<li><strong>contentGuard.</strong> Server-side regex input filter. URLs, phones, card numbers.</li>
+<li><strong>Proof of Presence.</strong> Server-side constraint limiting topic creation to within 1 km of user&#39;s last known position.</li>
+<li><strong>Echo.</strong> A reply to a topic. Visualised on the map as a satellite marker.</li>
+<li><strong>NPC.</strong> A seeded non-player-character account used to populate a new deployment city&#39;s map. Tagged <code>isNpc=true</code> at the API. Excluded from organic-topic counts.</li>
+<li><strong>Tier.</strong> A density-gated price level, 0 through 3. Determines the coefficient applied to published upsell prices.</li>
+</ul>
+</section>
 
-      <div class="callout">
-        <p><strong>Total per city of 10,000 MAU at tier 3: $1,100 to $1,950 per month.</strong></p>
-        <p style="margin-top:6px;">Costs per city: <span class="num">$300</span>/mo (infrastructure plus minimal ops).</p>
-        <p style="margin-top:6px;"><strong>Margin: 70 to 85%.</strong></p>
-      </div>
 
-      <h4>Scaling.</h4>
-      <p>10 cities × 10,000 MAU = <span class="num">$11,000 to $19,500</span>/mo = <span class="num">$130k to $234k</span>/year. Infrastructure scales sublinearly. 10 cities is not 10× cost. Approximately 3 to 4× the first-city baseline because shared services are the same.</p>
-      <p>100,000 MAU in a single large city (Istanbul, Berlin, Almaty): the model is the same, but average check is higher because businesses are larger and competition for visibility grows.</p>
-
-      <h3>Comparison with adjacent products</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Product</th><th>CAC</th><th>ARPU</th></tr></thead>
-          <tbody>
-            <tr><td>Tinder</td><td class="num">$3–5 per install</td><td class="num">$15 / mo</td></tr>
-            <tr><td>Meetup</td><td class="num">$10–15</td><td class="num">$8 / mo</td></tr>
-            <tr><td>Nextdoor</td><td class="num">$8–12</td><td>Local-ad-driven</td></tr>
-            <tr class="highlight"><td>LOKIO</td><td>Trending to <span class="num">$0</span></td><td class="num">$1.50–7 / mo (mix)</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>Tinder: heavy paid acquisition. Meetup: subscription on organisers, declining. Nextdoor: monetisation through local ads, US only.</p>
-      <p>LOKIO: CAC trending to $0, ARPU $1.50 to $7 per month (users plus businesses), margin 70%+. Because we do not spend on marketing what the product explains in 5 seconds.</p>
-
-      <h3>City-by-city, like Uber</h3>
-      <p>Not winner-takes-all. Every city is a separate market. We can grow one city at a time. First city, then the next, then the next. In each city we seed the supply side: 50 active publishers in one district and organic growth begins.</p>
-    </section>
-
-    <hr/>
-
-    <section id="traction">
-      <span class="section-num">09</span>
-      <h2>Traction. What is here now.</h2>
-      <p>A working product. Not a mockup. Not a Figma. Not a prototype. Live in production.</p>
-      <p><code>app.lokio.org</code> is open right now.</p>
-      <ul>
-        <li>Live PWA on production infrastructure</li>
-        <li>Google OAuth and WebAuthn passkey authentication</li>
-        <li>Real-time presence on the map via WebSocket</li>
-        <li>Topic creation, topic chat, public profile pages</li>
-        <li>Reports, geofallback, session revocation flows</li>
-        <li>Stack: React 18, Fastify, PostgreSQL, Redis, WebSocket, WebAuthn, Cloudflare, Railway, MapLibre GL</li>
-        <li>22+ organic topics from users who arrived without external prompting</li>
-        <li>Zero advertising. Zero outreach. Zero marketing spend.</li>
-      </ul>
-      <div class="callout">
-        <p><strong>The product is open. Anyone reading this document can verify what it does.</strong></p>
-      </div>
-    </section>
-
-    <hr/>
-
-    <section id="next">
-      <span class="section-num">10</span>
-      <h2>What ships next</h2>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Period</th><th>Milestone</th></tr></thead>
-          <tbody>
-            <tr><td><strong>May–Jun 2026</strong></td><td>Outreach materials finalised. Investor and partner conversations. Payment provider selection.</td></tr>
-            <tr><td><strong>Q3 2026</strong></td><td>"I'm Here" one-tap publish. TTL decay visuals. Reports / Saved screens wired.</td></tr>
-            <tr><td><strong>Q4 2026</strong></td><td>Payment Request API integration. Billing live per city. Legal entity incorporated on first transaction. Echo-reply markers on map.</td></tr>
-            <tr><td><strong>Q1 2027</strong></td><td>Profile screen unified. "Tonight / Right Now" filter chip.</td></tr>
-            <tr><td><strong>Q2 2027</strong></td><td>Capacitor wrap for iOS/Android. Push notifications. App Store + Play Store submission. GDPR-compliant Privacy Policy and Terms.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <hr/>
-
-    <section id="exploring">
-      <span class="section-num">11</span>
-      <h2>Currently exploring</h2>
-      <ul>
-        <li>Investors aligned with consumer-product, city-by-city marketplace expansion</li>
-        <li>Strategic partners: urban mobility (rideshare, scooters), hospitality (hotels, hostels), tourism (boards, agencies), local services (delivery, dog-walking, neighbourhood marketplaces), city administrations and chambers of commerce focused on small business activation, regional development funds aligned with local commerce growth</li>
-        <li>Advisors with operational experience in marketplace consumer products at city-by-city scale</li>
-      </ul>
-      <p>For the underlying economic positioning of the product (small-business activation as the growth lever that took China's GDP per capita from <span class="num">$156 to $12,663</span> in 44 years, and how LOKIO mechanically aligns with this model), see <a href="/documents/pitch" class="inline">The Shanghai principle in the LOKIO pitch document</a>.</p>
-      <p>There is no fixed funding ask. Engagement terms are determined per conversation.</p>
-      <div class="callout">
-        <p><strong>We are not raising on a deck. We are raising on a working product.</strong></p>
-      </div>
-
-      <div class="contact-block">
-        <a href="mailto:hello&#64;lokio.org" class="em">hello&#64;lokio.org</a>
-        <div class="lo">lokio.org · app.lokio.org</div>
-      </div>
-    </section>
-
-    <!-- ─── APPENDIX ─── -->
-    <div class="appendix-wrap">
-      <h2>Appendix · Technical</h2>
-      <p class="appendix-intro">The body of this document describes what LOKIO does, who it serves, and how it makes money. The appendix describes how it is built. Investors who want product proof read the body. Engineers, regulators, and partners who want technical proof read the appendix.</p>
-
-      <div class="appendix-section" id="ax-a">
-        <h3><span class="ax-letter">A</span> System architecture</h3>
-        <div class="diagram" id="dia-arch"></div>
-        <p><strong>Frontend.</strong> Single-page Progressive Web App. React 18, Vite. ~12,400 lines of source. Eight screens, seven modals, hard caps. Mobile-first, 360 to 390 dp viewport. No inline styles. CSS design tokens.</p>
-        <p><strong>Backend.</strong> Fastify (TypeScript) on Railway. Prisma ORM. ~8,700 lines of source. Single deployable service. Automatic deploy on git push.</p>
-        <p><strong>Real-time layer.</strong> WebSocket connection from the client to the API. Server publishes nearby-user events scoped to viewport. Redis as presence store and pub/sub backplane.</p>
-        <p><strong>Map.</strong> MapLibre GL with OpenStreetMap tiles. Open-source. No per-render fees.</p>
-      </div>
-
-      <div class="appendix-section" id="ax-b">
-        <h3><span class="ax-letter">B</span> Architectural principles</h3>
-        <ol>
-          <li>Backend complexity 100×, frontend complexity 1×. Behaviour computed server-side never appears as client configuration.</li>
-          <li>Single source of truth. No legacy ports. Components are rewritten when requirements change.</li>
-          <li>Zero gamification. Token-economy subsystem deleted from production in v61.</li>
-          <li>International-first. No deployment-city-specific strings in user-facing UI.</li>
-          <li>Outline over fill. Visual hierarchy through stroke and contrast.</li>
-        </ol>
-      </div>
-
-      <div class="appendix-section" id="ax-c">
-        <h3><span class="ax-letter">C</span> Safety architecture</h3>
-        <p>Safety is structural, not reactive. Four mechanisms substitute for moderation.</p>
-        <p><strong>TTL decay.</strong> Every topic has a default lifetime of 1,440 minutes. After that, the pin is removed and the chat is archived. The product does not accumulate a permanent record of user statements.</p>
-        <p><strong>Pseudonymous identity.</strong> Display names are optional from other users' perspective. Every account is cryptographically verified on the backend via Google OAuth or WebAuthn passkeys. There is no anonymous post surface. Bad actors are identifiable, blockable, and reportable. LOKIO is privacy-first, not anonymity-first.</p>
-        <p><strong>contentGuard.</strong> Server-side input filter, deterministic regex. Blocks URLs, phone numbers, and card numbers in topic and chat content. Synchronous. No machine learning. No remote calls.</p>
-        <p><strong>Proof of Presence.</strong> A topic can only be published from within 1 km of the user's last known location, with location freshness capped at 120 seconds. Enforced server-side. A user in Berlin cannot publish a topic in São Paulo. Eliminates the armchair-commentator failure mode and is a structural anti-spam measure: a spammer must physically traverse the territory they pollute.</p>
-      </div>
-
-      <div class="appendix-section" id="ax-d">
-        <h3><span class="ax-letter">D</span> Data flows</h3>
-        <div class="diagram" id="dia-data"></div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Category</th><th>Stored</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>Account identity</td><td>Yes</td><td>Google OAuth subject, WebAuthn credential ID, optional Telegram phone</td></tr>
-              <tr><td>Profile content</td><td>Yes</td><td>Display name, avatar, bio, links, interests. User-editable, user-deletable.</td></tr>
-              <tr><td>Topics and messages</td><td>Time-bounded</td><td>TTL plus short audit window, then automated removal</td></tr>
-              <tr><td>Presence</td><td>No persistence</td><td>Held in Redis with short retention</td></tr>
-              <tr><td>Payment instruments</td><td>No</td><td>Pre-revenue. When billing activates: platform-native Payment Request API. LOKIO does not store cards.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="appendix-section" id="ax-e">
-        <h3><span class="ax-letter">E</span> Authentication</h3>
-        <p><strong>Google OAuth.</strong> Authorisation-code flow against Google Identity. Default sign-up path.</p>
-        <p><strong>WebAuthn passkeys.</strong> Platform-bound credentials registered against <code>api.lokio.org</code>. Passwordless. No email or SMS verification leak vector. No credential database to breach. No "forgot password" flow to socially engineer.</p>
-        <p><strong>Telegram phone verification.</strong> Optional secondary verification, exposed in settings.</p>
-      </div>
-
-      <div class="appendix-section" id="ax-f">
-        <h3><span class="ax-letter">F</span> GDPR posture</h3>
-        <ul>
-          <li><strong>Right to access.</strong> Profile fully visible in product. Explicit data-export endpoint scheduled in Q4 2026.</li>
-          <li><strong>Right to deletion.</strong> Account deletion in settings. Cascades to topics, messages, presence. Not undoable.</li>
-          <li><strong>Data residency.</strong> Database hosted on Railway. Default region US-West. EU residency addressed via region migration and a Data Processing Addendum upon first formal request from an EU enterprise customer or regulator.</li>
-          <li><strong>Legal basis and DPA.</strong> Full GDPR compliance documentation prepared and provided on request before any EU enterprise customer onboarding. Current beta operates outside the EU on a legitimate-interest basis for account operation and explicit consent for optional features.</li>
-          <li><strong>Legal entity.</strong> Pre-revenue. No operating company yet incorporated. Incorporation occurs at first paid transaction.</li>
-        </ul>
-      </div>
-
-      <div class="appendix-section" id="ax-g">
-        <h3><span class="ax-letter">G</span> Database model inventory · v62.1.5</h3>
-        <p>Thirteen models: <code>User</code>, <code>Profile</code>, <code>Topic</code>, <code>TopicParticipant</code>, <code>Message</code>, <code>Report</code>, <code>Session</code>, <code>Passkey</code>, <code>EchoInteraction</code>, <code>EmotionalWeather</code>, <code>ActivityLifecycleJob</code>, plus two supporting tables. ~418 lines of Prisma schema.</p>
-      </div>
-
-      <div class="appendix-section" id="ax-h">
-        <h3><span class="ax-letter">H</span> API surface · selected</h3>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
-            <tbody>
-              <tr><td class="num">POST</td><td><code>/auth/google</code></td><td>Google OAuth code exchange</td></tr>
-              <tr><td class="num">POST</td><td><code>/auth/passkey/register</code></td><td>WebAuthn registration</td></tr>
-              <tr><td class="num">POST</td><td><code>/auth/passkey/assert</code></td><td>WebAuthn assertion</td></tr>
-              <tr><td class="num">GET</td><td><code>/profile/:userId</code></td><td>Profile JSON</td></tr>
-              <tr><td class="num">PATCH</td><td><code>/user/profile</code></td><td>Update own profile</td></tr>
-              <tr><td class="num">GET</td><td><code>/u/:userId</code></td><td>Public profile HTML page</td></tr>
-              <tr><td class="num">POST</td><td><code>/topics</code></td><td>Create topic</td></tr>
-              <tr><td class="num">GET</td><td><code>/topics</code></td><td>List topics in viewport</td></tr>
-              <tr><td class="num">POST</td><td><code>/topics/:id/messages</code></td><td>Post chat message in topic</td></tr>
-              <tr><td class="num">POST</td><td><code>/reports</code></td><td>Report user or topic</td></tr>
-              <tr><td class="num">WSS</td><td><code>/presence</code></td><td>WebSocket presence stream</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="appendix-section" id="ax-i">
-        <h3><span class="ax-letter">I</span> Glossary</h3>
-        <ul>
-          <li><strong>TTL.</strong> Topic lifetime before decay. Free-baseline default: 1,440 minutes.</li>
-          <li><strong>Pin.</strong> A topic rendered as a marker, anchored to publishing geographic coordinates.</li>
-          <li><strong>Presence.</strong> Real-time stream of nearby-user events delivered over WebSocket.</li>
-          <li><strong>contentGuard.</strong> Server-side regex input filter. URLs, phones, card numbers.</li>
-          <li><strong>Proof of Presence.</strong> Server-side constraint limiting topic creation to within 1 km of user's last known position.</li>
-          <li><strong>Echo.</strong> A reply to a topic. Visualised on the map as a satellite marker.</li>
-          <li><strong>NPC.</strong> A seeded non-player-character account used to populate a new deployment city's map. Tagged <code>isNpc=true</code> at the API. Excluded from organic-topic counts.</li>
-          <li><strong>Tier.</strong> A density-gated price level, 0 through 3. Determines the coefficient applied to published upsell prices.</li>
-        </ul>
-      </div>
-    </div>
 
   </main>
 </div>
@@ -1147,18 +932,15 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
         <li><a href="https://t.me/lokioapp/589" target="_blank" rel="noopener">Support · Telegram</a></li>
         <li><a href="https://t.me/lokioapp" target="_blank" rel="noopener">Community · Telegram</a></li>
         <li><a href="mailto:hello&#64;lokio.org?subject=Business%20inquiry">For business</a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Press%20inquiry">Press</a></li>
         <li><a href="mailto:hello&#64;lokio.org?subject=Investor%20inquiry">Investors</a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Partnership%20inquiry">Partnerships</a></li>
       </ul>
     </div>
     <div class="foot-col">
       <h4>Documents</h4>
       <ul>
-        <li><a href="/documents/whitepaper">Whitepaper</a></li>
-        <li><a href="/documents/pitch">Pitch deck</a></li>
-        <li><a href="/documents/presentation">Presentation</a></li>
+        <li><a href="/documents/pitch">Pitch</a></li>
         <li><a href="/documents/business">Business case</a></li>
+        <li><a href="/documents/whitepaper">Whitepaper</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -1172,22 +954,8 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
   <div class="foot-mark">© 2025 – 2026 LOKIO® GLOBAL LLC</div>
 </footer>
 
-<!-- Mermaid diagrams (rendered inline as SVG). -->
 <script>
 (function(){
-  /* ── Progress bar ── */
-  var pb=document.getElementById('progress');
-  function tick(){
-    var d=document.documentElement;
-    var max=d.scrollHeight-d.clientHeight;
-    var pct=max>0?(d.scrollTop/max)*100:0;
-    pb.style.width=pct+'%';
-  }
-  document.addEventListener('scroll',tick,{passive:true});
-  window.addEventListener('resize',tick);
-  tick();
-
-  /* ── TOC scroll-spy ── */
   var links=Array.prototype.slice.call(document.querySelectorAll('.toc-list a'));
   var targets=links.map(function(a){
     var id=a.getAttribute('href').replace('#','');
@@ -1196,9 +964,7 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
   function spy(){
     var top=window.scrollY+120;
     var current=null;
-    targets.forEach(function(el){
-      if(el.offsetTop<=top) current=el;
-    });
+    targets.forEach(function(el){if(el.offsetTop<=top) current=el;});
     links.forEach(function(a){a.classList.remove('active');});
     if(current){
       var match=links.find(function(a){return a.getAttribute('href')==='#'+current.id;});
@@ -1207,51 +973,6 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
   }
   document.addEventListener('scroll',spy,{passive:true});
   spy();
-})();
-</script>
-
-<!-- Mermaid CDN (light, only for the 3 diagrams) -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script>
-(function(){
-  if(typeof mermaid==='undefined') return;
-  mermaid.initialize({
-    startOnLoad:false,
-    theme:'base',
-    themeVariables:{
-      darkMode:true,
-      background:'transparent',
-      primaryColor:'#1a1a26',
-      primaryTextColor:'#ffffff',
-      primaryBorderColor:'rgba(255,255,255,0.18)',
-      lineColor:'rgba(255,255,255,0.40)',
-      secondaryColor:'#0A84FF',
-      tertiaryColor:'#16161A',
-      fontFamily:"'Geist','-apple-system',sans-serif",
-      fontSize:'14px',
-      mainBkg:'rgba(22,22,34,0.72)',
-      nodeTextColor:'#ffffff',
-      edgeLabelBackground:'#0a0a0a'
-    },
-    flowchart:{curve:'basis',padding:16,nodeSpacing:32,rankSpacing:48}
-  });
-
-  function render(id, def){
-    var el=document.getElementById(id);
-    if(!el) return;
-    mermaid.render(id+'-svg', def).then(function(out){
-      el.innerHTML=out.svg;
-    }).catch(function(err){
-      el.innerHTML='<div style="color:rgba(255,255,255,0.40);font-family:var(--mono);font-size:12px;">Diagram unavailable.</div>';
-      console.error(err);
-    });
-  }
-
-  render('dia-flow', 'graph LR\n  A[Open the map] --> B[Drop a joke or thought]\n  B --> C[Publish · 5 sec]\n  C --> D[People nearby see it]\n  D --> E[Reply in topic chat]\n  E --> F[Meet]\n  F --> G[Habit]');
-
-  render('dia-arch', 'graph TD\n  Client[Mobile / Web PWA] -->|HTTPS| CDN[Cloudflare Pages]\n  CDN -->|static assets| Client\n  Client -->|HTTPS / WSS| API[api.lokio.org · Fastify · Railway]\n  API --> PG[(PostgreSQL · 13 models)]\n  API --> Redis[(Redis · presence · cache)]\n  API --> Tiles[MapLibre GL · OpenStreetMap]');
-
-  render('dia-data', 'graph TD\n  User[User device] -->|HTTPS| API[api.lokio.org]\n  API -->|persistent| PG[(Account · Profile · Topics · Messages)]\n  API -->|ephemeral| Redis[(Presence · Sessions)]\n  PG -->|TTL lifecycle job| Cleanup[ActivityLifecycleJob]\n  Cleanup -->|delete after TTL + audit window| Removed((Removed))');
 })();
 </script>
 

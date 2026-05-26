@@ -1,32 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" data-lang="en">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<meta name="theme-color" content="#0a0a0a"/>
-<title>LOKIO. Business case.</title>
-<meta name="description" content="$3,500/month or $4.99 per post. The case for a café, trainer, market, vendor."/>
-<meta property="og:title" content="LOKIO. Business case."/>
-<meta property="og:description" content="$3,500/month or $4.99 per post. The case for a café, trainer, market, vendor."/>
+<meta name="theme-color" content="#FAFAFA"/>
+<title>LOKIO. For Local Businesses.</title>
+<meta name="description" content="A banner pin on a map of your district, visible to every user who opens the map there right now. $4.99 against $3,500 per month."/>
+<meta property="og:title" content="LOKIO for Local Businesses"/>
 <meta property="og:url" content="https://lokio.org/documents/business"/>
+<meta name="robots" content="index,follow"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-
 :root{
-  --magenta:#FF00FF;--male:#007FFF;--gold:#FBEC5D;
-  --blue:#0A84FF;--green:#30D158;--purple:#BF5AF2;--red:#FF375F;
-  --magenta-d:rgba(255,0,255,0.15);--male-d:rgba(0,127,255,0.15);
-  --gold-d:rgba(251,236,93,0.15);--blue-d:rgba(10,132,255,0.15);
-  --surface:rgba(22,22,34,0.72);--surface-hi:rgba(16,16,26,0.95);
-  --mock-bg:rgba(10,10,18,0.92);
-  --border:rgba(255,255,255,0.10);--border-hi:rgba(255,255,255,0.18);
-  --w14:rgba(255,255,255,0.14);--w10:rgba(255,255,255,0.10);
-  --w08:rgba(255,255,255,0.08);--w06:rgba(255,255,255,0.06);
-  --whi:rgba(255,255,255,0.96);--wmid:rgba(255,255,255,0.62);--wlo:rgba(255,255,255,0.40);
-  --r-sm:12px;--r-md:16px;--r-lg:20px;--r-xl:24px;--r-2xl:28px;--r-pill:999px;
+  --accent:#0A84FF;
+  --accent-lo:rgba(10,132,255,0.10);
+  --accent-border:rgba(10,132,255,0.20);
+  --gold:#FBEC5D;
+  --red:#FF375F;
+  --red-lo:rgba(255,55,95,0.08);
+  --red-border:rgba(255,55,95,0.28);
+  --gold-lo:rgba(251,236,93,0.10);
+  --gold-border:rgba(251,236,93,0.28);
+  --bg:#FAFAFA;
+  --surface:#FFFFFF;
+  --surface-hi:#F2F0EB;
+  --text:#0F0F18;
+  --text-mid:#5C5C66;
+  --text-lo:#8E8E96;
+  --border:rgba(0,0,0,0.08);
+  --border-hi:rgba(0,0,0,0.14);
+  --glass:rgba(18,18,26,0.82);
+  --glass-border:rgba(255,255,255,0.10);
+  --on-glass:rgba(255,255,255,0.95);
+  --on-glass-mid:rgba(255,255,255,0.62);
+  --on-glass-lo:rgba(255,255,255,0.40);
+  --r:12px;
+  --r-pill:999px;
   --font:'Geist',-apple-system,system-ui,sans-serif;
   --mono:'Geist Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   --ease:cubic-bezier(0.32,0.72,0,1);
@@ -37,525 +49,204 @@
 
 html{scroll-behavior:smooth;scroll-padding-top:80px;}
 html,body{
-  background:#0a0a0a;color:var(--whi);font-family:var(--font);
-  font-size:16px;line-height:1.6;
+  background:var(--bg);color:var(--text);font-family:var(--font);
+  font-size:16px;line-height:1.65;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
 }
-body{position:relative;min-height:100dvh;isolation:isolate;}
-
-body::before{
-  content:"";position:fixed;inset:0;z-index:-2;
-  background:
-    radial-gradient(ellipse 70% 55% at 10% 5%,  rgba(251,236,93,0.10) 0%, transparent 55%),
-    radial-gradient(ellipse 80% 60% at 92% 12%, rgba(10,132,255,0.16) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 20% 96%, rgba(251,236,93,0.16) 0%, transparent 55%),
-    radial-gradient(ellipse 85% 60% at 85% 100%,rgba(48,209,88,0.10) 0%, transparent 60%),
-    #0a0a0a;
-}
-body::after{
-  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(ellipse 90% 85% at center,black 10%,transparent 78%);
-}
-
+body{position:relative;min-height:100dvh;}
 a{color:inherit;text-decoration:none;}
 button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer;}
 
-/* HEADER */
+/* ═══ HEADER (glass, matches landing) ═══ */
 .hdr{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
   padding:14px var(--pad);
-  background:rgba(10,10,10,0.72);
-  backdrop-filter:saturate(160%) blur(18px);
-  -webkit-backdrop-filter:saturate(160%) blur(18px);
-  border-bottom:1px solid var(--border);
+  background:var(--glass);
+  backdrop-filter:saturate(160%) blur(28px);
+  -webkit-backdrop-filter:saturate(160%) blur(28px);
+  border-bottom:1px solid var(--glass-border);
 }
-.hdr-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.02em;font-size:18px;}
-.hdr-mark{width:28px;height:28px;border-radius:8px;background:var(--gold);color:#0a0a0a;display:grid;place-items:center;font-weight:900;font-size:16px;letter-spacing:-0.04em;}
-.hdr-doc-title{display:none;font-family:var(--mono);font-size:12px;color:var(--wmid);letter-spacing:0.16em;text-transform:uppercase;}
+.hdr-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-0.02em;font-size:18px;color:var(--on-glass);}
+.hdr-mark{width:28px;height:28px;color:var(--gold);flex-shrink:0;}
+.hdr-doc-title{display:none;font-family:var(--mono);font-size:12px;color:var(--on-glass-mid);letter-spacing:0.16em;text-transform:uppercase;}
 @media (min-width:768px){.hdr-doc-title{display:inline-block;}}
 .hdr-right{display:flex;align-items:center;gap:8px;}
-.hdr-back{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:8px 14px;font-size:13px;font-weight:500;color:var(--wmid);
-  border-radius:var(--r-pill);
-  transition:color .2s var(--ease),background .2s var(--ease);
-}
-.hdr-back:hover{color:var(--whi);background:var(--w06);}
-.hdr-cta{
-  display:none;padding:8px 18px;border-radius:var(--r-pill);
-  background:var(--gold);color:#0a0a0a;font-weight:700;font-size:14px;
-  transition:transform .2s var(--ease),background .2s var(--ease);
-}
-.hdr-cta:hover{background:#fff170;}
+.hdr-back{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:13px;font-weight:500;color:var(--on-glass-mid);border-radius:var(--r-pill);transition:color .2s var(--ease),background .2s var(--ease);}
+.hdr-back:hover{color:var(--on-glass);background:rgba(255,255,255,0.08);}
+.hdr-cta{display:none;padding:8px 18px;border-radius:var(--r-pill);background:var(--accent);color:#fff;font-weight:600;font-size:14px;transition:transform .2s var(--ease),background .2s var(--ease);}
+.hdr-cta:hover{background:#1A8FFF;}
 @media (min-width:768px){.hdr-cta{display:inline-flex;}}
 
-/* PROGRESS */
-.progress{position:fixed;top:60px;left:0;height:2px;width:0;background:var(--gold);z-index:99;transition:width .12s linear;box-shadow:0 0 16px var(--gold);}
-@media (min-width:768px){.progress{top:64px;}}
+/* ═══ PAGE GRID ═══ */
+.page{display:grid;grid-template-columns:1fr;max-width:1200px;margin:0 auto;padding:96px var(--pad) 96px;gap:48px;}
+@media (min-width:1024px){.page{grid-template-columns:220px minmax(0,1fr);padding:120px var(--pad) 96px;gap:56px;}}
+@media (min-width:1280px){.page{grid-template-columns:240px minmax(0,1fr);gap:80px;}}
 
-/* PAGE */
-.wrap{
-  max-width:880px;
-  margin:0 auto;
-  padding:96px var(--pad) 96px;
-}
-@media (min-width:768px){.wrap{padding:128px var(--pad) 96px;}}
+/* ═══ TOC SIDEBAR ═══ */
+.toc{display:none;position:sticky;top:96px;align-self:start;max-height:calc(100dvh - 120px);overflow-y:auto;padding-right:8px;}
+@media (min-width:1024px){.toc{display:block;}}
+.toc::-webkit-scrollbar{width:4px;}
+.toc::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.10);border-radius:2px;}
+.toc-tag{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-lo);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:2px;}
+.toc-list a{display:block;padding:8px 12px;font-size:13px;line-height:1.4;color:var(--text-mid);border-left:2px solid transparent;border-radius:0 6px 6px 0;transition:color .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);}
+.toc-list a:hover{color:var(--text);background:rgba(0,0,0,0.04);}
+.toc-list a.active{color:var(--text);background:rgba(0,0,0,0.06);border-left-color:var(--accent);}
+.toc-list a.warn{color:var(--red);}
+.toc-list a.warn.active{color:var(--red);border-left-color:var(--red);}
 
-/* HERO */
+/* ═══ CONTENT COLUMN ═══ */
+.col{max-width:720px;}
+
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  font-family:var(--mono);font-size:11px;font-weight:600;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:24px;
-  padding:6px 12px;border:1px solid rgba(251,236,93,0.32);
-  background:rgba(251,236,93,0.08);border-radius:var(--r-pill);
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:24px;
+  padding:6px 12px;border:1px solid var(--accent-border);background:var(--accent-lo);border-radius:var(--r-pill);
 }
-.eyebrow::before{
-  content:"";width:8px;height:8px;border-radius:50%;
-  background:var(--gold);box-shadow:0 0 12px var(--gold);
-}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);}
 
-h1{
-  font-weight:800;letter-spacing:-0.03em;line-height:1.0;
-  font-size:48px;margin-bottom:16px;
-}
-@media (min-width:768px){h1{font-size:72px;}}
-@media (min-width:1280px){h1{font-size:84px;}}
+h1{font-weight:800;letter-spacing:-0.03em;line-height:1.05;font-size:42px;margin-bottom:20px;color:var(--text);}
+@media (min-width:768px){h1{font-size:52px;}}
+@media (min-width:1280px){h1{font-size:60px;}}
 
-.tagline{
-  font-size:24px;line-height:1.25;color:var(--whi);
-  margin-bottom:32px;font-weight:600;letter-spacing:-0.02em;
-  max-width:32ch;
-}
-@media (min-width:768px){.tagline{font-size:32px;margin-bottom:40px;}}
+.lede{font-size:18px;line-height:1.55;color:var(--text-mid);max-width:60ch;margin-bottom:24px;font-weight:400;}
 
-.lede{
-  font-size:18px;line-height:1.6;color:var(--whi);max-width:60ch;
-  margin-bottom:24px;
-}
-@media (min-width:768px){.lede{font-size:20px;}}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+.meta-row span{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--r-pill);color:var(--text-lo);}
+.meta-row span.beta{border-color:var(--gold-border);color:#9A8400;background:var(--gold-lo);}
 
-.lede-sub{
-  font-size:16px;line-height:1.6;color:var(--wmid);max-width:60ch;
-  margin-bottom:32px;
-}
+/* ═══ BETA NOTICE ═══ */
+.beta-notice{margin-bottom:32px;padding:24px 28px;background:var(--gold-lo);border:1px solid var(--gold-border);border-radius:var(--r);}
+.beta-notice .tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#9A8400;margin-bottom:10px;}
+.beta-notice .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px rgba(251,236,93,0.5);}
+.beta-notice p{margin:0;font-size:15px;line-height:1.6;color:var(--text);}
+.beta-notice p + p{margin-top:8px;color:var(--text-mid);font-size:14px;}
 
-.meta-row{
-  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:48px;
-}
-.meta-row span{
-  font-family:var(--mono);font-size:11px;
-  padding:5px 10px;border:1px solid var(--border);
-  border-radius:var(--r-pill);color:var(--wmid);
-}
-.meta-row span.live{
-  border-color:rgba(48,209,88,0.32);color:var(--green);
-  background:rgba(48,209,88,0.06);
-}
-.meta-row span.live::before{
-  content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-  background:var(--green);margin-right:6px;vertical-align:middle;
-  box-shadow:0 0 8px var(--green);
-  animation:livepulse 2s var(--ease) infinite;
-}
-@keyframes livepulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+/* ═══ ACCEPTANCE NOTICE ═══ */
+.acceptance{margin-bottom:48px;padding:24px 28px;background:var(--red-lo);border:1px solid var(--red-border);border-radius:var(--r);}
+.acceptance .tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.acceptance .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 8px rgba(255,55,95,0.4);}
+.acceptance p{margin:0;font-size:15px;line-height:1.6;color:var(--text);font-weight:500;}
+.acceptance p + p{margin-top:8px;color:var(--text);font-weight:400;}
 
-/* PRIMARY CTA (gold for business audience) */
-.cta-gold{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:18px 32px;background:var(--gold);color:#0a0a0a;
-  font-weight:700;font-size:17px;letter-spacing:-0.01em;
-  border-radius:var(--r-pill);
-  box-shadow:0 12px 40px rgba(251,236,93,0.32);
-  transition:transform .2s var(--ease),background .2s var(--ease),box-shadow .2s var(--ease);
-}
-.cta-gold:hover{background:#fff170;box-shadow:0 16px 48px rgba(251,236,93,0.42);}
-.cta-gold:active{transform:scale(0.98);}
-.cta-gold .arr{display:inline-block;transition:transform .2s var(--ease);}
-.cta-gold:hover .arr{transform:translateX(4px);}
+/* ═══ SECTIONS ═══ */
+section{scroll-margin-top:96px;margin-top:56px;}
+section:first-of-type{margin-top:0;}
 
-.cta-secondary{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:14px 24px;background:transparent;
-  border:1.5px solid var(--border-hi);color:var(--whi);
-  font-weight:600;font-size:15px;border-radius:var(--r-pill);
-  transition:background .2s var(--ease),border-color .2s var(--ease);
-}
-.cta-secondary:hover{background:var(--w06);border-color:rgba(255,255,255,0.32);}
+.section-num{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-lo);margin-bottom:12px;display:block;}
+.section-num.warn{color:var(--red);}
 
-.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px;}
+h2{font-weight:800;letter-spacing:-0.025em;line-height:1.15;font-size:26px;margin-bottom:16px;color:var(--text);}
+@media (min-width:768px){h2{font-size:32px;}}
+h3{font-weight:700;letter-spacing:-0.015em;line-height:1.3;font-size:18px;margin-top:28px;margin-bottom:10px;color:var(--text);}
+h4{font-weight:600;font-size:15px;line-height:1.3;margin-top:20px;margin-bottom:6px;color:var(--text);}
 
-/* HERO BIG NUMBERS */
-.bignum{
-  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
-  margin:48px 0 32px;
-  padding:40px 32px;
-  background:linear-gradient(135deg, rgba(251,236,93,0.10), rgba(251,236,93,0.02) 60%);
-  border:1px solid rgba(251,236,93,0.28);
-  border-radius:var(--r-2xl);
-}
-@media (min-width:640px){.bignum{align-items:center;text-align:center;padding:56px 40px;}}
+p{margin-bottom:14px;color:var(--text);font-size:15px;line-height:1.7;}
+p strong,li strong{color:var(--text);font-weight:600;}
+.muted{color:var(--text-mid);}
 
-.bignum-label{
-  font-family:var(--mono);font-size:11px;font-weight:600;
-  letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);
-}
-.bignum-old{
-  font-family:var(--mono);font-weight:900;
-  font-size:clamp(48px,8vw,96px);line-height:0.95;
-  color:var(--wlo);text-decoration:line-through;
-  text-decoration-thickness:3px;letter-spacing:-0.04em;
-}
-.bignum-vs{font-size:clamp(16px,2vw,20px);color:var(--wmid);font-weight:500;margin:4px 0;}
-.bignum-new{
-  font-family:var(--mono);font-weight:900;
-  font-size:clamp(80px,14vw,160px);line-height:0.95;
-  background:linear-gradient(135deg, var(--gold), #ffa07a);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-  letter-spacing:-0.04em;
-}
-.bignum-cap{
-  font-size:clamp(15px,1.8vw,18px);color:var(--whi);
-  font-weight:500;margin-top:12px;line-height:1.5;
-  max-width:48ch;
-}
+ul,ol{margin:0 0 14px 0;padding-left:20px;}
+li{margin-bottom:6px;color:var(--text);line-height:1.6;font-size:15px;}
+ul li::marker,ol li::marker{color:var(--text-lo);}
 
-/* SECTIONS */
-section{
-  scroll-margin-top:80px;
-  margin-top:80px;
-}
+code{font-family:var(--mono);font-size:0.92em;padding:2px 7px;background:rgba(0,0,0,0.05);border:1px solid var(--border);border-radius:6px;color:#C7254E;}
+a.inline{color:var(--accent);border-bottom:1px solid var(--accent-lo);transition:border-color .2s var(--ease);}
+a.inline:hover{border-bottom-color:var(--accent);}
+hr{border:none;border-top:1px solid var(--border);margin:32px 0;}
 
-.section-num{
-  font-family:var(--mono);font-size:11px;font-weight:600;
-  letter-spacing:0.16em;text-transform:uppercase;
-  color:var(--wlo);margin-bottom:16px;display:block;
-}
-
-h2{
-  font-weight:800;letter-spacing:-0.025em;line-height:1.1;
-  font-size:32px;margin-bottom:20px;
-}
-@media (min-width:768px){h2{font-size:42px;}}
-
-h3{
-  font-weight:700;letter-spacing:-0.015em;line-height:1.25;
-  font-size:22px;margin-top:36px;margin-bottom:12px;
-}
-@media (min-width:768px){h3{font-size:26px;}}
-
-h4{
-  font-weight:600;font-size:16px;line-height:1.3;
-  margin-top:24px;margin-bottom:8px;color:var(--whi);
-}
-
-p{margin-bottom:16px;color:var(--whi);font-size:16px;line-height:1.65;}
-@media (min-width:768px){p{font-size:17px;}}
-p strong, li strong{color:#fff;font-weight:600;}
-.muted{color:var(--wmid);}
-
-ul,ol{margin:0 0 16px 0;padding-left:20px;}
-li{margin-bottom:8px;color:var(--whi);line-height:1.6;}
-ul li::marker{color:var(--gold);}
-
-code{
-  font-family:var(--mono);font-size:0.92em;
-  padding:2px 7px;background:var(--w08);
-  border:1px solid var(--border);border-radius:6px;color:var(--gold);
-}
-
-a.inline{color:var(--gold);border-bottom:1px solid var(--gold-d);transition:border-color .2s var(--ease);}
-a.inline:hover{border-bottom-color:var(--gold);}
-
-hr{border:none;border-top:1px solid var(--border);margin:48px 0;}
-
-/* TABLES */
-.tbl{
-  border:1px solid var(--border-hi);border-radius:var(--r-lg);
-  overflow:hidden;background:var(--surface);margin:24px 0;overflow-x:auto;
-}
-.tbl table{width:100%;border-collapse:collapse;font-size:15px;}
-.tbl thead{background:var(--w06);}
-.tbl th, .tbl td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--border);vertical-align:middle;}
-.tbl th{font-weight:600;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--wmid);}
-.tbl td{color:var(--whi);line-height:1.5;}
-.tbl td strong{color:#fff;}
+/* ═══ TABLES ═══ */
+.tbl{margin:20px 0;overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--surface);}
+.tbl table{width:100%;border-collapse:collapse;font-size:14px;}
+.tbl thead{background:rgba(0,0,0,0.03);}
+.tbl th,.tbl td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--border);vertical-align:top;}
+.tbl th{font-weight:600;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-lo);}
+.tbl td{color:var(--text);line-height:1.5;}
+.tbl td strong{color:var(--text);}
 .tbl tbody tr:last-child td{border-bottom:none;}
-.tbl .num{font-family:var(--mono);}
-.tbl tr.gold td{
-  background:linear-gradient(90deg, rgba(251,236,93,0.12), rgba(251,236,93,0.02));
-  font-weight:700;color:#fff;
-}
-.tbl tr.gold td:first-child{font-weight:800;color:var(--gold);}
-.tbl tr.dim td{color:var(--wmid);}
 
-/* WHO GRID. 4 cards: café/trainer/market/vendor */
-.who-grid{
-  display:grid;grid-template-columns:1fr;gap:14px;margin:32px 0;
-}
-@media (min-width:640px){.who-grid{grid-template-columns:1fr 1fr;gap:18px;}}
-@media (min-width:1024px){.who-grid{grid-template-columns:1fr 1fr 1fr 1fr;}}
+/* ═══ CALLOUTS ═══ */
+.callout{background:var(--accent-lo);border:1px solid var(--accent-border);border-radius:var(--r);padding:18px 22px;margin:20px 0;}
+.callout p{margin:0;font-size:15px;line-height:1.55;color:var(--text);}
+.callout p strong{color:var(--text);}
+.callout p + p{margin-top:6px;}
+.callout.warn{background:var(--red-lo);border-color:var(--red-border);}
+.callout.gold{background:var(--gold-lo);border-color:var(--gold-border);}
 
-.who-card{
-  background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.01));
-  border:1px solid rgba(251,236,93,0.20);
-  border-radius:var(--r-lg);padding:24px;
-  display:flex;flex-direction:column;gap:12px;
-  transition:border-color .2s var(--ease),transform .2s var(--ease);
+/* ═══ SHIELD (hard protective blocks) ═══ */
+.shield{
+  margin:24px 0;padding:24px 26px;
+  background:var(--red-lo);
+  border:1.5px solid var(--red-border);
+  border-radius:var(--r);
 }
-.who-card:hover{border-color:rgba(251,236,93,0.40);transform:translateY(-2px);}
+.shield .shield-tag{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:800;
+  letter-spacing:0.18em;text-transform:uppercase;color:var(--red);
+  padding:4px 10px;border:1px solid var(--red-border);
+  background:rgba(255,55,95,0.06);border-radius:var(--r-pill);margin-bottom:14px;
+}
+.shield p{margin-bottom:10px;font-size:13.5px;font-weight:600;line-height:1.55;text-transform:uppercase;letter-spacing:0.02em;color:var(--text);}
+.shield p:last-child{margin-bottom:0;}
+.shield p strong{color:var(--text);font-weight:800;}
+.shield ul,.shield ol{margin:8px 0 10px 0;padding-left:22px;}
+.shield li{font-size:13.5px;font-weight:600;line-height:1.5;text-transform:uppercase;letter-spacing:0.02em;color:var(--text);}
 
-.who-icon{
-  width:40px;height:40px;border-radius:10px;
-  background:rgba(251,236,93,0.12);border:1px solid rgba(251,236,93,0.32);
-  display:grid;place-items:center;color:var(--gold);
-}
-.who-icon svg{width:20px;height:20px;}
-.who-card h3{margin:0;font-size:18px;color:#fff;}
-.who-card p{font-size:14px;color:var(--wmid);margin:0;line-height:1.5;}
+/* ═══ CONTACT ═══ */
+.contact-block{margin:32px 0 0;padding:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r);}
+.contact-block .em{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--accent);display:inline-block;}
+.contact-block .em:hover{color:#1A8FFF;}
+.contact-block p{margin-top:8px;color:var(--text-mid);font-size:14px;}
 
-/* CALLOUT */
-.callout{
-  background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.02));
-  border:1px solid rgba(251,236,93,0.24);
-  border-radius:var(--r-xl);padding:24px 28px;margin:32px 0;
-}
-.callout p{margin:0;font-size:17px;line-height:1.55;}
-.callout p + p{margin-top:8px;}
-.callout p strong{color:#fff;}
-
-.callout.blue{
-  background:linear-gradient(135deg, rgba(10,132,255,0.08), rgba(10,132,255,0.02));
-  border-color:rgba(10,132,255,0.24);
-}
-
-/* CAFÉ ROI WALKTHROUGH */
-.roi{
-  margin:32px 0;
-  background:var(--surface);
-  border:1px solid var(--border-hi);
-  border-radius:var(--r-2xl);
-  padding:32px 28px;
-}
-@media (min-width:768px){.roi{padding:40px 36px;}}
-
-.roi-head{
-  display:flex;align-items:center;gap:12px;margin-bottom:20px;
-}
-.roi-head .icon{
-  width:40px;height:40px;border-radius:10px;
-  background:var(--gold-d);border:1px solid rgba(251,236,93,0.32);
-  display:grid;place-items:center;color:var(--gold);
-}
-.roi-head h3{margin:0;font-size:22px;}
-
-.roi-steps{
-  display:flex;flex-direction:column;gap:0;margin:24px 0 0;list-style:none;padding:0;
-}
-.roi-step{
-  display:flex;gap:16px;padding:18px 0;
-  border-bottom:1px dashed var(--border);
-}
-.roi-step:last-child{border-bottom:none;}
-.roi-step-num{
-  flex-shrink:0;
-  width:32px;height:32px;border-radius:50%;
-  background:var(--w08);border:1px solid var(--border-hi);
-  display:grid;place-items:center;
-  font-family:var(--mono);font-size:12px;font-weight:700;color:var(--gold);
-}
-.roi-step-body{flex-grow:1;}
-.roi-step-title{font-size:16px;font-weight:600;color:#fff;margin-bottom:4px;}
-.roi-step-desc{font-size:14px;color:var(--wmid);line-height:1.55;}
-.roi-step-num-val{
-  flex-shrink:0;
-  font-family:var(--mono);font-size:15px;font-weight:700;
-  color:var(--gold);align-self:center;text-align:right;
-  min-width:80px;
-}
-
-.roi-totals{
-  display:grid;grid-template-columns:1fr 1fr;gap:14px;
-  margin-top:24px;padding-top:24px;border-top:1px solid var(--border);
-}
-.roi-total{
-  padding:18px;background:var(--mock-bg);
-  border:1px solid var(--border-hi);border-radius:var(--r-md);
-}
-.roi-total-label{
-  font-family:var(--mono);font-size:10px;font-weight:600;
-  letter-spacing:0.16em;text-transform:uppercase;color:var(--wmid);margin-bottom:8px;
-}
-.roi-total-num{
-  font-family:var(--mono);font-weight:800;font-size:clamp(24px,3.5vw,36px);
-  letter-spacing:-0.02em;line-height:1;
-}
-.roi-total.old .roi-total-num{color:var(--wlo);text-decoration:line-through;text-decoration-thickness:2px;}
-.roi-total.new .roi-total-num{
-  background:linear-gradient(135deg, var(--gold), #ffa07a);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-/* TIER VISUAL. 4 column ramp */
-.tiers{
-  display:grid;grid-template-columns:1fr;gap:12px;margin:32px 0;
-}
-@media (min-width:640px){.tiers{grid-template-columns:repeat(4,1fr);gap:16px;}}
-
-.tier-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  padding:20px;
-  display:flex;flex-direction:column;gap:8px;
-  position:relative;
-  transition:border-color .2s var(--ease);
-}
-.tier-card:hover{border-color:var(--border-hi);}
-.tier-card.t0{opacity:0.72;}
-.tier-card.t3{
-  border-color:rgba(251,236,93,0.40);
-  background:linear-gradient(135deg, rgba(251,236,93,0.06), rgba(251,236,93,0.01));
-}
-
-.tier-num{
-  font-family:var(--mono);font-size:11px;font-weight:700;
-  letter-spacing:0.12em;color:var(--wmid);
-}
-.tier-card.t3 .tier-num{color:var(--gold);}
-.tier-when{font-size:13px;color:var(--wmid);line-height:1.4;}
-.tier-coef{
-  font-family:var(--mono);font-weight:800;font-size:24px;color:#fff;
-  margin-top:8px;letter-spacing:-0.02em;
-}
-.tier-card.t3 .tier-coef{
-  background:linear-gradient(135deg, var(--gold), #ffa07a);
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.tier-prices{font-family:var(--mono);font-size:12px;color:var(--wmid);line-height:1.6;margin-top:8px;}
-.tier-prices strong{color:#fff;}
-
-/* SHANGHAI MINI */
-.sh-mini{
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  margin:32px 0;
-  padding:32px 24px;
-  background:linear-gradient(135deg, rgba(255,55,95,0.04), rgba(251,236,93,0.04) 50%, rgba(10,132,255,0.04));
-  border:1px solid var(--border-hi);
-  border-radius:var(--r-2xl);
-  text-align:center;
-}
-.sh-mini-numbers{
-  display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;
-  justify-content:center;
-}
-.sh-mini-from, .sh-mini-to{
-  font-family:var(--mono);font-weight:800;letter-spacing:-0.04em;
-  font-size:clamp(36px,6vw,64px);line-height:1;
-}
-.sh-mini-from{color:var(--wmid);}
-.sh-mini-to{
-  background:linear-gradient(135deg, var(--gold), #ffa07a);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-}
-.sh-mini-arrow{font-size:clamp(24px,4vw,40px);color:var(--wlo);font-weight:300;}
-.sh-mini-cap{
-  font-size:clamp(14px,1.8vw,17px);color:var(--wmid);
-  margin-top:8px;line-height:1.5;max-width:50ch;
-}
-.sh-mini-cap strong{color:var(--gold);}
-.sh-mini-link{
-  display:inline-flex;align-items:center;gap:6px;margin-top:12px;
-  font-family:var(--mono);font-size:12px;font-weight:600;
-  color:var(--gold);letter-spacing:0.04em;
-  border-bottom:1px solid var(--gold-d);padding-bottom:2px;
-}
-.sh-mini-link:hover{border-bottom-color:var(--gold);}
-
-/* SIGN UP BLOCK */
-.signup{
-  margin-top:80px;
-  padding:48px 32px;
-  background:linear-gradient(135deg, rgba(251,236,93,0.10), rgba(10,132,255,0.06));
-  border:1px solid var(--border-hi);
-  border-radius:var(--r-2xl);
-  text-align:center;
-}
-@media (min-width:768px){.signup{padding:64px 48px;}}
-
-.signup h2{margin-bottom:16px;}
-.signup .lead{
-  font-size:18px;line-height:1.55;color:var(--whi);
-  max-width:48ch;margin:0 auto 32px;
-}
-
-.signup-ctas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
-.signup-note{
-  margin-top:24px;font-family:var(--mono);font-size:12px;
-  color:var(--wlo);letter-spacing:0.04em;
-}
-
-/* MOCK */
-.mock{
-  background:var(--mock-bg);border:1px solid var(--border-hi);
-  border-radius:var(--r-lg);padding:18px 20px;
-  font-family:var(--mono);font-size:14px;line-height:1.6;
-  margin:24px 0;max-width:560px;
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  box-shadow:0 12px 40px rgba(0,0,0,0.48), 0 0 0 1px rgba(0,0,0,0.32);
-}
-.mock-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:rgba(255,255,255,0.78);font-size:12px;margin-bottom:10px;}
-.mock-user{color:rgba(255,255,255,0.92);font-weight:500;}
-.mock-meta{color:rgba(255,255,255,0.62);}
-.mock-dot{color:rgba(255,255,255,0.40);}
-.mock-body{color:var(--whi);font-size:15px;line-height:1.5;margin-bottom:12px;font-family:var(--font);}
-.mock-foot{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.78);font-size:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);}
-.mock-arrow{color:rgba(255,255,255,0.50);}
-.mock-echo{color:#3FA0FF;font-weight:600;}
-.mock-joined{color:#4FD971;font-weight:600;}
-.mock.b .mock-user::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);margin-right:6px;vertical-align:middle;}
-
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-top:80px;}
+/* ═══ FOOTER ═══ */
+footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-top:64px;background:var(--surface);}
 .foot-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:32px;}
 @media (min-width:640px){.foot-inner{grid-template-columns:1fr 1fr;gap:32px 48px;}}
 @media (min-width:1024px){.foot-inner{grid-template-columns:1.4fr 1fr 1fr;gap:64px;}}
-.foot-col h4{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--wlo);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-top:0;}
+.foot-col h4{font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-lo);margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border);margin-top:0;}
 .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;margin:0;}
 .foot-col li{margin:0;}
-.foot-col a{font-size:14px;color:var(--wmid);transition:color .2s var(--ease);line-height:1.4;display:inline-block;padding:2px 0;}
-.foot-col a:hover{color:var(--whi);}
-.foot-contact{font-family:var(--mono);font-size:13px;color:var(--wmid);display:flex;flex-direction:column;gap:4px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+.foot-col a{font-size:14px;color:var(--text-mid);transition:color .2s var(--ease);line-height:1.4;display:inline-block;padding:2px 0;}
+.foot-col a:hover{color:var(--text);}
+.foot-contact{font-family:var(--mono);font-size:13px;color:var(--text-mid);display:flex;flex-direction:column;gap:4px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border);}
 .foot-contact a{padding:0;}
-.foot-contact a:hover{color:var(--whi);}
-.foot-mark{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--wlo);letter-spacing:0.08em;}
+.foot-contact a:hover{color:var(--text);}
+.foot-mark{max-width:1200px;margin:40px auto 0;padding-top:24px;border-top:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text-lo);letter-spacing:0.08em;}
 
-/* LANG SWAP */
-[data-lang="en"] [lang="ru"]{display:none;}
-[data-lang="ru"] [lang="en"]{display:none;}
+/* ═══ SMALL VIEWPORT / IFRAME ═══ */
+@media (max-width:520px){
+  :root{--pad:16px;}
+  .hdr{padding:10px var(--pad);}
+  .hdr-logo{font-size:15px;gap:8px;}
+  .hdr-mark{width:22px;height:22px;}
+  .hdr-doc-title{display:none;}
+  .hdr-back{padding:6px 10px;font-size:12px;}
+  .page{padding:72px var(--pad) 48px;gap:24px;}
+  .col{max-width:100%;}
+  h1{font-size:28px;margin-bottom:14px;}
+  h2{font-size:22px;}
+  h3{font-size:16px;}
+  .lede{font-size:15px;}
+  .eyebrow{font-size:10px;padding:4px 10px;}
+  .meta-row span{font-size:10px;padding:4px 8px;}
+  .beta-notice,.acceptance,.shield,.callout,.contact-block{padding:16px 18px;}
+  .tbl th,.tbl td{padding:8px 10px;font-size:13px;}
+  footer{padding:32px var(--pad) 24px;}
+  .foot-inner{gap:24px;}
+}
 
-/* PRINT */
+/* ═══ PRINT ═══ */
 @media print{
-  .hdr,.progress,footer{display:none;}
-  body::before,body::after{display:none;}
+  .hdr,.toc,footer{display:none;}
   body{background:#fff;color:#000;}
-  .wrap{padding:0;max-width:none;}
+  .page{display:block;padding:0;}
   h1,h2,h3,h4{color:#000;}
   p,li,td{color:#222;}
-  .mock,.bignum,.callout,.tbl,.roi,.tier-card,.who-card,.signup,.sh-mini,.roi-total{break-inside:avoid;background:#f7f7f7;border-color:#bbb;}
-  .bignum-new, .roi-total.new .roi-total-num, .sh-mini-to{
-    -webkit-text-fill-color:#a07000;color:#a07000;background:none;
-  }
-  .bignum-old, .roi-total.old .roi-total-num, .sh-mini-from{color:#999;}
+  .callout,.beta-notice,.acceptance,.contact-block,.tbl,.shield{break-inside:avoid;background:#f5f5f5;border-color:#bbb;}
+  .shield{background:#ffeded !important;border-color:#cc4444 !important;}
+  .shield p,.shield li{color:#220000;}
   section{break-inside:avoid-page;}
 }
 </style>
@@ -564,342 +255,265 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 
 <header class="hdr">
   <a href="/" class="hdr-logo" aria-label="LOKIO home">
-    <span class="hdr-mark">L</span>
+    <svg class="hdr-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(80,80) rotate(45)">
+        <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
+      </g>
+    </svg>
     <span>LOKIO</span>
-    <span class="hdr-doc-title">/ Business case</span>
+    <span class="hdr-doc-title">/ Business</span>
   </a>
   <div class="hdr-right">
     <a class="hdr-back" href="/">
       <span aria-hidden="true">←</span>
       <span>Home</span>
     </a>
-    <a class="hdr-cta" href="mailto:hello&#64;lokio.org?subject=Business%20inquiry&body=Hi%20LOKIO%20team%2C%0A%0AI%20run%20a%20local%20business%20and%20I%27d%20like%20to%20learn%20more%20about%20putting%20a%20banner%20pin%20on%20the%20map.%0A%0AMy%20business%3A%20%0ACity%2Fdistrict%3A%20%0AWhat%20I%20want%20to%20advertise%3A%20%0A%0AThanks.">Sign up your business</a>
+    <a class="hdr-cta" href="https://app.lokio.org" target="_blank" rel="noopener">Open the map</a>
   </div>
 </header>
 
-<div class="progress" id="progress"></div>
-
-<main class="wrap">
-
-  <span class="eyebrow">For local businesses</span>
-  <h1>$3,500 a month.<br/>Now $4.99.</h1>
-  <p class="tagline">For a café, a trainer, a neighbourhood market, a street vendor.</p>
-
-  <p class="lede">Reaching customers in your district used to require a marketer, an ad budget, and a search-engine plan. Most of the spend was non-targeted, most of the result was unknown until the month closed.</p>
-  <p class="lede-sub">LOKIO is a banner pin on a map of your district, visible to every user who opens the map there right now. Single purchase. ROI measurable on the same day.</p>
-
-  <div class="meta-row">
-    <span>Business case</span>
-    <span>~5 min read</span>
-    <span>EN</span>
-    <span class="live">Live now · app.lokio.org</span>
-  </div>
-
-  <div class="cta-row">
-    <a class="cta-gold" href="mailto:hello&#64;lokio.org?subject=Business%20inquiry&body=Hi%20LOKIO%20team%2C%0A%0AI%20run%20a%20local%20business%20and%20I%27d%20like%20to%20learn%20more%20about%20putting%20a%20banner%20pin%20on%20the%20map.%0A%0AMy%20business%3A%20%0ACity%2Fdistrict%3A%20%0AWhat%20I%20want%20to%20advertise%3A%20%0A%0AThanks.">
-      <span>Sign up your business</span>
-      <span class="arr" aria-hidden="true">→</span>
-    </a>
-    <a class="cta-secondary" href="https://app.lokio.org" target="_blank" rel="noopener">
-      <span>See the map</span>
-      <span aria-hidden="true">→</span>
-    </a>
-  </div>
-
-  <hr/>
-
-  <!-- ─── 01 · Who this is for ─── -->
-  <section id="who">
-    <span class="section-num">01 · Who this is for</span>
-    <h2>If you reach customers in walking distance, this is for you.</h2>
-    <p class="muted">LOKIO is geo-bounded by design. A banner pin appears to people who open the map in your district. Not the city, not the country, not somebody scrolling at home in another country. The people who can walk to you in the next hour.</p>
-
-    <div class="who-grid">
-      <div class="who-card">
-        <div class="who-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
-        </div>
-        <h3>Café</h3>
-        <p>"First coffee free, anyone in the district right now." Five people walk in within the hour. Three return next week.</p>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/></svg>
-        </div>
-        <h3>Trainer</h3>
-        <p>Solo yoga or kickboxing instructor fills tonight's class with one map post. No subscription platform fee.</p>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M3 9v11h18V9"/><path d="M9 22v-7h6v7"/></svg>
-        </div>
-        <h3>Market</h3>
-        <p>Neighbourhood market lets the street know they have fresh fish today. No marketer required. The street walks in.</p>
-      </div>
-      <div class="who-card">
-        <div class="who-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8z"/></svg>
-        </div>
-        <h3>Street vendor</h3>
-        <p>Announces today's location to passers-by within walking distance. The pin updates with the cart.</p>
-      </div>
-    </div>
-
-    <div class="callout">
-      <p><strong>Not for chains.</strong> Chains do not need geo-bounded posts because they own broadcast advertising. LOKIO mechanically does not scale for them. By design.</p>
-    </div>
-  </section>
-
-  <hr/>
-
-  <!-- ─── 02 · The economics ─── -->
-  <section id="economics">
-    <span class="section-num">02 · The economics</span>
-    <h2>$4.99 against $3,500 per month.</h2>
-
-    <div class="bignum">
-      <div class="bignum-label">A small café spending on marketing</div>
-      <div class="bignum-old">$3,500/month</div>
-      <div class="bignum-vs">becomes</div>
-      <div class="bignum-new">$4.99</div>
-      <div class="bignum-cap">per banner pin, geo-bounded to the district, visible to people who open the map there right now.</div>
-    </div>
-
-    <p>A small café spends roughly <strong>$3,500</strong> per month on marketing in the existing model:</p>
-    <ul>
-      <li><strong>$2,000</strong> on a marketer</li>
-      <li><strong>$1,000</strong> on ads (Google, Facebook)</li>
-      <li><strong>$500</strong> on SEO and local listings</li>
+<div class="page">
+  <aside class="toc" aria-label="Contents">
+    <div class="toc-tag">Business case</div>
+    <ul class="toc-list">
+      <li><a href="#who">Who this is for</a></li>
+      <li><a href="#economics">The economics</a></li>
+      <li><a href="#banner">What a banner looks like</a></li>
+      <li><a href="#roi">Café ROI walkthrough</a></li>
+      <li><a href="#tiers">Pricing</a></li>
+      <li><a href="#why">Why this works</a></li>
+      <li><a href="#start">How to start</a></li>
+      <li><a href="#signup">Sign up</a></li>
     </ul>
-    <p>The result is unknown until the month closes. The clicks are not local. The impressions are not present-moment. The reviews are months old.</p>
+  </aside>
 
-    <p>On LOKIO, the same café publishes a banner pin for <strong>$4.99</strong>. The pin is visible to every user who opens the map in the district. The free-coffee filter surfaces it on top of regular pins to people actively looking for offers right now. ROI is measurable on the same day.</p>
+  <main class="col">
 
-    <div class="tbl">
-      <table>
-        <thead><tr><th>Channel</th><th>Cost</th><th>Targeting</th><th>ROI signal</th></tr></thead>
-        <tbody>
-          <tr><td>Google Ads click</td><td class="num">$3–5 per click</td><td>Non-targeted, often out-of-area</td><td>Days to weeks</td></tr>
-          <tr><td>Facebook Ads</td><td class="num">$7–12 per 1,000 impressions</td><td>Mostly out-of-area</td><td>Days to weeks</td></tr>
-          <tr><td>Yelp business listing</td><td class="num">$300+ per month</td><td>Reviews from past months</td><td>Weeks</td></tr>
-          <tr class="gold"><td>LOKIO map banner</td><td class="num">$4.99 per topic, full life</td><td>District viewport, present moment</td><td>Same day</td></tr>
-        </tbody>
-      </table>
+    <span class="eyebrow">For local businesses</span>
+    <h1>$3,500 a month. Now $4.99.</h1>
+    <p class="lede">Reaching customers in your district used to require a marketer, an ad budget, and a search-engine plan. Most of the spend was non-targeted, most of the result was unknown until the month closed.</p>
+    <div class="meta-row">
+      <span>Effective: 26 May 2026</span>
+      <span>Last updated: 26 May 2026</span>
+      <span class="beta">v2 · Live</span>
     </div>
 
-    <p class="muted">A click in Google Ads costs $3 to 5 and it is a non-targeted click from someone who may be in another city. On LOKIO the entire reach is geographically bounded to the district before the post is even seen.</p>
-  </section>
+<p class="muted">LOKIO is a banner pin on a map of your district, visible to every user who opens the map there right now. Single purchase. ROI measurable on the same day.</p>
+<hr>
+<section id="who">
+<span class="section-num">01 · Who this is for</span>
+<h2>If you reach customers in walking distance, this is for you.</h2>
+<p>LOKIO is geo-bounded by design. A banner pin appears to people who open the map in your district. Not the city, not the country, not somebody scrolling at home in another country. The people who can walk to you in the next hour.</p>
+<p class="muted"><strong>Café.</strong> &quot;First coffee free, anyone in the district right now.&quot; Five people walk in within the hour. Three return next week.</p>
+<p><strong>Trainer.</strong> Solo yoga or kickboxing instructor fills tonight&#39;s class with one map post. No subscription platform fee.</p>
+<p><strong>Market.</strong> Neighbourhood market lets the street know they have fresh fish today. No marketer required. The street walks in.</p>
+<p><strong>Street vendor.</strong> Announces today&#39;s location to passers-by within walking distance. The pin updates with the cart.</p>
+<div class="callout">
+<p><strong>Not for chains.</strong> Chains do not need geo-bounded posts because they own broadcast advertising. LOKIO mechanically does not scale for them. By design.</p>
+</div>
+</section>
 
-  <hr/>
 
-  <!-- ─── 03 · What a banner pin looks like ─── -->
-  <section id="banner">
-    <span class="section-num">03 · What a banner pin looks like</span>
-    <h2>A pin on the map. A free-coffee filter. A walk-in.</h2>
-    <p>A banner pin is a regular topic pin with three properties: visual emphasis on the map, ranking on the free-coffee filter for users actively looking for offers, and full topic lifetime (24 hours by default).</p>
 
-    <div class="mock b">
-      <div class="mock-head">
-        <span class="mock-user">@kiosk_riverside</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-meta">120m · 22h remaining</span>
-      </div>
-      <div class="mock-body">"First coffee free for anyone reading this in the next hour. Sourdough on the counter. We are at the corner of Riverside and 8th."</div>
-      <div class="mock-foot">
-        <span class="mock-arrow">↳</span>
-        <span class="mock-echo">12 echo</span>
-        <span class="mock-dot">·</span>
-        <span class="mock-joined">7 walked in</span>
-      </div>
-    </div>
+<hr>
+<section id="economics">
+<span class="section-num">02 · The economics</span>
+<h2>$4.99 against $3,500 per month.</h2>
+<p>A small café spends roughly <strong>$3,500</strong> per month on marketing in the existing model:</p>
+<ul>
+<li><strong>$2,000</strong> on a marketer</li>
+<li><strong>$1,000</strong> on ads (Google, Facebook)</li>
+<li><strong>$500</strong> on SEO and local listings</li>
+</ul>
+<p>The result is unknown until the month closes. The clicks are not local. The impressions are not present-moment. The reviews are months old.</p>
+<p>On LOKIO, the same café publishes a banner pin for <strong>$4.99</strong>. The pin is visible to every user who opens the map in the district. The free-coffee filter surfaces it on top of regular pins to people actively looking for offers right now. ROI is measurable on the same day.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Cost</th>
+<th>Targeting</th>
+<th>ROI signal</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Google Ads click</td>
+<td>$3–5 per click</td>
+<td>Non-targeted, often out-of-area</td>
+<td>Days to weeks</td>
+</tr>
+<tr>
+<td>Facebook Ads</td>
+<td>$7–12 per 1,000 impressions</td>
+<td>Mostly out-of-area</td>
+<td>Days to weeks</td>
+</tr>
+<tr>
+<td>Yelp business listing</td>
+<td>$300+ per month</td>
+<td>Reviews from past months</td>
+<td>Weeks</td>
+</tr>
+<tr>
+<td><strong>LOKIO map banner</strong></td>
+<td><strong>$4.99 per topic, full life</strong></td>
+<td><strong>District viewport, present moment</strong></td>
+<td><strong>Same day</strong></td>
+</tr>
+</tbody></table></div>
+<p>A click in Google Ads costs $3 to 5 and it is a non-targeted click from someone who may be in another city. On LOKIO the entire reach is geographically bounded to the district before the post is even seen.</p>
+</section>
 
-    <p class="muted">The post above is a banner pin. <strong>Twelve people</strong> reacted. <strong>Seven walked in</strong>. Five of them came back the next week without a banner. <strong>Customer LTV started with one $4.99 post.</strong></p>
-  </section>
 
-  <hr/>
 
-  <!-- ─── 04 · Café ROI walkthrough ─── -->
-  <section id="roi">
-    <span class="section-num">04 · Café ROI walkthrough</span>
-    <h2>One pin, one afternoon, one hundred dollars.</h2>
-    <p>A simple worked example. A neighbourhood café with a slow Tuesday afternoon decides to test a banner pin.</p>
+<hr>
+<section id="banner">
+<span class="section-num">03 · What a banner pin looks like</span>
+<h2>A pin on the map. A free-coffee filter. A walk-in.</h2>
+<p class="muted">A banner pin is a regular topic pin with three properties: visual emphasis on the map, ranking on the free-coffee filter for users actively looking for offers, and full topic lifetime (24 hours by default).</p>
+<p>The post is a banner pin. <strong>Twelve people</strong> reacted. <strong>Seven walked in.</strong> Five of them came back the next week without a banner. <strong>Customer LTV started with one $4.99 post.</strong></p>
+</section>
 
-    <div class="roi">
-      <div class="roi-head">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4z"/></svg>
-        </div>
-        <h3>Tuesday, 14:00. Empty café.</h3>
-      </div>
 
-      <ol class="roi-steps">
-        <li class="roi-step">
-          <div class="roi-step-num">1</div>
-          <div class="roi-step-body">
-            <div class="roi-step-title">Open LOKIO. Drop a banner pin.</div>
-            <div class="roi-step-desc">"First coffee free for the next hour. Croissants too. We are right here." Picks the banner upsell. Five seconds to publish.</div>
-          </div>
-          <div class="roi-step-num-val">$4.99</div>
-        </li>
-        <li class="roi-step">
-          <div class="roi-step-num">2</div>
-          <div class="roi-step-body">
-            <div class="roi-step-title">Pin appears on the district map.</div>
-            <div class="roi-step-desc">Gold border, free-coffee filter ranks it on top. Visible to every user who opens the map in the district.</div>
-          </div>
-          <div class="roi-step-num-val">+0</div>
-        </li>
-        <li class="roi-step">
-          <div class="roi-step-num">3</div>
-          <div class="roi-step-body">
-            <div class="roi-step-title">Within an hour: 12 walk-ins.</div>
-            <div class="roi-step-desc">Each gets the free coffee. 8 of them order food alongside. Average ticket $9.</div>
-          </div>
-          <div class="roi-step-num-val">+$72</div>
-        </li>
-        <li class="roi-step">
-          <div class="roi-step-num">4</div>
-          <div class="roi-step-body">
-            <div class="roi-step-title">Within the day: 5 more walk-ins.</div>
-            <div class="roi-step-desc">From the same pin. Average ticket $7.</div>
-          </div>
-          <div class="roi-step-num-val">+$35</div>
-        </li>
-        <li class="roi-step">
-          <div class="roi-step-num">5</div>
-          <div class="roi-step-body">
-            <div class="roi-step-title">Following week: 6 return without a banner.</div>
-            <div class="roi-step-desc">Customer LTV. Trackable in your point-of-sale because they ask about the offer. Approx ticket $7.</div>
-          </div>
-          <div class="roi-step-num-val">+$42</div>
-        </li>
-      </ol>
 
-      <div class="roi-totals">
-        <div class="roi-total old">
-          <div class="roi-total-label">Cost</div>
-          <div class="roi-total-num">$4.99</div>
-        </div>
-        <div class="roi-total new">
-          <div class="roi-total-label">Same-day revenue</div>
-          <div class="roi-total-num">$107</div>
-        </div>
-      </div>
-    </div>
+<hr>
+<section id="roi">
+<span class="section-num">04 · Café ROI walkthrough</span>
+<h2>One pin, one afternoon, one hundred dollars.</h2>
+<p class="muted">A simple worked example. A neighbourhood café with a slow Tuesday afternoon decides to test a banner pin.</p>
+<h3>Tuesday, 14:00. Empty café.</h3>
+<p><strong>Step 1 · Open LOKIO. Drop a banner pin.</strong> &quot;First coffee free for the next hour. Croissants too. We are right here.&quot; Picks the banner upsell. Five seconds to publish. Cost: <strong>$4.99</strong>.</p>
+<p><strong>Step 2 · Pin appears on the district map.</strong> Gold border, free-coffee filter ranks it on top. Visible to every user who opens the map in the district. Additional cost: <strong>$0</strong>.</p>
+<p><strong>Step 3 · Within an hour: 12 walk-ins.</strong> Each gets the free coffee. 8 of them order food alongside. Average ticket $9. Revenue: <strong>+$72</strong>.</p>
+<p><strong>Step 4 · Within the day: 5 more walk-ins.</strong> From the same pin. Average ticket $7. Revenue: <strong>+$35</strong>.</p>
+<p><strong>Step 5 · Following week: 6 return without a banner.</strong> Customer LTV. Trackable in your point-of-sale because they ask about the offer. Approx ticket $7. Revenue: <strong>+$42</strong>.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th></th>
+<th>Amount</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Cost</strong></td>
+<td>$4.99</td>
+</tr>
+<tr>
+<td><strong>Same-day revenue</strong></td>
+<td>$107</td>
+</tr>
+</tbody></table></div>
+<p>Not a forecast. A worked example with realistic numbers, against the alternative of a Tuesday-afternoon empty room. The first-week return cohort alone repays the cost <strong>twenty times over</strong>. Margin on a coffee in a small café is 65–75%, so the actual margin captured is around <strong>$70</strong> on the day plus <strong>$28</strong> the following week.</p>
+<div class="callout">
+<p class="muted"><strong>The case is asymmetric.</strong> $4.99 buys district visibility for a 24-hour topic. One walk-in pays it back. Anything beyond is upside.</p>
+</div>
+</section>
 
-    <p class="muted">Not a forecast. A worked example with realistic numbers, against the alternative of a Tuesday-afternoon empty room. The first-week return cohort alone repays the cost <strong>twenty times over</strong>. Margin on a coffee in a small café is 65–75%, so the actual margin captured is around <strong>$70</strong> on the day plus <strong>$28</strong> the following week.</p>
 
-    <div class="callout">
-      <p><strong>The case is asymmetric.</strong> $4.99 buys district visibility for a 24-hour topic. One walk-in pays it back. Anything beyond is upside.</p>
-    </div>
-  </section>
 
-  <hr/>
+<hr>
+<section id="tiers">
+<span class="section-num">05 · Pricing</span>
+<h2>Free in a new city. Full price when the city is busy.</h2>
+<p>A new city has zero supply. Charging $4.99 on day one would kill adoption. So prices ramp with city density. The coefficient is automatic, not set by a human. The ramp is one-way: once a city moves up, prices do not come back down.</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>When</th>
+<th>Coef.</th>
+<th>Banner</th>
+<th>Slot</th>
+<th>Visibility</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>0 · Seed</strong></td>
+<td>New city, no critical mass</td>
+<td>× 0</td>
+<td>Free</td>
+<td>Free</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>1 · Early</strong></td>
+<td>First active publishers</td>
+<td>× 0.3</td>
+<td>$1.49</td>
+<td>$0.15</td>
+<td>$0.59</td>
+</tr>
+<tr>
+<td><strong>2 · Growing</strong></td>
+<td>District-level density</td>
+<td>× 0.6</td>
+<td>$2.99</td>
+<td>$0.29</td>
+<td>$1.19</td>
+</tr>
+<tr>
+<td><strong>3 · Active</strong></td>
+<td>City has crossed threshold</td>
+<td>× 1.0</td>
+<td>$4.99</td>
+<td>$0.49</td>
+<td>$1.99</td>
+</tr>
+</tbody></table></div>
+<p>If your city is at tier 0, your banner pin costs <strong>nothing</strong>. The product earns from your district only when your district is busy enough to deliver real customers. <strong>The same idea Uber discovered through driver subsidies.</strong> Automated.</p>
+</section>
 
-  <!-- ─── 05 · Pricing tiers ─── -->
-  <section id="tiers">
-    <span class="section-num">05 · Pricing</span>
-    <h2>Free in a new city. Full price when the city is busy.</h2>
-    <p>A new city has zero supply. Charging $4.99 on day one would kill adoption. So prices ramp with city density. The coefficient is automatic, not set by a human. The ramp is one-way: once a city moves up, prices do not come back down.</p>
 
-    <div class="tiers">
-      <div class="tier-card t0">
-        <span class="tier-num">Tier 0 · Seed</span>
-        <span class="tier-when">New city, no critical mass</span>
-        <span class="tier-coef">× 0</span>
-        <span class="tier-prices"><strong>Banner: Free</strong><br/>Slot: Free<br/>Visibility: Free</span>
-      </div>
-      <div class="tier-card t1">
-        <span class="tier-num">Tier 1 · Early</span>
-        <span class="tier-when">First active publishers</span>
-        <span class="tier-coef">× 0.3</span>
-        <span class="tier-prices"><strong>Banner: $1.49</strong><br/>Slot: $0.15<br/>Visibility: $0.59</span>
-      </div>
-      <div class="tier-card t2">
-        <span class="tier-num">Tier 2 · Growing</span>
-        <span class="tier-when">District-level density</span>
-        <span class="tier-coef">× 0.6</span>
-        <span class="tier-prices"><strong>Banner: $2.99</strong><br/>Slot: $0.29<br/>Visibility: $1.19</span>
-      </div>
-      <div class="tier-card t3">
-        <span class="tier-num">Tier 3 · Active</span>
-        <span class="tier-when">City has crossed threshold</span>
-        <span class="tier-coef">× 1.0</span>
-        <span class="tier-prices"><strong>Banner: $4.99</strong><br/>Slot: $0.49<br/>Visibility: $1.99</span>
-      </div>
-    </div>
 
-    <p class="muted">If your city is at tier 0, your banner pin costs <strong>nothing</strong>. The product earns from your district only when your district is busy enough to deliver real customers. <strong>The same idea Uber discovered through driver subsidies.</strong> Automated.</p>
-  </section>
+<hr>
+<section id="why">
+<span class="section-num">06 · Why this works</span>
+<h2>Not advertising people hate. Invitations they wait for.</h2>
+<p>Display ads interrupt. Banner blindness is real. People scroll past. The conversion math has been getting worse for a decade.</p>
+<p>A banner pin on LOKIO appears to a person who <strong>opened the map looking for something to do near them.</strong> Their attention is already on the map. The free-coffee filter exists because a meaningful share of users tap it. The banner pin is what they came looking for.</p>
+<div class="callout">
+<p><strong>Same channel. Different intent.</strong> A Google Ads click is interruption. A LOKIO banner pin is the answer to a question the user just asked.</p>
+</div>
 
-  <hr/>
+<p>The mechanic is the same one that made WeChat Pay work for street vendors in China and Pinduoduo work for budget shoppers. <strong>Small business reaches its customer directly without an intermediary.</strong> The ads model takes a cut between merchant and customer. LOKIO removes the cut.</p>
+<p>China&#39;s GDP per capita went from $156 to $12,663 between 1978 and 2022. <strong>81-fold growth in 44 years</strong>, driven by 140 million SMEs, not by chains. LOKIO is built for the same layer of the economy. <a href="/documents/pitch#shanghai" class="inline">Read the Shanghai principle →</a></p>
+</section>
 
-  <!-- ─── 06 · Why this works ─── -->
-  <section id="why">
-    <span class="section-num">06 · Why this works</span>
-    <h2>Not advertising people hate. Invitations they wait for.</h2>
 
-    <p>Display ads interrupt. Banner blindness is real. People scroll past. The conversion math has been getting worse for a decade.</p>
-    <p>A banner pin on LOKIO appears to a person who <strong>opened the map looking for something to do near them.</strong> Their attention is already on the map. The free-coffee filter exists because a meaningful share of users tap it. The banner pin is what they came looking for.</p>
 
-    <div class="callout blue">
-      <p><strong>Same channel. Different intent.</strong> A Google Ads click is interruption. A LOKIO banner pin is the answer to a question the user just asked.</p>
-    </div>
+<hr>
+<section id="start">
+<span class="section-num">07 · How to start</span>
+<h2>Three steps. Same day.</h2>
+<ol>
+<li><strong>Open <code>app.lokio.org</code>.</strong> Sign in with Google or a passkey. No business onboarding form. The product treats every user equally until you choose to publish a banner pin.</li>
+<li><strong>Drop a pin from your café/studio/market/cart.</strong> Write the offer in plain language. Pick the banner upsell at the bottom of the create form.</li>
+<li><strong>Wait an hour.</strong> Read the replies. Check the foot traffic. The case is yours to make.</li>
+</ol>
+<div class="callout">
+<p>If your city is in <strong>tier 0 or tier 1</strong>, your first banner is free or under <strong>$1.49</strong>. There is no obligation, no contract, no monthly fee.</p>
+</div>
 
-    <p>The mechanic is the same one that made WeChat Pay work for street vendors in China and Pinduoduo work for budget shoppers. <strong>Small business reaches its customer directly without an intermediary.</strong> The ads model takes a cut between merchant and customer. LOKIO removes the cut.</p>
+<p>For larger orders (multiple pins per week, multiple districts, multi-location coordination) we are reachable at <a href="mailto:hello&#64;lokio.org?subject=Business%20inquiry" class="inline">hello@lokio.org</a>. There is no enterprise plan. There is the same single-purchase price, automated, with assistance if it helps.</p>
+</section>
 
-    <div class="sh-mini">
-      <div class="sh-mini-numbers">
-        <span class="sh-mini-from">$156</span>
-        <span class="sh-mini-arrow">→</span>
-        <span class="sh-mini-to">$12,663</span>
-      </div>
-      <p class="sh-mini-cap">China's GDP per capita, 1978 to 2022. <strong>81-fold growth in 44 years</strong>, driven by 140 million SMEs, not by chains. LOKIO is built for the same layer of the economy.</p>
-      <a class="sh-mini-link" href="/documents/pitch#shanghai">
-        Read the Shanghai principle
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
 
-  <hr/>
 
-  <!-- ─── 07 · How to start ─── -->
-  <section id="start">
-    <span class="section-num">07 · How to start</span>
-    <h2>Three steps. Same day.</h2>
+<hr>
+<section id="signup">
+<span class="section-num">Sign up</span>
+<h2>Sign up your business.</h2>
+<p>A banner pin from <strong>$0 to $4.99</strong> depending on your city. ROI measurable on the same day. Reach the people in walking distance, right now.</p>
+<div class="contact-block">
+<a class="em" href="mailto:hello&#64;lokio.org?subject=Business%20inquiry&body=Hi%20LOKIO%20team%2C%0A%0AI%20run%20a%20local%20business.%0A%0AMy%20business%3A%20%0ACity%2Fdistrict%3A%20%0AWhat%20I%20want%20to%20advertise%3A%20%0A%0AThanks.">hello@lokio.org</a>
+<p>lokio.org · app.lokio.org</p>
+</div>
+</section>
 
-    <ol style="counter-reset:none;list-style:decimal;padding-left:24px;">
-      <li><strong>Open <code>app.lokio.org</code>.</strong> Sign in with Google or a passkey. No business onboarding form. The product treats every user equally until you choose to publish a banner pin.</li>
-      <li><strong>Drop a pin from your café/studio/market/cart.</strong> Write the offer in plain language. Pick the banner upsell at the bottom of the create form.</li>
-      <li><strong>Wait an hour.</strong> Read the replies. Check the foot traffic. The case is yours to make.</li>
-    </ol>
 
-    <div class="callout">
-      <p>If your city is in <strong>tier 0 or tier 1</strong>, your first banner is free or under <strong>$1.49</strong>. There is no obligation, no contract, no monthly fee.</p>
-    </div>
 
-    <p>For larger orders (multiple pins per week, multiple districts, multi-location coordination) we are reachable at <a class="inline" href="mailto:hello&#64;lokio.org?subject=Business%20inquiry">hello&#64;lokio.org</a>. There is no enterprise plan. There is the same single-purchase price, automated, with assistance if it helps.</p>
-  </section>
-
-  <!-- ─── SIGN UP ─── -->
-  <section class="signup" id="signup">
-    <h2>Sign up your business.</h2>
-    <p class="lead">A banner pin from <strong>$0 to $4.99</strong> depending on your city. ROI measurable on the same day. Reach the people in walking distance, right now.</p>
-    <div class="signup-ctas">
-      <a class="cta-gold" href="mailto:hello&#64;lokio.org?subject=Business%20inquiry&body=Hi%20LOKIO%20team%2C%0A%0AI%20run%20a%20local%20business%20and%20I%27d%20like%20to%20learn%20more%20about%20putting%20a%20banner%20pin%20on%20the%20map.%0A%0AMy%20business%3A%20%0ACity%2Fdistrict%3A%20%0AWhat%20I%20want%20to%20advertise%3A%20%0ABest%20way%20to%20reach%20me%3A%20%0A%0AThanks.">
-        <span>Sign up your business</span>
-        <span class="arr" aria-hidden="true">→</span>
-      </a>
-      <a class="cta-secondary" href="https://app.lokio.org" target="_blank" rel="noopener">
-        <span>Open the map first</span>
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
-    <p class="signup-note">hello&#64;lokio.org · app.lokio.org</p>
-  </section>
-
-</main>
+  </main>
+</div>
 
 <footer>
   <div class="foot-inner">
@@ -914,18 +528,15 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
         <li><a href="https://t.me/lokioapp/589" target="_blank" rel="noopener">Support · Telegram</a></li>
         <li><a href="https://t.me/lokioapp" target="_blank" rel="noopener">Community · Telegram</a></li>
         <li><a href="mailto:hello&#64;lokio.org?subject=Business%20inquiry">For business</a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Press%20inquiry">Press</a></li>
         <li><a href="mailto:hello&#64;lokio.org?subject=Investor%20inquiry">Investors</a></li>
-        <li><a href="mailto:hello&#64;lokio.org?subject=Partnership%20inquiry">Partnerships</a></li>
       </ul>
     </div>
     <div class="foot-col">
       <h4>Documents</h4>
       <ul>
-        <li><a href="/documents/whitepaper">Whitepaper</a></li>
-        <li><a href="/documents/pitch">Pitch deck</a></li>
-        <li><a href="/documents/presentation">Presentation</a></li>
+        <li><a href="/documents/pitch">Pitch</a></li>
         <li><a href="/documents/business">Business case</a></li>
+        <li><a href="/documents/whitepaper">Whitepaper</a></li>
       </ul>
     </div>
     <div class="foot-col">
@@ -941,17 +552,23 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 
 <script>
 (function(){
-  /* Progress bar */
-  var pb=document.getElementById('progress');
-  function tick(){
-    var d=document.documentElement;
-    var max=d.scrollHeight-d.clientHeight;
-    var pct=max>0?(d.scrollTop/max)*100:0;
-    pb.style.width=pct+'%';
+  var links=Array.prototype.slice.call(document.querySelectorAll('.toc-list a'));
+  var targets=links.map(function(a){
+    var id=a.getAttribute('href').replace('#','');
+    return document.getElementById(id);
+  }).filter(Boolean);
+  function spy(){
+    var top=window.scrollY+120;
+    var current=null;
+    targets.forEach(function(el){if(el.offsetTop<=top) current=el;});
+    links.forEach(function(a){a.classList.remove('active');});
+    if(current){
+      var match=links.find(function(a){return a.getAttribute('href')==='#'+current.id;});
+      if(match) match.classList.add('active');
+    }
   }
-  document.addEventListener('scroll',tick,{passive:true});
-  window.addEventListener('resize',tick);
-  tick();
+  document.addEventListener('scroll',spy,{passive:true});
+  spy();
 })();
 </script>
 
