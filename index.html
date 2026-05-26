@@ -38,17 +38,38 @@
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
-{
+[{
   "@context":"https://schema.org",
   "@type":"WebApplication",
   "name":"LOKIO",
   "url":"https://lokio.org",
   "applicationCategory":"SocialNetworkingApplication",
-  "operatingSystem":"Web",
-  "description":"Location-based social app where people nearby talk through map pins with threaded chats.",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-  "author":{"@type":"Organization","name":"LOKIO","url":"https://lokio.org"}
-}
+  "operatingSystem":"Web, iOS, Android",
+  "description":"Open the map, see what is happening near you right now. Free coffee deals, events tonight, jokes from your district, people who want company. Drop a pin, start a conversation. Meet people nearby without dating apps. Free stuff near you. Local business promotion for $4.99.",
+  "alternativeHeadline":"Things to do near me · Free events nearby · Meet people near me · Local discovery · Free stuff near me today",
+  "keywords":"things to do near me, free stuff near me, events near me tonight, meet people nearby, free coffee near me, what to do today, local events, make friends new city, dating without swiping, free advertising small business, local business promotion, people nearby right now, meet locals traveling, alternative to tinder, alternative to meetup, linktree alternative free, expat community, things to do alone, restaurants near me, free things to do near me",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD","description":"Free baseline forever. Paid boosts $0.49–$4.99."},
+  "featureList":"Map-based pins, Real-time chat, Ephemeral content, Free business banners, OneLink profile, Guest browsing, Proof of Presence safety, 18+ verification",
+  "screenshot":"https://lokio.org/img/og.png",
+  "author":{"@type":"Organization","name":"LOKIO","url":"https://lokio.org","email":"hello@lokio.org","sameAs":["https://t.me/lokioapp"]},
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5","ratingCount":"1","bestRating":"5"}
+},
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Is LOKIO free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Posting, reading, joining chats, and your profile page are free forever. Paid boosts ($0.49–$4.99) amplify your reach when it matters."}},
+    {"@type":"Question","name":"Do I need to install anything?","acceptedAnswer":{"@type":"Answer","text":"No. LOKIO is a web app. Open app.lokio.org in your browser. No download, no app store required."}},
+    {"@type":"Question","name":"Is it safe to meet people from LOKIO?","acceptedAnswer":{"@type":"Answer","text":"LOKIO is 18+ only. Every account is verified via Google or passkey. Pins auto-expire, reports are transparent, repeat offenders are auto-banned. Always meet in public places."}},
+    {"@type":"Question","name":"How is LOKIO different from Tinder or Instagram?","acceptedAnswer":{"@type":"Answer","text":"No profile form. No swipes. No followers. No feed. You drop a thought on the map — people nearby see it and reply. Meeting happens through shared context, not a self-sale."}},
+    {"@type":"Question","name":"Can my business use LOKIO?","acceptedAnswer":{"@type":"Answer","text":"Yes. A gold banner pin makes your business visible to everyone who opens the map in your district. From $0 in new cities to $4.99. Cost per walk-in: $0.42 vs $80-200 on Google Ads."}},
+    {"@type":"Question","name":"What cities is LOKIO available in?","acceptedAnswer":{"@type":"Answer","text":"Every city on the planet. The map is live and anyone can post. Some cities have more activity — you can be the first in yours."}},
+    {"@type":"Question","name":"What if my city is empty?","acceptedAnswer":{"@type":"Answer","text":"Be the first. An empty map is your advantage — every user who opens it sees your pin. Your free OneLink profile works regardless: all your links, geolocation, and QR code."}},
+    {"@type":"Question","name":"Can I browse without signing up?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open app.lokio.org and tap Browse as guest. You see the map, pins, and chats. To post or reply, sign in with Google — takes five seconds."}},
+    {"@type":"Question","name":"Who sees my location?","acceptedAnswer":{"@type":"Answer","text":"Nobody sees your exact location. Your pin appears where you posted it, not where you are now. No live tracking. You choose when and where to post."}},
+    {"@type":"Question","name":"How do I delete my account?","acceptedAnswer":{"@type":"Answer","text":"Settings → Delete account. Immediate. All pins, messages, and profile data are removed. Not reversible."}}
+  ]
+}]
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
