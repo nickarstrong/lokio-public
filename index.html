@@ -144,12 +144,11 @@ button{font-family:inherit;cursor:pointer;}
    FLOATING NAV (glass pill)
    ════════════════════════════════ */
 .nav-wrap{
-  position:fixed;top:10px;left:0;right:0;z-index:100;
+  position:fixed;top:14px;left:0;right:0;z-index:100;
   display:flex;justify-content:center;
-  padding:0 6px;
+  padding:0 var(--s-3);
   pointer-events:none;
 }
-@media(min-width:581px){.nav-wrap{top:14px;padding:0 var(--s-3);}}
 .nav{
   pointer-events:auto;
   width:100%;max-width:740px;
@@ -1199,7 +1198,7 @@ footer{
   border-color:rgba(255,255,255,0.16);
 }
 @media(max-width:580px){
-  .nav-lang{ display:none; }
+  .nav-lang{ display:none; } /* на mobile спрячем в menu, оставим CTA */
 }
 
 /* ════════════════════════════════
@@ -2380,7 +2379,7 @@ footer{
 <!-- ════════ LOKA CHAT WIDGET v8 ════════ -->
 <style>
 .loka-fab{
-  position:fixed;bottom:20px;right:20px;z-index:900;
+  position:fixed;bottom:28px;right:28px;z-index:900;
   width:100px;height:100px;border-radius:50%;
   cursor:pointer;border:none;background:transparent;
   padding:0;box-shadow:none;overflow:visible;
@@ -2513,7 +2512,7 @@ footer{
 .loka-cta-x:hover{background:rgba(255,255,255,0.1);}
 @media(max-width:480px){
   .loka-chat{width:calc(100vw - 16px);right:8px;bottom:8px;height:80vh;}
-  .loka-fab{bottom:12px;right:12px;width:80px;height:80px;}
+  .loka-fab{bottom:20px;right:20px;width:80px;height:80px;}
   .loka-morph{width:80px;height:80px;}
 }
 </style>
