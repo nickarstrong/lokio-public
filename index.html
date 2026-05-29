@@ -1043,14 +1043,19 @@ footer{
 }
 .foot-col a:hover{color:var(--c-text);}
 .foot-contact{
-  display:flex;flex-direction:column;gap:4px;
+  display:flex;flex-direction:row;flex-wrap:wrap;gap:10px;
   margin-bottom:var(--s-5);padding-bottom:var(--s-5);
   border-bottom:1px solid var(--c-border);
-  font:500 var(--t-footnote)/1.4 var(--font-mono);
-  color:var(--c-text-mid);
 }
-.foot-contact a{font:inherit;color:inherit;padding:0;}
-.foot-contact a:hover{color:var(--c-text);}
+.foot-contact a{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;border-radius:999px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);
+  font:500 13px/1 var(--font);color:var(--c-text-mid);
+  text-decoration:none;transition:all 0.2s;
+}
+.foot-contact a:hover{background:rgba(255,255,255,0.1);color:var(--c-text);border-color:rgba(255,255,255,0.15);}
+.foot-contact a svg{width:16px;height:16px;flex-shrink:0;}
 
 .foot-bot{
   display:flex;align-items:center;justify-content:space-between;
@@ -1614,6 +1619,7 @@ footer{
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span data-en="Works on web · no install" data-ru="Работает в браузере · без установки">Works on web · no install</span></span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> <span data-en="Anonymous by default" data-ru="Анонимно по умолчанию">Anonymous by default</span></span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg> <span data-en="No feed · no follows" data-ru="Без ленты · без подписчиков">No feed · no follows</span></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4c0 1.95-2 3-2 5h-4c0-2-2-3.05-2-5a4 4 0 0 1 4-4z"/><line x1="10" y1="17" x2="14" y2="17"/><line x1="10" y1="20" x2="14" y2="20"/><line x1="11" y1="23" x2="13" y2="23"/></svg> <span data-en="Loka AI · your city guide" data-ru="Loka AI · гид по городу">Loka AI · your city guide</span></span>
         </div>
 
         <div class="hero-store-note">
@@ -2149,9 +2155,9 @@ footer{
 
       <div class="foot-col">
         <div class="foot-contact">
-          <a href="https://t.me/lokioapp" target="_blank" rel="noopener">t.me/lokioapp</a>
-          <a href="mailto:hello&#64;lokio.org">hello&#64;lokio.org</a>
-          <a href="https://app.lokio.org" target="_blank" rel="noopener">app.lokio.org</a>
+          <a href="https://t.me/lokioapp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>
+          <a href="mailto:hello&#64;lokio.org"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>Email</a>
+          <a href="https://app.lokio.org" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>app.lokio.org</a>
         </div>
         <h4 data-en="Contact" data-ru="Контакты">Contact</h4>
         <ul>
