@@ -2371,7 +2371,7 @@ footer{
 })();
 </script>
 
-<!-- ════════ LOKA CHAT WIDGET ════════ -->
+<!-- ════════ LOKA CHAT WIDGET v2 ════════ -->
 <style>
 .loka-fab{
   position:fixed;bottom:24px;right:24px;z-index:900;
@@ -2427,14 +2427,16 @@ footer{
   flex:1;overflow-y:auto;padding:16px;
   display:flex;flex-direction:column;gap:8px;
   min-height:280px;max-height:340px;
+  scrollbar-width:none;
 }
+.loka-messages::-webkit-scrollbar{display:none;}
+
 .loka-msg{
   max-width:85%;padding:10px 14px;border-radius:14px 14px 14px 4px;
   font-size:14px;line-height:1.45;color:var(--on-glass);
   background:rgba(255,255,255,0.08);
   animation:loka-msg-in 0.3s var(--ease) both;
 }
-.loka-msg a{color:var(--accent-hi);text-decoration:underline;}
 @keyframes loka-msg-in{
   from{opacity:0;transform:translateY(8px);}
   to{opacity:1;transform:translateY(0);}
@@ -2523,8 +2525,8 @@ footer{
     <button class="loka-cta-close" id="loka-cta-close">✕</button>
     <h3 id="loka-cta-h"></h3>
     <div class="loka-cta-actions">
-      <a class="loka-cta-btn primary" href="https://app.lokio.org" id="loka-cta-onboard"></a>
-      <a class="loka-cta-btn ghost" href="https://app.lokio.org?guest=1" id="loka-cta-map"></a>
+      <a class="loka-cta-btn primary" href="https://app.lokio.org" id="loka-cta-reg"></a>
+      <a class="loka-cta-btn ghost" href="https://app.lokio.org?guest=1" id="loka-cta-guest"></a>
     </div>
   </div>
 </div>
@@ -2533,68 +2535,37 @@ footer{
 (function(){
   var isRU = /^ru\b/i.test(navigator.language||'');
 
-  var scripts = {
-    en: {
-      greeting: [
-        "Hey! I'm Loka 👋",
-        "I live inside LOKIO — a map where people nearby actually talk to each other."
-      ],
-      prompt: "What interests you?",
-      placeholder: "Type a message...",
-      buttons: ["What can I do?", "I'm bored", "Tell me more"],
-      branches: {
-        0: [
-          "Drop a joke on the map — your neighborhood sees it and replies 😄",
-          "Find free stuff nearby — coffee, food, events happening right now.",
-          "Or just browse and see who's around."
-        ],
-        1: [
-          "Post something on the map — a thought, a question, anything.",
-          "Someone nearby will pick it up. That's how people actually meet here."
-        ],
-        2: [
-          "Everyone gets a free profile page — your links, bio, QR code. Like Linktree but free forever.",
-          "Businesses get a gold pin on the map — visible at any zoom. Free in new cities, walk-ins the same day."
-        ]
-      },
-      closer: "Want to see the map yourself?",
-      closerBtns: ["Open the app", "Just look at the map"],
-      ctaH: "To chat with me for real — open the app",
-      ctaOnboard: "Open the app",
-      ctaMap: "Browse the map first"
-    },
-    ru: {
-      greeting: [
-        "Привет! Я Loka 👋",
-        "Я живу внутри LOKIO — это карта, где люди рядом реально общаются."
-      ],
-      prompt: "Что тебе интересно?",
-      placeholder: "Написать сообщение...",
-      buttons: ["Что тут можно?", "Мне скучно", "Расскажи ещё"],
-      branches: {
-        0: [
-          "Кинь шутку на карту — район увидит и ответит 😄",
-          "Найди бесплатное рядом — кофе, еду, события прямо сейчас.",
-          "Или просто посмотри кто вокруг."
-        ],
-        1: [
-          "Напиши что-нибудь на карте — мысль, вопрос, что угодно.",
-          "Кто-то рядом подхватит. Так тут знакомятся."
-        ],
-        2: [
-          "У каждого есть бесплатная страница — ссылки, био, QR-код. Как Linktree, только бесплатно навсегда.",
-          "Бизнес получает золотой пин на карте — виден на любом зуме. В новых городах — бесплатно, люди приходят в тот же день."
-        ]
-      },
-      closer: "Хочешь сам посмотреть карту?",
-      closerBtns: ["Открыть приложение", "Просто глянуть карту"],
-      ctaH: "Чтобы поговорить со мной по-настоящему — открой приложение",
-      ctaOnboard: "Открыть приложение",
-      ctaMap: "Сначала посмотреть карту"
-    }
+  /* Sequential script — all 6 triggers, no branching */
+  var script = isRU ? {
+    placeholder: 'Написать сообщение...',
+    ctaH: 'Чтобы поговорить со мной по-настоящему — зарегистрируйся',
+    ctaReg: 'Зарегистрироваться',
+    ctaGuest: 'Сначала посмотреть карту',
+    steps: [
+      {msgs: ['Привет! Я Loka 👋', 'Я живу внутри LOKIO — это карта, где люди рядом реально общаются.']},
+      {msgs: ['Знаешь что тут можно делать?', 'Кинуть шутку на карту — район увидит и ответит. Найти бесплатный кофе рядом. Посмотреть что происходит прямо сейчас.'], btn: 'А если скучно?'},
+      {msgs: ['Напиши что-нибудь на карте — мысль, вопрос, что угодно.', 'Кто-то рядом подхватит. Так тут знакомятся — без анкет, без свайпов.'], btn: 'Что ещё есть?'},
+      {msgs: ['У каждого бесплатная страница — ссылки, био, QR. Как Linktree, только бесплатно навсегда.'], btn: 'А для бизнеса?'},
+      {msgs: ['Бизнес ставит золотой пин на карту — виден всем. В новых городах бесплатно. Люди приходят в тот же день.'], btn: 'А что ты не можешь?'},
+      {msgs: ['Я не вижу карту и не знаю что на ней сейчас — только ты можешь это увидеть, открыв приложение 😊', 'И я никогда не выдумываю функции которых нет.']},
+      {msgs: ['Хочешь попробовать?'], btn_final: true}
+    ]
+  } : {
+    placeholder: 'Type a message...',
+    ctaH: 'To chat with me for real — sign up',
+    ctaReg: 'Sign up',
+    ctaGuest: 'Just browse the map first',
+    steps: [
+      {msgs: ["Hey! I'm Loka 👋", "I live inside LOKIO — a map where people nearby actually talk to each other."]},
+      {msgs: ["Know what you can do here?", "Drop a joke on the map — your neighborhood replies. Find free coffee nearby. See what's happening right now."], btn: "What if I'm bored?"},
+      {msgs: ["Post something on the map — a thought, a question, anything.", "Someone nearby picks it up. That's how people meet here — no forms, no swipes."], btn: "What else?"},
+      {msgs: ["Everyone gets a free profile page — links, bio, QR code. Like Linktree but free forever."], btn: "What about businesses?"},
+      {msgs: ["Businesses get a gold pin on the map — visible to everyone. Free in new cities. Walk-ins the same day."], btn: "What can't you do?"},
+      {msgs: ["I can't see the map or what's on it right now — only you can, by opening the app 😊", "And I never make up features that don't exist."]},
+      {msgs: ["Want to try it?"], btn_final: true}
+    ]
   };
 
-  var s = isRU ? scripts.ru : scripts.en;
   var msgs = document.getElementById('loka-msgs');
   var fab = document.getElementById('loka-fab');
   var chat = document.getElementById('loka-chat');
@@ -2603,25 +2574,20 @@ footer{
   var cta = document.getElementById('loka-cta');
   var ctaClose = document.getElementById('loka-cta-close');
 
-  input.placeholder = s.placeholder;
-  document.getElementById('loka-cta-h').textContent = s.ctaH;
-  document.getElementById('loka-cta-onboard').textContent = s.ctaOnboard;
-  document.getElementById('loka-cta-map').textContent = s.ctaMap;
+  input.placeholder = script.placeholder;
+  document.getElementById('loka-cta-h').textContent = script.ctaH;
+  document.getElementById('loka-cta-reg').textContent = script.ctaReg;
+  document.getElementById('loka-cta-guest').textContent = script.ctaGuest;
 
-  var GOLD = '#FBEC5D';
   function buildMorph(container, size){
-    var layers = 7;
-    var step = size / layers;
+    var layers = 7, step = size / layers;
     for(var i=0;i<layers;i++){
       var el = document.createElement('div');
       el.className = 'loka-layer';
       var sz = size - i * step;
       el.style.width = sz+'px';
       el.style.height = sz+'px';
-      var light = Math.min(255, 251 + i*1);
-      var lightG = Math.min(255, 236 + i*3);
-      var lightB = Math.min(255, 93 + i*18);
-      el.style.backgroundColor = 'rgb('+light+','+lightG+','+lightB+')';
+      el.style.backgroundColor = 'rgb('+Math.min(255,251+i)+','+Math.min(255,236+i*3)+','+Math.min(255,93+i*18)+')';
       el.style.animationDelay = (i*0.06)+'s';
       container.appendChild(el);
     }
@@ -2629,14 +2595,13 @@ footer{
   buildMorph(document.getElementById('loka-fab-morph'), 60);
   buildMorph(document.getElementById('loka-chat-av'), 32);
 
+  var stepIdx = 0;
   var queue = [];
   var running = false;
-  var branchDone = false;
 
   function addTyping(){
     var t = document.createElement('div');
-    t.className = 'loka-typing';
-    t.id = 'loka-typing';
+    t.className = 'loka-typing'; t.id = 'loka-typing';
     t.innerHTML = '<span></span><span></span><span></span>';
     msgs.appendChild(t);
     msgs.scrollTop = msgs.scrollHeight;
@@ -2652,22 +2617,6 @@ footer{
     msgs.appendChild(m);
     msgs.scrollTop = msgs.scrollHeight;
   }
-  function addButtons(labels, handler){
-    var wrap = document.createElement('div');
-    wrap.className = 'loka-btns';
-    labels.forEach(function(label, idx){
-      var b = document.createElement('button');
-      b.className = 'loka-btn';
-      b.textContent = label;
-      b.addEventListener('click', function(){
-        wrap.remove();
-        handler(idx);
-      });
-      wrap.appendChild(b);
-    });
-    msgs.appendChild(wrap);
-    msgs.scrollTop = msgs.scrollHeight;
-  }
 
   function runQueue(){
     if(running || !queue.length) return;
@@ -2675,54 +2624,74 @@ footer{
     var item = queue.shift();
     if(item.type === 'typing'){
       addTyping();
-      setTimeout(function(){ running=false; runQueue(); }, item.dur || 1200);
+      setTimeout(function(){ running=false; runQueue(); }, item.dur);
     } else if(item.type === 'msg'){
       removeTyping();
       addMsg(item.text);
-      setTimeout(function(){ running=false; runQueue(); }, 400);
-    } else if(item.type === 'buttons'){
+      setTimeout(function(){ running=false; runQueue(); }, 300);
+    } else if(item.type === 'btn'){
       removeTyping();
-      addButtons(item.labels, item.handler);
+      var wrap = document.createElement('div');
+      wrap.className = 'loka-btns';
+      var b = document.createElement('button');
+      b.className = 'loka-btn';
+      b.textContent = item.label;
+      b.addEventListener('click', function(){
+        wrap.remove();
+        playStep();
+      });
+      wrap.appendChild(b);
+      msgs.appendChild(wrap);
+      msgs.scrollTop = msgs.scrollHeight;
+      running = false;
+    } else if(item.type === 'btn_final'){
+      removeTyping();
+      var wrap2 = document.createElement('div');
+      wrap2.className = 'loka-btns';
+      var b1 = document.createElement('button');
+      b1.className = 'loka-btn';
+      b1.textContent = script.ctaReg;
+      b1.style.background = 'rgba(10,132,255,0.2)';
+      b1.style.borderColor = 'rgba(10,132,255,0.4)';
+      b1.addEventListener('click', function(){ window.open('https://app.lokio.org','_blank'); });
+      var b2 = document.createElement('button');
+      b2.className = 'loka-btn';
+      b2.textContent = script.ctaGuest;
+      b2.addEventListener('click', function(){ window.open('https://app.lokio.org?guest=1','_blank'); });
+      wrap2.appendChild(b1);
+      wrap2.appendChild(b2);
+      msgs.appendChild(wrap2);
+      msgs.scrollTop = msgs.scrollHeight;
       running = false;
     }
   }
 
-  function enqueue(type, data){
-    if(type === 'msg'){
-      queue.push({type:'typing', dur: Math.min(1800, 600 + data.length * 15)});
-      queue.push({type:'msg', text:data});
-    } else if(type === 'buttons'){
-      queue.push({type:'buttons', labels:data.labels, handler:data.handler});
+  function playStep(){
+    if(stepIdx >= script.steps.length) return;
+    var step = script.steps[stepIdx];
+    stepIdx++;
+    step.msgs.forEach(function(t){
+      queue.push({type:'typing', dur: Math.min(1600, 500 + t.length * 12)});
+      queue.push({type:'msg', text:t});
+    });
+    if(step.btn){
+      queue.push({type:'btn', label: step.btn});
+    } else if(step.btn_final){
+      queue.push({type:'btn_final'});
+    } else {
+      /* auto-continue to next step after short pause */
+      queue.push({type:'typing', dur: 800});
+      setTimeout(function(){
+        playStep();
+      }, 0);
     }
     runQueue();
-  }
-
-  function startScript(){
-    s.greeting.forEach(function(t){ enqueue('msg', t); });
-
-    enqueue('msg', s.prompt);
-    enqueue('buttons', {
-      labels: s.buttons,
-      handler: function(idx){
-        var branch = s.branches[idx];
-        branch.forEach(function(t){ enqueue('msg', t); });
-        enqueue('msg', s.closer);
-        enqueue('buttons', {
-          labels: s.closerBtns,
-          handler: function(ci){
-            if(ci === 0) window.open('https://app.lokio.org','_blank');
-            else window.open('https://app.lokio.org?guest=1','_blank');
-          }
-        });
-        branchDone = true;
-      }
-    });
   }
 
   fab.addEventListener('click', function(){
     fab.classList.add('hidden');
     chat.classList.add('open');
-    if(!msgs.children.length) startScript();
+    if(!msgs.children.length) playStep();
   });
 
   closeBtn.addEventListener('click', function(){
