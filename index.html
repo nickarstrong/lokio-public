@@ -2371,96 +2371,77 @@ footer{
 })();
 </script>
 
-<!-- ════════ LOKA CHAT WIDGET v4 ════════ -->
+<!-- ════════ LOKA CHAT WIDGET v6 ════════ -->
 <style>
+/* ─── FAB ─── */
 .loka-fab{
   position:fixed;bottom:24px;right:24px;z-index:900;
-  width:72px;height:72px;border-radius:50%;
+  width:72px;height:72px;
   cursor:pointer;border:none;background:transparent;
-  padding:0;box-shadow:none;overflow:visible;
+  padding:0;overflow:visible;
 }
 .loka-fab.hidden{display:none;}
-.loka-morph{position:relative;width:72px;height:72px;overflow:visible;}
+
+/* ─── 3D morph containers (from original) ─── */
+.loka-perspective{perspective:600px;width:72px;height:72px;}
+.loka-perspective.big{width:80px;height:80px;}
+.loka-stage{
+  position:relative;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform 0.3s ease-out;
+}
 .loka-layer{
   position:absolute;left:50%;top:50%;
+  transform-style:preserve-3d;
   border-radius:50%;
-  border:1.5px solid rgba(0,0,0,0.3);
-  transition:background-color 0.8s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition:background-color 0.8s ease, box-shadow 0.8s ease;
 }
-.loka-layer.idle-0{animation:lk-i0 4s alternate infinite ease-in-out;}
-.loka-layer.idle-1{animation:lk-i1 3.4s alternate infinite ease-in-out;}
-.loka-layer.idle-2{animation:lk-i2 3.8s alternate infinite ease-in-out;}
-.loka-layer.idle-3{animation:lk-i3 3.1s alternate infinite ease-in-out;}
-.loka-layer.idle-4{animation:lk-i4 3.6s alternate infinite ease-in-out;}
-.loka-layer.typing{animation:lk-typing 1.3s alternate infinite ease-in-out;}
-.loka-layer.happy{animation:lk-happy 2.2s alternate infinite ease-in-out;}
-.loka-layer.love{animation:lk-love 1.5s alternate infinite ease-in-out;}
-.loka-layer.think{animation:lk-think 3s infinite linear;}
-.loka-layer.calm{animation:lk-calm 4s alternate infinite ease-in-out;}
+.loka-glow{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  border-radius:50%;filter:blur(18px);opacity:0.3;
+  transition:background-color 0.8s, opacity 0.8s;pointer-events:none;
+}
+.loka-fab .loka-glow{width:52px;height:52px;}
+.loka-chat-avatar .loka-glow{width:58px;height:58px;}
 
-@keyframes lk-i0{
-  0%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-  33%{border-radius:28% 55% 42% 58%;transform:translate(-50%,-50%) rotate(22deg) scale(1.06);}
-  66%{border-radius:55% 32% 58% 38%;transform:translate(-50%,-50%) rotate(-15deg) scale(0.95);}
-  100%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-}
-@keyframes lk-i1{
-  0%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-  33%{border-radius:55% 35% 50% 30%;transform:translate(-50%,-50%) rotate(-20deg) scale(0.94);}
-  66%{border-radius:30% 50% 35% 55%;transform:translate(-50%,-50%) rotate(28deg) scale(1.07);}
-  100%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-}
-@keyframes lk-i2{
-  0%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-  33%{border-radius:40% 60% 30% 50%;transform:translate(-50%,-50%) rotate(30deg) scale(1.08);}
-  66%{border-radius:60% 35% 50% 40%;transform:translate(-50%,-50%) rotate(-22deg) scale(0.93);}
-  100%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-}
-@keyframes lk-i3{
-  0%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-  33%{border-radius:50% 30% 60% 40%;transform:translate(-50%,-50%) rotate(-25deg) scale(0.92);}
-  66%{border-radius:35% 55% 40% 60%;transform:translate(-50%,-50%) rotate(18deg) scale(1.09);}
-  100%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-}
-@keyframes lk-i4{
-  0%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-  33%{border-radius:58% 28% 45% 55%;transform:translate(-50%,-50%) rotate(35deg) scale(1.1);}
-  66%{border-radius:30% 58% 55% 28%;transform:translate(-50%,-50%) rotate(-30deg) scale(0.9);}
-  100%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
+/* ─── Original keyframes (copied 1:1) ─── */
+@keyframes lk-idle{
+  0%,100%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotateY(0deg) rotateX(0deg);}
+  25%{border-radius:42%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotateY(8deg) rotateX(4deg);}
+  50%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotateY(0deg) rotateX(-3deg);}
+  75%{border-radius:44%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotateY(-6deg) rotateX(2deg);}
 }
 @keyframes lk-typing{
-  0%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg);}
-  15%{border-radius:48%;transform:translate(-50%,-50%) rotate(0deg);}
-  85%{border-radius:12%;transform:translate(-50%,-50%) rotate(90deg) scale(0.96);}
-  100%{border-radius:12%;transform:translate(-50%,-50%) rotate(90deg) scale(0.96);}
+  0%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(0deg) scale(1);}
+  15%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(0deg) scale(1);}
+  85%{border-radius:10%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(110deg) scale(0.95);}
+  100%{border-radius:10%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(110deg) scale(0.95);}
 }
 @keyframes lk-happy{
-  0%{border-radius:50%;transform:translate(-50%,-50%) scale(1) rotate(0deg);}
-  25%{border-radius:35% 55% 45% 50%;transform:translate(-50%,-50%) scale(1.08) rotate(16deg);}
-  50%{border-radius:50% 40% 55% 35%;transform:translate(-50%,-50%) scale(0.96) rotate(-6deg);}
-  75%{border-radius:40% 50% 35% 55%;transform:translate(-50%,-50%) scale(1.05) rotate(10deg);}
-  100%{border-radius:50%;transform:translate(-50%,-50%) scale(1) rotate(0deg);}
+  0%,100%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(1) rotateZ(0deg);}
+  30%{border-radius:38%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(1.06) rotateZ(15deg);}
+  60%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(0.97) rotateZ(-5deg);}
 }
-@keyframes lk-love{
-  0%,100%{border-radius:50%;transform:translate(-50%,-50%) scale(1);}
-  14%{border-radius:50%;transform:translate(-50%,-50%) scale(1.14);}
-  28%{border-radius:50%;transform:translate(-50%,-50%) scale(0.96);}
-  42%{border-radius:50%;transform:translate(-50%,-50%) scale(1.1);}
-  60%{border-radius:50%;transform:translate(-50%,-50%) scale(1);}
+@keyframes lk-sad{
+  0%,100%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(1) rotateX(0deg);}
+  50%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(0.93) rotateX(8deg);}
 }
 @keyframes lk-think{
-  0%{border-radius:50%;transform:translate(-50%,-50%) rotate(0deg) scale(1);}
-  20%{border-radius:40% 50% 30% 55%;transform:translate(-50%,-50%) rotate(45deg) scale(0.95);}
-  40%{border-radius:30% 55% 50% 35%;transform:translate(-50%,-50%) rotate(110deg) scale(1.02);}
-  60%{border-radius:55% 30% 40% 50%;transform:translate(-50%,-50%) rotate(190deg) scale(0.97);}
-  80%{border-radius:50% 40% 55% 30%;transform:translate(-50%,-50%) rotate(280deg) scale(1.01);}
-  100%{border-radius:50%;transform:translate(-50%,-50%) rotate(360deg) scale(1);}
+  0%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(0deg);}
+  25%{border-radius:28%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(60deg);}
+  50%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(120deg);}
+  75%{border-radius:22%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(200deg);}
+  100%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) rotate(360deg);}
 }
-@keyframes lk-calm{
-  0%,100%{border-radius:50%;transform:translate(-50%,-50%) scale(1);}
-  50%{border-radius:50%;transform:translate(-50%,-50%) scale(0.94);}
+@keyframes lk-love{
+  0%,100%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(1);}
+  15%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(1.14);}
+  30%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(0.96);}
+  45%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(1.1);}
+  60%{border-radius:50%;transform:translate(-50%,-50%) translateZ(var(--tz)) scale(1);}
 }
 
+/* ─── Chat window ─── */
 .loka-chat{
   position:fixed;bottom:24px;right:24px;z-index:901;
   width:360px;max-height:520px;
@@ -2470,14 +2451,13 @@ footer{
   box-shadow:0 8px 40px rgba(0,0,0,0.25);
 }
 .loka-chat.open{display:flex;}
-
 .loka-chat-head{
   display:flex;flex-direction:column;align-items:center;
   padding:20px 16px 12px;position:relative;
 }
 .loka-chat-avatar{width:80px;height:80px;position:relative;margin-bottom:6px;}
 .loka-chat-name{font-size:15px;font-weight:500;color:var(--on-glass);}
-.loka-chat-mood{font-size:11px;color:var(--on-glass-lo);margin-top:2px;transition:color 0.5s;}
+.loka-chat-mood{font-size:11px;color:var(--on-glass-lo);margin-top:2px;}
 .loka-chat-close{
   position:absolute;top:12px;right:12px;
   width:28px;height:28px;border-radius:999px;border:none;
@@ -2485,23 +2465,18 @@ footer{
   font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
 }
 .loka-chat-close:hover{background:rgba(255,255,255,0.15);}
-
 .loka-messages{
   flex:1;overflow-y:auto;padding:0 16px 16px;
   display:flex;flex-direction:column;gap:6px;
-  min-height:200px;max-height:300px;
-  scrollbar-width:none;
+  min-height:200px;max-height:300px;scrollbar-width:none;
 }
 .loka-messages::-webkit-scrollbar{display:none;}
-
 .loka-msg{
   max-width:88%;padding:10px 14px;border-radius:14px 14px 14px 4px;
   font-size:14px;line-height:1.5;color:var(--on-glass);
-  background:rgba(255,255,255,0.08);
-  animation:lk-in 0.3s var(--ease) both;
+  background:rgba(255,255,255,0.08);animation:lk-in 0.3s var(--ease) both;
 }
 @keyframes lk-in{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-
 .loka-typing-ind{
   display:flex;gap:4px;padding:10px 14px;max-width:60px;
   border-radius:14px 14px 14px 4px;background:rgba(255,255,255,0.08);
@@ -2510,7 +2485,6 @@ footer{
 .loka-typing-ind span:nth-child(2){animation-delay:0.2s;}
 .loka-typing-ind span:nth-child(3){animation-delay:0.4s;}
 @keyframes lk-dot{0%,60%,100%{opacity:0.3;transform:translateY(0);}30%{opacity:1;transform:translateY(-4px);}}
-
 .loka-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-self:flex-end;}
 .loka-btn{
   padding:8px 16px;border-radius:var(--r-pill);border:1px solid rgba(10,132,255,0.4);
@@ -2520,7 +2494,6 @@ footer{
 }
 .loka-btn:hover{background:rgba(10,132,255,0.22);border-color:rgba(10,132,255,0.6);}
 .loka-btn::after{content:' \2192';opacity:0.6;}
-
 .loka-input-row{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.08);display:flex;gap:8px;align-items:center;}
 .loka-input{
   flex:1;padding:8px 14px;border-radius:var(--r-pill);
@@ -2528,7 +2501,6 @@ footer{
   color:var(--on-glass);font-size:14px;font-family:var(--font);outline:none;cursor:pointer;
 }
 .loka-input::placeholder{color:var(--on-glass-lo);}
-
 .loka-cta-overlay{
   position:absolute;inset:0;z-index:5;
   background:rgba(10,10,18,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
@@ -2550,13 +2522,23 @@ footer{
 </style>
 
 <button class="loka-fab" id="loka-fab" aria-label="Chat with Loka">
-  <div class="loka-morph" id="loka-fab-morph"></div>
+  <div class="loka-perspective" id="loka-fab-persp">
+    <div class="loka-stage" id="loka-fab-stage">
+      <div class="loka-glow" id="loka-fab-glow"></div>
+    </div>
+  </div>
 </button>
 
 <div class="loka-chat" id="loka-chat">
   <div class="loka-chat-head">
     <button class="loka-chat-close" id="loka-close">&#10005;</button>
-    <div class="loka-chat-avatar" id="loka-avatar"></div>
+    <div class="loka-chat-avatar">
+      <div class="loka-perspective big" id="loka-av-persp">
+        <div class="loka-stage" id="loka-av-stage">
+          <div class="loka-glow" id="loka-av-glow"></div>
+        </div>
+      </div>
+    </div>
     <div class="loka-chat-name">Loka</div>
     <div class="loka-chat-mood" id="loka-mood-label"></div>
   </div>
@@ -2576,15 +2558,115 @@ footer{
 
 <script>
 (function(){
-  var isRU=/^ru\b/i.test(navigator.language||'');
+  /* ─── Original morph engine (ported from loka_3d_metamorphic_mood.html) ─── */
+  var LAYERS=11, FAB_SIZE=66, FAB_STEP=4.5, FAB_Z=2;
+  var AV_SIZE=74, AV_STEP=5, AV_Z=2.5;
+
+  function lighten(hex,amt){
+    var r=Math.min(255,parseInt(hex.slice(1,3),16)+amt);
+    var g=Math.min(255,parseInt(hex.slice(3,5),16)+amt);
+    var b=Math.min(255,parseInt(hex.slice(5,7),16)+amt);
+    return '#'+[r,g,b].map(function(v){return v.toString(16).padStart(2,'0');}).join('');
+  }
+  function alpha(hex,a){
+    var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+    return 'rgba('+r+','+g+','+b+','+a+')';
+  }
+
   var moods={
-    idle:{color:'#FBEC5D',step:38,anim:'idle'},
-    typing:{color:'#FF9F0A',step:32,anim:'typing'},
-    happy:{color:'#30D158',step:36,anim:'happy'},
-    love:{color:'#FF3DBA',step:30,anim:'love'},
-    think:{color:'#0A84FF',step:36,anim:'think'},
-    calm:{color:'#636366',step:28,anim:'calm'}
+    idle:   {color:'#FBEC5D',anim:'lk-idle',  dur:4,  label:''},
+    typing: {color:'#FF9F0A',anim:'lk-typing',dur:1.4,label:''},
+    happy:  {color:'#30D158',anim:'lk-happy', dur:2.2,label:''},
+    love:   {color:'#FF3DBA',anim:'lk-love',  dur:1.6,label:''},
+    think:  {color:'#0A84FF',anim:'lk-think', dur:3.5,label:''},
+    calm:   {color:'#636366',anim:'lk-sad',   dur:5,  label:''}
   };
+
+  var fabStage=document.getElementById('loka-fab-stage');
+  var fabGlow=document.getElementById('loka-fab-glow');
+  var avStage=document.getElementById('loka-av-stage');
+  var avGlow=document.getElementById('loka-av-glow');
+  var fabLayers=[], avLayers=[];
+
+  function buildMorph(stage,store,baseSize,step,zStep){
+    for(var i=0;i<LAYERS;i++){
+      var el=document.createElement('div');
+      el.className='loka-layer';
+      var s=baseSize-i*step;
+      el.style.width=s+'px';el.style.height=s+'px';
+      el.style.setProperty('--tz',(i*zStep)+'px');
+      el.style.zIndex=i;
+      stage.appendChild(el);
+      store.push(el);
+    }
+  }
+  buildMorph(fabStage,fabLayers,FAB_SIZE,FAB_STEP,FAB_Z);
+  buildMorph(avStage,avLayers,AV_SIZE,AV_STEP,AV_Z);
+
+  function setMood(name){
+    var m=moods[name]||moods.idle;
+    [fabGlow,avGlow].forEach(function(g){
+      g.style.backgroundColor=m.color;
+      g.style.opacity=name==='calm'?'0.1':'0.3';
+    });
+    [fabLayers,avLayers].forEach(function(layers){
+      layers.forEach(function(el,i){
+        var c=lighten(m.color,i*12);
+        el.style.backgroundColor=c;
+        el.style.boxShadow='0 '+(1+i*0.4)+'px '+(3+i)+'px '+alpha(m.color,0.12-i*0.008);
+        el.style.animation='none';
+        void el.offsetHeight;
+        var delay=name==='love'?i*0.04:i*0.07;
+        el.style.animation=m.anim+' '+m.dur+'s '+delay+'s alternate infinite ease-in-out';
+      });
+    });
+  }
+  setMood('idle');
+
+  /* ─── 3D mousemove on FAB stage (from original) ─── */
+  fabStage.addEventListener('mousemove',function(e){
+    var rect=fabStage.getBoundingClientRect();
+    var x=(e.clientX-rect.left)/rect.width-0.5;
+    var y=(e.clientY-rect.top)/rect.height-0.5;
+    fabStage.style.transform='rotateY('+(x*20)+'deg) rotateX('+(-y*20)+'deg)';
+  });
+  fabStage.addEventListener('mouseleave',function(){
+    fabStage.style.transform='rotateY(0deg) rotateX(0deg)';
+  });
+
+  /* ─── Jelly: pointer tracking stretches outer layers ─── */
+  var fabRect=null,jellyActive=false,maxStretch=50;
+  function updateJelly(px,py){
+    if(!fabRect)return;
+    var cx=fabRect.left+fabRect.width/2,cy=fabRect.top+fabRect.height/2;
+    var dx=px-cx,dy=py-cy,dist=Math.sqrt(dx*dx+dy*dy);
+    var pull=Math.min(dist/250,1);
+    var angle=Math.atan2(dy,dx);
+    fabLayers.forEach(function(el,i){
+      var strength=(1-i/LAYERS)*maxStretch*pull;
+      var tx=Math.cos(angle)*strength,ty=Math.sin(angle)*strength;
+      var s=el.style.animation;
+      el.style.animationPlayState='paused';
+      el.style.transform='translate(calc(-50% + '+tx+'px), calc(-50% + '+ty+'px)) translateZ(var(--tz)) rotate('+(angle*180/Math.PI*0.2)+'deg)';
+    });
+  }
+  function resetJelly(){
+    fabLayers.forEach(function(el){
+      el.style.animationPlayState='running';
+      el.style.transform='';
+    });
+  }
+  document.addEventListener('pointermove',function(e){
+    if(document.getElementById('loka-fab').classList.contains('hidden'))return;
+    fabRect=document.getElementById('loka-fab').getBoundingClientRect();
+    var cx=fabRect.left+fabRect.width/2,cy=fabRect.top+fabRect.height/2;
+    var d=Math.sqrt(Math.pow(e.clientX-cx,2)+Math.pow(e.clientY-cy,2));
+    if(d<250){jellyActive=true;updateJelly(e.clientX,e.clientY);}
+    else if(jellyActive){jellyActive=false;resetJelly();}
+  });
+
+  /* ─── i18n script ─── */
+  var isRU=/^ru\b/i.test(navigator.language||'');
   var script=isRU?{
     placeholder:'\u041d\u0430\u043f\u0438\u0441\u0430\u0442\u044c \u0441\u043e\u043e\u0431\u0449\u0435\u043d\u0438\u0435...',
     ctaH:'\u0427\u0442\u043e\u0431\u044b \u043f\u043e\u0433\u043e\u0432\u043e\u0440\u0438\u0442\u044c \u0441\u043e \u043c\u043d\u043e\u0439 \u043f\u043e-\u043d\u0430\u0441\u0442\u043e\u044f\u0449\u0435\u043c\u0443 \u2014 \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u0443\u0439\u0441\u044f \ud83d\ude0a',
@@ -2614,46 +2696,23 @@ footer{
       {mood:'love',msgs:["So, wanna try? \ud83d\ude80"],btn_final:true}
     ]
   };
-  var msgs=document.getElementById('loka-msgs');
+
+  /* ─── DOM ─── */
+  var msgsEl=document.getElementById('loka-msgs');
   var fab=document.getElementById('loka-fab');
   var chat=document.getElementById('loka-chat');
   var input=document.getElementById('loka-input');
   var cta=document.getElementById('loka-cta');
-  var avatarWrap=document.getElementById('loka-avatar');
-  var moodLabel=document.getElementById('loka-mood-label');
   input.placeholder=script.placeholder;
   document.getElementById('loka-cta-h').textContent=script.ctaH;
   document.getElementById('loka-cta-reg').textContent=script.ctaReg;
   document.getElementById('loka-cta-guest').textContent=script.ctaGuest;
-  var avatarLayers=[],fabLayers=[];
-  function buildMorph(c,size,store){
-    var n=5,step=Math.floor(size/(n+1));
-    for(var i=0;i<n;i++){
-      var el=document.createElement('div');el.className='loka-layer idle-'+i;
-      var sz=size-i*step;
-      el.style.width=sz+'px';el.style.height=sz+'px';
-      el.style.animationDelay=(i*0.15)+'s';
-      c.appendChild(el);if(store)store.push(el);
-    }
-  }
-  buildMorph(document.getElementById('loka-fab-morph'),72,fabLayers);
-  buildMorph(avatarWrap,80,avatarLayers);
-  function setMood(name){
-    var m=moods[name]||moods.idle;
-    var all=avatarLayers.concat(fabLayers);
-    all.forEach(function(el,i){
-      var li=i%5;
-      var r=parseInt(m.color.slice(1,3),16),g=parseInt(m.color.slice(3,5),16),b=parseInt(m.color.slice(5,7),16);
-      el.style.backgroundColor='rgb('+Math.min(255,r+li*m.step)+','+Math.min(255,g+li*m.step)+','+Math.min(255,b+li*m.step)+')';
-      var cls=name==='idle'?'idle-'+li:m.anim;
-      el.className='loka-layer '+cls;
-    });
-  }
-  setMood('idle');
+
+  /* ─── Chat message queue ─── */
   var stepIdx=0,queue=[],running=false;
-  function addTyping(){var t=document.createElement('div');t.className='loka-typing-ind';t.id='lk-typ';t.innerHTML='<span></span><span></span><span></span>';msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;}
+  function addTyping(){var t=document.createElement('div');t.className='loka-typing-ind';t.id='lk-typ';t.innerHTML='<span></span><span></span><span></span>';msgsEl.appendChild(t);msgsEl.scrollTop=msgsEl.scrollHeight;}
   function removeTyping(){var t=document.getElementById('lk-typ');if(t)t.remove();}
-  function addMsg(text){var m=document.createElement('div');m.className='loka-msg';m.textContent=text;msgs.appendChild(m);msgs.scrollTop=msgs.scrollHeight;}
+  function addMsg(text){var m=document.createElement('div');m.className='loka-msg';m.textContent=text;msgsEl.appendChild(m);msgsEl.scrollTop=msgsEl.scrollHeight;}
   function runQueue(){
     if(running||!queue.length)return;running=true;var item=queue.shift();
     if(item.type==='mood'){setMood(item.name);running=false;runQueue();}
@@ -2666,7 +2725,7 @@ footer{
       removeTyping();var w=document.createElement('div');w.className='loka-btns';
       var b=document.createElement('button');b.className='loka-btn';b.textContent=item.label;
       b.addEventListener('click',function(){w.remove();playStep();});
-      w.appendChild(b);msgs.appendChild(w);msgs.scrollTop=msgs.scrollHeight;running=false;
+      w.appendChild(b);msgsEl.appendChild(w);msgsEl.scrollTop=msgsEl.scrollHeight;running=false;
     }else if(item.type==='btn_final'){
       removeTyping();var w2=document.createElement('div');w2.className='loka-btns';
       var b1=document.createElement('button');b1.className='loka-btn';b1.textContent=script.ctaReg;
@@ -2674,18 +2733,16 @@ footer{
       b1.addEventListener('click',function(){window.open('https://app.lokio.org','_blank');});
       var b2=document.createElement('button');b2.className='loka-btn';b2.textContent=script.ctaGuest;
       b2.addEventListener('click',function(){window.open('https://app.lokio.org?guest=1','_blank');});
-      w2.appendChild(b1);w2.appendChild(b2);msgs.appendChild(w2);msgs.scrollTop=msgs.scrollHeight;running=false;
+      w2.appendChild(b1);w2.appendChild(b2);msgsEl.appendChild(w2);msgsEl.scrollTop=msgsEl.scrollHeight;running=false;
     }
   }
   function playStep(){
     if(stepIdx>=script.steps.length)return;
     var step=script.steps[stepIdx];stepIdx++;
     queue.push({type:'mood',name:step.mood});
-    /* One typing indicator for the whole step */
     var totalLen=0;step.msgs.forEach(function(t){totalLen+=t.length;});
     queue.push({type:'typing',dur:Math.min(2200,600+totalLen*6)});
     queue.push({type:'set_mood',name:step.mood});
-    /* All messages flow with just a pause between them, no re-typing */
     step.msgs.forEach(function(t,i){
       if(i===0)queue.push({type:'msg',text:t});
       else queue.push({type:'msg_delay',text:t,dur:Math.min(900,300+t.length*4)});
@@ -2695,64 +2752,12 @@ footer{
     else{queue.push({type:'pause',dur:500});setTimeout(playStep,0);}
     runQueue();
   }
-  fab.addEventListener('click',function(){fab.classList.add('hidden');chat.classList.add('open');if(!msgs.children.length)playStep();});
+
+  /* ─── Events ─── */
+  fab.addEventListener('click',function(){fab.classList.add('hidden');chat.classList.add('open');if(!msgsEl.children.length)playStep();});
   document.getElementById('loka-close').addEventListener('click',function(){chat.classList.remove('open');fab.classList.remove('hidden');});
   input.addEventListener('click',function(){cta.classList.add('open');});
   document.getElementById('loka-cta-x').addEventListener('click',function(){cta.classList.remove('open');});
-
-  /* ═══ JELLY: pointer tracking on FAB ═══ */
-  var fabRect=null;
-  var jellyActive=false;
-  var maxStretch=60; /* px max displacement of outermost layer */
-
-  function updateJelly(px,py){
-    if(!fabRect)return;
-    var cx=fabRect.left+fabRect.width/2;
-    var cy=fabRect.top+fabRect.height/2;
-    var dx=px-cx, dy=py-cy;
-    var dist=Math.sqrt(dx*dx+dy*dy);
-    var maxDist=300; /* radius of influence */
-    var pull=Math.min(dist/maxDist,1);
-
-    fabLayers.forEach(function(el,i){
-      /* outer layer (0) stretches most, inner (4) least */
-      var strength=(1-i/5)*maxStretch*pull;
-      var angle=Math.atan2(dy,dx);
-      var tx=Math.cos(angle)*strength;
-      var ty=Math.sin(angle)*strength;
-      /* Pause CSS animation during drag — direct transform */
-      el.style.animationPlayState='paused';
-      el.style.transform='translate(calc(-50% + '+tx+'px), calc(-50% + '+ty+'px)) rotate('+(angle*180/Math.PI*0.3)+'deg) scale('+(1+pull*(0.15-i*0.025))+')';
-    });
-  }
-
-  function resetJelly(){
-    fabLayers.forEach(function(el){
-      el.style.animationPlayState='running';
-      el.style.transform='';
-    });
-  }
-
-  /* Track pointer across entire page when near FAB */
-  document.addEventListener('pointermove',function(e){
-    if(fab.classList.contains('hidden'))return;
-    if(!fabRect)fabRect=fab.getBoundingClientRect();
-    var cx=fabRect.left+fabRect.width/2;
-    var cy=fabRect.top+fabRect.height/2;
-    var dx=e.clientX-cx,dy=e.clientY-cy;
-    var dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<300){
-      jellyActive=true;
-      updateJelly(e.clientX,e.clientY);
-    }else if(jellyActive){
-      jellyActive=false;
-      resetJelly();
-    }
-  });
-
-  /* Recalc FAB position on scroll/resize */
-  window.addEventListener('scroll',function(){fabRect=fab.getBoundingClientRect();},{passive:true});
-  window.addEventListener('resize',function(){fabRect=fab.getBoundingClientRect();});
 })();
 </script>
 
