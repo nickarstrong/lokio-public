@@ -238,6 +238,11 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
 }
 
 /* ═══ PRINT ═══ */
+
+/* Embedded in app/landing modal: host shows close button, site header is noise */
+.embedded .hdr{display:none;}
+.embedded .page{padding-top:48px;}
+
 @media print{
   .hdr,.toc,footer{display:none;}
   body{background:#fff;color:#000;}
@@ -250,6 +255,7 @@ footer{border-top:1px solid var(--border);padding:48px var(--pad) 32px;margin-to
   section{break-inside:avoid-page;}
 }
 </style>
+<script>if(window.self!==window.top)document.documentElement.classList.add("embedded");</script>
 </head>
 <body>
 
