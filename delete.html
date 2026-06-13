@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Delete your LOKIO account</title>
+<meta name="description" content="How to delete your LOKIO account and all associated data, what is removed, what is kept, and for how long."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://lokio.org/delete"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --glass: rgba(18,18,26,0.78);
+  --glass-blur: blur(28px) saturate(180%);
+  --glass-border: rgba(255,255,255,0.10);
+
+  --bg:#FAFAFA;
+  --bg-warm:#ECEAE5;
+  --c-surface:#FFFFFF;
+  --c-border: rgba(0,0,0,0.06);
+  --c-border-hi: rgba(0,0,0,0.10);
+  --c-text:#0F0F18;
+  --c-text-mid:#5C5C66;
+  --c-text-lo:#8E8E96;
+
+  --on-glass:rgba(255,255,255,0.95);
+
+  --accent:#0A84FF;
+  --accent-hi:#2D96FF;
+  --accent-on:#FFFFFF;
+
+  --r:12px;
+  --r-pill:999px;
+
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px;
+  --s-6:24px; --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-24:96px;
+
+  --t-display:28px; --t-title:20px; --t-headline:17px;
+  --t-body:15px; --t-callout:14px; --t-footnote:12px;
+
+  --font:'Geist',-apple-system,system-ui,sans-serif;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+  --maxw:760px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+html,body{
+  font-family:var(--font);
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(10,132,255,0.06) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  background-attachment:fixed;
+  color:var(--c-text);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+
+/* NAV — glass pill (как лендинг) */
+.nav-wrap{
+  position:fixed;top:14px;left:0;right:0;z-index:100;
+  display:flex;justify-content:center;padding:0 var(--s-3);pointer-events:none;
+}
+.nav{
+  pointer-events:auto;width:100%;max-width:740px;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-2);
+  padding:6px 6px 6px 14px;
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);border-radius:var(--r-pill);
+  box-shadow:0 12px 28px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.nav-brand{display:flex;align-items:center;gap:9px;color:var(--on-glass);}
+.nav-mark{width:24px;height:24px;flex-shrink:0;}
+.nav-name{font:700 15px/1 var(--font);letter-spacing:-0.02em;}
+.nav-right{display:flex;align-items:center;gap:var(--s-2);}
+.nav-lang{
+  background:transparent;border:0;color:rgba(255,255,255,0.66);
+  font:600 13px/1 var(--font);padding:8px 10px;border-radius:var(--r-pill);
+}
+.nav-lang:hover{color:var(--on-glass);}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent);color:var(--accent-on);
+  font:600 13px/1 var(--font);padding:9px 14px;border-radius:var(--r-pill);
+  transition:background .2s var(--ease);
+}
+.nav-cta:hover{background:var(--accent-hi);}
+.nav-cta svg{width:14px;height:14px;}
+
+/* CONTENT */
+main{max-width:var(--maxw);margin:0 auto;padding:120px var(--s-5) var(--s-12);}
+.kicker{
+  display:inline-block;font:600 var(--t-footnote)/1 var(--font);
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:var(--s-3);
+}
+h1{
+  font:700 clamp(32px,6vw,var(--t-display)) /1.05 var(--font);
+  letter-spacing:-0.03em;color:var(--c-text);margin-bottom:var(--s-4);
+  text-wrap:balance;
+}
+.lede{
+  font:500 var(--t-headline)/1.55 var(--font);color:var(--c-text-mid);
+  letter-spacing:-0.005em;max-width:620px;margin-bottom:var(--s-10);text-wrap:pretty;
+}
+
+.card{
+  background:var(--c-surface);border:1px solid var(--c-border);
+  border-radius:var(--r);padding:var(--s-6);margin-bottom:var(--s-5);
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+}
+.card.primary{border-color:rgba(10,132,255,0.25);box-shadow:0 8px 24px rgba(10,132,255,0.08);}
+h2{
+  font:700 var(--t-title)/1.2 var(--font);letter-spacing:-0.02em;
+  color:var(--c-text);margin-bottom:var(--s-4);
+}
+h2 .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:var(--r-pill);
+  background:var(--accent);color:var(--accent-on);
+  font:700 13px/1 var(--font);margin-right:10px;vertical-align:2px;
+}
+p{font:400 var(--t-body)/1.65 var(--font);color:var(--c-text-mid);margin-bottom:var(--s-3);}
+p:last-child{margin-bottom:0;}
+p strong{color:var(--c-text);font-weight:600;}
+ol.steps{list-style:none;counter-reset:step;margin:var(--s-2) 0;}
+ol.steps li{
+  counter-increment:step;position:relative;padding:0 0 var(--s-4) var(--s-10);
+  font:400 var(--t-body)/1.6 var(--font);color:var(--c-text-mid);
+}
+ol.steps li:last-child{padding-bottom:0;}
+ol.steps li::before{
+  content:counter(step);position:absolute;left:0;top:-1px;
+  width:28px;height:28px;border-radius:var(--r-pill);
+  background:var(--bg-warm);border:1px solid var(--c-border-hi);
+  display:flex;align-items:center;justify-content:center;
+  font:600 13px/1 var(--font);color:var(--c-text);
+}
+ul.plain{list-style:none;margin:var(--s-1) 0;}
+ul.plain li{
+  position:relative;padding:0 0 var(--s-2) var(--s-5);
+  font:400 var(--t-body)/1.6 var(--font);color:var(--c-text-mid);
+}
+ul.plain li::before{
+  content:"";position:absolute;left:2px;top:11px;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+ul.plain li:last-child{padding-bottom:0;}
+.mailbtn{
+  display:inline-flex;align-items:center;gap:8px;margin-top:var(--s-3);
+  background:var(--accent);color:var(--accent-on);
+  font:600 var(--t-callout)/1 var(--font);padding:13px 18px;border-radius:var(--r-pill);
+  transition:background .2s var(--ease);
+}
+.mailbtn:hover{background:var(--accent-hi);}
+.mailbtn svg{width:16px;height:16px;}
+.note{
+  margin-top:var(--s-5);font:400 var(--t-callout)/1.6 var(--font);
+  color:var(--c-text-lo);
+}
+
+footer{padding:var(--s-12) var(--s-5) var(--s-8);border-top:1px solid var(--c-border);margin-top:var(--s-8);}
+.foot{max-width:var(--maxw);margin:0 auto;display:flex;flex-direction:column;gap:var(--s-5);}
+.foot-links{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);}
+.foot-links a{font:500 var(--t-callout)/1 var(--font);color:var(--c-text-mid);padding:6px 0;}
+.foot-links a:hover{color:var(--c-text);}
+.foot-bot{
+  font:500 var(--t-footnote)/1.4 var(--font);color:var(--c-text-lo);
+  padding-top:var(--s-4);border-top:1px solid var(--c-border);
+}
+
+@media (max-width:560px){
+  main{padding:104px var(--s-4) var(--s-10);}
+  .nav-links-hide{display:none;}
+  .card{padding:var(--s-5);}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="nav-brand" href="/">
+      <svg class="nav-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(80,80) rotate(45)">
+          <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
+        </g>
+      </svg>
+      <span class="nav-name">LOKIO</span>
+    </a>
+    <div class="nav-right">
+      <button class="nav-lang" id="lang-toggle" aria-label="Switch language">RU</button>
+      <a class="nav-cta" href="https://app.lokio.org">
+        <span data-en="Open the app" data-ru="Открыть">Open the app</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <span class="kicker" data-en="Account &amp; data" data-ru="Аккаунт и данные">Account &amp; data</span>
+  <h1 data-en="Delete your LOKIO account" data-ru="Удаление аккаунта LOKIO">Delete your LOKIO account</h1>
+  <p class="lede"
+     data-en="You can delete your LOKIO account and all data tied to it at any time. Here is how to do it, what gets removed, and what we keep and for how long."
+     data-ru="Вы можете удалить аккаунт LOKIO и все связанные с ним данные в любой момент. Ниже — как это сделать, что удаляется и что мы храним и какое время.">
+     You can delete your LOKIO account and all data tied to it at any time. Here is how to do it, what gets removed, and what we keep and for how long.
+  </p>
+
+  <section class="card primary">
+    <h2><span class="num">1</span><span data-en="Delete from the app (fastest)" data-ru="Удалить из приложения (быстрее всего)">Delete from the app (fastest)</span></h2>
+    <ol class="steps">
+      <li data-en="Open LOKIO and go to the Profile tab." data-ru="Откройте LOKIO и перейдите на вкладку «Профиль».">Open LOKIO and go to the Profile tab.</li>
+      <li data-en="Open account settings and choose Delete account." data-ru="Откройте настройки аккаунта и выберите «Удалить аккаунт».">Open account settings and choose Delete account.</li>
+      <li data-en="Confirm. Your account is deactivated immediately and queued for permanent erasure." data-ru="Подтвердите. Аккаунт сразу деактивируется и ставится в очередь на окончательное удаление.">Confirm. Your account is deactivated immediately and queued for permanent erasure.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">2</span><span data-en="No access to the app?" data-ru="Нет доступа к приложению?">No access to the app?</span></h2>
+    <p data-en="Email us from the address linked to your account and ask us to delete it. We confirm your identity and process the request within 30 days."
+       data-ru="Напишите нам с адреса, привязанного к аккаунту, и попросите удалить его. Мы подтвердим личность и обработаем запрос в течение 30 дней.">
+       Email us from the address linked to your account and ask us to delete it. We confirm your identity and process the request within 30 days.
+    </p>
+    <a class="mailbtn" href="mailto:hello@lokio.org?subject=Delete%20my%20LOKIO%20account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+      hello@lokio.org
+    </a>
+  </section>
+
+  <section class="card">
+    <h2><span data-en="What gets deleted" data-ru="Что удаляется">What gets deleted</span></h2>
+    <ul class="plain">
+      <li data-en="Your account and login identity." data-ru="Аккаунт и данные входа.">Your account and login identity.</li>
+      <li data-en="Your profile: name, avatar, bio, links and badges." data-ru="Профиль: имя, аватар, описание, ссылки и бейджи.">Your profile: name, avatar, bio, links and badges.</li>
+      <li data-en="Pins you created and your replies in threads." data-ru="Созданные вами пины и ваши ответы в обсуждениях.">Pins you created and your replies in threads.</li>
+      <li data-en="Your chats and messages." data-ru="Ваши чаты и сообщения.">Your chats and messages.</li>
+      <li data-en="Device and session data associated with you." data-ru="Данные устройства и сессии, связанные с вами.">Device and session data associated with you.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span data-en="What we keep, and for how long" data-ru="Что мы храним и какое время">What we keep, and for how long</span></h2>
+    <ul class="plain">
+      <li data-en="A 30-day recovery window: the account is soft-deleted first, then permanently erased. This protects you against accidental or hostile deletion."
+          data-ru="Окно восстановления 30 дней: аккаунт сначала помечается удалённым, затем стирается окончательно. Это защита от случайного или враждебного удаления.">
+          A 30-day recovery window: the account is soft-deleted first, then permanently erased. This protects you against accidental or hostile deletion.</li>
+      <li data-en="Purchase and transaction records (e.g. reach boosts) for as long as required by law and store policies."
+          data-ru="Записи о покупках и транзакциях (например, усиление охвата) — столько, сколько требуют закон и правила магазинов.">
+          Purchase and transaction records (e.g. reach boosts) for as long as required by law and store policies.</li>
+      <li data-en="Anonymized, aggregated analytics that cannot be linked back to you."
+          data-ru="Обезличенная агрегированная аналитика, которую нельзя связать с вами.">
+          Anonymized, aggregated analytics that cannot be linked back to you.</li>
+    </ul>
+    <p class="note"
+       data-en="After the 30-day window, deletion is irreversible. Pins and threads in LOKIO expire on their own regardless of account status."
+       data-ru="По истечении 30 дней удаление необратимо. Пины и обсуждения в LOKIO в любом случае исчезают сами по истечении времени жизни.">
+       After the 30-day window, deletion is irreversible. Pins and threads in LOKIO expire on their own regardless of account status.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="foot-links">
+      <a href="/" data-en="Home" data-ru="Главная">Home</a>
+      <a href="/terms" data-en="Terms" data-ru="Условия">Terms</a>
+      <a href="/privacy" data-en="Privacy" data-ru="Конфиденциальность">Privacy</a>
+      <a href="mailto:hello@lokio.org" data-en="Contact" data-ru="Контакт">Contact</a>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 LOKIO</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('lang-toggle');
+  var cur='en';
+  function apply(lang){
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var v=el.getAttribute('data-'+lang);
+      if(v!=null) el.textContent=v;
+    });
+    btn.textContent=(lang==='en')?'RU':'EN';
+    cur=lang;
+  }
+  btn.addEventListener('click',function(){apply(cur==='en'?'ru':'en');});
+})();
+</script>
+</body>
+</html>
