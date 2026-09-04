@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "org.lokio.app",
+      "sha256_cert_fingerprints": [
+        "B3:D1:EB:6B:90:DD:1B:20:32:D3:90:B7:F5:0D:11:9D:49:83:BE:4D:12:AA:90:F0:58:56:55:86:BB:2C:2C:F5"
+      ]
+    }
+  }
+]
