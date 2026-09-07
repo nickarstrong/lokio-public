@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>LOKIO child safety standards</title>
+<meta name="description" content="LOKIO child safety standards: child sexual abuse and exploitation is prohibited, how to report a concern in the app or by email, and what we do with a report."/>
+<meta name="robots" content="index,follow"/>
+<link rel="canonical" href="https://lokio.org/child-safety"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --glass: rgba(18,18,26,0.78);
+  --glass-blur: blur(28px) saturate(180%);
+  --glass-border: rgba(255,255,255,0.10);
+
+  --bg:#FAFAFA;
+  --bg-warm:#ECEAE5;
+  --c-surface:#FFFFFF;
+  --c-border: rgba(0,0,0,0.06);
+  --c-border-hi: rgba(0,0,0,0.10);
+  --c-text:#0F0F18;
+  --c-text-mid:#5C5C66;
+  --c-text-lo:#8E8E96;
+
+  --on-glass:rgba(255,255,255,0.95);
+
+  --accent:#0A84FF;
+  --accent-hi:#2D96FF;
+  --accent-on:#FFFFFF;
+
+  --r:12px;
+  --r-pill:999px;
+
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px;
+  --s-6:24px; --s-8:32px; --s-10:40px; --s-12:48px; --s-16:64px; --s-24:96px;
+
+  --t-display:28px; --t-title:20px; --t-headline:17px;
+  --t-body:15px; --t-callout:14px; --t-footnote:12px;
+
+  --font:'Geist',-apple-system,system-ui,sans-serif;
+  --ease:cubic-bezier(0.32,0.72,0,1);
+  --maxw:760px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+html,body{
+  font-family:var(--font);
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(10,132,255,0.06) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 100%);
+  background-attachment:fixed;
+  color:var(--c-text);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  min-height:100vh;
+}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;}
+
+/* NAV — glass pill (как лендинг) */
+.nav-wrap{
+  position:fixed;top:14px;left:0;right:0;z-index:100;
+  display:flex;justify-content:center;padding:0 var(--s-3);pointer-events:none;
+}
+.nav{
+  pointer-events:auto;width:100%;max-width:740px;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--s-2);
+  padding:6px 6px 6px 14px;
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);border-radius:var(--r-pill);
+  box-shadow:0 12px 28px rgba(0,0,0,0.20), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.nav-brand{display:flex;align-items:center;gap:9px;color:var(--on-glass);}
+.nav-mark{width:24px;height:24px;flex-shrink:0;}
+.nav-name{font:700 15px/1 var(--font);letter-spacing:-0.02em;}
+.nav-right{display:flex;align-items:center;gap:var(--s-2);}
+.nav-lang{
+  background:transparent;border:0;color:rgba(255,255,255,0.66);
+  font:600 13px/1 var(--font);padding:8px 10px;border-radius:var(--r-pill);
+}
+.nav-lang:hover{color:var(--on-glass);}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent);color:var(--accent-on);
+  font:600 13px/1 var(--font);padding:9px 14px;border-radius:var(--r-pill);
+  transition:background .2s var(--ease);
+}
+.nav-cta:hover{background:var(--accent-hi);}
+.nav-cta svg{width:14px;height:14px;}
+
+/* CONTENT */
+main{max-width:var(--maxw);margin:0 auto;padding:120px var(--s-5) var(--s-12);}
+.kicker{
+  display:inline-block;font:600 var(--t-footnote)/1 var(--font);
+  letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);
+  margin-bottom:var(--s-3);
+}
+h1{
+  font:700 clamp(32px,6vw,var(--t-display)) /1.05 var(--font);
+  letter-spacing:-0.03em;color:var(--c-text);margin-bottom:var(--s-4);
+  text-wrap:balance;
+}
+.lede{
+  font:500 var(--t-headline)/1.55 var(--font);color:var(--c-text-mid);
+  letter-spacing:-0.005em;max-width:620px;margin-bottom:var(--s-10);text-wrap:pretty;
+}
+
+.card{
+  background:var(--c-surface);border:1px solid var(--c-border);
+  border-radius:var(--r);padding:var(--s-6);margin-bottom:var(--s-5);
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+}
+.card.primary{border-color:rgba(10,132,255,0.25);box-shadow:0 8px 24px rgba(10,132,255,0.08);}
+h2{
+  font:700 var(--t-title)/1.2 var(--font);letter-spacing:-0.02em;
+  color:var(--c-text);margin-bottom:var(--s-4);
+}
+h2 .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:var(--r-pill);
+  background:var(--accent);color:var(--accent-on);
+  font:700 13px/1 var(--font);margin-right:10px;vertical-align:2px;
+}
+p{font:400 var(--t-body)/1.65 var(--font);color:var(--c-text-mid);margin-bottom:var(--s-3);}
+p:last-child{margin-bottom:0;}
+p strong{color:var(--c-text);font-weight:600;}
+ol.steps{list-style:none;counter-reset:step;margin:var(--s-2) 0;}
+ol.steps li{
+  counter-increment:step;position:relative;padding:0 0 var(--s-4) var(--s-10);
+  font:400 var(--t-body)/1.6 var(--font);color:var(--c-text-mid);
+}
+ol.steps li:last-child{padding-bottom:0;}
+ol.steps li::before{
+  content:counter(step);position:absolute;left:0;top:-1px;
+  width:28px;height:28px;border-radius:var(--r-pill);
+  background:var(--bg-warm);border:1px solid var(--c-border-hi);
+  display:flex;align-items:center;justify-content:center;
+  font:600 13px/1 var(--font);color:var(--c-text);
+}
+ul.plain{list-style:none;margin:var(--s-1) 0;}
+ul.plain li{
+  position:relative;padding:0 0 var(--s-2) var(--s-5);
+  font:400 var(--t-body)/1.6 var(--font);color:var(--c-text-mid);
+}
+ul.plain li::before{
+  content:"";position:absolute;left:2px;top:11px;
+  width:6px;height:6px;border-radius:50%;background:var(--accent);
+}
+ul.plain li:last-child{padding-bottom:0;}
+.mailbtn{
+  display:inline-flex;align-items:center;gap:8px;margin-top:var(--s-3);
+  background:var(--accent);color:var(--accent-on);
+  font:600 var(--t-callout)/1 var(--font);padding:13px 18px;border-radius:var(--r-pill);
+  transition:background .2s var(--ease);
+}
+.mailbtn:hover{background:var(--accent-hi);}
+.mailbtn svg{width:16px;height:16px;}
+.note{
+  margin-top:var(--s-5);font:400 var(--t-callout)/1.6 var(--font);
+  color:var(--c-text-lo);
+}
+
+footer{padding:var(--s-12) var(--s-5) var(--s-8);border-top:1px solid var(--c-border);margin-top:var(--s-8);}
+.foot{max-width:var(--maxw);margin:0 auto;display:flex;flex-direction:column;gap:var(--s-5);}
+.foot-links{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);}
+.foot-links a{font:500 var(--t-callout)/1 var(--font);color:var(--c-text-mid);padding:6px 0;}
+.foot-links a:hover{color:var(--c-text);}
+.foot-bot{
+  font:500 var(--t-footnote)/1.4 var(--font);color:var(--c-text-lo);
+  padding-top:var(--s-4);border-top:1px solid var(--c-border);
+}
+
+@media (max-width:560px){
+  main{padding:104px var(--s-4) var(--s-10);}
+  .nav-links-hide{display:none;}
+  .card{padding:var(--s-5);}
+}
+</style>
+</head>
+<body>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <a class="nav-brand" href="/">
+      <svg class="nav-mark" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(80,80) rotate(45)">
+          <path d="M-58,-54 Q-58,-58 -54,-58 L54,-58 Q58,-58 58,-54 L58,54 Q58,58 54,58 L4,58 Q0,58 0,54 L0,4 Q0,0 -4,0 L-54,0 Q-58,0 -58,-4 Z" fill="currentColor"/>
+        </g>
+      </svg>
+      <span class="nav-name">LOKIO</span>
+    </a>
+    <div class="nav-right">
+      <button class="nav-lang" id="lang-toggle" aria-label="Switch language">RU</button>
+      <a class="nav-cta" href="https://app.lokio.org">
+        <span data-en="Open the app" data-ru="Открыть">Open the app</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<main>
+  <span class="kicker" data-en="Safety" data-ru="Безопасность">Safety</span>
+  <h1 data-en="Child safety standards" data-ru="Стандарты безопасности детей">Child safety standards</h1>
+  <p class="lede"
+     data-en="LOKIO is a service for adults. Child sexual abuse and exploitation (CSAE) is prohibited absolutely, without exception and without any artistic, educational or satirical carve-out. This page states our standards, how anyone can report a concern, and what we do when we receive one."
+     data-ru="LOKIO — сервис для взрослых. Сексуальное насилие над детьми и их эксплуатация (CSAE) запрещены безусловно: без исключений и без оговорок про художественную, образовательную или сатирическую ценность. На этой странице — наши стандарты, как сообщить о нарушении и что мы делаем, получив сообщение.">
+     LOKIO is a service for adults. Child sexual abuse and exploitation (CSAE) is prohibited absolutely, without exception and without any artistic, educational or satirical carve-out. This page states our standards, how anyone can report a concern, and what we do when we receive one.
+  </p>
+
+  <section class="card primary">
+    <h2><span class="num">1</span><span data-en="Report it inside the app" data-ru="Сообщить прямо в приложении">Report it inside the app</span></h2>
+    <p data-en="Anyone using LOKIO can report a child safety concern without leaving the app. No verification, no account level, no waiting."
+       data-ru="Любой пользователь LOKIO может сообщить о проблеме с безопасностью детей, не выходя из приложения. Без верификации, без уровней аккаунта, без ожидания.">
+       Anyone using LOKIO can report a child safety concern without leaving the app. No verification, no account level, no waiting.
+    </p>
+    <ol class="steps">
+      <li data-en="Open the pin or the profile in question." data-ru="Откройте пин или профиль, о котором идёт речь.">Open the pin or the profile in question.</li>
+      <li data-en="Tap Report." data-ru="Нажмите «Пожаловаться».">Tap Report.</li>
+      <li data-en="Choose Child safety. This reason is always available, to every user." data-ru="Выберите «Безопасность детей». Эта причина доступна всегда и каждому.">Choose Child safety. This reason is always available, to every user.</li>
+    </ol>
+    <p class="note"
+       data-en="A child safety report takes effect immediately: the content is hidden from the map while a human reviews it. We do not wait for a second report."
+       data-ru="Сообщение о безопасности детей срабатывает сразу: контент скрывается с карты до проверки человеком. Второго сообщения мы не ждём.">
+       A child safety report takes effect immediately: the content is hidden from the map while a human reviews it. We do not wait for a second report.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">2</span><span data-en="Report it by email" data-ru="Сообщить по почте">Report it by email</span></h2>
+    <p data-en="If you cannot use the app, or you are not a LOKIO user, write to us. This address is monitored and is the point of contact we have registered with Google Play for child safety matters."
+       data-ru="Если приложением воспользоваться нельзя или вы не пользователь LOKIO — напишите нам. Этот адрес читается и указан в Google Play как контакт по вопросам безопасности детей.">
+       If you cannot use the app, or you are not a LOKIO user, write to us. This address is monitored and is the point of contact we have registered with Google Play for child safety matters.
+    </p>
+    <a class="mailbtn" href="mailto:hello@lokio.org?subject=Child%20safety">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+      hello@lokio.org
+    </a>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">3</span><span data-en="What is prohibited" data-ru="Что запрещено">What is prohibited</span></h2>
+    <p data-en="The following is prohibited on LOKIO in every form — in pins, chats, profiles, avatars, links, banners and usernames:"
+       data-ru="Следующее запрещено в LOKIO в любом виде — в пинах, чатах, профилях, аватарах, ссылках, баннерах и именах:">
+       The following is prohibited on LOKIO in every form - in pins, chats, profiles, avatars, links, banners and usernames:
+    </p>
+    <ol class="steps">
+      <li data-en="Child sexual abuse material, and any link, hint or route to it." data-ru="Материалы сексуального насилия над детьми, а также любые ссылки, намёки и маршруты к ним.">Child sexual abuse material, and any link, hint or route to it.</li>
+      <li data-en="Sexualisation of a minor, including in drawings, generated images, text and roleplay." data-ru="Сексуализация несовершеннолетнего, в том числе в рисунках, сгенерированных изображениях, тексте и ролевой игре.">Sexualisation of a minor, including in drawings, generated images, text and roleplay.</li>
+      <li data-en="Grooming: building trust with a minor for sexual purposes, or attempting to move such a conversation elsewhere." data-ru="Груминг: втирание в доверие к несовершеннолетнему с сексуальными целями и попытки увести такой разговор на другую площадку.">Grooming: building trust with a minor for sexual purposes, or attempting to move such a conversation elsewhere.</li>
+      <li data-en="Soliciting, arranging or advertising a meeting with a minor for sexual purposes." data-ru="Предложение, организация или реклама встречи с несовершеннолетним в сексуальных целях.">Soliciting, arranging or advertising a meeting with a minor for sexual purposes.</li>
+      <li data-en="Sextortion, trafficking, and any commercial exploitation of a minor." data-ru="Сексуальное вымогательство, торговля людьми и любая коммерческая эксплуатация несовершеннолетнего.">Sextortion, trafficking, and any commercial exploitation of a minor.</li>
+      <li data-en="Using LOKIO while under 18, or creating an account on behalf of a minor." data-ru="Пользование LOKIO лицом младше 18 лет и создание аккаунта от имени несовершеннолетнего.">Using LOKIO while under 18, or creating an account on behalf of a minor.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">4</span><span data-en="What we do when we receive a report" data-ru="Что мы делаем, получив сообщение">What we do when we receive a report</span></h2>
+    <ol class="steps">
+      <li data-en="The content is hidden from the map immediately, before any human looks at it." data-ru="Контент немедленно скрывается с карты — ещё до того, как его посмотрит человек.">The content is hidden from the map immediately, before any human looks at it.</li>
+      <li data-en="A person reviews the report within 24 hours." data-ru="Человек рассматривает сообщение в течение 24 часов.">A person reviews the report within 24 hours.</li>
+      <li data-en="If it is confirmed, the account is terminated permanently and the sign-in identity behind it is barred from creating a new one." data-ru="Если подтверждается — аккаунт закрывается навсегда, а учётной записи входа запрещается заводить новый.">If it is confirmed, the account is terminated permanently and the sign-in identity behind it is barred from creating a new one.</li>
+      <li data-en="Evidence is preserved rather than deleted, so it can be handed to the authorities." data-ru="Доказательства сохраняются, а не удаляются, чтобы их можно было передать властям.">Evidence is preserved rather than deleted, so it can be handed to the authorities.</li>
+      <li data-en="Confirmed child sexual abuse material is reported to NCMEC and to the competent authority in the relevant jurisdiction, as the applicable law requires." data-ru="Подтверждённые материалы сексуального насилия над детьми передаются в NCMEC и в компетентный орган соответствующей юрисдикции, как того требует применимое право.">Confirmed child sexual abuse material is reported to NCMEC and to the competent authority in the relevant jurisdiction, as the applicable law requires.</li>
+    </ol>
+    <p class="note"
+       data-en="We cooperate with law enforcement requests that are lawful and properly served."
+       data-ru="Мы содействуем законным и надлежаще оформленным запросам правоохранительных органов.">
+       We cooperate with law enforcement requests that are lawful and properly served.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">5</span><span data-en="How the product itself limits risk" data-ru="Как сам продукт снижает риск">How the product itself limits risk</span></h2>
+    <ol class="steps">
+      <li data-en="LOKIO is 18+. The age requirement is stated at sign-up and in the store listing." data-ru="LOKIO — 18+. Возрастное требование указано при регистрации и в карточке магазина.">LOKIO is 18+. The age requirement is stated at sign-up and in the store listing.</li>
+      <li data-en="Every account is created through Google or Apple sign-in. Anonymous account creation is not possible." data-ru="Каждый аккаунт создаётся через вход Google или Apple. Анонимная регистрация невозможна.">Every account is created through Google or Apple sign-in. Anonymous account creation is not possible.</li>
+      <li data-en="Your exact location is never published. A pin carries a place, a person does not." data-ru="Точное местоположение человека никогда не публикуется. Место несёт пин, а не человек.">Your exact location is never published. A pin carries a place, a person does not.</li>
+      <li data-en="Pins expire on their own, so nothing accumulates into an archive." data-ru="Пины истекают сами, поэтому ничего не копится в архив.">Pins expire on their own, so nothing accumulates into an archive.</li>
+      <li data-en="Any user can block any other user, silently and at once." data-ru="Любой пользователь может заблокировать любого другого — молча и сразу.">Any user can block any other user, silently and at once.</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2><span class="num">6</span><span data-en="Reporting to the authorities directly" data-ru="Обращение напрямую к властям">Reporting to the authorities directly</span></h2>
+    <p data-en="You do not need to go through us. If a child is in immediate danger, contact your local emergency services first. Reports can also be made directly to:"
+       data-ru="Через нас идти не обязательно. Если ребёнку угрожает непосредственная опасность — сначала звоните в экстренные службы. Сообщить можно и напрямую:">
+       You do not need to go through us. If a child is in immediate danger, contact your local emergency services first. Reports can also be made directly to:
+    </p>
+    <ol class="steps">
+      <li data-en="NCMEC CyberTipline — report.cybertip.org" data-ru="NCMEC CyberTipline — report.cybertip.org">NCMEC CyberTipline - report.cybertip.org</li>
+      <li data-en="INHOPE — the network of national hotlines, inhope.org" data-ru="INHOPE — сеть национальных горячих линий, inhope.org">INHOPE - the network of national hotlines, inhope.org</li>
+      <li data-en="The police in your country." data-ru="Полиция вашей страны.">The police in your country.</li>
+    </ol>
+  </section>
+
+  <p class="note" data-en="Last updated: 7 September 2026" data-ru="Обновлено: 7 сентября 2026">Last updated: 7 September 2026</p>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="foot-links">
+      <a href="/" data-en="Home" data-ru="Главная">Home</a>
+      <a href="/terms" data-en="Terms" data-ru="Условия">Terms</a>
+      <a href="/privacy" data-en="Privacy" data-ru="Конфиденциальность">Privacy</a>
+      <a href="mailto:hello@lokio.org" data-en="Contact" data-ru="Контакт">Contact</a>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 LOKIO</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('lang-toggle');
+  var cur='en';
+  function apply(lang){
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var v=el.getAttribute('data-'+lang);
+      if(v!=null) el.textContent=v;
+    });
+    btn.textContent=(lang==='en')?'RU':'EN';
+    cur=lang;
+  }
+  btn.addEventListener('click',function(){apply(cur==='en'?'ru':'en');});
+})();
+</script>
+</body>
+</html>
