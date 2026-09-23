@@ -154,6 +154,7 @@ Full-stack engineer. Built the entire stack in six months: backend, frontend, de
 - Whitepaper: https://lokio.org/documents/whitepaper
 - Terms: https://lokio.org/documents/terms
 - Privacy: https://lokio.org/documents/privacy
+- Official Telegram channel: https://t.me/lokio_org
 - Telegram community: https://t.me/lokioapp
 - Contact: hello@lokio.org
 
