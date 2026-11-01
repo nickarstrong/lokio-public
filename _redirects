@@ -19,3 +19,6 @@
 # ── App shortcuts ──
 /app    https://app.lokio.org    302
 /map    https://app.lokio.org    302
+
+# Profile card links (Play listing promises lokio.org/u/<name>) -> the card in the app
+/u/*   https://app.lokio.org/u/:splat   302
