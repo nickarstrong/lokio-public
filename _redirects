@@ -24,4 +24,8 @@
 /u/*   https://app.lokio.org/u/:splat   302
 
 # Utility apps: in-app privacy/support links (lokio.org/apps/<slug>/...) live on GitHub Pages
+/apps/compress-photo/*   https://nickarstrong.github.io/lokio-apps/compress/:splat   302
+/apps/photo-to-text/*   https://nickarstrong.github.io/lokio-apps/phototext/:splat   302
+/apps/stamp-sign/*   https://nickarstrong.github.io/lokio-apps/pdfsign/:splat   302
+/apps/read-aloud/*   https://nickarstrong.github.io/lokio-apps/aloud/:splat   302
 /apps/*   https://nickarstrong.github.io/lokio-apps/:splat   302
