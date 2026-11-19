@@ -22,3 +22,6 @@
 
 # Profile card links (Play listing promises lokio.org/u/<name>) -> the card in the app
 /u/*   https://app.lokio.org/u/:splat   302
+
+# Utility apps: in-app privacy/support links (lokio.org/apps/<slug>/...) live on GitHub Pages
+/apps/*   https://nickarstrong.github.io/lokio-apps/:splat   302
